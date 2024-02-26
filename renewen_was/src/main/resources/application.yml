@@ -1,0 +1,29 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /renewen
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+spring:
+  main:
+    web-application-type: servlet
+    banner-mode: 'off'
+#  profiles:
+#    active: local    
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/renewen?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234
+mybatis:
+  mapper-locations: classpath:mapper/*.xml 
+  type-aliases-package: kr.smhrd.renewen.model  
+  configuration:
+    map-underscore-to-camel-case: true  
+    

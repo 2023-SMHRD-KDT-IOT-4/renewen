@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.smhrd.renewen.mapper.UserMapper">
+
+	<select id="loginCheck" parameterType="UserVO">
+		SELECT count(*) FROM user_info 
+		WHERE user_id = #{userId} AND user_pw = SHA2(#{userPw} , 256)
+	</select>
+	
+	<select id="getUser" resultType="UserVO">
+		SELECT 
+			u.user_id, u.user_email, u.user_name, u.user_tel, u.user_company, u.manage_position, u.manage_task, u.grant_yn, u.joined_at, 
+		 	auth.auth_id, auth.auth_nm
+		FROM user_info u
+    	INNER JOIN user_auth auth ON u.auth_id = auth.auth_id
+		WHERE u.user_id = #{userId}
+	</select>
+	
+	<insert id="joinUser" parameterType="UserVO">
+		INSERT INTO user_info
+			(user_id, user_pw, auth_id, user_email, user_name, user_tel,
+			 user_company, manage_position, manage_task)
+		VALUES
+			(#{userId}, SHA2(#{userPw}, 256), #{authId}, #{userEmail}, #{userName}, #{userTel},
+			 #{userCompany}, #{managePosition}, #{manageTask})
+	</insert>
+	
+</mapper>
