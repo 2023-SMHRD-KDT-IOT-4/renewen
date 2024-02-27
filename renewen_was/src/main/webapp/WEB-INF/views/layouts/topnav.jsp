@@ -2,165 +2,152 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-	<!-- Sidenav Toggle Button-->
-  <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
+    <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white"
+        id="sidenavAccordion">
+        <!-- Sidenav Toggle Button-->
 
-  <!-- Navbar Brand-->
-  <!-- * * Tip * * You can use text or an image for your navbar brand.-->
-  <!-- * * * * * * When using an image, we recommend the SVG format.-->
-  <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-  <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="${contextPath}/">renewen</a>
+        <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle">
+            <img src="${contextPath}/assets/img/menu.png" alt="Menu Icon" style="height: 20px;">
+        </button>
+        <!-- Navbar Brand-->
 
-  <!-- Navbar Search Input-->
-  <!-- * * Note: * * Visible only on and above the lg breakpoint-->
-  <form class="form-inline me-auto d-none d-lg-block me-3">
-   <div class="input-group input-group-joined input-group-solid">
-       <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
-       <div class="input-group-text"><i data-feather="search"></i></div>
-   </div>
-  </form>
-  
-  <!-- Navbar Items-->
-   <ul class="navbar-nav align-items-center ms-auto">
-	   <!-- Documentation Dropdown-->
-	   <li class="nav-item dropdown no-caret d-none d-md-block me-3">
-	       <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	           <div class="fw-500">Documentation</div>
-	           <i class="fas fa-chevron-right dropdown-arrow"></i>
-	       </a>
-	       <div class="dropdown-menu dropdown-menu-end py-0 me-sm-n15 me-lg-0 o-hidden animated--fade-in-up" aria-labelledby="navbarDropdownDocs">
-	           <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro" target="_blank">
-	               <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="book"></i></div>
-	               <div>
-	                   <div class="small text-gray-500">Documentation</div>
-	                   Usage instructions and reference
-	               </div>
-	           </a>
-	           <div class="dropdown-divider m-0"></div>
-	           <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/components" target="_blank">
-	               <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="code"></i></div>
-	               <div>
-	                   <div class="small text-gray-500">Components</div>
-	                   Code snippets and reference
-	               </div>
-	           </a>
-	           <div class="dropdown-divider m-0"></div>
-	           <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/changelog" target="_blank">
-	               <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="file-text"></i></div>
-	               <div>
-	                   <div class="small text-gray-500">Changelog</div>
-	                   Updates and changes
-	               </div>
-	           </a>
-	       </div>
-	   </li>
-	   
-	   
-    <!-- Navbar Search Dropdown-->
-    <!-- 
-    * * Note: * * Visible only below the lg breakpoint
-    <li class="nav-item dropdown no-caret me-3 d-lg-none">
-        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
-        
-        
-        Dropdown - Search
-        <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
-            <form class="form-inline me-auto w-100">
-                <div class="input-group input-group-joined input-group-solid">
-                    <input class="form-control pe-0" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                    <div class="input-group-text"><i data-feather="search"></i></div>
-                </div>
-            </form>
-        </div>
-    </li>
-    
-     -->
-    
-    <!-- Alerts Dropdown-->
-    <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-        <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
-            <h6 class="dropdown-header dropdown-notifications-header">
-                <i class="me-2" data-feather="bell"></i>
-                Alerts Center
-            </h6>
-            <!-- Example Alert 1-->
-            <a class="dropdown-item dropdown-notifications-item" href="#!">
-                <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
-                <div class="dropdown-notifications-item-content">
-                    <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
-                    <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
-                </div>
-            </a>
-            <!-- Example Alert 2-->
-            <a class="dropdown-item dropdown-notifications-item" href="#!">
-                <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
-                <div class="dropdown-notifications-item-content">
-                    <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
-                    <div class="dropdown-notifications-item-content-text">A new monthly report is ready. Click here to view!</div>
-                </div>
-            </a>
-            <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
-        </div>
-    </li>
-    <!-- Messages Dropdown-->
-    <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-        <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
-        <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
-            <h6 class="dropdown-header dropdown-notifications-header">
-                <i class="me-2" data-feather="mail"></i>
-                Message Center
-            </h6>
-            <!-- Example Message 1  -->
-            <a class="dropdown-item dropdown-notifications-item" href="#!">
-                <img class="dropdown-notifications-item-img" src="${contextPath}/assets/img/illustrations/profiles/profile-2.png" />
-                <div class="dropdown-notifications-item-content">
-                    <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                    <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
-                </div>
-            </a>
-            <!-- Footer Link-->
-            <a class="dropdown-item dropdown-notifications-footer" href="#!">Read All Messages</a>
-        </div>
-    </li>
-	  <!-- User Dropdown-->
-	  <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-	  
-	  	<c:if test="${empty user}">
-		  	<a class="nav-link dropdown-toggle" href="${contextPath}/user/login" >
-		  		<i data-feather="log-in"></i> 로그인
-	  		</a>
-		  	<a class="nav-link dropdown-toggle" href="${contextPath}/user/join" >
-		  		<i data-feather="user"></i> 회원가입
-	  		</a>
-	  	</c:if>
+        <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">
+            <img src="${contextPath}/assets/img/logo.png" alt="Logo" style="height: 50px;">
+            Renewen
+        </a>
 
-	  	<c:if test="${not empty user}">
-	      <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	      	<img class="img-fluid" src="${contextPath}/assets/img/illustrations/profiles/profile-1.png" />
-	     	</a>
-	      <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
-       		<div class="dropdown-header d-flex align-items-center">
-         		<img class="dropdown-user-img" src="${contextPath}/assets/img/illustrations/profiles/profile-1.png" />
-	            <div class="dropdown-user-details">
-	                <div class="dropdown-user-details-name">${user.userName}</div>
-	                <div class="dropdown-user-details-email">${user.userEmail}</div>
-	            </div>
-          </div>
-          <div class="dropdown-divider"></div>
-	          <a class="dropdown-item" href="#!">
-            	<span class="dropdown-item-icon"><i data-feather="settings"></i></span>
-							회원정보	              
-	          </a>
-	          <a class="dropdown-item" href="${contextPath}/user/logout">
-            	<span class="dropdown-item-icon"><i data-feather="log-out"></i></span>
-							로그아웃
-	          </a>
-	      </div>
-	  	</c:if>	
-	  </li>
-	</ul>
-</nav>
+        <!-- Navbar Items-->
+        <ul class="navbar-nav align-items-center ms-auto">
+
+            <!-- 알림 Dropdown-->
+            <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"
+                    href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false"><img src="${contextPath}/assets/img/bell.png" alt="Bell Icon" style="height: 20px;"></a>
+                <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+                    aria-labelledby="navbarDropdownAlerts">
+                    <h6 class="dropdown-header dropdown-notifications-header">
+                        알림
+                    </h6>
+                    <!-- 알림1 -->
+                    <a class="dropdown-item dropdown-notifications-item" href="#!">
+                        <div class="dropdown-notifications-item-icon bg-success"><i data-feather="user-plus"></i></div>
+                        <div class="dropdown-notifications-item-content">
+                            <div class="dropdown-notifications-item-content-details">02.22, 2024</div>
+                            <div class="dropdown-notifications-item-content-text">로그인 성공!</div>
+                        </div>
+                    </a>
+                    <!-- 알림 2-->
+                    <a class="dropdown-item dropdown-notifications-item" href="#!">
+                        <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
+                        <div class="dropdown-notifications-item-content">
+                            <div class="dropdown-notifications-item-content-details">02.22, 2024</div>
+                            <div class="dropdown-notifications-item-content-text">관리자 등록 요청이 승인되었습니다.</div>
+                        </div>
+                    </a>
+                    <!-- 알림 3-->
+                    <a class="dropdown-item dropdown-notifications-item" href="#!">
+                        <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
+                        <div class="dropdown-notifications-item-content">
+                            <div class="dropdown-notifications-item-content-details">02.22, 2024</div>
+                            <div class="dropdown-notifications-item-content-text">오늘의 발전량을 확인하세요!</div>
+                        </div>
+                    </a>
+                    <!-- 알림 4-->
+                    <a class="dropdown-item dropdown-notifications-item" href="#!">
+                        <div class="dropdown-notifications-item-icon bg-danger"><i
+                                class="fas fa-exclamation-triangle"></i></div>
+                        <div class="dropdown-notifications-item-content">
+                            <div class="dropdown-notifications-item-content-details">02.24, 2024</div>
+                            <div class="dropdown-notifications-item-content-text">비정상적 접근 감지!</div>
+                        </div>
+                    </a>
+
+                    <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
+                </div>
+            </li>
+        </ul>
+        </li>
+
+        <!-- Power Plant Dropdown-->
+        <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"
+                href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><img src="${contextPath}/assets/img/plant.png" alt="plant Icon" style="height: 20px;"></a>
+
+            <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+                aria-labelledby="navbarDropdownMessages">
+                <h6 class="dropdown-header dropdown-notifications-header">
+                    발전소 목록
+                </h6>
+                <!-- 발전소 목록 1  -->
+                <a class="dropdown-item dropdown-notifications-item" href="#!">
+                    <img class="dropdown-notifications-item-img" src="${contextPath}/assets/img/plant.png" alt="plant Icon" />
+                    <div class="dropdown-notifications-item-content">
+                        <div class="dropdown-notifications-item-content-text">발전소 A</div>
+                        <div class="dropdown-notifications-item-content-details"></div>
+                    </div>
+                </a>
+                <!-- 발전소 목록 2  -->
+                <a class="dropdown-item dropdown-notifications-item" href="#!">
+                    <img class="dropdown-notifications-item-img" src="${contextPath}/assets/img/plant.png" alt="plant Icon" />
+                    <div class="dropdown-notifications-item-content">
+                        <div class="dropdown-notifications-item-content-text">발전소 B</div>
+                        <div class="dropdown-notifications-item-content-details"></div>
+                    </div>
+                </a>
+                <!-- 발전소 목록 3  -->
+                <a class="dropdown-item dropdown-notifications-item" href="#!">
+                    <img class="dropdown-notifications-item-img" src="${contextPath}/assets/img/plant.png" alt="plant Icon" />
+                    <div class="dropdown-notifications-item-content">
+                        <div class="dropdown-notifications-item-content-text">발전소 C</div>
+                        <div class="dropdown-notifications-item-content-details"></div>
+                    </div>
+                </a>
+
+                <!-- Footer Link-->
+                <a class="dropdown-item dropdown-notifications-footer" href="#!">발전소 추가</a>
+            </div>
+        </li>
+        </ul>
+        <!-- User Dropdown-->
+        <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"
+                href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><img src="${contextPath}/assets/img/user.png" alt="plant Icon" style="height: 20px;"></a>
+
+            <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+                aria-labelledby="navbarDropdownMessages">
+                <h6 class="dropdown-header dropdown-notifications-header">
+                    사용자 정보
+                </h6>
+                <!-- 사용자 정보 -->
+                <a class="dropdown-item dropdown-notifications-item" href="#!">
+                	<img class="dropdown-notifications-item-img" src="${contextPath}/assets/img/user.png" alt="user Icon" />
+                    <div class="dropdown-notifications-item-content">
+                        <div class="dropdown-notifications-item-content-text">환영합니다!</div>
+                        <div class="dropdown-notifications-item-content-details"></div>
+                        <div class="dropdown-user-details-name">사용자명:#</div>
+                        <div class="dropdown-user-details-email">이메일: #</div>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#!">
+                    <div class="dropdown-item-icon"></div>
+                    회원가입
+                </a>
+                <a class="dropdown-item" href="${contextPath}/user/login">
+                    <div class="dropdown-item-icon"></div>
+                    로그인
+                </a>
+                <a class="dropdown-item" href="#!">
+                    <div class="dropdown-item-icon"></div>
+                    로그아웃
+                </a>
+            </div>
+        </li>
+        </ul>
+    </nav>
     
     
+   
