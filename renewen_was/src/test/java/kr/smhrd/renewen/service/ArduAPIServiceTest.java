@@ -1,24 +1,29 @@
-package kr.smhrd.apiresttemplateservice;
+package kr.smhrd.renewen.service;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.client.RestTemplate;
 
- 
-@SpringBootTest
-@ContextConfiguration(classes = WeatherService.class)
-public class WeatherService {
+import kr.smhrd.renewen.model.SensingDataVO;
 
-	 
+@SpringBootTest
+public class ArduAPIServiceTest {
+
 	private final String apiUrl = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php?tm=202211300900&stn=0&help=1&authKey=-pjFeFmRQnmYxXhZkXJ5Pg";
 	
-	private final RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
-	
-	public WeatherService(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
+	@Test
+	@DisplayName("ddd")
+	public void ddd() {
+		assertNotNull(11);
 	}
 	
 	@Test
@@ -27,9 +32,4 @@ public class WeatherService {
 		String weatherData = restTemplate.getForObject(apiUrl, String.class);
 		System.out.println(weatherData);
 	}
-
-
-
-
-
 }

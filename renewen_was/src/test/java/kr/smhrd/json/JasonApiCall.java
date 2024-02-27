@@ -9,15 +9,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import kr.smhrd.apiresttemplateservice.WeatherService;
+import kr.smhrd.renewen.api.WeatherService;
 
  
 @SpringBootTest
 @ContextConfiguration(classes = JasonApiCall.class)
+// API에 GET 요청을 보내고 응답을 받아오는 역할을 하는 클래스
 public class JasonApiCall {
 	
 	@Autowired
-	private RestTemplate restTemplate;
+	private RestTemplate restTemplate; // 외부 API에 요청을 보냄
 
 	@Test
 	public static void main(String[] args) throws Exception {
@@ -39,6 +40,7 @@ public class JasonApiCall {
 				new InputStreamReader(con.getInputStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
+		
 		
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);

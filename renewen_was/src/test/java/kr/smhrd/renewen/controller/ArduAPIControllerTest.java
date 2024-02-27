@@ -1,4 +1,4 @@
-package kr.smhrd.weathercontroller;
+package kr.smhrd.renewen.controller;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import kr.smhrd.apiresttemplateservice.WeatherService;
+import kr.smhrd.renewen.api.WeatherService;
 
 @RestController
 @SpringBootTest
-public class WeatherController {
+// RESTful API를 제공하는 컨트롤러 클래스
+public class ArduAPIControllerTest {
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -19,7 +20,7 @@ public class WeatherController {
 	private final WeatherService weatherService;
 	
 	@Autowired
-	public WeatherController(WeatherService weatherService) {
+	public ArduAPIControllerTest(WeatherService weatherService) {
 		this.weatherService = weatherService;
 	}
 	
@@ -27,8 +28,8 @@ public class WeatherController {
 	@GetMapping("/weather")
 	public String getWeather() {
 		// 기상청 API 호출
-		String weatherData = weatherService.getWeatherData();
-		return weatherData;
+//		String weatherData = weatherService.getWeatherData();
+		return "";
 	}
 
 }

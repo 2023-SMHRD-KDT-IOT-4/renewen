@@ -1,4 +1,4 @@
-package kr.smhrd.apiresttemplateservice;
+package kr.smhrd.renewen.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
