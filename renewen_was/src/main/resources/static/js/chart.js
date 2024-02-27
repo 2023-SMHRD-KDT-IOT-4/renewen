@@ -1,6 +1,7 @@
 
         // 페이지가 로드될 때 실행되는 함수
        window.onload = function() {
+				 	console.log("chart");
             // 도넛 차트 데이터
             var doughnutChartData = {
                 labels: ["현재 발전 용량", "최대 발전 용량"],
