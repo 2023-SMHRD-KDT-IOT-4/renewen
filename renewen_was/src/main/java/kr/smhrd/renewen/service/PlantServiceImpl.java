@@ -20,14 +20,29 @@ public class PlantServiceImpl implements PlantService {
 	
 	@Override
 	public int registerPlant(PowerPlantVO vo) {
-		return plantMapper.registerPlant(vo);
+	
+		return plantMapper.registerPlant(vo);			
+		
 	}
 
+	
 	@Override
 	public List<PowerPlantVO> getPlantsByUserId(String userId) {
+		
 		return plantMapper.getPlantsByUserId(userId);
 	}
 
+	@Override
+	public int deletePlant (PowerPlantVO vo) {
+		return plantMapper.deletePlant(vo);
+	}
+	
+	@Override
+	public PowerPlantVO getPlantInfo(int plantNo) {
+		return plantMapper.getPlantInfo(plantNo);
+	}
+	
+	
 	@Override
 	public PowerPlantVO getPlantByPlantNo(long plantNo) {
 		return plantMapper.getPlantByPlantNo(plantNo);

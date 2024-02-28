@@ -11,7 +11,7 @@
         </button>
         <!-- Navbar Brand-->
 
-        <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">
+        <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="${contextPath}/">
             <img src="${contextPath}/assets/img/logo.png" alt="Logo" style="height: 50px;">
             Renewen
         </a>
@@ -132,7 +132,7 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" href="${contextPath}/user/join">
                     <div class="dropdown-item-icon"></div>
                     회원가입
                 </a>
@@ -140,7 +140,7 @@
                     <div class="dropdown-item-icon"></div>
                     로그인
                 </a>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" href="${contextPath}/user/logout">
                     <div class="dropdown-item-icon"></div>
                     로그아웃
                 </a>

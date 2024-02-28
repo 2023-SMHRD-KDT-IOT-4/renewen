@@ -76,7 +76,7 @@
                                             <!-- 3발전소 총용량 원형 차트 -->
                                             <!-- <canvas id="myPieChart" width="400" height="400"></canvas> -->
 
-                                            <!-- <canvas id="myPlantChart" width="400" height="400"></canvas> -->
+                                            <canvas id="myPlantChart" width="400" height="400"></canvas>
                                             
                                         </div>
                                     </div>
