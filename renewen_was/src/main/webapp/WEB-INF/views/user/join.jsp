@@ -42,61 +42,68 @@
 										</div>
 										<div class="card-body">
 											<!--  form-->
-											<form>
+											<form action="${contextPath}/user/join" method="post">
 												<!-- id-->
 												<div class="mb-3">
 													<label class="mb-1">아이디</label>
-													<input class="form-control" id="userId" type="text"
+													<input class="form-control" id="userId" name="userId" type="text"
 														placeholder="아이디를 입력하세요">
 												</div>
 												<!-- password-->
 												<div class="mb-3">
 													<label class="mb-1">비밀번호</label>
-													<input class="form-control" id="userPw" type="password"
+													<input class="form-control" id="userPw" name="userPw" type="password"
 														placeholder="비밀번호를 입력하세요" />
 												</div>
 												<!-- email-->
 												<div class="mb-3">
 													<label class="mb-1">이메일</label>
-													<input class="form-control" id="userEmail" type="email"
+													<input class="form-control" id="userEmail" name="userEmail" type="email"
 														placeholder="이메일을 입력하세요" />
+												</div>
+												<div class="mb-3">
+													<label class="mb-1">이름</label>
+													<input class="form-control" id="userName" name="userName" type="text"
+														placeholder="이름을 입력하세요" />
+												</div>
+												<div class="mb-3">
+													<label class="mb-1">연락처</label>
+													<input class="form-control" id="userTel" name="userTel" type="text"
+														placeholder="연락처를 입력하세요" />
 												</div>
 												<!-- 권한 선택-->
 												<div class="mb-3">
 													<label for="authSelect">권한 선택</label>
-													<select class="form-control" id="authSelect1">
-														<option>일반 사용자</option>
-														<option>발전소 관리자</option>
+													<select class="form-control" id="authSelect1" name="authId">
+														<c:forEach items="${authList}" var="auth">
+															<option value="${auth.authId}">${auth.authNm}</option>
+														</c:forEach>
 													</select>
 												</div>
 												<!-- 추가정보 발전소관리자 선택 시 -->
-												<div id="authId" style="display: none;">
-													<div class="mb-3">
-														<label class="mb-1">사용자 권한 id</label>
-														<input class="form-control" id="authId" type="text"
-															placeholder="사용자 권한 ID를 입력하세요" />
-													</div>
+												<div id="authIdSection" style="display: none;">
+													
 													<div class="mb-3">
 														<label class="mb-1">사용자 회사</label>
-														<input class="form-control" id="userCompany" type="text"
+														<input class="form-control" id="userCompany" name="userCompany" type="text"
 															placeholder="회사명을 입력하세요" />
 													</div>
 													<div class="mb-3">
 														<label class="mb-1">담당 직위</label>
-														<input class="form-control" id="managePosition" type="text"
+														<input class="form-control" id="managePosition" name="managePosition" type="text"
 															placeholder="담당 직위를 입력하세요" />
 													</div>
 													<div class="mb-3">
 														<label class="mb-1">담당 업무명</label>
-														<input class="form-control" id="manageTask" type="text"
+														<input class="form-control" id="manageTask" name="manageTask" type="text"
 															placeholder="담당 업무를 입력하세요" />
 													</div>
 												</div>
 
 
-												<!-- 로그인 버튼 -->
+												<!-- 회원가입 버튼 -->
 												<div class="d-grid">
-													<a class="btn btn-primary" href="#">로그인</a>
+													<button type="submit" class="btn btn-primary">회원가입</button>
 												</div>
 											</form>
 										</div>
@@ -112,7 +119,7 @@
 
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 				crossorigin="anonymous"></script>
-			<script src="${contextPath}/js/userJoin.js"></script>
+			<script src="${contextPath}/js/user_join.js"></script>
 			<!-- renewen -->
 
 			<script src="${contextPath}/js/scripts.js"></script>

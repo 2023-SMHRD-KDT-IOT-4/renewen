@@ -28,4 +28,10 @@
 			 #{userCompany}, #{managePosition}, #{manageTask})
 	</insert>
 	
+	<select id="getValidAuthList" resultType="UserAuthVO">
+		SELECT * FROM USER_AUTH
+		WHERE AUTH_ID != 'ROLE_ADMIN'
+		ORDER BY AUTH_ID DESC
+	</select>
+	
 </mapper>

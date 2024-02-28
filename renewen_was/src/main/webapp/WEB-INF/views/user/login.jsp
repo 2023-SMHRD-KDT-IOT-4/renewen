@@ -37,23 +37,23 @@
 										</div>
 										<div class="card-body">
 											<!-- Login form-->
-											<form>
+											<form action="${contextPath}/user/login" method="post">
 												<!-- id-->
 												<div class="mb-3">
 													<label class="mb-1">아이디</label>
-													<input class="form-control" id="userId" type="text"
+													<input class="form-control" id="userId" name="userId" type="text"
 														placeholder="아이디를 입력하세요" />
 												</div>
 												<!-- password-->
 												<div class="mb-3">
 													<label class="mb-1">비밀번호</label>
-													<input class="form-control" id="userPw" type="password"
+													<input class="form-control" id="userPw" name="userPw" type="password"
 														placeholder="비밀번호를 입력하세요" />
 												</div>
 
 												<!-- 로그인 버튼 -->
 												<div class="d-grid">
-													<a class="btn btn-primary" href="#">로그인</a>
+													<button type="submit" class="btn btn-primary">로그인</button>
 												</div>
 											</form>
 										</div>
