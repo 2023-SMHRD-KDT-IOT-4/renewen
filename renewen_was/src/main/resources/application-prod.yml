@@ -21,9 +21,9 @@ spring:
       suffix: .jsp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/renewen?characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: 1234
+    url: jdbc:mysql://host:3307/schema?characterEncoding=UTF-8&serverTimezone=UTC
+    username: userName
+    password: pw
 mybatis:
   mapper-locations: classpath:mapper/*.xml 
   type-aliases-package: kr.smhrd.renewen.model  
@@ -32,7 +32,8 @@ mybatis:
     
 # 별도 설정
 upload:
-  path: C:\\upload
-  img: \\imgs
+  path: /var/upload
+  img: /imgs
+
     
     

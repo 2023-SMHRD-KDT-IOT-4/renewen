@@ -25,31 +25,46 @@
 		<jsp:include page="/WEB-INF/views/layouts/sidenav.jsp" />
 	
 		<div id="layoutSidenav_content">
-    	<main>
-      	<!-- Main page content-->
-     		<div class="container-xl px-4 mt-5">
-        	<!-- Custom page header alternative example-->
-	        <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
-	          <div class="me-4 mb-3 mb-sm-0">
-	          
-						  <h2>Login form</h2>
-						  <form action="${contextPath}/user/login" method="post">
-						    <div class="mb-3 mt-3">
-						      <label for="userId">id:</label>
-						      <input type="text" class="form-control" id="userId" placeholder="Enter id" name="userId">
-						    </div>
-						    <div class="mb-3">
-						      <label for="userPw">Password:</label>
-						      <input type="password" class="form-control" id="userPw" placeholder="Enter password" name="userPw">
-						    </div>
-						    <button type="submit" class="btn btn-primary">Submit</button>
-						  </form>
-	            
-            </div>
-	        </div>
-        </div>
-    	</main>
-    	
+    <main>
+						<div class="container-xl px-4">
+							<div class="row justify-content-center">
+								<div class="col-lg-5">
+
+									<!-- 로그인-->
+									<div class="card shadow-lg border-0 rounded-lg mt-5">
+										<div class="card-header justify-content-center">
+											<h3 class="fw-light my-4">로그인</h3>
+										</div>
+										<div class="card-body">
+											<!-- Login form-->
+											<form>
+												<!-- id-->
+												<div class="mb-3">
+													<label class="mb-1">아이디</label>
+													<input class="form-control" id="userId" type="text"
+														placeholder="아이디를 입력하세요" />
+												</div>
+												<!-- password-->
+												<div class="mb-3">
+													<label class="mb-1">비밀번호</label>
+													<input class="form-control" id="userPw" type="password"
+														placeholder="비밀번호를 입력하세요" />
+												</div>
+
+												<!-- 로그인 버튼 -->
+												<div class="d-grid">
+													<a class="btn btn-primary" href="#">로그인</a>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</main>
+   
+   
+   
     	<jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
 		</div> <!-- end <div id="layoutSidenav_content"> -->
   </div>

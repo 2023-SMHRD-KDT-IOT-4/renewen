@@ -122,7 +122,7 @@
                     사용자 정보
                 </h6>
                 <!-- 사용자 정보 -->
-                <a class="dropdown-item dropdown-notifications-item" href="#!">
+                <a class="dropdown-item dropdown-notifications-item" href="login.jsp">
                 	<img class="dropdown-notifications-item-img" src="${contextPath}/assets/img/user.png" alt="user Icon" />
                     <div class="dropdown-notifications-item-content">
                         <div class="dropdown-notifications-item-content-text">환영합니다!</div>
@@ -140,7 +140,9 @@
                     <div class="dropdown-item-icon"></div>
                     로그인
                 </a>
+
                 <a class="dropdown-item" href="${contextPath}/user/logout">
+
                     <div class="dropdown-item-icon"></div>
                     로그아웃
                 </a>

@@ -1,3 +1,4 @@
+DROP TABLE if exists weather_api;
 DROP TABLE if exists predicted_gen_elec;
 DROP TABLE if exists cell_generated_elec;
 DROP TABLE if exists cell_shot_img;
@@ -37,8 +38,8 @@ CREATE TABLE user_info
     `user_company`     VARCHAR(30)     NULL        COMMENT '사용자 회사', 
     `manage_position`  VARCHAR(20)     NULL        COMMENT '담당 직위',
     `manage_task`      VARCHAR(50)     NULL        COMMENT '담당 업무명', 
-    `grant_yn`         CHAR(1)         NOT NULL    DEFAULT 'N' COMMENT '가입승인 여부', 
-    `joined_at`        TIMESTAMP       NOT NULL    DEFAULT (TIMESTAMP(NOW(3))) COMMENT '가입 시간', 
+    `use_yn`           CHAR(1)         NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
+    `joined_at`        TIMESTAMP       NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '가입 시간', 
     CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
@@ -58,7 +59,7 @@ CREATE TABLE user_log
     `connect_ip`   VARCHAR(20)     NOT NULL    COMMENT '접속 ip', 
     `access_menu`  VARCHAR(30)     NOT NULL    COMMENT '접근 메뉴', 
     `log_content`  VARCHAR(100)    NOT NULL    COMMENT '로그 내용', 
-    `created_at`   TIMESTAMP       NOT NULL    DEFAULT (TIMESTAMP(NOW(3))) COMMENT '로그 시간', 
+    `created_at`   TIMESTAMP       NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '로그 시간', 
      PRIMARY KEY (log_id)
 );
 
@@ -89,21 +90,26 @@ ALTER TABLE sensor_info COMMENT '서비스 센서 정의 테이블';
 
 CREATE TABLE power_plant
 (
-    `plant_no`           INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '발전소 식별번호', 
-    `user_id`            VARCHAR(30)     NOT NULL    COMMENT '사용자 id', 
-    `plant_name`         VARCHAR(30)     NOT NULL    COMMENT '발전소 이름', 
-    `plant_addr`         VARCHAR(100)    NOT NULL    COMMENT '발전소 주소', 
-    `br_number`          VARCHAR(30)     NOT NULL    COMMENT '사업자등록번호', 
-    `generate_cell_cnt`  INT             NOT NULL    COMMENT '발전 셀 갯수', 
-    `plant_link_key`     VARCHAR(50)     NULL        COMMENT '발전소 연동키', 
-    `grant_yn`           CHAR(1)         NOT NULL    DEFAULT 'N' COMMENT '승인여부', 
-    `use_yn`             CHAR(1)         NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`         TIMESTAMP       NOT NULL    DEFAULT (TIMESTAMP(NOW(3))) COMMENT '연동 시간', 
+    `plant_no`        INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '발전소 식별번호', 
+    `user_id`         VARCHAR(30)      NOT NULL    COMMENT '사용자 아이디', 
+    `plant_name`      VARCHAR(30)      NOT NULL    COMMENT '발전소 이름', 
+    `plant_addr1`     VARCHAR(100)     NOT NULL    COMMENT '발전소 주소(기본)', 
+    `plant_addr2`     VARCHAR(50)      NOT NULL    COMMENT '발전소 주소(상세)', 
+    `br_number`       VARCHAR(30)      NOT NULL    COMMENT '사업자등록번호', 
+    `plant_link_key`  VARCHAR(50)      NULL        COMMENT '발전소 연동키', 
+    `grant_yn`        CHAR(1)          NOT NULL    DEFAULT 'N' COMMENT '승인여부', 
+    `use_yn`          CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
+    `created_at`      TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '연동 시간', 
+    `stn_no`          VARCHAR(10)      NOT NULL    COMMENT '관측소 지점번호', 
+    `latitude`        DECIMAL(9, 7)    NOT NULL    COMMENT '위도', 
+    `longitude`       DECIMAL(9, 7)    NOT NULL    COMMENT '경도', 
     CONSTRAINT PK_power_plant PRIMARY KEY (plant_no)
 );
 
+-- 테이블 Comment 설정 SQL - power_plant
 ALTER TABLE power_plant COMMENT '연동 발전소 정보 저장 테이블';
 
+-- Foreign Key 설정 SQL - power_plant(user_id) -> user_info(user_id)
 ALTER TABLE power_plant
     ADD CONSTRAINT FK_power_plant_user_id_user_info_user_id FOREIGN KEY (user_id)
         REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -120,10 +126,10 @@ CREATE TABLE plant_sensing_data
     `sensor_serial_num`  VARCHAR(50)       NOT NULL    COMMENT '센서 시리얼번호', 
     `measure_value`      DECIMAL(12, 2)    NOT NULL    COMMENT '센싱 측정 값', 
     `measure_desc`       VARCHAR(100)      NULL        COMMENT '센싱 측정 설명', 
-    `use_yn`             CHAR(1)           NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`         DATETIME          NOT NULL    COMMENT '측정 시간', 
+    `use_yn`             CHAR(1)           NOT NULL    DEFAULT 'Y' COMMENT '사용여부',
+    `created_at`         TIMESTAMP         NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간',    
      PRIMARY KEY (sd_no)
-);
+) ;
 
 ALTER TABLE plant_sensing_data COMMENT '발전소 센싱 데이터 저장 테이블';
 
@@ -141,17 +147,21 @@ ALTER TABLE plant_sensing_data AUTO_INCREMENT=350001;
 
 CREATE TABLE cloud_shot_img
 (
-    `cs_no`           INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '구름 이미지 식별번호', 
-    `plant_no`        INT UNSIGNED    NOT NULL    COMMENT '발전소 식별번호', 
-    `cloud_img`       MEDIUMBLOB      NOT NULL    COMMENT '구름 촬영 이미지', 
-    `cloud_img_desc`  VARCHAR(100)    NULL        COMMENT '촬영 이미지 설명', 
-    `use_yn`          CHAR(1)         NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`      DATETIME       NOT NULL    COMMENT '촬영 시간', 
+    `cs_no`               INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '구름 이미지 식별번호', 
+    `plant_no`            INT UNSIGNED     NOT NULL    COMMENT '발전소 식별번호', 
+    `cloud_img_desc`      VARCHAR(100)     NULL        COMMENT '촬영 이미지 설명', 
+    `cloud_img_name`      VARCHAR(1200)    NOT NULL    COMMENT '이미지 업로드 이름', 
+    `cloud_img_realname`  VARCHAR(1500)    NOT NULL    COMMENT '이미지 파일이름', 
+    `cloud_img_size`      INT              NOT NULL    COMMENT '이미지 사이즈', 
+    `cloud_img_ext`       VARCHAR(10)      NOT NULL    COMMENT '이미지 확장자', 
+    `use_yn`              CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
+    `created_at`          TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '촬영 시간', 
      PRIMARY KEY (cs_no)
 );
 
 ALTER TABLE cloud_shot_img COMMENT '발전소 구름형상 촬영 이미지 저장 테이블';
 
+-- Foreign Key 설정 SQL - cloud_shot_img(plant_no) -> power_plant(plant_no)
 ALTER TABLE cloud_shot_img
     ADD CONSTRAINT FK_cloud_shot_img_plant_no_power_plant_plant_no FOREIGN KEY (plant_no)
         REFERENCES power_plant (plant_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -165,14 +175,14 @@ CREATE TABLE generate_cell
     `cell_no`         INT UNSIGNED      NOT NULL    AUTO_INCREMENT COMMENT '발전셀 식별번호', 
     `plant_no`        INT UNSIGNED      NOT NULL    COMMENT '발전소 식별번호', 
     `cell_type`       VARCHAR(30)       NOT NULL    COMMENT '발전셀 타입', 
-    `cell_serial_num`  VARCHAR(50)       NOT NULL    COMMENT '발전셀 시리얼번호',
+    `cell_serial_num` VARCHAR(50)       NOT NULL    COMMENT '발전셀 시리얼번호',
     `cell_volume`     DECIMAL(12, 2)    NOT NULL    COMMENT '발전셀 용량', 
     `cell_size_unit`  VARCHAR(10)       NOT NULL    COMMENT '셀 크기 단위', 
     `cell_width`      DECIMAL(12, 2)    NOT NULL    COMMENT '셀 크기(가로)', 
     `cell_height`     DECIMAL(12, 2)    NOT NULL    COMMENT '셀 크기(세로)', 
     `cell_depth`      DECIMAL(12, 2)    NOT NULL    COMMENT '셀 크기(높이)', 
     `use_yn`          CHAR(1)           NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`      TIMESTAMP         NOT NULL    DEFAULT (TIMESTAMP(NOW(3))) COMMENT '연동시간', 
+    `created_at`      TIMESTAMP         NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '연동시간', 
      PRIMARY KEY (cell_no)
 );
 
@@ -188,15 +198,19 @@ ALTER TABLE generate_cell AUTO_INCREMENT=550001;
 
 CREATE TABLE cell_shot_img
 (
-    `cs_no`          INT UNSIGNED    NOT NULL    AUTO_INCREMENT COMMENT '셀 이미지 식별번호', 
-    `cell_no`        INT UNSIGNED    NOT NULL    COMMENT '발전셀 식별번호', 
-    `cell_img`       MEDIUMBLOB      NOT NULL    COMMENT '셀 촬영 이미지', 
-    `cell_img_desc`  VARCHAR(100)    NULL        COMMENT '촬영 이미지 설명', 
-    `use_yn`         CHAR(1)         NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`     DATETIME        NOT NULL    COMMENT '촬영 시간', 
+    `cs_no`              INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '셀 이미지 식별번호', 
+    `cell_no`            INT UNSIGNED     NOT NULL    COMMENT '발전셀 식별번호', 
+    `cell_img_desc`      VARCHAR(100)     NULL        COMMENT '촬영 이미지 설명', 
+    `cell_img_name`      VARCHAR(1200)    NOT NULL    COMMENT '이미지 업로드 이름', 
+    `cell_img_realname`  VARCHAR(1500)    NOT NULL    COMMENT '이미지 파일이름', 
+    `cell_img_size`      INT              NOT NULL    COMMENT '이미지 사이즈', 
+    `cell_img_ext`       VARCHAR(10)      NOT NULL    COMMENT '셀 이미지 확장자', 
+    `use_yn`             CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
+    `created_at`         TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '촬영 시간', 
      PRIMARY KEY (cs_no)
 );
 
+-- 테이블 Comment 설정 SQL - cell_shot_img
 ALTER TABLE cell_shot_img COMMENT '발전셀 촬영 이미지 저장 테이블';
 
 -- Foreign Key 설정 SQL - cell_shot_img(cell_no) -> generate_cell(cell_no)
@@ -215,7 +229,7 @@ CREATE TABLE cell_generated_elec
     `gen_voltage`       INT              NOT NULL    COMMENT '발전 전압(V)', 
     `gen_elec_current`  DECIMAL(12,2)    NOT NULL    COMMENT '발전 전류(A)', 
     `use_yn`            CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`        DATETIME         NOT NULL    COMMENT '측정 시간', 
+    `created_at`        TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간', 
      PRIMARY KEY (cell_gen_no)
 );
 
@@ -234,10 +248,10 @@ CREATE TABLE predicted_gen_elec
 (
     `predict_no`        INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '예측 식별번호', 
     `cell_gen_no`       INT UNSIGNED     NOT NULL    COMMENT '셀 발전량 식별번호', 
-    `predict_gen_elec`  DECIMAL(12,2)    NOT NULL    COMMENT '예측 발전량', 
+    `predict_gen_elec`  DECIMAL(12,2)    NOT NULL    COMMENT '예측 발전량',
     `predict_rate`      DECIMAL(3,2)     NOT NULL    COMMENT '예측율', 
     `use_yn`            CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`        DATETIME         NOT NULL    COMMENT '측정 시간', 
+	`created_at`        TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간',
      PRIMARY KEY (predict_no)
 );
 
@@ -249,3 +263,20 @@ ALTER TABLE predicted_gen_elec
         REFERENCES cell_generated_elec (cell_gen_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE predicted_gen_elec AUTO_INCREMENT=850001;
+
+-- ===============================================================================================================
+
+CREATE TABLE weather_api
+(
+    `w_no`           INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '관측 식별 번호', 
+    `stn_no`         VARCHAR(10)      NOT NULL    COMMENT '관측소 지점번호', 
+    `weather_type`   VARCHAR(20)      NOT NULL    COMMENT '기상인자 타입', 
+    `weather_value`  DECIMAL(12,2)    NOT NULL    COMMENT '기상인자 측정값', 
+    `use_yn`         CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
+    `created_at`     TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간', 
+     PRIMARY KEY (w_no)
+);
+
+ALTER TABLE weather_api COMMENT '기상청 api허브에서 받아온 값 저장 테이블';
+
+ALTER TABLE weather_api AUTO_INCREMENT=950001;
