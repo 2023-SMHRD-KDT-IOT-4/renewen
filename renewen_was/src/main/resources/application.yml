@@ -7,9 +7,15 @@ server:
       enabled: true
       force: true
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
   main:
     web-application-type: servlet
     banner-mode: 'off'
+<<<<<<< HEAD
 #  profiles:
 #    active: local    
 
@@ -25,6 +31,8 @@ spring:
 #          scope: 
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-KDT-IOT-4/renewen
   mvc:
     view:
       prefix: /WEB-INF/
@@ -38,8 +46,17 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml 
   type-aliases-package: kr.smhrd.renewen.model  
   configuration:
+<<<<<<< HEAD
     map-underscore-to-camel-case: true  
 
     
+=======
+    map-underscore-to-camel-case: true    
+    
+# 별도 설정
+upload:
+  path: C:\\upload
+  img: \\imgs
+>>>>>>> branch 'main' of https://github.com/2023-SMHRD-KDT-IOT-4/renewen
     
     

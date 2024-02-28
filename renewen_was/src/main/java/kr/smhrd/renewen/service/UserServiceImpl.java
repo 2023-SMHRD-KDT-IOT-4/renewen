@@ -1,9 +1,12 @@
 package kr.smhrd.renewen.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.smhrd.renewen.mapper.UserMapper;
+import kr.smhrd.renewen.model.UserAuthVO;
 import kr.smhrd.renewen.model.UserVO;
 
 @Service
@@ -28,6 +31,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int joinUser(UserVO user) {
 		return userMapper.joinUser(user);
+	}
+
+	@Override
+	public List<UserAuthVO> getValidAuthList() {
+		return userMapper.getValidAuthList();
 	}
 
 }

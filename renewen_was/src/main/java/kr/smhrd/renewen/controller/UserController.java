@@ -1,11 +1,16 @@
 package kr.smhrd.renewen.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
+import kr.smhrd.renewen.model.UserAuthVO;
 import kr.smhrd.renewen.model.UserVO;
 import kr.smhrd.renewen.service.UserService;
 
@@ -41,20 +46,14 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/join")
-	public String join() {
+	public String join(Model model) {
+		List<UserAuthVO> authList = userService.getValidAuthList();
+		model.addAttribute("authList", authList);
 		return "views/user/join";
 	}
 	
 	@PostMapping("/user/join")
 	public String join(UserVO user) {
-		
-		System.out.println(user);
-		// 임의 데이터 세팅
-		String userId = user.getUserId();
-		user.setAuthId("ROLE_PLANT_ADMIN");
-		user.setUserEmail(userId + "@renewen.com");
-		user.setUserName(userId + "name");
-		user.setUserTel("010-1111-2222");
 		
 		userService.joinUser(user);
 		

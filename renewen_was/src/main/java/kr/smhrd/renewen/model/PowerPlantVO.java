@@ -17,10 +17,12 @@ public class PowerPlantVO {
     private String plantName;
     // 발전소 주소 
     private String plantAddr;
+    //발전소 상세 주소
+    private String plantAddr2;
     // 사업자등록번호 
     private String brNumber;
     // 발전 셀 갯수 
-    private int generateCellCnt;
+    //private int generateCellCnt;
     // 발전소 연동키 
     private String plantLinkKey;
     // 승인여부 
