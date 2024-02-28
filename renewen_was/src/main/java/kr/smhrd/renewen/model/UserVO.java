@@ -30,8 +30,6 @@ public class UserVO {
     private String managePosition;
     // 담당 업무명 
     private String manageTask;
-    // 가입승인 여부 
-    private String grantYn;
     // 가입 시간 
     private Timestamp joinedAt;
     

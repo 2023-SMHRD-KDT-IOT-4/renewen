@@ -11,10 +11,11 @@
 	
 	<select id="getUser" resultType="UserVO">
 		SELECT 
-			u.user_id, u.user_email, u.user_name, u.user_tel, u.user_company, u.manage_position, u.manage_task, u.grant_yn, u.joined_at, 
+			u.user_id, u.user_email, u.user_name, u.user_tel, u.user_company, u.manage_position, u.manage_task, u.joined_at, 
 		 	auth.auth_id, auth.auth_nm
 		FROM user_info u
-    	INNER JOIN user_auth auth ON u.auth_id = auth.auth_id
+    	INNER JOIN user_auth auth 
+    	ON u.auth_id = auth.auth_id
 		WHERE u.user_id = #{userId}
 	</select>
 	
