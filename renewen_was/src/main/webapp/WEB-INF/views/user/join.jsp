@@ -116,7 +116,7 @@
 			<!-- renewen -->
 
 			<script src="${contextPath}/js/scripts.js"></script>
-			<script src="${contextPath}/js/userJoin.js"></script>
+			<script src="${contextPath}/js/user_join.js"></script>
 			<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		</body>
 
