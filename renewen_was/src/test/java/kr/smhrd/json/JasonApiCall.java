@@ -17,8 +17,8 @@ import kr.smhrd.renewen.api.WeatherService;
 // API에 GET 요청을 보내고 응답을 받아오는 역할을 하는 클래스
 public class JasonApiCall {
 	
-	@Autowired
-	private RestTemplate restTemplate; // 외부 API에 요청을 보냄
+	@Autowired // 의존성주입
+	private RestTemplate restTemplate; // 외부 API에 HTTP 요청 보내고, 응답 받음
 
 	@Test
 	public static void main(String[] args) throws Exception {
@@ -32,22 +32,23 @@ public class JasonApiCall {
 		// 요청 방식 GET
 		con.setRequestMethod("GET");
 
-		// 요청 헤더 설정_Content-Type을 application/json으로 설정
+		// 요청 헤더 설정_Content-Type을 application/json으로 설정해 JSON형식의 응답 요청
 		con.setRequestProperty("Content-Type", "application/json");
 
-		// API의 응답을 읽기 위한 BufferedReader를 생성
+		// API의 응답을 읽기 위한 BufferedReader를 생성해 응답을 읽어옴
 		BufferedReader in = new BufferedReader(
 				new InputStreamReader(con.getInputStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 		
-		
+		// 응답 한 줄씩 읽고 StringBuffer에 추가
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
-		// BufferedReader 닫기
+		// 읽기가 끝나면 BufferedReader 닫고
 		in.close();
 		
+		// 응답을 문자열 형태로 출력
 		System.out.println(response.toString());
 
 	}

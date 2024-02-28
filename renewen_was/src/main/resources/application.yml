@@ -12,6 +12,19 @@ spring:
     banner-mode: 'off'
 #  profiles:
 #    active: local    
+
+
+# 네이버 로그인 연동
+#  security:
+#    oauth2:
+#     client:
+#      registration:
+#        google:
+#          client-id: 780755290259-30bopb1kcelc9laqk5ijln2evlplg9qb.apps.googleusercontent.com
+#          client-secret: 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
+#          scope: 
+
+
   mvc:
     view:
       prefix: /WEB-INF/
@@ -26,4 +39,7 @@ mybatis:
   type-aliases-package: kr.smhrd.renewen.model  
   configuration:
     map-underscore-to-camel-case: true  
+
+    
+    
     
