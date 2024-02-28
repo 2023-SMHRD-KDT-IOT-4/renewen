@@ -43,30 +43,16 @@
                         <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
                                 <!-- Nested Sidenav Accordion (Pages -> Account)-->
-                                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAccount" aria-expanded="false"
-                                    aria-controls="pagesCollapseAccount">
-                                    발전소 등록
-                                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAccount" aria-expanded="false"
-                                    aria-controls="pagesCollapseAccount">
-                                    발전소 리스트
-                                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAccount" aria-expanded="false"
-                                    aria-controls="pagesCollapseAccount">
-                                    셀 상태 확인
-                                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAccount" aria-expanded="false"
-                                    aria-controls="pagesCollapseAccount">
-                                    구름 이미지
-                                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
+                                
+                                
+                                <a class="nav-link" href="${contextPath}/plant/register">발전소 등록</a>
+                                
+                                <a class="nav-link collapsed" href="${contextPath}/plant/list">발전소 리스트</a>
+                                
+                                <a class="nav-link collapsed" href="javascript:void(0);">셀 상태 확인</a>
+                                
+                                <a class="nav-link collapsed" href="${contextPath}/plant/cloudImgs" >구름 이미지 </a>
+                               
 
 
                                 <div class="collapse" id="pagesCollapseAuth"

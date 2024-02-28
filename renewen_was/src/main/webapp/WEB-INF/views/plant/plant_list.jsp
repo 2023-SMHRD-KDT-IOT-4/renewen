@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -32,9 +34,9 @@
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="filter"></i></div>
-                                Tables 
+                                발전소 리스트 
                             </h1>
-                            <div class="page-header-subtitle">An extension of the Simple DataTables library, customized for SB Admin Pro</div>
+                            <!-- <div class="page-header-subtitle">An extension of the Simple DataTables library, customized for SB Admin Pro</div> -->
                         </div>
                     </div>
                 </div>
@@ -53,30 +55,43 @@
 	                    <th>발전소 이름</th>
 	                    <th>주소</th>
 	                    <th>사업자등록번호</th>
-	                    <th>발전 셀 갯수</th>
 	                    <th>연동키</th>
 	                    <th>승인여부</th>
 	                    <th>연동시간</th>
 	                  </tr>
                    </thead>
+
                    <tbody>
+                   
                    	<c:forEach var="vo" items="${list}" varStatus="status">
                    		<tr>
 	                      <td>${status.count}</td>
 	                      <td>${vo.plantName}</td>
-	                      <td>${vo.plantAddr}</td>
-	                      <td>${vo.brNumber}</td>
-	                      <td>${vo.generateCellCnt}</td>
-	                      <td>${vo.plantLinkKey}</td>
+	                      <td>${vo.plantAddr} ${vo.plantAddr2}</td>
+	                     <c:set var="num" value="${vo.brNumber}"/>
+	                     <td>${fn:substring(num,0,3)}-${fn:substring(num,3,5)}-${fn:substring(num,5,10)}</td>
+	                     
+	                     <c:choose>
+	                     	<c:when test="${empty vo.plantLinkKey}">
+	                     		<td>미연동</td>
+                     		</c:when>
+	                     	<c:otherwise>
+		                      <td>${vo.plantLinkKey}</td>
+	                     	</c:otherwise>
+	                     </c:choose> 
 	                      <td>${vo.grantYn}</td>
 	                      <td>${vo.createdAt}</td>
 	                      <td>
-	                        <button class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button>
-	                        <button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button>
+	                        <!-- <button  class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button> -->
+	                        <a href="${contextPath}/plant/update?plantNo=${vo.plantNo}" class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></a>
+	                        <!-- <button  class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button> -->
+	                        <a href="${contextPath}/plant/list/delete?plantNo=${vo.plantNo}" onclick="return delete_event()" class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></a>
 	                      </td>
                     	</tr>
                    	</c:forEach>
+                   	
                    </tbody>
+                   
               </table>
          		</div>
 	   			</div>
@@ -93,6 +108,17 @@
   <script src="${contextPath}/js/datatables/datatables-simple-demo.js"></script>	
 	<!-- renewen -->  
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+  
+  <script type="text/javascript">
+  	function delete_event(){
+  		 if(confirm("발전소를 삭제하시겠습니까?") == true){
+             return true; 
+          }else{
+             return false; 
+          }
+  	}
+  </script>
   
 </body>
 </html>

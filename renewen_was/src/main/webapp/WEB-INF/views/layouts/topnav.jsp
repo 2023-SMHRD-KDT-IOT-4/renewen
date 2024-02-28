@@ -11,7 +11,7 @@
         </button>
         <!-- Navbar Brand-->
 
-        <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">
+        <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="${contextPath}/">
             <img src="${contextPath}/assets/img/logo.png" alt="Logo" style="height: 50px;">
             Renewen
         </a>
@@ -140,7 +140,9 @@
                     <div class="dropdown-item-icon"></div>
                     로그인
                 </a>
-                <a class="dropdown-item" href="${contextPath}/#">
+
+                <a class="dropdown-item" href="${contextPath}/user/logout">
+
                     <div class="dropdown-item-icon"></div>
                     로그아웃
                 </a>

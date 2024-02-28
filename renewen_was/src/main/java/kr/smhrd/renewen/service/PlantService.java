@@ -16,6 +16,10 @@ public interface PlantService {
 	public PowerPlantVO getPlantByPlantNo(long plantNo);
 	public long getPlantNoByLinkKey(String plantLinkKey);
 	
+	public int deletePlant(PowerPlantVO vo);
+	
+	public PowerPlantVO getPlantInfo(int plantNo);
+	
 	// =================================================================	
 	
 	// 센싱데이터 

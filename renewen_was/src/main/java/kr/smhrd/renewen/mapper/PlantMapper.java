@@ -18,6 +18,10 @@ public interface PlantMapper {
 	public PowerPlantVO getPlantByPlantNo(long plantNo);
 	public Long getPlantNoByLinkKey(String plantLinkKey);
 	
+	public int deletePlant(PowerPlantVO vo);
+	
+	public PowerPlantVO getPlantInfo(int plantNo);
+	
 	// =================================================================	
 	
 	// 센싱데이터 

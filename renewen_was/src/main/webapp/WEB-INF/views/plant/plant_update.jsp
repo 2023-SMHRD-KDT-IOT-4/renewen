@@ -29,7 +29,7 @@
         	<!-- Custom page header alternative example-->
 	        <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
 	          <div class="me-4 mb-3 mb-sm-0">
-	            <h1 class="mb-0">발전소 등록</h1>
+	            <h1 class="mb-0">발전소 정보 수정</h1>
 	            <!-- <div class="small">
 	                <span class="fw-500 text-primary">Friday</span>
 	                &middot; September 20, 2021 &middot; 12:16 PM
@@ -46,30 +46,31 @@
 	        </div>
         </div>
         <div class="container mt-3">
-				  <!-- <h2>Form</h2> -->
+        			
+
 				    <!-- 발전소 이름, 발전소 주소, 사업자 등록 번호  -->
-				  <form action="${contextPath}/plant/register" method="post" onsubmit="return validateForm()">
+				  <form action="${contextPath}/plant/update" method="post" onsubmit="return validateForm()">
 				    <div class="mb-3 mt-3">
 				      <label for="userId">발전소 이름</label>
-				      <input type="text" class="form-control" id="plantName" placeholder="발전소 이름 입력" name="plantName">
+				      <input type="text" class="form-control" id="plantName" placeholder="발전소 이름 입력" name="plantName" value="${vo.plantName}">
 				    </div>
 				    <div class="mb-3">
 				      <label for="userPw">발전소 주소</label>
-				      <input type="text" class="form-control" id="plantAddr" onclick="sample6_execDaumPostcode()" placeholder="발전소 주소 입력" name="plantAddr">
+				      <input type="text" class="form-control" id="plantAddr" onclick="sample6_execDaumPostcode()" placeholder="발전소 주소 입력" name="plantAddr" value="${vo.plantAddr}">
 				      
-				      <input type="text" class="form-control" id="plantAddr2" placeholder="상세주소입력" name="plantAddr2">
+				      <input type="text" class="form-control" id="plantAddr2" placeholder="상세주소입력" name="plantAddr2" value="${vo.plantAddr2 }">
 				      <!-- <input type="text" id="sample6_detailAddress" placeholder="상세주소"> -->
 				      <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 				    </div>
 				    <div class="mb-3">
 				      <label for="userPw">사업자 등록 번호</label>
-				      <input type="text" class="form-control" id="brNumber"  placeholder="사업자 번호 입력(숫자만 입력해주세요)" name="brNumber" oninput="formatNumber(this)">
+				      <input type="text" class="form-control" id="brNumber"  placeholder="사업자 번호 입력(숫자만 입력해주세요)" name="brNumber" oninput="formatNumber(this)" value="${vo.brNumber }">
 				    </div>
 				    
 				    
 				    <button type="submit" class="btn btn-primary">등록</button>
 				  </form>
-				</div>
+		</div>
     	</main>
     	<jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
 		</div> <!-- end <div id="layoutSidenav_content"> -->
@@ -124,12 +125,12 @@
 		
 
 	<script type="text/javascript">
-	  // 한국어 요일 배열
+
 	    var koreanDays = ['일', '월', '화', '수', '목', '금', '토'];
-	    // 한국어 월 배열
+
 	    var koreanMonths = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 	
-	    // 현재 시간과 날짜를 업데이트하는 함수
+
 	    function updateDateTime() {
 	        var currentDate = new Date();
 	
@@ -141,15 +142,14 @@
 	        var minutes = currentDate.getMinutes();
 	        var ampm = hours >= 12 ? '오후' : '오전';
 	
-	        // 12시간제로 변환
+
 	        hours = hours % 12;
-	        hours = hours ? hours : 12; // 0시는 12로 표시
+	        hours = hours ? hours : 12; 
 	
-	        // 한 자리 숫자는 앞에 0을 붙여 두 자리로 만듭니다.
+
 	        dayOfMonth = (dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth;
 	        minutes = (minutes < 10) ? "0" + minutes : minutes;
-	
-	        // 각 요소의 텍스트를 현재 시간과 날짜로 설정합니다.
+
 	        document.getElementById("currentYear").textContent = year + '년';
 	        document.getElementById("currentMonth").textContent = month;
 	        document.getElementById("currentDayOfMonth").textContent = dayOfMonth + '일';
@@ -159,10 +159,9 @@
 	        document.getElementById("currentPeriod").textContent = ampm;
 	    }
 	
-	    // 페이지가 로드될 때와 매 분마다 시간과 날짜 업데이트
 	    window.onload = function() {
-	        updateDateTime(); // 페이지 로드 시 호출하여 초기화
-	        setInterval(updateDateTime, 1000); // 1분마다 갱신
+	        updateDateTime(); 
+	        setInterval(updateDateTime, 1000);
 	    };
 		
 	</script>

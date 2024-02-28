@@ -7,15 +7,24 @@
 	<!-- 발전소 -->
 	<insert id="registerPlant" parameterType="PowerPlantVO">
 		INSERT INTO power_plant
-			(user_id, plant_name, plant_addr, br_number, generate_cell_cnt)
+			(user_id, plant_name, plant_addr, plant_addr2, br_number)
 		VALUES
-    	(#{userId}, #{plantName}, #{plantAddr}, #{brNumber}, #{generateCellCnt})
+    	(#{userId}, #{plantName}, #{plantAddr},#{plantAddr2} ,#{brNumber})
 	</insert>
 	
 	<select id="getPlantsByUserId" resultType="PowerPlantVO">
 		SELECT * FROM power_plant
 		WHERE user_id = #{userId}
 	</select>
+	
+	<delete id="deletePlant" parameterType="PowerPlantVO">
+		DELETE FROM power_plant WHERE user_id=#{userId} AND plant_no=#{plantNo}
+	</delete>
+		
+	<select id="getPlantInfo" resultType="PowerPlantVO">
+		SELECT * FROM power_plant WHERE plant_no=#{plantNo}
+	</select>
+		
 
 	<select id="getPlantByPlantNo" resultType="PowerPlantVO">
 		SELECT * FROM power_plant

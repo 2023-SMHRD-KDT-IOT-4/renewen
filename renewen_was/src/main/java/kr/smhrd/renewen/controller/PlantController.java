@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,14 +33,18 @@ public class PlantController {
 	
 	@PostMapping("/plant/register")
 	public String plantRegister(PowerPlantVO plant, HttpSession session) {
-		
+		System.out.println(plant);
 		UserVO user = (UserVO) session.getAttribute("user");
 		String userId = user.getUserId();
-		// dummy data
+		
 		plant.setUserId(userId);
-		plant.setPlantAddr("test addr");
-		plant.setBrNumber("test Br");
-		plantService.registerPlant(plant);
+		plant.setPlantName(plant.getPlantName());
+		plant.setPlantAddr(plant.getPlantAddr());
+		plant.setPlantAddr2(plant.getPlantAddr2());
+		plant.setBrNumber(plant.getBrNumber());
+		
+		int res = plantService.registerPlant(plant);
+		System.out.println("발전소 등록 결과 : "+ res);
 		
 		return "redirect:/plant/list";
 	}
@@ -54,6 +59,40 @@ public class PlantController {
 		
 		return "views/plant/plant_list";
 	}
+	
+	@GetMapping("/plant/list/delete")
+	public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {
+		System.out.println(plantNo);
+		
+		UserVO user = (UserVO)session.getAttribute("user");
+		String userId = user.getUserId();
+		plant.setUserId(userId);
+		
+		System.out.println("아이디 : "+userId);
+		plant.setPlantNo(plantNo);	
+		
+		int res = plantService.deletePlant(plant);
+		
+		System.out.println("리스트 삭제 결과 : "+res);
+		
+		return "redirect:/plant/list";
+		
+	}
+	
+	@GetMapping("/plant/update")
+	public String plantUpdate(@RequestParam("plantNo")int plantNo, HttpSession session,Model model) {
+		
+		
+		PowerPlantVO vo = plantService.getPlantInfo(plantNo);
+		model.addAttribute("vo",vo);
+		
+		
+		
+		return "views/plant/plant_update";
+	}
+	
+	
+	
 	
 	@GetMapping("/plant/cloudImgs")
 	public String imgList(Model model, HttpSession session) {
