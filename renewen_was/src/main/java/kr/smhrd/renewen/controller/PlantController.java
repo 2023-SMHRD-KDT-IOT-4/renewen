@@ -56,39 +56,59 @@ public class PlantController {
 		String userId = user.getUserId();
 		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
 		model.addAttribute("list", list);
-		
+		session.setAttribute("plantNo", list);
+		System.out.println("세션에 저장된 값"+session.getAttribute("plantNo"));
 		return "views/plant/plant_list";
 	}
 	
-	@GetMapping("/plant/list/delete")
-	public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {
-		System.out.println(plantNo);
-		
-		UserVO user = (UserVO)session.getAttribute("user");
-		String userId = user.getUserId();
-		plant.setUserId(userId);
-		
-		System.out.println("아이디 : "+userId);
-		plant.setPlantNo(plantNo);	
-		
-		int res = plantService.deletePlant(plant);
-		
-		System.out.println("리스트 삭제 결과 : "+res);
-		
-		return "redirect:/plant/list";
-		
-	}
+	 @GetMapping("/plant/list/delete")
+	   public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {
+	      System.out.println(plantNo);
+	      
+	      UserVO user = (UserVO)session.getAttribute("user");
+	      String userId = user.getUserId();
+	      plant.setUserId(userId);
+	      
+	      System.out.println("아이디 : "+userId);
+	      plant.setPlantNo(plantNo);   
+	      
+	      int res = plantService.deletePlant(plant);
+	      
+	      System.out.println("리스트 삭제 결과 : "+res);
+	      
+	      return "redirect:/plant/list";
+	      
+	   }
+
 	
-	@GetMapping("/plant/update")
-	public String plantUpdate(@RequestParam("plantNo")int plantNo, HttpSession session,Model model) {
+	 @GetMapping("/plant/update")
+	   public String plantUpdate(@RequestParam("plantNo")int plantNo, HttpSession session,Model model) {
+	      
+	      
+	      PowerPlantVO vo = plantService.getPlantInfo(plantNo);
+	      model.addAttribute("vo",vo);
+	      long getPlantNo = vo.getPlantNo();
+	      session.setAttribute("plantNo",getPlantNo );
+	      
+	      
+	      
+	      return "views/plant/plant_update";
+	   }
+
+	
+	@PostMapping("/plant/update")
+	public String plantUpdate( PowerPlantVO plant, HttpSession session) {
+		long plantNo = (long)session.getAttribute("plantNo");
+		plant.setPlantNo(plantNo);
+		plant.setPlantAddr(plant.getPlantAddr());
+		plant.setPlantAddr2(plant.getPlantAddr2());
+		plant.setBrNumber(plant.getBrNumber());
 		
+		int res = plantService.updatePlant(plant);
+		System.out.println("발전소 정보 수정 결과 : "+res);
+	
+		return "redirect:/plant/list";	
 		
-		PowerPlantVO vo = plantService.getPlantInfo(plantNo);
-		model.addAttribute("vo",vo);
-		
-		
-		
-		return "views/plant/plant_update";
 	}
 	
 	

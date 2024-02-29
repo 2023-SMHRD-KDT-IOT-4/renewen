@@ -46,7 +46,7 @@
         <!-- Main page content-->
         <div class="container-xl px-4 mt-n10">
         	<div class="card mb-4">
-          	<div class="card-header">발전소 리스트</div>
+          	<div class="card-header">${user.userId}회원님의 발전소 리스트</div>
             	<div class="card-body">
               	<table class="table table-hover">
                 	<thead>
@@ -81,12 +81,16 @@
 	                     </c:choose> 
 	                      <td>${vo.grantYn}</td>
 	                      <td>${vo.createdAt}</td>
+	                      
 	                      <td>
 	                        <!-- <button  class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button> -->
 	                        <a href="${contextPath}/plant/update?plantNo=${vo.plantNo}" class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></a>
 	                        <!-- <button  class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button> -->
 	                        <a href="${contextPath}/plant/list/delete?plantNo=${vo.plantNo}" onclick="return delete_event()" class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></a>
 	                      </td>
+	                      <c:if test="${vo.grantYn eq 'Y'}">
+	                      	<td><button>발전 셀 연동</button></td>			                      	
+	                      </c:if>
                     	</tr>
                    	</c:forEach>
                    	

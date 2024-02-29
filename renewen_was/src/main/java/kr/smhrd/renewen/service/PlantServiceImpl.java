@@ -40,6 +40,12 @@ public class PlantServiceImpl implements PlantService {
 	@Override
 	public PowerPlantVO getPlantInfo(int plantNo) {
 		return plantMapper.getPlantInfo(plantNo);
+	
+	}
+	
+	@Override
+	public int updatePlant(PowerPlantVO vo) {
+		return plantMapper.updatePlant(vo);
 	}
 	
 	

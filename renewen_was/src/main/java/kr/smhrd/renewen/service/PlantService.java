@@ -19,6 +19,7 @@ public interface PlantService {
 	public int deletePlant(PowerPlantVO vo);
 	
 	public PowerPlantVO getPlantInfo(int plantNo);
+	public int updatePlant(PowerPlantVO vo);
 	
 	// =================================================================	
 	

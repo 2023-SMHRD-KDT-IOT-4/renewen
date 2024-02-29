@@ -21,9 +21,15 @@
 		DELETE FROM power_plant WHERE user_id=#{userId} AND plant_no=#{plantNo}
 	</delete>
 		
-	<select id="getPlantInfo" resultType="PowerPlantVO">
+	<select id="getPlantInfo" resultType="PowerPlantVO" >
 		SELECT * FROM power_plant WHERE plant_no=#{plantNo}
 	</select>
+	
+	<update id="updatePlant" parameterType="PowerPlantVO">
+		UPDATE power_plant SET plant_name=#{plantName},plant_addr=#{plantAddr},plant_addr2=#{plantAddr2},br_number=#{brNumber} 
+		WHERE plant_no=#{plantNo};
+		
+	</update>
 		
 
 	<select id="getPlantByPlantNo" resultType="PowerPlantVO">
