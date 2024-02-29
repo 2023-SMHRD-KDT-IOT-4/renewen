@@ -8,5 +8,30 @@
     "name": "upload.img",
     "type": "java.lang.String",
     "description": "A description for 'upload.img'"
+  },
+  {
+    "name": "spring.kakao.token-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kakao.token-uri'"
+  },
+  {
+    "name": "spring.kakao.user-info-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kakao.user-info-uri'"
+  },
+  {
+    "name": "spring.kakao.grant-type",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kakao.grant-type'"
+  },
+  {
+    "name": "spring.kakao.client-id",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kakao.client-id'"
+  },
+  {
+    "name": "spring.kakao.redirect-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kakao.redirect-uri'"
   }
 ]}
