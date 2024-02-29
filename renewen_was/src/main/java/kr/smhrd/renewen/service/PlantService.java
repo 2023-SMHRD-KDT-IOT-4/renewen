@@ -19,6 +19,7 @@ public interface PlantService {
 	public int deletePlant(PowerPlantVO vo);
 	
 	public PowerPlantVO getPlantInfo(int plantNo);
+	public int updatePlant(PowerPlantVO vo);
 	
 	// =================================================================	
 	
@@ -36,8 +37,11 @@ public interface PlantService {
 	// =================================================================
 	
 	// 발전셀
+	// 발전셀 정보 저장
 	public int insertGenerateCell(GenerateCellVO vo);
+	// 발전셀 촬영 이미지 저장
 	public int insertCellShotImg(CellShotImgVO vo);
+	// cellNo 조회(셀 시리얼번호로)
 	public long getCellNoBySerialNum(String cellSerialNum);
 	
 }

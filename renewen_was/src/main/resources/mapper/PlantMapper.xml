@@ -21,9 +21,15 @@
 		DELETE FROM power_plant WHERE user_id=#{userId} AND plant_no=#{plantNo}
 	</delete>
 		
-	<select id="getPlantInfo" resultType="PowerPlantVO">
+	<select id="getPlantInfo" resultType="PowerPlantVO" >
 		SELECT * FROM power_plant WHERE plant_no=#{plantNo}
 	</select>
+	
+	<update id="updatePlant" parameterType="PowerPlantVO">
+		UPDATE power_plant SET plant_name=#{plantName},plant_addr=#{plantAddr},plant_addr2=#{plantAddr2},br_number=#{brNumber} 
+		WHERE plant_no=#{plantNo};
+		
+	</update>
 		
 
 	<select id="getPlantByPlantNo" resultType="PowerPlantVO">
@@ -94,9 +100,11 @@
 	
 	<insert id="insertCloudShotImg" parameterType="CloudShotImgVO">
 		INSERT INTO cloud_shot_img
-    	(plant_no, cloud_img, cloud_img_desc, created_at)
+    	(plant_no, cloud_img_desc, cloud_img_name, cloud_img_realname, 
+    	 cloud_img_size, cloud_img_ext, created_at)
 		VALUES
-    	(#{plantNo}, #{cloudImg}, #{cloudImgDesc}, #{createdAt})
+    	(#{plantNo}, #{cloudImgDesc}, #{cloudImgName}, #{cloudImgRealname},
+    	 #{cloudImgSize}, #{cloudImgExt}, #{createdAt})
 	</insert>
 
 	<!-- ================================================================================ -->
@@ -113,9 +121,11 @@
 	
 	<insert id="insertCellShotImg" parameterType="CellShotImgVO">
 		INSERT INTO cell_shot_img
-    	(cell_no, cell_img, cell_img_desc, created_at)
+    	(cell_no, cell_img_desc, cell_img_name, cell_img_realname,
+    	 cell_img_size, cell_img_ext, created_at)
 		VALUES
-    	(#{cellNo}, #{cellImg}, #{cellImgDesc}, #{createdAt})
+    	(#{cellNo}, #{cellImgDesc}, #{cellImgName}, #{cellImgRealname},
+    	 #{cellImgSize}, #{cellImgExt}, #{createdAt})
 	</insert>
 	
 	<select id="getCellNoBySerialNum">

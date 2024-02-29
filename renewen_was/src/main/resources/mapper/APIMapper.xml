@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.smhrd.renewen.mapper.APIMapper">
+
+	<insert id="insertWeatherFactor" parameterType="hashMap">
+			INSERT INTO weather_api(stn_no, weather_type, weather_value, created_at)
+			VALUES(#{stnNo}, #{weatherType}, #{weatherValue}, #{createdAt})
+	</insert>
+	
+	
+</mapper>

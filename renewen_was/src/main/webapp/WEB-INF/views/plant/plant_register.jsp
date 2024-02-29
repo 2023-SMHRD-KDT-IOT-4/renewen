@@ -118,18 +118,18 @@
 	             }
 	         }).open();
 	  	 }
-	  	 //Tab키 이벤트
+	  	 
 	     document.getElementById("plantAddr").addEventListener("focus", sample6_execDaumPostcode);
   	</script>
 		
 
 	<script type="text/javascript">
-	  // 한국어 요일 배열
+
 	    var koreanDays = ['일', '월', '화', '수', '목', '금', '토'];
-	    // 한국어 월 배열
+
 	    var koreanMonths = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
 	
-	    // 현재 시간과 날짜를 업데이트하는 함수
+
 	    function updateDateTime() {
 	        var currentDate = new Date();
 	
@@ -141,15 +141,14 @@
 	        var minutes = currentDate.getMinutes();
 	        var ampm = hours >= 12 ? '오후' : '오전';
 	
-	        // 12시간제로 변환
+
 	        hours = hours % 12;
-	        hours = hours ? hours : 12; // 0시는 12로 표시
+	        hours = hours ? hours : 12; 
 	
-	        // 한 자리 숫자는 앞에 0을 붙여 두 자리로 만듭니다.
+
 	        dayOfMonth = (dayOfMonth < 10) ? "0" + dayOfMonth : dayOfMonth;
 	        minutes = (minutes < 10) ? "0" + minutes : minutes;
-	
-	        // 각 요소의 텍스트를 현재 시간과 날짜로 설정합니다.
+
 	        document.getElementById("currentYear").textContent = year + '년';
 	        document.getElementById("currentMonth").textContent = month;
 	        document.getElementById("currentDayOfMonth").textContent = dayOfMonth + '일';
@@ -159,10 +158,18 @@
 	        document.getElementById("currentPeriod").textContent = ampm;
 	    }
 	
-	    // 페이지가 로드될 때와 매 분마다 시간과 날짜 업데이트
 	    window.onload = function() {
-	        updateDateTime(); // 페이지 로드 시 호출하여 초기화
-	        setInterval(updateDateTime, 1000); // 1분마다 갱신
+	        updateDateTime(); 
+	        setInterval(updateDateTime, 1000);
+	        
+		    // 커서 위치
+		    var input = document.querySelector('input');
+		    if(input) {
+		        var inputValue = input.value;
+		        input.selectionStart = input.selectionEnd = inputValue.length;
+		        input.focus();
+		    }
+		    
 	    };
 		
 	</script>
