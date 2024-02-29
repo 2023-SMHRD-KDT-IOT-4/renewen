@@ -1,9 +1,13 @@
 package kr.smhrd.renewen.controller;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,24 +35,38 @@ public class ArduAPIController {
 
 	@Autowired
 	ArduAPIService arduAPIService;
-
-	// 구름형상 이미지 insert
+	
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
+	// 구름형상 이미지 업로드 및 db insert
 	@PostMapping("/img/cloud")
-	public String cloudImgInsert(@RequestBody ShotImg reqVO) {
+	public String processCloudImg(@RequestBody ShotImg reqVO) throws IOException {
 
 		String plantLinkKey = reqVO.getPlantLinkKey();
 		// 발전소연동키 조회로 해당 발전소 가져옴
 		long plantNo = plantService.getPlantNoByLinkKey(plantLinkKey);
-
 		if (plantNo == 0) {
 			return "Not Exists";
 		}
-
-		CloudShotImgVO cloudShotImgVO = arduAPIService.getCloudShotImgVO(plantNo, reqVO);
+		
+		// 이미지 업로드 처리. db저장할 vo 리턴
+		CloudShotImgVO shotImgVO = CloudShotImgVO.builder().build();
+				
+		try {
+			shotImgVO = arduAPIService.processShotImg(plantNo, reqVO);
+		} catch (IOException e) {
+			log.error("cloudImg upload fail");
+			return "fail";
+		}
+			
 		// 해당 발전소 구름형상 이미지 db저장
-		plantService.insertCloudShotImg(cloudShotImgVO);
+		int result = plantService.insertCloudShotImg(shotImgVO);
+		if(result == 0) {
+			log.error("cloudImg db insert fail");
+			return "fail";
+		}
 
-		return "suc";
+		return "success";
 	}
 
 	// 발전셀들 촬영 이미지 insert
