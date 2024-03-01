@@ -6,15 +6,24 @@
 
 	<!-- 발전소 -->
 	<insert id="registerPlant" parameterType="PowerPlantVO">
-		INSERT INTO power_plant
-			(user_id, plant_name, plant_addr, plant_addr2, br_number)
+		<!-- insert전에 발전소 정렬순서 값 구하기(처음 0 이후 +1씩) -->
+		<selectKey order="BEFORE" keyProperty="sortNo" resultType="Integer"> 
+			SELECT IFNULL(MAX(sort_no)+1, 0) as sortNo 
+			FROM power_plant
+			WHERE user_id = #{userId}
+		</selectKey>
+		INSERT INTO power_plant 
+			(user_id, plant_name, plant_addr, plant_addr2 ,
+			 br_number, stn_no, latitude, longitude, sort_no)
 		VALUES
-    	(#{userId}, #{plantName}, #{plantAddr},#{plantAddr2} ,#{brNumber})
+    	(#{userId}, #{plantName}, #{plantAddr}, #{plantAddr2},
+    	 #{brNumber}, #{stnNo}, #{latitude}, #{longitude}, #{sortNo})
 	</insert>
 	
 	<select id="getPlantsByUserId" resultType="PowerPlantVO">
 		SELECT * FROM power_plant
 		WHERE user_id = #{userId}
+		ORDER BY sort_no
 	</select>
 	
 	<delete id="deletePlant" parameterType="PowerPlantVO">
@@ -26,8 +35,12 @@
 	</select>
 	
 	<update id="updatePlant" parameterType="PowerPlantVO">
-		UPDATE power_plant SET plant_name=#{plantName},plant_addr=#{plantAddr},plant_addr2=#{plantAddr2},br_number=#{brNumber} 
-		WHERE plant_no=#{plantNo};
+		UPDATE power_plant 
+			SET plant_name=#{plantName}, 
+					plant_addr=#{plantAddr},
+					plant_addr2=#{plantAddr2},
+					br_number=#{brNumber} 
+		WHERE plant_no=#{plantNo}
 		
 	</update>
 		

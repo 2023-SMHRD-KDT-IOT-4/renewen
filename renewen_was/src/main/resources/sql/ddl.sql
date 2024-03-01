@@ -93,7 +93,7 @@ CREATE TABLE power_plant
     `plant_no`        INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '발전소 식별번호', 
     `user_id`         VARCHAR(30)      NOT NULL    COMMENT '사용자 아이디', 
     `plant_name`      VARCHAR(30)      NOT NULL    COMMENT '발전소 이름', 
-    `plant_addr1`     VARCHAR(100)     NOT NULL    COMMENT '발전소 주소(기본)', 
+    `plant_addr`     VARCHAR(100)     NOT NULL    COMMENT '발전소 주소(기본)', 
     `plant_addr2`     VARCHAR(50)      NOT NULL    COMMENT '발전소 주소(상세)', 
     `br_number`       VARCHAR(30)      NOT NULL    COMMENT '사업자등록번호', 
     `plant_link_key`  VARCHAR(50)      NULL        COMMENT '발전소 연동키', 
@@ -101,8 +101,9 @@ CREATE TABLE power_plant
     `use_yn`          CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
     `created_at`      TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '연동 시간', 
     `stn_no`          VARCHAR(10)      NOT NULL    COMMENT '관측소 지점번호', 
-    `latitude`        DECIMAL(9, 7)    NOT NULL    COMMENT '위도', 
-    `longitude`       DECIMAL(9, 7)    NOT NULL    COMMENT '경도', 
+    `latitude`        DECIMAL(11, 8)    NOT NULL    COMMENT '위도', 
+    `longitude`       DECIMAL(11, 8)    NOT NULL    COMMENT '경도',
+    `sort_no`         INT               NOT NULL    COMMENT '정렬순서', 
     CONSTRAINT PK_power_plant PRIMARY KEY (plant_no)
 );
 
@@ -273,7 +274,7 @@ CREATE TABLE weather_api
     `weather_type`   VARCHAR(20)      NOT NULL    COMMENT '기상인자 타입', 
     `weather_value`  DECIMAL(12,2)    NOT NULL    COMMENT '기상인자 측정값', 
     `use_yn`         CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-    `created_at`     TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간', 
+    `created_at`     TIMESTAMP        NOT NULL    COMMENT '측정 시간', 
      PRIMARY KEY (w_no)
 );
 

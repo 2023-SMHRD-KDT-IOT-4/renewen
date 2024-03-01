@@ -36,12 +36,7 @@ public class PlantController {
 		System.out.println(plant);
 		UserVO user = (UserVO) session.getAttribute("user");
 		String userId = user.getUserId();
-		
 		plant.setUserId(userId);
-		plant.setPlantName(plant.getPlantName());
-		plant.setPlantAddr(plant.getPlantAddr());
-		plant.setPlantAddr2(plant.getPlantAddr2());
-		plant.setBrNumber(plant.getBrNumber());
 		
 		int res = plantService.registerPlant(plant);
 		System.out.println("발전소 등록 결과 : "+ res);
