@@ -49,6 +49,8 @@
                                 
                                 <a class="nav-link collapsed" href="${contextPath}/plant/list">발전소 리스트</a>
                                 
+                                <a class="nav-link collapsed" href="${contextPath}/plant/list2">발전소 리스트2(지도)</a>
+                                
                                 <a class="nav-link collapsed" href="javascript:void(0);">셀 상태 확인</a>
                                 
                                 <a class="nav-link collapsed" href="${contextPath}/plant/cloudImgs" >구름 이미지 </a>
