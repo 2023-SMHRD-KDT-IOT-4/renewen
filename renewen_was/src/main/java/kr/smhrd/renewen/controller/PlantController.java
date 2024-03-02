@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,12 +37,7 @@ public class PlantController {
 		System.out.println(plant);
 		UserVO user = (UserVO) session.getAttribute("user");
 		String userId = user.getUserId();
-		
 		plant.setUserId(userId);
-		plant.setPlantName(plant.getPlantName());
-		plant.setPlantAddr(plant.getPlantAddr());
-		plant.setPlantAddr2(plant.getPlantAddr2());
-		plant.setBrNumber(plant.getBrNumber());
 		
 		int res = plantService.registerPlant(plant);
 		System.out.println("발전소 등록 결과 : "+ res);
@@ -60,6 +56,28 @@ public class PlantController {
 		System.out.println("세션에 저장된 값"+session.getAttribute("plantNo"));
 		return "views/plant/plant_list";
 	}
+
+	// 기존 리스트에 지도반영
+	@GetMapping("/plant/list2")
+	public String plantList2(Model model, HttpSession session) {
+		
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userId = user.getUserId();
+		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
+		model.addAttribute("list", list);
+		return "views/plant/plant_list2";
+	}
+
+	@GetMapping("/plant/list/json")
+	public @ResponseBody List<PowerPlantVO> plantListJson(HttpSession session) {
+		
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userId = user.getUserId();
+		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
+		return list;
+	}
+	
+	
 	
 	 @GetMapping("/plant/list/delete")
 	   public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {

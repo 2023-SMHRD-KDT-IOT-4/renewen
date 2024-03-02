@@ -49,6 +49,10 @@
 				  <!-- <h2>Form</h2> -->
 				    <!-- 발전소 이름, 발전소 주소, 사업자 등록 번호  -->
 				  <form action="${contextPath}/plant/register" method="post" onsubmit="return validateForm()">
+				  		<!-- dummy - 관측소 지점번호, 위도, 경도 -->
+				  	<input type="hidden" name="stnNo" value="156" /> 
+				  	<input type="hidden" name="latitude" value="35.17294" /> 
+				  	<input type="hidden" name="longitude" value="126.89156" /> 
 				    <div class="mb-3 mt-3">
 				      <label for="userId">발전소 이름</label>
 				      <input type="text" class="form-control" id="plantName" placeholder="발전소 이름 입력" name="plantName">
