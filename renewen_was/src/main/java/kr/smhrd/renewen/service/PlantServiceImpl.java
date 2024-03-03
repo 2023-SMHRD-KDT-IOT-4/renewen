@@ -108,4 +108,15 @@ public class PlantServiceImpl implements PlantService {
 		return plantMapper.insertCellShotImg(vo);
 	}
 
+	@Override
+	public List<GenerateCellVO> getCellsByPlantNo(long plantNo) {
+		return plantMapper.getCellsByPlantNo(plantNo);
+	}
+
+
+	@Override
+	public List<CellShotImgVO> getCellImgsByCellNo(long cellNo) {
+		return plantMapper.getCellImgsByCellNo(cellNo);
+	}
+
 }

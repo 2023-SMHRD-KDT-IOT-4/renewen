@@ -22,7 +22,7 @@
 	
 	<select id="getPlantsByUserId" resultType="PowerPlantVO">
 		SELECT * FROM power_plant
-		WHERE user_id = #{userId}
+		WHERE user_id = #{userId} AND use_yn = 'Y'
 		ORDER BY sort_no
 	</select>
 	
@@ -107,7 +107,10 @@
 	
 	<!-- 구름형상 이미지 -->
 	<select id="getCloudImgsByPlantNo" resultType="CloudShotImgVO">
-		SELECT * FROM cloud_shot_img
+		SELECT 
+			cs_no, plant_no, cloud_img_desc, cloud_img_name, cloud_img_realname,
+			cloud_img_size, cloud_img_ext, use_yn, created_at
+	 	FROM cloud_shot_img
 		WHERE plant_no = #{plantNo}
 	</select>
 	
@@ -144,6 +147,18 @@
 	<select id="getCellNoBySerialNum">
 		SELECT cell_no FROM generate_cell
 		WHERE cell_serial_num = #{cellSerialNum}
+	</select>
+	
+	<select id="getCellsByPlantNo" resultType="GenerateCellVO">
+		SELECT * FROM generate_cell
+		WHERE plant_no = #{plantNo}
+		ORDER BY cell_no
+	</select>
+
+	<select id="getCellImgsByCellNo" resultType="CellShotImgVO">
+		SELECT * FROM cell_shot_img
+		WHERE cell_no = #{cellNo}
+		ORDER BY created_at DESC
 	</select>
 	
 </mapper>

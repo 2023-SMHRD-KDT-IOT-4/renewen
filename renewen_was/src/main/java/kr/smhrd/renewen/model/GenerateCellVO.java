@@ -1,6 +1,7 @@
 package kr.smhrd.renewen.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -29,4 +30,6 @@ public class GenerateCellVO {
     private String useYn;
     // 연동시간 
     private Timestamp createdAt;
+    
+    private List<CellShotImgVO> cellImgList;
 }
