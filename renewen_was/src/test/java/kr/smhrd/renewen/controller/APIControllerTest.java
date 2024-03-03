@@ -12,7 +12,7 @@ import kr.smhrd.renewen.api.WeatherService;
 @RestController
 @SpringBootTest
 // RESTful API를 제공하는 컨트롤러 클래스
-public class ArduAPIControllerTest {
+public class APIControllerTest {
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -20,7 +20,7 @@ public class ArduAPIControllerTest {
 	private final WeatherService weatherService;
 	
 	@Autowired
-	public ArduAPIControllerTest(WeatherService weatherService) {
+	public APIControllerTest(WeatherService weatherService) {
 		this.weatherService = weatherService;
 	}
 	

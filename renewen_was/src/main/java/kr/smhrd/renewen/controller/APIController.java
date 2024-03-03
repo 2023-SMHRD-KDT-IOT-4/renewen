@@ -2,12 +2,12 @@ package kr.smhrd.renewen.controller;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,24 +19,25 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.SensingDataVO;
 import kr.smhrd.renewen.model.api.ShotImg;
-import kr.smhrd.renewen.service.ArduAPIService;
+import kr.smhrd.renewen.service.APIService;
 import kr.smhrd.renewen.service.PlantService;
 
 // 아두이노(ESP32, 라즈베리파이)로 부터 센싱데이터 및 이미지 ==> DB 저장  
 @RestController
 @RequestMapping("/api/was")
-public class ArduAPIController {
+public class APIController {
 
 	@Autowired
 	PlantService plantService;
 
 	@Autowired
-	ArduAPIService arduAPIService;
+	APIService arduAPIService;
 	
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	// 구름형상 이미지 업로드 및 db insert
 	@PostMapping("/img/cloud")
@@ -49,20 +50,19 @@ public class ArduAPIController {
 			return "Not Exists";
 		}
 		
-		// 이미지 업로드 처리. db저장할 vo 리턴
+		// 1) 이미지 업로드 처리. db 저장할 vo 리턴
 		CloudShotImgVO shotImgVO = CloudShotImgVO.builder().build();
-				
 		try {
 			shotImgVO = arduAPIService.processShotImg(plantNo, reqVO);
 		} catch (IOException e) {
-			log.error("cloudImg upload fail");
+			logger.error("cloudImg upload fail");
 			return "fail";
 		}
 			
-		// 해당 발전소 구름형상 이미지 db저장
+		// 2) 구름형상 이미지 db저장
 		int result = plantService.insertCloudShotImg(shotImgVO);
 		if(result == 0) {
-			log.error("cloudImg db insert fail");
+			logger.error("cloudImg db insert fail {}", shotImgVO);
 			return "fail";
 		}
 
@@ -75,7 +75,28 @@ public class ArduAPIController {
 		
 		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
 		JsonArray cellsJsonArray = jsonObj.get("cells").getAsJsonArray();
-		arduAPIService.processCellShotImgs(cellsJsonArray);
+		
+		// 1) 이미지 업로드 처리. db 저장할 List<VO> 리턴
+		List<CellShotImgVO> cellImgList = new ArrayList<>();
+		try {
+			 cellImgList = arduAPIService.processCellShotImgs(cellsJsonArray);
+			 if(cellImgList == null) {
+				 return "Not Exists";
+			 }
+				 
+		} catch (IOException e) {
+			logger.error("cloudImg upload fail");
+			return "fail";
+		}
+		
+		// 2) 이미지 db 저장
+		for(CellShotImgVO vo : cellImgList) {
+			int result = plantService.insertCellShotImg(vo);
+			if(result == 0) {
+				logger.error("cellImg db insert fail {}", vo);
+			}
+			
+		}
 		
 		return "suc";
 	}
