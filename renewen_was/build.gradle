@@ -12,9 +12,15 @@ java {
 	sourceCompatibility = '17'
 }
 
-bootWar {
+war {
 	archiveBaseName = 'renewen'
 	archiveFileName = 'renewen.war'
+	archiveVersion = '0.0.1'
+}
+
+bootWar {
+	archiveBaseName = 'renewen'
+	archiveFileName = 'renewenBoot.war'
 	archiveVersion = '0.0.1'
 }
 
