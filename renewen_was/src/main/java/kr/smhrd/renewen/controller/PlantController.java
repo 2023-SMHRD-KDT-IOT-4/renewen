@@ -213,4 +213,14 @@ public class PlantController {
 	            .header(HttpHeaders.CONTENT_DISPOSITION,contentDisposition)
 	            .body(resource);
 	}
+	
+	@GetMapping("/plant/dashboard")
+
+	public String dashboardPage() {
+
+		
+
+		return "views/plant/dashboard";
+
+	}
 }
