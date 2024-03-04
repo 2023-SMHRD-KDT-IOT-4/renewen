@@ -84,14 +84,14 @@
 													<c:set var="num" value="${vo.brNumber}" />
 													<td>${fn:substring(num,0,3)}-${fn:substring(num,3,5)}-${fn:substring(num,5,10)}</td>
 
-													<c:choose>
+<%-- 													<c:choose>
 														<c:when test="${empty vo.plantLinkKey}">
 															<td>미연동</td>
 														</c:when>
-														<%-- <c:otherwise>
+													 <c:otherwise>
 															<td>${vo.plantLinkKey}</td>
-														</c:otherwise> --%>
-													</c:choose>
+														</c:otherwise>  
+													</c:choose> --%>
 
 													<td>
 														<!-- <button  class="btn btn-datatable btn-icon btn-transparent-dark me-2"><i data-feather="more-vertical"></i></button> -->

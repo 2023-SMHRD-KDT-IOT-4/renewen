@@ -150,7 +150,7 @@ public class APIService {
 				CellGeneratedElecVO cge = new CellGeneratedElecVO();
 				cge.setCellNo(cellNo);
 				cge.setGenVoltage(cell.getGenVoltage());
-				cge.setGenElecCurrent(cge.getGenElecCurrent());
+				cge.setGenElecCurrent(cell.getGenElecCurrent());
 				cge.setCreatedAt(cell.getCreatedAt());
 				cellGenList.add(cge);
 			}

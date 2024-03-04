@@ -28,12 +28,16 @@ import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.PowerPlantVO;
 import kr.smhrd.renewen.model.UserVO;
 import kr.smhrd.renewen.service.PlantService;
+import kr.smhrd.renewen.service.PlantStatsService;
 
 @Controller
 public class PlantController { 
 
 	@Autowired
 	PlantService plantService;
+	
+	@Autowired
+	PlantStatsService plantStatsService;
 
 	@Autowired
 	CommonUtil commonUtil;
@@ -85,19 +89,6 @@ public class PlantController {
 		model.addAttribute("list", list);
 		return "views/plant/plant_list2";
 	}
-	
-	
-
-	@GetMapping("/plant/list/json")
-	public @ResponseBody List<PowerPlantVO> plantListJson(HttpSession session) {
-		
-		UserVO user = (UserVO) session.getAttribute("user");
-		String userId = user.getUserId();
-		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
-		return list;
-	}
-	
-	
 	
 	 @GetMapping("/plant/list/delete")
 	   public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {
@@ -247,5 +238,20 @@ public class PlantController {
 	    return ResponseEntity.ok()
 	            .header(HttpHeaders.CONTENT_DISPOSITION,contentDisposition)
 	            .body(resource);
+	}
+	
+		
+	
+	
+	@GetMapping("/plant/dashboard")
+	public String dashboardPage(Model model, HttpSession session) {
+
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userId = user.getUserId();
+		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
+		model.addAttribute("plantList", plantList);
+		
+		return "views/plant/dashboard";
+
 	}
 }
