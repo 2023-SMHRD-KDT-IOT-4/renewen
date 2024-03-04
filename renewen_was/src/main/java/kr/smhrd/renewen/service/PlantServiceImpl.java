@@ -55,7 +55,11 @@ public class PlantServiceImpl implements PlantService {
 		return plantMapper.getPlantByPlantNo(plantNo);
 	}
 
-
+	@Override
+	public int updateUseYn(long cellNo) {
+		return plantMapper.updateUseYn(cellNo);
+	}
+	
 	@Override
 	public List<CloudShotImgVO> getCloudImgsByPlantNo(long plantNo) {
 		return plantMapper.getCloudImgsByPlantNo(plantNo);

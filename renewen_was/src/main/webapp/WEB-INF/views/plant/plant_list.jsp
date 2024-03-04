@@ -18,6 +18,7 @@
   
   <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body class="nav-fixed">
   
@@ -88,8 +89,33 @@
 	                        <!-- <button  class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button> -->
 	                        <a href="${contextPath}/plant/list/delete?plantNo=${vo.plantNo}" onclick="return delete_event()" class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></a>
 	                      </td>
+	                      
 	                      <c:if test="${vo.grantYn eq 'Y'}">
-	                      	<td><button>발전 셀 연동</button></td>			                      	
+	                      	<!-- <td><button>발전 셀 연동</button></td>-->
+	                      	<!--  <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_${vo.plantNo}" onclick="redirectToLogin()">발전 셀 연동</button></td> -->
+	                      	<!-- <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_${vo.plantNo}" onclick="redirectToModal('${vo.plantNo}')">발전 셀 연동</button> -->
+	                      	<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getCellInfo('${vo.plantNo}')">발전 셀 연동</button></td>
+	                      	
+	                     
+	                      	<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">발전 셀 연동</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        <!-- 모달 내용 -->
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							        <button type="button" class="btn btn-primary"  id="saveChangesBtn" >연동하기</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							                  	
 	                      </c:if>
                     	</tr>
                    	</c:forEach>
@@ -111,7 +137,8 @@
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
   <script src="${contextPath}/js/datatables/datatables-simple-demo.js"></script>	
 	<!-- renewen -->  
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  	<script src="${contextPath}/js/cell_info_modal.js"></script>
+
   
   
   <script type="text/javascript">
@@ -122,8 +149,12 @@
              return false; 
           }
   	}
+  	
   </script>
-
+  
+	
+	
+	
 </body>
 </html>
 

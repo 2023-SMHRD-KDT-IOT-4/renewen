@@ -57,6 +57,10 @@
 		FROM power_plant
 		WHERE plant_link_key = #{plantLinkKey} AND use_yn = 'Y'
 	</select>
+	
+	<update id="updateUseYn">
+		UPDATE generate_cell SET use_yn='Y' where cell_no=#{cellNo}
+	</update>
 	<!-- ================================================================================ -->
 	
 	<!-- 센싱데이터 -->

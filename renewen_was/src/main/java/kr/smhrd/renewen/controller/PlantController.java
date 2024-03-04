@@ -2,6 +2,7 @@ package kr.smhrd.renewen.controller;
 
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -69,6 +70,8 @@ public class PlantController {
 		model.addAttribute("list", list);
 		session.setAttribute("plantNo", list);
 		System.out.println("세션에 저장된 값"+session.getAttribute("plantNo"));
+		
+		
 		return "views/plant/plant_list";
 	}
 
@@ -150,6 +153,38 @@ public class PlantController {
 		
 	}
 	
+	//모달창에 정보 가져오기
+	@GetMapping("/plant/modal")
+	public @ResponseBody List<GenerateCellVO> getCellInfo(@RequestParam("plantNo")int plantNo, HttpSession session,Model model) {
+		System.out.println("발전소 번호 가져오기 : "+plantNo);
+		List<GenerateCellVO> cellList = plantService.getCellsByPlantNo(plantNo);
+		//session.setAttribute("cellList", cellList);
+		
+		model.addAttribute("cellList", cellList);
+		session.setAttribute("cellList", cellList);
+		System.out.println(cellList);
+		return cellList;
+		
+	}
+	//generate_cell테이블의 사용여부
+	@GetMapping("/updateUseYn")
+	@ResponseBody
+	public String updateUseYn(HttpSession session, @RequestParam("selectedIndexArray") Integer[] selectedIndexArray) {
+	    List<GenerateCellVO> cellList = (List<GenerateCellVO>)session.getAttribute("cellList");
+	    List<Long> cellNoValues = new ArrayList<>();
+
+	    if (cellList != null && !cellList.isEmpty()) {
+	        for (int selectedIndex : selectedIndexArray) {
+	            long cellNoValue = cellList.get(selectedIndex).getCellNo();
+	            cellNoValues.add(cellNoValue);
+	        }
+	    }
+
+	    for(int j = 0; j<cellNoValues.size(); j++) {
+	    	plantService.updateUseYn(cellNoValues.get(j));
+	    }
+	    return "success";
+	}
 
 	// 발전소 구름형상 페이지
 	@GetMapping("/plant/cloudImgs")
