@@ -58,6 +58,7 @@ public class PlantRestController {
 		double currentWatt = statsService.genCurrent(plantNo); // 현재발전량
 		response.put("totalWatt", totalWatt);
 		response.put("currentWatt", currentWatt);
+		logger.info("plant gen elec {}", response);
 		
 		return ResponseEntity.ok().body(response);
 	}

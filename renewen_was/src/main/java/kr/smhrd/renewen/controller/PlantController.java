@@ -27,12 +27,16 @@ import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.PowerPlantVO;
 import kr.smhrd.renewen.model.UserVO;
 import kr.smhrd.renewen.service.PlantService;
+import kr.smhrd.renewen.service.PlantStatsService;
 
 @Controller
 public class PlantController { 
 
 	@Autowired
 	PlantService plantService;
+	
+	@Autowired
+	PlantStatsService plantStatsService;
 
 	@Autowired
 	CommonUtil commonUtil;
@@ -201,12 +205,17 @@ public class PlantController {
 	            .body(resource);
 	}
 	
-	@GetMapping("/plant/dashboard")
-
-	public String dashboardPage() {
-
 		
+	
+	
+	@GetMapping("/plant/dashboard")
+	public String dashboardPage(Model model, HttpSession session) {
 
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userId = user.getUserId();
+		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
+		model.addAttribute("plantList", plantList);
+		
 		return "views/plant/dashboard";
 
 	}
