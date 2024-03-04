@@ -67,6 +67,8 @@ public class PlantController {
 		model.addAttribute("list", list);
 		return "views/plant/plant_list2";
 	}
+	
+	
 
 	@GetMapping("/plant/list/json")
 	public @ResponseBody List<PowerPlantVO> plantListJson(HttpSession session) {
@@ -99,6 +101,7 @@ public class PlantController {
 	   }
 
 	
+	 
 	 @GetMapping("/plant/update")
 	   public String plantUpdate(@RequestParam("plantNo")int plantNo, HttpSession session,Model model) {
 	      
@@ -114,6 +117,7 @@ public class PlantController {
 	   }
 
 	
+	 
 	@PostMapping("/plant/update")
 	public String plantUpdate( PowerPlantVO plant, HttpSession session) {
 		long plantNo = (long)session.getAttribute("plantNo");
@@ -130,8 +134,7 @@ public class PlantController {
 	}
 	
 	
-	
-	
+		
 	@GetMapping("/plant/cloudImgs")
 	public String imgList(Model model, HttpSession session) {
 		

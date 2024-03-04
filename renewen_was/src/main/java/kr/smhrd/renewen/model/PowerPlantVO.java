@@ -39,6 +39,33 @@ public class PowerPlantVO {
     private double latitude;
     // 경도 
     private double longitude;
+    
+    // 겨레 추가
+    // '위도, 경도' 형식의 문자열로 좌표를 설정
+//    public void setCoordinates(String coordinates) {
+//    	String[] parts = coordinates.split(", ");
+//    	if (parts.length == 2) {
+//    		try {
+//    			this.latitude = Double.parseDouble(parts[0]);
+//    			this.longitude = Double.parseDouble(parts[1]);
+//    		} catch (NumberFormatException e) {
+//    			e.printStackTrace();
+//    		}
+//    	}else {
+//    		System.out.println("잘못된 형식의 좌표입니다.");
+//    	}
+//    }
+//    
+//    // 위도 값 문자열 형태로 반환
+//    public String getLatitudeAsString() {
+//    	return String.valueOf(longitude);
+//    }
+//    // 경도 값 문자열 형태로 반환
+//    public String getLongitudeAsString() {
+//        return String.valueOf(longitude);
+//    }
+//     
+    
     // 정렬순서 
     private int sortNo;
     // 발전 셀 갯수 
