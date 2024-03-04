@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.smhrd.renewen.mapper.PlantMapper;
+import kr.smhrd.renewen.model.CellGeneratedElecVO;
 import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.GenerateCellVO;
@@ -106,6 +107,23 @@ public class PlantServiceImpl implements PlantService {
 	@Override
 	public int insertCellShotImg(CellShotImgVO vo) {
 		return plantMapper.insertCellShotImg(vo);
+	}
+
+	@Override
+	public List<GenerateCellVO> getCellsByPlantNo(long plantNo) {
+		return plantMapper.getCellsByPlantNo(plantNo);
+	}
+
+
+	@Override
+	public List<CellShotImgVO> getCellImgsByCellNo(long cellNo) {
+		return plantMapper.getCellImgsByCellNo(cellNo);
+	}
+
+
+	@Override
+	public int insertGeneratedElec(CellGeneratedElecVO vo) {
+		return plantMapper.insertGeneratedElec(vo);
 	}
 
 }

@@ -1,10 +1,9 @@
 package kr.smhrd.renewen.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class PowerPlantVO {
@@ -68,6 +67,9 @@ public class PowerPlantVO {
     
     // 정렬순서 
     private int sortNo;
+    
+    private List<GenerateCellVO> cellList;
+    
     // 발전 셀 갯수 
     //private int generateCellCnt;
 }

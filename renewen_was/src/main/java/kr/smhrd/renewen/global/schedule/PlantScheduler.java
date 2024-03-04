@@ -13,14 +13,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import kr.smhrd.renewen.global.util.DateUtil;
+import kr.smhrd.renewen.global.util.CommonUtil;
 import kr.smhrd.renewen.model.api.WeatherVO;
 import kr.smhrd.renewen.service.APIService;
 
 /**
  * 발전소 스케줄링 1) Rest API 기상인자 - 기상청 API 허브(https://apihub.kma.go.kr/)
  */
-//@Component
+@Component
 public class PlantScheduler {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -31,6 +31,9 @@ public class PlantScheduler {
 
 	@Autowired
 	RestTemplate restTemplate;
+	
+	@Autowired
+	CommonUtil commonUtil;
 
 	/**
 	 * 10분 간격
@@ -53,7 +56,7 @@ public class PlantScheduler {
 		
 		// Rest Get 요청
 		String response = restTemplate.getForObject(reqUrl, String.class);
-		String curTime = DateUtil.getCurrentDateTime();
+		String curTime = commonUtil.getCurrentDateTime();
 		// DB 저장할 vo List
 		List<WeatherVO> weatherList = getWeatherList(response, curTime);
 		
@@ -74,6 +77,7 @@ public class PlantScheduler {
 		
 	}
 
+	// DB 저장할 기상정보 List<VO>로 정제
 	public List<WeatherVO> getWeatherList(String response, String createdTime) {
 
 		Map<String, Integer> columnTypeMap = new HashMap<>();

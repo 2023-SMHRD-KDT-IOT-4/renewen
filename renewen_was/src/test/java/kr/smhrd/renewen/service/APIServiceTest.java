@@ -14,7 +14,7 @@ import kr.smhrd.renewen.model.SensingDataVO;
 
 @SpringBootTest
 // 서비스 계층의 테스트를 위한 클래스
-public class ArduAPIServiceTest {
+public class APIServiceTest {
 
 	private final String apiUrl = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php?tm=202211300900&stn=0&help=1&authKey=-pjFeFmRQnmYxXhZkXJ5Pg";
 	

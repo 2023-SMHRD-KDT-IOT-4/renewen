@@ -1,6 +1,6 @@
 package kr.smhrd.renewen.model;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -28,5 +28,12 @@ public class GenerateCellVO {
     // 사용여부 
     private String useYn;
     // 연동시간 
-    private Timestamp createdAt;
+    private String createdAt;
+    
+    private List<CellShotImgVO> cellImgList;
+    
+    // 발전 전압(V) 
+    private int genVoltage;
+    // 발전 전류(A) 
+    private double genElecCurrent;
 }

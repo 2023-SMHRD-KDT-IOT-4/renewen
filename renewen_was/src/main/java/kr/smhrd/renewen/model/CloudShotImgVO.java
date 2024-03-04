@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 // 발전소 구름형상 이미지
-
 @Data
 @Builder
 public class CloudShotImgVO {
@@ -29,5 +28,10 @@ public class CloudShotImgVO {
     private String useYn;
     // 촬영 시간 
     private String createdAt;
+    
+    // View 출력 - src 속성 경로
+    public String getImgFile() {
+    	return cloudImgRealname + "." + cloudImgExt;
+    }
     
 }

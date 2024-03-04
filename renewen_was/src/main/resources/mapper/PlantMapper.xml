@@ -22,7 +22,7 @@
 	
 	<select id="getPlantsByUserId" resultType="PowerPlantVO">
 		SELECT * FROM power_plant
-		WHERE user_id = #{userId}
+		WHERE user_id = #{userId} AND use_yn = 'Y'
 		ORDER BY sort_no
 	</select>
 	
@@ -39,7 +39,9 @@
 			SET plant_name=#{plantName}, 
 					plant_addr=#{plantAddr},
 					plant_addr2=#{plantAddr2},
-					br_number=#{brNumber} 
+					br_number=#{brNumber},
+					latitude=#{latitude},
+					longitude=#{longitude}					
 		WHERE plant_no=#{plantNo}
 		
 	</update>
@@ -107,7 +109,10 @@
 	
 	<!-- 구름형상 이미지 -->
 	<select id="getCloudImgsByPlantNo" resultType="CloudShotImgVO">
-		SELECT * FROM cloud_shot_img
+		SELECT 
+			cs_no, plant_no, cloud_img_desc, cloud_img_name, cloud_img_realname,
+			cloud_img_size, cloud_img_ext, use_yn, created_at
+	 	FROM cloud_shot_img
 		WHERE plant_no = #{plantNo}
 	</select>
 	
@@ -123,13 +128,15 @@
 	<!-- ================================================================================ -->
 
 	<!-- 발전셀 -->
+
+	<!-- 아두이노 연동 - 발전셀 정보 use_yn 'N'으로 -->
 	<insert id="insertGenerateCell" parameterType="GenerateCellVO">
 		INSERT INTO generate_cell
 	    (plant_no, cell_type, cell_serial_num, cell_volume, cell_size_unit, 
-	     cell_width, cell_height, cell_depth)
+	     cell_width, cell_height, cell_depth, use_yn)
 	VALUES
 	    (#{plantNo}, #{cellType}, #{cellSerialNum}, #{cellVolume}, #{cellSizeUnit},
-	     #{cellWidth}, #{cellHeight}, #{cellDepth} )
+	     #{cellWidth}, #{cellHeight}, #{cellDepth}, #{useYn} )
 	</insert>
 	
 	<insert id="insertCellShotImg" parameterType="CellShotImgVO">
@@ -140,10 +147,30 @@
     	(#{cellNo}, #{cellImgDesc}, #{cellImgName}, #{cellImgRealname},
     	 #{cellImgSize}, #{cellImgExt}, #{createdAt})
 	</insert>
+
+	<insert id="insertGeneratedElec" parameterType="CellGeneratedElecVO">
+		INSERT INTO cell_generated_elec
+		    (cell_no, gen_voltage, gen_elec_current, created_at)
+		VALUES
+		    (#{cellNo}, #{genVoltage}, #{genElecCurrent}, #{createdAt});
+	</insert>
 	
 	<select id="getCellNoBySerialNum">
-		SELECT cell_no FROM generate_cell
+		SELECT IFNULL(cell_no, 0) as cell_no 
+		FROM generate_cell
 		WHERE cell_serial_num = #{cellSerialNum}
+	</select>
+	
+	<select id="getCellsByPlantNo" resultType="GenerateCellVO">
+		SELECT * FROM generate_cell
+		WHERE plant_no = #{plantNo}
+		ORDER BY cell_no
+	</select>
+
+	<select id="getCellImgsByCellNo" resultType="CellShotImgVO">
+		SELECT * FROM cell_shot_img
+		WHERE cell_no = #{cellNo}
+		ORDER BY created_at DESC
 	</select>
 	
 </mapper>

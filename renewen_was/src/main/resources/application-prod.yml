@@ -1,7 +1,7 @@
 server:
-  port: 8081
+  port: 8080
   servlet:
-    context-path: /renewen
+    context-path: /
     encoding:
       charset: UTF-8
       enabled: true
@@ -32,7 +32,7 @@ mybatis:
     
 # 별도 설정
 upload:
-  path: /var/upload
+  path: /home/renewen/upload
   img: /imgs
 
     
