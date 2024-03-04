@@ -24,7 +24,7 @@
 	      address: plantAddr, 
 	      address2: plantAddr2,
 	      plantLinkKey: plantLinkKey,
-	      
+	      stnNo: stnNo
 	    });
 	    markers.push(marker); // 생성된 마커를 배열에 추가
 	  }
