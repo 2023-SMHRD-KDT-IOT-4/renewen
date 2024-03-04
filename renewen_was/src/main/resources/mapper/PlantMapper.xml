@@ -39,7 +39,9 @@
 			SET plant_name=#{plantName}, 
 					plant_addr=#{plantAddr},
 					plant_addr2=#{plantAddr2},
-					br_number=#{brNumber} 
+					br_number=#{brNumber},
+					latitude=#{latitude},
+					longitude=#{longitude}					
 		WHERE plant_no=#{plantNo}
 		
 	</update>

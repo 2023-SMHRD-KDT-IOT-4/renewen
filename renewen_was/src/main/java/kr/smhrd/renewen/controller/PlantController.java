@@ -136,6 +136,8 @@ public class PlantController {
 		plant.setPlantAddr(plant.getPlantAddr());
 		plant.setPlantAddr2(plant.getPlantAddr2());
 		plant.setBrNumber(plant.getBrNumber());
+		plant.setLatitude(plant.getLatitude());
+		plant.setLongitude(plant.getLongitude());
 		
 		int res = plantService.updatePlant(plant);
 		System.out.println("발전소 정보 수정 결과 : "+res);
