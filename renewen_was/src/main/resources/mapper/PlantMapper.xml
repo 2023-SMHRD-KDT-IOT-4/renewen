@@ -128,13 +128,15 @@
 	<!-- ================================================================================ -->
 
 	<!-- 발전셀 -->
+
+	<!-- 아두이노 연동 - 발전셀 정보 use_yn 'N'으로 -->
 	<insert id="insertGenerateCell" parameterType="GenerateCellVO">
 		INSERT INTO generate_cell
 	    (plant_no, cell_type, cell_serial_num, cell_volume, cell_size_unit, 
-	     cell_width, cell_height, cell_depth)
+	     cell_width, cell_height, cell_depth, use_yn)
 	VALUES
 	    (#{plantNo}, #{cellType}, #{cellSerialNum}, #{cellVolume}, #{cellSizeUnit},
-	     #{cellWidth}, #{cellHeight}, #{cellDepth} )
+	     #{cellWidth}, #{cellHeight}, #{cellDepth}, #{useYn} )
 	</insert>
 	
 	<insert id="insertCellShotImg" parameterType="CellShotImgVO">
@@ -145,9 +147,17 @@
     	(#{cellNo}, #{cellImgDesc}, #{cellImgName}, #{cellImgRealname},
     	 #{cellImgSize}, #{cellImgExt}, #{createdAt})
 	</insert>
+
+	<insert id="insertGeneratedElec" parameterType="CellGeneratedElecVO">
+		INSERT INTO cell_generated_elec
+		    (cell_no, gen_voltage, gen_elec_current, created_at)
+		VALUES
+		    (#{cellNo}, #{genVoltage}, #{genElecCurrent}, #{createdAt});
+	</insert>
 	
 	<select id="getCellNoBySerialNum">
-		SELECT cell_no FROM generate_cell
+		SELECT IFNULL(cell_no, 0) as cell_no 
+		FROM generate_cell
 		WHERE cell_serial_num = #{cellSerialNum}
 	</select>
 	

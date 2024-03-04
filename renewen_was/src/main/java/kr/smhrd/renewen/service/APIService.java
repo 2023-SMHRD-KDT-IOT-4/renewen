@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 
 import kr.smhrd.renewen.global.util.CommonUtil;
 import kr.smhrd.renewen.mapper.APIMapper;
+import kr.smhrd.renewen.model.CellGeneratedElecVO;
 import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.GenerateCellVO;
@@ -136,14 +137,27 @@ public class APIService {
 		// 발전셀 정보 generate_cell
 		Type cellsType = new TypeToken<List<GenerateCellVO>>(){}.getType();
 		List<GenerateCellVO> cellList = new Gson().fromJson(cellsJsonArray, cellsType);
+		List<CellGeneratedElecVO> cellGenList = new ArrayList<>();
+		
 		for(GenerateCellVO cell : cellList) {
 			String serialNum = cell.getCellSerialNum();
-			long result = plantService.getCellNoBySerialNum(serialNum);
-
-			if(result == 0) {
+			long cellNo = plantService.getCellNoBySerialNum(serialNum);
+			if(cellNo == 0) { // 발전셀 최초 등록
 				cell.setPlantNo(plantNo);
+				cell.setUseYn("N");
 				plantService.insertGenerateCell(cell);
-			} 
+			} else {
+				CellGeneratedElecVO cge = new CellGeneratedElecVO();
+				cge.setCellNo(cellNo);
+				cge.setGenVoltage(cell.getGenVoltage());
+				cge.setGenElecCurrent(cge.getGenElecCurrent());
+				cge.setCreatedAt(cell.getCreatedAt());
+				cellGenList.add(cge);
+			}
+		}
+		// 발전셀 발전량 저장
+		for(CellGeneratedElecVO vo : cellGenList) {
+			plantService.insertGeneratedElec(vo);
 		}
 		
 	}

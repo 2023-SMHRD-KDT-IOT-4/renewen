@@ -2,6 +2,7 @@ package kr.smhrd.renewen.service;
 
 import java.util.List;
 
+import kr.smhrd.renewen.model.CellGeneratedElecVO;
 import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.GenerateCellVO;
@@ -38,7 +39,7 @@ public interface PlantService {
 	
 	// 발전셀
 
-	// 발전셀 정보 저장
+	// 아두이노 연동 - 발전셀 정보 저장
 	public int insertGenerateCell(GenerateCellVO vo);
 	// cellNo 조회(셀 시리얼번호로)
 	public long getCellNoBySerialNum(String cellSerialNum);
@@ -49,4 +50,7 @@ public interface PlantService {
 	public int insertCellShotImg(CellShotImgVO vo);
 	// 해당 발전셀의 셀 촬영이미지 리스트
 	public List<CellShotImgVO> getCellImgsByCellNo(long cellNo);
+	
+	// 발전셀 발전량 저장 
+	public int insertGeneratedElec(CellGeneratedElecVO vo);
 }
