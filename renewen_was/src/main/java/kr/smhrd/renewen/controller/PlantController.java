@@ -83,19 +83,6 @@ public class PlantController {
 		return "views/plant/plant_list2";
 	}
 	
-	
-
-	@GetMapping("/plant/list/json")
-	public @ResponseBody List<PowerPlantVO> plantListJson(HttpSession session) {
-		
-		UserVO user = (UserVO) session.getAttribute("user");
-		String userId = user.getUserId();
-		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
-		return list;
-	}
-	
-	
-	
 	 @GetMapping("/plant/list/delete")
 	   public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {
 	      System.out.println(plantNo);
