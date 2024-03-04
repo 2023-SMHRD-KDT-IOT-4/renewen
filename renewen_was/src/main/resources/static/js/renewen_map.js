@@ -6,7 +6,7 @@
 	const printPlantMap = async function (plantList = [], mapDiv) {
 	  let mapOptions = {
 	    center: new naver.maps.LatLng(35.17294, 126.89156), // 초기 중심 좌표 (광주)
-	    zoom: 8 // 초기 확대 수준
+	    zoom: 10 // 초기 확대 수준
 	  };
 	
 	  let plantMap = new naver.maps.Map(mapDiv, mapOptions);
@@ -23,7 +23,8 @@
 	      plant: plant,
 	      address: plantAddr, 
 	      address2: plantAddr2,
-	      plantLinkKey: plantLinkKey
+	      plantLinkKey: plantLinkKey,
+	      
 	    });
 	    markers.push(marker); // 생성된 마커를 배열에 추가
 	  }
