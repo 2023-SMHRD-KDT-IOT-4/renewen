@@ -39,6 +39,6 @@
 	  // 마커 클릭 이벤트 처리
 	  async function handleMarkerClick(plant) {
 		  console.log(plant);
-	    alert(plant.plantName + ' 발전소를 클릭했습니다!' + '\n주소: ' + plant.plantAddr);
+	    alert(plant.plantName + ' 발전소를 클릭했습니다!' + '\n주소: ' + plant.plantAddr + plantAddr2);
 	  }
 	};
