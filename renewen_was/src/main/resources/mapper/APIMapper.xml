@@ -9,5 +9,17 @@
 			VALUES(#{stnNo}, #{weatherType}, #{weatherValue}, #{createdAt})
 	</insert>
 	
+	<select id="getWeatherList" parameterType="hashMap" resultType="WeatherListVO">
+		SELECT DISTINCT stn_no, weather_type, created_at,
+	    CASE
+        WHEN weather_value &lt; 0 THEN 0 
+        ELSE weather_value
+    	END AS weather_value
+		FROM weather_api 
+		WHERE stn_no = #{stnNo}  
+			AND weather_type = #{type}
+    	AND DATE(created_at) = CURDATE()
+    ORDER BY created_at
+	</select>
 	
 </mapper>
