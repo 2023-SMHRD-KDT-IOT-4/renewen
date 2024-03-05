@@ -1,3 +1,5 @@
+// 기존
+
 // weather.js (JavaScript에서 HTML 문서의 특정 요소 찾기)
 // getElementById(' ') => HTML 요소의 고유한 id 속성으로 해당 요소 찾기
 const tempSection = document.querySelector('.temperature');
@@ -24,22 +26,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 // 현재 위치 날씨 정보 가져오기
 const getWeatherInfo = () => {
-    if (navigator.geolocation) {
-        navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-            if (result.state === 'denied') {
-                hideIcon();
-            } else {
-                navigator.geolocation.getCurrentPosition(success, fail);
-            }
-        });
-    } else {
-        alert("사용자의 위치 정보를 알 수 없습니다.");
-    }
-};
-
-const hideIcon = () => {
-    const iconElement = document.querySelector('.icon');
-    iconElement.style.display = 'none';
+	if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(success, fail);
+	} else {
+		alert("사용자의 위치 정보를 알 수 없습니다.")
+	}
 };
 
 
