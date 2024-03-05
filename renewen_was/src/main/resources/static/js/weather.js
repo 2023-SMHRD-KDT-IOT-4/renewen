@@ -65,7 +65,7 @@ const getWeather = (lat, lon) => {
 	    const descriptionElement = document.getElementById('description');
 	    
 		// 화면 표시
-		temperatureElement.innerText = temperature;
+		temperatureElement.innerText = temperature + " °C";
 		descriptionElement.innerText = description;
 	
 		// 아이콘 설정

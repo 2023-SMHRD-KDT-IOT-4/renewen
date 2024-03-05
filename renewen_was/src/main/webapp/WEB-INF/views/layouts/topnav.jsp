@@ -20,43 +20,41 @@
         <!-- Navbar Items-->
         <ul class="navbar-nav align-items-center ms-auto">
         
-        <!-- 날씨 API -->
+        <!-- 날씨 API -->      
         <body>
-			<!-- <p class="link" style="font-size: 1.0em; font-weight: 600; margin-top: 14px;">날씨 정보</p> -->
-			<div>
-		        <span id="description" class="description"></span>
-		    </div>
-			<div class="weather-info">
-		     	<img id="icon" class="icon" style="width: 50px; height: 50px;">
-    		</div>
-    		<div>
-		        <span id="temperature" class="temperature"></span>
-		        <span style="margin-right:30px">°C</span>
-		        
-		    </div>
-    		<script src="${contextPath}/js/weather.js"></script>
-			<style>
-				.link {
-					cursor: pointer;
-				}
-				
-				.weather-info {
-					display: flex;
-					flex-direction: row;
-				}
-				
-				.weather-info div {
-					margin-right: 70px;
-				}
-				
-				.weather-info dt {
-					font-weight: bold;
-					margin-bottom: 2px;
-				}
-			</style>
-		</body>
+         <div class="weather-info">
+              <img id="icon" class="icon" style="width: 50px; height: 50px;">
+          </div>
+         <div>
+              <span id="description" class="description" style="margin-right:8px"></span>
+          </div>
         
-
+          <div>
+              <span id="temperature" class="temperature"></span>
+              
+          </div>
+          <script src="${contextPath}/js/weather.js"></script>
+         <style>
+            .link {
+               cursor: pointer;
+            }
+            
+            .weather-info {
+               display: flex;
+               flex-direction: row;
+            }
+            
+            .weather-info div {
+               margin-right: 70px;
+            }
+            
+            .weather-info dt {
+               font-weight: bold;
+               margin-bottom: 2px;
+            }
+         </style>
+      </body>
+        
 		<!-- 알림 Dropdown-->
             <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
                 <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"
