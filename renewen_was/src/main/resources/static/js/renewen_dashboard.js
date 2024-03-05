@@ -4,6 +4,7 @@
 
 $(document).ready(function() {
 	console.log('dashboard js');
+	console.log('dashboard2 js');
 	const contextPath = $("#contextPath").val();
 	const genElecUrl = contextPath + '/plant/gen/elec';
 	
