@@ -14,7 +14,8 @@
 				(SELECT cell_no, plant_no 
 				 FROM generate_cell
 				 WHERE plant_no = #{plantNo} ) AS B 
-		ON A.cell_no = B.cell_no
+			ON A.cell_no = B.cell_no
+		WHERE DATE(A.created_at) = CURDATE()
 	</select>
 
 	<select id="getCurrentElecPerCell" resultType="CellGeneratedElecVO">
@@ -29,6 +30,7 @@
 		JOIN generate_cell AS GC 
 			ON A.cell_no = GC.cell_no
 		WHERE GC.plant_no = #{plantNo}
+			AND DATE(A.created_at) = CURDATE()
 	</select>
 	
 </mapper>

@@ -15,46 +15,41 @@
             <img src="${contextPath}/assets/img/logo.png" alt="Logo" style="height: 50px;">
             Renewen
         </a>
-		<!-- 날씨 API -->
-		<body>
-			<!-- <p class="link" style="font-size: 1.0em; font-weight: 600; margin-top: 14px;">날씨 정보</p> -->
-			<div class="weather-info">
-				<div>
-					<dt>상태</dt>
-					<span id=description calss="description"></span>
-				</div>
-				<img class="icon">
-				<dt>기온</dt>
-				<span id="temperature" class="temperature"></span>
-			</div>
-			<div></div>
-			<script src="./weather.js"></script>
-			<style>
-				.link {
-					cursor: pointer;
-				}
-				
-				.weather-info {
-					display: flex;
-					flex-direction: row;
-				}
-				
-				.weather-info div {
-					margin-right: 50px;
-				}
-				
-				.weather-info dt {
-					font-weight: bold;
-					margin-bottom: 2px;
-				}
-				
-				.weather-info dd {
-					margin: 0;
-				}
-			</style>
-			<script src="${contextPath}/js/weather.js"></script>
-		</body>
+
+		<!-- 날씨 API -->      
+        <body>
+	         <div class="weather-info">
+	              <img id="icon" class="icon" style="width: 50px; height: 50px;">
+	          </div>
+	         <div>
+	              <span id="description" class="description" style="margin-right:8px"></span>
+	          </div>
 	
+	          <div>
+	              <span id="temperature" class="temperature"></span>
+	              
+	          </div>
+	          <script src="${contextPath}/js/weather.js"></script>
+	         <style>
+	            .link {
+	               cursor: pointer;
+	            }
+	            
+	            .weather-info {
+	               display: flex;
+	               flex-direction: row;
+	            }
+	            
+	            .weather-info div {
+	               margin-right: 70px;
+	            }
+	            
+	            .weather-info dt {
+	               font-weight: bold;
+	               margin-bottom: 2px;
+	            }
+	         </style>
+      	</body>
         <!-- Navbar Items-->
         <ul class="navbar-nav align-items-center ms-auto">
         
@@ -174,12 +169,9 @@
 		
 		
         </ul><!-- Navbar Items끝  -->
+ 
+   
         
-
-       
-        </ul>
-
-        </ul>
     </nav>
     
     
