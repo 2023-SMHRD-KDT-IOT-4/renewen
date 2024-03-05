@@ -15,5 +15,6 @@ public interface UserMapper {
 	public UserVO getUser(String userId);
 	public int joinUser(UserVO user);
 	public List<UserAuthVO> getValidAuthList();
+	public int updateUser(UserVO user);
 }
  

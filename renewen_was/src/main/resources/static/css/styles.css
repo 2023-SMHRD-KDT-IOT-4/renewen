@@ -21044,3 +21044,27 @@ pre[class*=language-] {
 .token.variable {
   color: #ff6666;
 }
+/* 현정수정  */
+/* 셀렉트 박스 앞 라벨 추가 */
+.inline-label {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle; /* 수직 정렬 */
+}
+#selectList {
+    width: 100%;
+    max-width: 100%;
+    height: 50px; /* 높이를 조절하여 옵션 텍스트가 잘리지 않도록 */
+    white-space: normal; /* 옵션 텍스트가 잘리지 않도록 */
+    overflow: visible; /* 내용이 넘칠 경우 잘리지 않고 표시되도록 */
+    line-height: 1.5; /* 행간을 더 넓게 설정 */
+}
+
+#selectList option {
+    white-space: normal; /* 옵션 텍스트가 잘리지 않도록 */
+    font-size: 14px; /* 폰트 크기 조절 */
+}
+
+
+
+

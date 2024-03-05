@@ -11,5 +11,6 @@ public interface UserService {
 	public UserVO login(UserVO user);
 	public int joinUser(UserVO user);
 	public List<UserAuthVO> getValidAuthList();
+	public int updateUser(UserVO user);
 	
 }
