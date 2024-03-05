@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	getWeatherInfo();
 });
 
-
 const success = (position) => {
     console.log(position);
     const latitude = position.coords.latitude;
