@@ -31,6 +31,7 @@
     	            });
     	        } else {
     	            console.log("No checkboxes selected."); // 선택된 체크박스가 없는 경우
+    	            alert("선택된 항목이 없습니다.")
     	        }
     	    });
     	});

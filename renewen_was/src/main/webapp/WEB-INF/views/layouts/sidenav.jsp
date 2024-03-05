@@ -58,8 +58,7 @@
                                 <a class="nav-link" href="${contextPath}/plant/register">발전소 등록</a>
                                 
                                 <a class="nav-link collapsed" href="${contextPath}/plant/list">발전소 리스트</a>
-                                
-                                <a class="nav-link collapsed" href="${contextPath}/plant/list2">발전소 리스트2(지도)</a>
+                               
                                 
                                 <a class="nav-link collapsed" href="${contextPath}/plant/cellImgs">셀 상태 확인</a>
                                 
