@@ -15,11 +15,52 @@
             <img src="${contextPath}/assets/img/logo.png" alt="Logo" style="height: 50px;">
             Renewen
         </a>
+ 
 
         <!-- Navbar Items-->
         <ul class="navbar-nav align-items-center ms-auto">
+        
+        <!-- 날씨 API -->
+		<body>
+			<!-- <p class="link" style="font-size: 1.0em; font-weight: 600; margin-top: 14px;">날씨 정보</p> -->
+			<div class="weather-info">
+				<div>
+					<dt>상태</dt>
+					<span id=description calss="description"></span>
+				</div>
+				<img class="icon">
+				<dt>기온</dt>
+				<span id="temperature" class="temperature"></span>
+				</div>
+			<div>
+			<script src="./weather.js"></script>
+			<style>
+				.link {
+					cursor: pointer;
+				}
+				
+				.weather-info {
+					display: flex;
+					flex-direction: row;
+				}
+				
+				.weather-info div {
+					margin-right: 50px;
+				}
+				
+				.weather-info dt {
+					font-weight: bold;
+					margin-bottom: 2px;
+				}
+				
+				.weather-info dd {
+					margin: 0;
+				}
+			</style>
+			<script src="${contextPath}/js/weather.js"></script>
+		</body>
 
-            <!-- 알림 Dropdown-->
+		<!-- 알림 Dropdown-->
             <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
                 <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"
                     href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"

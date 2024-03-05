@@ -106,7 +106,7 @@
   
 	
 		<!-- 겨레 추가 -->
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 	function getAddressCoordinates(address) {
 	    var geocoder = new daum.maps.services.Geocoder();
 	    geocoder.addressSearch(address, function(result, status) {
@@ -122,7 +122,7 @@
 	        }
 	    });
 	}
-	</script>
+	</script> -->
 
 
 </body>

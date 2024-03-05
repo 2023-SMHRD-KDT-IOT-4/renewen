@@ -41,7 +41,7 @@
     // InfoWindow에 표시될 내용 생성
 	let infoWindowContent = '<div style="text-align: center; margin-top: 10px;">' + '<span style="margin-right: 10px; font-size: 1.0em; font-weight: 600;"><발전소:' +
     					 '<span style="margin-left: 5px; margin-right: 10px; font-size: 1.0em; font-weight: 600;">' + plantName + '>' + '</span>' + '</div>' +
-                         '<div style="margin-left: 5px; margin-right: 10px;">*주소: ' + plantAddr + plantAddr2 + '</div>' +
+                         '<div style="margin-left: 5px; margin-right: 10px;">*주소: ' + plantAddr + ' '+ plantAddr2 + '</div>' +
                          '<div style="margin-left: 5px; margin-right: 10px;">*위도/경도: ' + latitude + ' / ' + longitude + '</div>' +
                          '<div style="margin-left: 5px; margin-right: 10px; margin-bottom: 10px;">*연동키: ' + linkKeyContent  + '</div>';
       
