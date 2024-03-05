@@ -1,15 +1,21 @@
-//weather.js
-const button = document.querySelector('.button');
-const tempSection = document.querySelector('.temperature');
-const placeSection = document.querySelector('.place');
-const descSection = document.querySelector('.description');
+// weather.js (JavaScript에서 HTML 문서의 특정 요소 찾기)
+// getElementById(' ') => HTML 요소의 고유한 id 속성으로 해당 요소 찾기
+const tempSection = document.getElementById('.temperature');
+const descSection = document.getElementById('.description');
 const iconSection = document.querySelector('.icon');
 
 const API_KEY = '5d3b52e64fc331fa29bf21b358d19183'
+
 // 함수 바꾸기
-button.addEventListener('click', () => {
+/*button.addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition(success, fail);
+});*/
+
+// 페이지 로드 시, 날씨정보 호출
+document.addEventListener('DOMContentLoaded', ()=> {
+	getWeatherInfo();
 });
+
 
 const success = (position) => {
     console.log(position);
@@ -35,11 +41,9 @@ const getWeather = (lat, lon) => {
     })
     .then((json) => {
         const temperature = json.main.temp;
-        const place = json.name;
         const description = json.weather[0].description;
 
         tempSection.innerText = temperature;
-        placeSection.innerText = place;
         descSection.innerText = description;
     })
     .then((json) => {
