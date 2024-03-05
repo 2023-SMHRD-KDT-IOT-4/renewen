@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
+import kr.smhrd.renewen.model.PowerPlantVO;
 import kr.smhrd.renewen.model.UserAuthVO;
 import kr.smhrd.renewen.model.UserVO;
+import kr.smhrd.renewen.service.PlantService;
 import kr.smhrd.renewen.service.UserService;
 
 @Controller
@@ -20,19 +22,26 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	PlantService plantService;
+	
 	@GetMapping("/user/login")
 	public String login() {
 		return "views/user/login";
 	}
 	
 	@PostMapping("/user/login")
-	public String login(UserVO user, HttpSession session) {
+	public String login(UserVO user, HttpSession session,Model model) {
 		
 		System.out.println(user);
 		UserVO loginUser = userService.login(user);
 		System.out.println("logined!! " + loginUser);
+		String userId = loginUser.getUserId();
 		if(loginUser != null) {
 			session.setAttribute("user", loginUser);
+			List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
+			System.out.println("로그인후 발전소 정보"+plantList);
+			session.setAttribute("plantList", plantList);
 			return "redirect:/";
 		} else {
 			return "redirect:/user/login";
@@ -59,4 +68,23 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	@GetMapping("/user/update")
+	public String userUpdate(HttpSession session) {
+		return "views/user/user_update";
+	}
+	
+	@PostMapping("user/update")
+	public String updateUser(UserVO user,Model model) {
+		System.out.println(user);
+		int res = userService.updateUser(user);
+		if(res>0) {
+			//model.addAttribute("updateSuccessMsg","회원정보 수정 성공!");
+			return "redirect:/";
+		}else {
+			//model.addAttribute("updateFailMsg","회원정보 수정 실패!");
+			return "redirect:/user/update";
+		}
+	}
 }
+
