@@ -36,7 +36,7 @@
 	
 	<update id="updateUser" parameterType="UserVO">
 		UPDATE user_info 
-			SET user_pw=#{userPw},
+			SET user_pw = SHA2(#{userPw} , 256),
 				user_email=#{userEmail},
 				user_name=#{userName},
 				user_tel=#{userTel}
