@@ -23,18 +23,17 @@
         <!-- 날씨 API -->
         <body>
 			<!-- <p class="link" style="font-size: 1.0em; font-weight: 600; margin-top: 14px;">날씨 정보</p> -->
+			<div>
+		        <span id="description" class="description"></span>
+		    </div>
 			<div class="weather-info">
-		        <div>
-		            <dt>상태</dt>
-		            <span id="description" class="description"></span>
-		        </div>
 		     	<img class="icon">
-		        <div>
-		            <dt>기온</dt>
-		            <span id="temperature" class="temperature"></span>
-		        </div>
     		</div>
-			<script src="./weather.js"></script>
+    		<div>
+		        <span id="temperature" class="temperature"></span>
+		        °C
+		    </div>
+    		<script src="${contextPath}/js/weather.js"></script>
 			<style>
 				.link {
 					cursor: pointer;
@@ -53,12 +52,7 @@
 					font-weight: bold;
 					margin-bottom: 2px;
 				}
-				
-				.weather-info dd {
-					margin: 0;
-				}
 			</style>
-			<script src="${contextPath}/js/weather.js"></script>
 		</body>
         
 

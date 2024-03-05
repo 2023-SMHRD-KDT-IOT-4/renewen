@@ -6,6 +6,12 @@ const iconSection = document.querySelector('.icon');
 
 const API_KEY = '5d3b52e64fc331fa29bf21b358d19183'
 
+// 위치 엑세스 없이 위치 고정할 시 
+/*const gwangjuLatitude = 35.1595; 
+const gwangjuLongitude = 126.8526; 
+getWeather(gwangjuLatitude, gwangjuLongitude); // 광주광역시의 날씨 정보 가져오기
+*/
+
 // 함수 바꾸기
 /*button.addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition(success, fail);
@@ -54,9 +60,13 @@ const getWeather = (lat, lon) => {
 		const description = json.weather[0].description;
 		const icon = json.weather[0].icon;
 		
+	    // HTML 요소 선택
+	    const temperatureElement = document.getElementById('temperature');
+	    const descriptionElement = document.getElementById('description');
+	    
 		// 화면 표시
-		temperature.innerText = temperature;
-		description.innerText = description;
+		temperatureElement.innerText = temperature;
+		descriptionElement.innerText = description;
 	
 		// 아이콘 설정
 		const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
