@@ -4,12 +4,11 @@
 
 $(document).ready(function() {
 	console.log('dashboard js');
-	console.log('dashboard2 js');
 	const contextPath = $("#contextPath").val();
 	const genElecUrl = contextPath + '/plant/gen/elec';
 	const weatherUrl = contextPath + '/api/was/weather/list';
 	
-	let plantNo = $("#plantList").val(); // 선택 발전소 식별번호
+	let plantNo = $("#selectList").val(); // 선택 발전소 식별번호
 	let stnNo = "156";
  	// 1. 금일 발전량 텍스트 출력	
 	fetchGenElec(genElecUrl, plantNo); 
@@ -22,12 +21,14 @@ $(document).ready(function() {
 
 	// 3. 금일 기상 차트 출력
 	printWeatherChart(weatherUrl, stnNo, timeArray);
+	
+	
 	// ====================================================================
 
 	 // 발전소 변경 시 
-	 $("#plantList").change(function() {
+	 $("#selectList").change(function() {
   	plantNo = $(this).val();
-  	// 발전소 발전량 fetch ==> span에 값 출력
+  	// 발전소 발전량 fetch ==> 차트 출력
    	fetchGenElec(genElecUrl, plantNo);
   });
   
@@ -35,8 +36,6 @@ $(document).ready(function() {
 
 
 const fetchGenElec = (url, plantNo) => {
-	
-	console.log('fetchGenElec ' + plantNo);
 	
 	$.ajax({
     url: url,
@@ -47,12 +46,17 @@ const fetchGenElec = (url, plantNo) => {
     success: function(response) {
         console.log('Received data:', response);
         const {totalWatt, currentWatt} = response;
-        $("#spanCurrentWatt").text(currentWatt);
-        $("#spanTotalWatt").text(totalWatt);
+        const expectedWatt = totalWatt * 0.8;
+        
+        drawGenElecChart(currentWatt, totalWatt, expectedWatt);
+        // $("#spanCurrentWatt").text(currentWatt);
+        // $("#spanTotalWatt").text(totalWatt);
+        // $("#spanExpectedWatt").text(expectedWatt);
     },
     error: function(xhr, status, error) {
-        $("#spanCurrentWatt").text('N/A');
-        $("#spanTotalWatt").text('N/A');
+				drawGenElecChart(0, 0, 0);
+        // $("#spanCurrentWatt").text('N/A');
+        // $("#spanTotalWatt").text('N/A');
   	}
 	});
 }// fetchGenElec
@@ -76,8 +80,7 @@ const printWeatherChart = (url, stnNo = 156, timeArray) => {
         
     },
     error: function(xhr, status, error) {
-        $("#spanCurrentWatt").text('N/A');
-        $("#spanTotalWatt").text('N/A');
+        console.error(error);
   	}
 	});
 
@@ -211,7 +214,6 @@ const printPredictChart = (divId, plantNo = 0) => {
 	seriesData2.forEach(item => {
     // 현재 시간과 비교하여 현재 시간 이후인 경우 value에 null 할당
     if (item.time > getCurrentTime()) {
-				console.log(item.time)
         item.value = null;
     } else {
 	    item.value -= 50; // 이전에 주석 처리한 코드

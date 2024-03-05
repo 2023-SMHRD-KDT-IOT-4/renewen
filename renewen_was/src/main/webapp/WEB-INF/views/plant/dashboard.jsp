@@ -6,28 +6,30 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>renewen</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>renewen</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="icon" type="image/x-icon" 	href="${contextPath}/assets/img/favicon.png" />
+	<link href="${contextPath}/css/styles.css" rel="stylesheet" />
+	<script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+	
+	<!--현정, 하이차트 사용 위해 라이브러리 로드  -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<!-- Highcharts 스타일 시트 로드 -->
+	<link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
+	
+	<style>
+	.chart-container-css {
+		position: relative;
+		height: 80vh;
+		overflow: hidden;
+	}
+	</style>
 
-<link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon.png" />
-<link href="${contextPath}/css/styles.css" rel="stylesheet" />
-
-
-<script data-search-pseudo-elements defer
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
-	crossorigin="anonymous"></script>
-<!--현정, 하이차트 사용 위해 라이브러리 로드  -->
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<!-- Highcharts 스타일 시트 로드 -->
-<link rel="stylesheet"
-	href="https://code.highcharts.com/css/highcharts.css">
 </head>
 <body class="nav-fixed">
 
@@ -78,93 +80,72 @@
 						</div>
 					</header>
 
-					<!-- <div class="container-xl px-4 mt-5"> -->
-					<!-- row 3칸 -->
+					<!-- row1 -->
 					<div class="row" id="dashDiv1">
 
+						<!-- 금일 발전량 -->
 						<div class="col-lg-4">
-							<!-- 발전소 발전량 -->
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량</div>
 								<div class="card-body">
-								<!-- 현정 수정 부분, 바 차트 삽입  -->
-									<div class="chart-bar" id="chart-container">
-										<h2>현재 발전량</h2>
+									<!-- 현정 수정 부분, 바 차트 삽입  -->
+									<div class="chart-bar" id="chart-container"></div>
+							<!-- 						
+									<div>
+										<span>현재 발전량</span>
 										<span id="spanCurrentWatt"></span>
-
-										<h2>누적 발전량</h2>
+										<span>누적 발전량</span>
 										<span id="spanTotalWatt"></span>
-
-										<h2>예상 발전량</h2>
+										<span>예상 발전량</span>
 										<span id="spanExpectedWatt"></span>
-
-										<!-- 그래프를 그릴 컨테이너 -->
-										<div id="chart-container"></div>
-											<!--  -->
-									</div>
-									<div></div>
-								</div>
+									</div> 
+							-->
+							</div>
 							</div>
 						</div>
-
+						
+						<!-- 금일 발전량 추이 -->
 						<div class="col-lg-8">
 							<!-- Pie chart example-->
 							<div class="card mb-4">
 								<div class="card-header">예상 발전량</div>
 								<div class="card-body">
-									<!-- style="height: 400px;" -->
 									<div id="chartPredictElec" class="chart-pie"></div>
 								</div>
 							</div>
 						</div>
 
 					</div>
-					<!-- end row -->
+					<!-- end row1 -->
 
-					<!-- row 3칸 -->
+					<!-- row2 -->
 					<div class="row" id="dashDiv2">
+						<!-- 셀 상태 -->
 						<div class="col-lg-4">
-							<!-- Bar chart example-->
 							<div class="card mb-4">
-								<div class="card-header">셀 상태 출력 - 1)아이콘(상태별 색상) 2)상태 텍스트로
-									출력 3) 셀 표면 온도 /</div>
+								<div class="card-header">
+									셀 상태</div>
 								<div class="card-body">
+									1)아이콘(상태별 색상) 2)상태 텍스트로	출력 3) 셀 표면 온도
 									<div class="chart-bar" id="chart1">
-										<%-- <canvas id="aaa" width="100%" height="50"></canvas> --%>
 									</div>
 								</div>
-								<div class="card-footer small text-muted">Updated
-									yesterday at 11:59 PM</div>
 							</div>
 						</div>
+						
+						<!-- 금일 기상차트 -->
 						<div class="col-lg-8">
-							<!-- Pie chart example-->
 							<div class="card mb-4">
-								<div class="card-header">기상차트e</div>
-								<div class="card-body">
-									<div class="chart-pie">
-										<canvas id="myPieChart" width="100%" height="50"></canvas>
+								<div class="card-header">금일 기상차트</div>
+									<div class="card-body">
+										<div id="chartWeather" class="chart-container-css"></div>
 									</div>
-								</div>
-								<div class="card-footer small text-muted">Updated
-									yesterday at 11:59 PM</div>
 							</div>
 						</div>
 
-						<%--      <div class="col-lg-4">
-              <!-- Pie chart example-->
-              <div class="card mb-4">
-                <div class="card-header">Pie Chart Example</div>
-                <div class="card-body">
-                  <div class="chart-pie"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-              </div>
-            </div>
-          </div> <!-- end row -->
- --%>
 					</div>
-					<!-- end <div class="container-xl px-4 mt-5">-->
+				</div>
+				<!-- end <div class="container-xl px-4 mt-5">-->
 			</main>
 
 			<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
@@ -172,13 +153,11 @@
 		<!-- end <div id="layoutSidenav_content"> -->
 	</div>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="${contextPath}/js/scripts.js"></script>
 	<!-- renewen -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/echarts@5"></script>
+	<script src="https://fastly.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 	<script src="${contextPath}/js/renewen_dashboard.js"></script>
 	<script src="${contextPath}/js/bar_chart.js"></script>
 </body>
