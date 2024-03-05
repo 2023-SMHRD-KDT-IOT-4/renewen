@@ -76,8 +76,9 @@
 														onclick="sample6_execDaumPostcode()"
 														placeholder="발전소 주소 입력" name="plantAddr"
 														onfocus="sample6_execDaumPostcode()">
+														<!--버튼색 변경 노랑  -->
 													<button type="button" onclick="sample6_execDaumPostcode()"
-														class="btn btn-secondary">우편번호 찾기</button>
+														class="btn btn-warning">우편번호 찾기</button>
 												</div>
 												<input type="text" class="form-control mt-2" id="plantAddr2"
 													placeholder="상세주소입력" name="plantAddr2">
