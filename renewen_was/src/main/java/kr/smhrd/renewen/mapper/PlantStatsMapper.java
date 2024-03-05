@@ -9,9 +9,9 @@ import kr.smhrd.renewen.model.CellGeneratedElecVO;
 @Mapper
 public interface PlantStatsMapper {
 
-	// 발전소 셀 별 누적 발전량
+	// 발전소 셀 별 금일 누적 발전량
 	public List<CellGeneratedElecVO> getTotalElecPerCell(long plantNo);
-	// 발전소 셀 별 현재 발전량
+	// 발전소 셀 별 금일 현재 발전량
 	public List<CellGeneratedElecVO> getCurrentElecPerCell(long plantNo);
 	
 }

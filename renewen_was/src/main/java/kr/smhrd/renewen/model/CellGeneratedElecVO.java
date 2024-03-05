@@ -17,4 +17,8 @@ public class CellGeneratedElecVO {
     private String useYn;
     // 측정 시간 
 	private String createdAt; 
+	
+	private double genElecWatt;
+	
+	private double genElecWattText;
 }

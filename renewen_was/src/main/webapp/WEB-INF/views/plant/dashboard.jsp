@@ -63,12 +63,14 @@
             <div class="col-lg-4">
               <!-- 발전소 발전량 -->
               <div class="card mb-4">
-                <div class="card-header">발전소 발전량</div>
+                <div class="card-header">금일 발전량</div>
                 <div class="card-body">
                   <div class="chart-bar">
                   	<h2>현재 발전량</h2>
                   	<span id="spanCurrentWatt"></span>
                   	<h2>누적 발전량</h2>
+                  	<span id="spanTotalWatt"></span>
+                  	<h2>예상 발전량</h2>
                   	<span id="spanTotalWatt"></span>
                   </div>
                 </div>
@@ -80,8 +82,7 @@
               <div class="card mb-4">
                 <div class="card-header">예상 발전량</div>
                 <div class="card-body"><!-- style="height: 400px;" -->
-                  <div id="chartPredictElec" class="chart-pie" >
-                  	<%-- <canvas id="chartPredictElec" width="100%" height="50"></canvas> --%>
+                  <div id="chartPredictElec" class="chart-pie">
                  	</div>
                 </div>
               </div>
@@ -94,7 +95,7 @@
             <div class="col-lg-4">
               <!-- Bar chart example-->
               <div class="card mb-4">
-                <div class="card-header">Bar Chart Example</div>
+                <div class="card-header">셀 상태 출력 - 1)아이콘(상태별 색상) 2)상태 텍스트로 출력 3) 셀 표면 온도 / </div>
                 <div class="card-body">
                   <div class="chart-bar" id="chart1" >
                   	<%-- <canvas id="aaa" width="100%" height="50"></canvas> --%>
@@ -103,17 +104,18 @@
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-8">
               <!-- Pie chart example-->
               <div class="card mb-4">
-                <div class="card-header">Pie Chart Example</div>
+                <div class="card-header">기상차트e</div>
                 <div class="card-body">
                   <div class="chart-pie"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
                 </div>
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
             </div>
-            <div class="col-lg-4">
+            
+       <%--      <div class="col-lg-4">
               <!-- Pie chart example-->
               <div class="card mb-4">
                 <div class="card-header">Pie Chart Example</div>
@@ -124,7 +126,7 @@
               </div>
             </div>
           </div> <!-- end row -->
-
+ --%>
         </div> <!-- end <div class="container-xl px-4 mt-5">-->
     	</main>
     	
