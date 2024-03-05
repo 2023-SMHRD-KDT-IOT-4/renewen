@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
  
-@SpringBootTest
 @SpringBootApplication
 public class RenewenApplicationTest {
 	

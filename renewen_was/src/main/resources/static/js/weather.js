@@ -24,11 +24,22 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 // 현재 위치 날씨 정보 가져오기
 const getWeatherInfo = () => {
-	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(success, fail);
-	} else {
-		alert("사용자의 위치 정보를 알 수 없습니다.")
-	}
+    if (navigator.geolocation) {
+        navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+            if (result.state === 'denied') {
+                hideIcon();
+            } else {
+                navigator.geolocation.getCurrentPosition(success, fail);
+            }
+        });
+    } else {
+        alert("사용자의 위치 정보를 알 수 없습니다.");
+    }
+};
+
+const hideIcon = () => {
+    const iconElement = document.querySelector('.icon');
+    iconElement.style.display = 'none';
 };
 
 
