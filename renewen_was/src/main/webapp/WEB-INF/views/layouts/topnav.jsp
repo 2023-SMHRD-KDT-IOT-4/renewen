@@ -27,11 +27,12 @@
 		        <span id="description" class="description"></span>
 		    </div>
 			<div class="weather-info">
-		     	<img class="icon">
+		     	<img id="icon" class="icon" style="width: 50px; height: 50px;">
     		</div>
     		<div>
 		        <span id="temperature" class="temperature"></span>
-		        °C
+		        <span style="margin-right:30px">°C</span>
+		        
 		    </div>
     		<script src="${contextPath}/js/weather.js"></script>
 			<style>
