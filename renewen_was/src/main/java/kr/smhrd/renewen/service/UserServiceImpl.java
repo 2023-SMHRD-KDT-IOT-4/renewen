@@ -37,5 +37,10 @@ public class UserServiceImpl implements UserService{
 	public List<UserAuthVO> getValidAuthList() {
 		return userMapper.getValidAuthList();
 	}
+	
+	@Override
+	public int updateUser(UserVO user) {
+		return userMapper.updateUser(user);
+	}
 
 }
