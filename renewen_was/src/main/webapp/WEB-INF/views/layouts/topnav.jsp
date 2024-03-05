@@ -59,7 +59,7 @@
             <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
                 <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts"
                     href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false"><img src="${contextPath}/assets/img/bell.png" alt="Bell Icon" style="height: 20px;"></a>
+                    aria-expanded="false"><img src="${contextP+ath}/assets/img/bell.png" alt="Bell Icon" style="height: 20px;"></a>
                 <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
                     aria-labelledby="navbarDropdownAlerts">
                     <h6 class="dropdown-header dropdown-notifications-header">
