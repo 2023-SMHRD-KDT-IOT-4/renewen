@@ -3,6 +3,8 @@ package kr.smhrd.renewen.global.util;
 import java.io.File;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -23,14 +25,23 @@ public class CommonUtil {
 	String imgDir; // 업로드-이미지 경로
 	
 	/**
-	 * @return 현재 날짜시간 yymmddhhmmss
+	 * @param dateFormat yymmddhhmmss
+	 * @return
 	 */
-	public String getCurrentDateTime() {
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-		String formattedDateTime = currentDateTime.format(formatter);
-		return formattedDateTime;
+	public String getCurrentDateTime(String dateFormat) {
+		ZoneId zoneId = ZoneId.of("Asia/Seoul"); // 타임존 지정
+		ZonedDateTime currentTimeInZone = ZonedDateTime.now(zoneId);
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
+		return currentTimeInZone.format(dateFormatter);
 	}
+
+	/**
+     * @param number 2자리
+     * @return "00" "11"
+     */
+    public String formatNumberWithPadding(int number) {
+        return String.format("%02d", number);
+    }	
 	
 	/**
 	 * @return 업로드할 이미지 경로 

@@ -113,7 +113,7 @@ public class APIService {
 	
 	public String uploadImg(String imgOriginName, String imgExt, byte[] decodedImg) throws IOException {
 		
-		String imgUploadName = commonUtil.getCurrentDateTime() + "_" + imgOriginName; // 20240227_imgOriginName
+		String imgUploadName = commonUtil.getCurrentDateTime("yyyyMMddHHmmss") + "_" + imgOriginName; // 20240227_imgOriginName
 		String realUploadDir = commonUtil.getUploadImgPath();
 		File uploadFolder = new File(realUploadDir);
 		
@@ -171,4 +171,8 @@ public class APIService {
 		return apiMapper.getWeatherList(map);
 	}
 
+	public boolean isInserted(String dateTime) {
+		int result = apiMapper.checkInsert(dateTime);
+		return result > 0 ? true : false;
+	}
 }

@@ -14,4 +14,6 @@ public interface APIMapper {
 	public int insertWeatherFactor(Map<String, Object> map);
 	
 	public List<WeatherListVO> getWeatherList(Map<String, String> map);
+	
+	public int checkInsert(String dateTime);
 }

@@ -22,4 +22,8 @@
     ORDER BY created_at
 	</select>
 	
+	<select id="checkInsert" resultType="Integer">
+		SELECT COUNT(*) FROM weather_api 
+		WHERE created_at = #{dateTime}
+	</select>
 </mapper>
