@@ -85,14 +85,16 @@
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량</div>
 								<div class="card-body">
-									 <div class="chart-bar">
+									<!--  <div class="chart-bar">
 										<h2>현재 발전량</h2>
 										<span id="spanCurrentWatt"></span>
 										<h2>누적 발전량</h2>
 										<span id="spanTotalWatt"></span>
 										<h2>예상 발전량</h2>
 										<span id="spanTotalWatt"></span>
-									</div> 
+									</div> -->
+									<div id="barChartContainer">
+									</div>
 									<div></div>
 								</div>
 							</div>
