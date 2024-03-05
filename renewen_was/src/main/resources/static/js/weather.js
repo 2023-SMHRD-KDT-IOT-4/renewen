@@ -1,3 +1,5 @@
+// 기존
+
 // weather.js (JavaScript에서 HTML 문서의 특정 요소 찾기)
 // getElementById(' ') => HTML 요소의 고유한 id 속성으로 해당 요소 찾기
 const tempSection = document.querySelector('.temperature');
@@ -44,7 +46,9 @@ const success = (position) => {
 // 실패
 const fail = () => {
     alert("좌표를 받아올 수 없습니다.")
+	iconSection.parentElement.style.display = 'none';
 }
+
 
 // OpenWeatherMap API를 통해 날씨 정보 가져오기
 const getWeather = (lat, lon) => {
@@ -65,16 +69,20 @@ const getWeather = (lat, lon) => {
 	    const descriptionElement = document.getElementById('description');
 	    
 		// 화면 표시
-		temperatureElement.innerText = temperature;
+		temperatureElement.innerText = temperature + " °C";
 		descriptionElement.innerText = description;
 	
 		// 아이콘 설정
 		const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
 		iconSection.setAttribute('src', iconURL);
+		
+		 iconSection.parentElement.style.display = 'block'; // 부모 요소인 div를 표시
 	})
 	.catch((error) => {
 		console.error('날씨 데이터를 가져오는 중 오류 발생:', error);
 		alert('날씨 데이터를 가져오지 못했습니다. 다시 시도해 주세요.');
+		
+		
 	});
 
 }
