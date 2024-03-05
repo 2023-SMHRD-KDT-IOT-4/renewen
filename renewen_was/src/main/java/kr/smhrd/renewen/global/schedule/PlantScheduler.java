@@ -20,7 +20,7 @@ import kr.smhrd.renewen.service.APIService;
 /**
  * 발전소 스케줄링 1) Rest API 기상인자 - 기상청 API 허브(https://apihub.kma.go.kr/)
  */
-@Component
+//@Component
 public class PlantScheduler {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -48,11 +48,14 @@ public class PlantScheduler {
 	public void callApiHub() {
 
 		// 조회 지점(지역) 리스트 현재는 156,165만. 추후 발전소 테이블에서 유효발전소 조회로
-		List<String> stnList = Arrays.asList("156", "165");
+		List<String> stnList = Arrays.asList("156");
 		String stnQueryString = String.join(":", stnList); // 요소 사이에 쉼표로 결합 ("156:165")
 
 		String baseUrl = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php?authKey=" + API_HUB_KEY;
-		String reqUrl = baseUrl + "&stn=" + stnQueryString;
+		// 요청시간 추가 ex) 202403040000
+		String tm = commonUtil.getCurrentDateTime().substring(0,8) + "0900"; 
+		String reqUrl = baseUrl + "&stn=" + stnQueryString + "&tm=" + tm;
+		System.out.println(reqUrl);
 		
 		// Rest Get 요청
 		String response = restTemplate.getForObject(reqUrl, String.class);
@@ -65,7 +68,7 @@ public class PlantScheduler {
 			Map<String, Double> measureMap =vo.getMeasure();
 			Map<String, Object> parameterMap = new HashMap<>(); // insert
 			parameterMap.put("stnNo", vo.getStnNo());
-			parameterMap.put("createdAt", vo.getCreatedAt());
+			parameterMap.put("createdAt", tm + "00");
 			
 			for (String key : measureMap.keySet()) {
 			    Double value = measureMap.get(key);
@@ -82,10 +85,11 @@ public class PlantScheduler {
 
 		Map<String, Integer> columnTypeMap = new HashMap<>();
 		columnTypeMap.put("STN", -1); // 지점코드
+		columnTypeMap.put("TA", -1); // 기온
+		columnTypeMap.put("SI", -1); // 일사량
+		columnTypeMap.put("WS", -1); // 풍속
 		columnTypeMap.put("PA", -1); // 기압
 		columnTypeMap.put("WD", -1); // 풍향
-		columnTypeMap.put("WS", -1); // 풍속
-		columnTypeMap.put("SI", -1); // 일사량
 		List<WeatherVO> weatherList = new ArrayList<>();
 
 		String[] lines = response.split("\\r?\\n");

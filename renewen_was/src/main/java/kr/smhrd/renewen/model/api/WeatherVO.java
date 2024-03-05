@@ -16,7 +16,7 @@ public class WeatherVO {
 	private String stnNo;
 	
 	// key : 기상인자 타입 / value : 기상인자 값
-	// PA(기압), WD(풍향), WS(풍속), SI(일사량)
+	// PA(기압), WD(풍향), WS(풍속), SI(일사량), TA(기온)
 	private Map<String, Double> measure;
 	// 사용여부 
     private String useYn;

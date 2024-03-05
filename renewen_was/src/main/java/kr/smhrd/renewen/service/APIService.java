@@ -26,6 +26,7 @@ import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.api.ShotImg;
+import kr.smhrd.renewen.model.api.WeatherListVO;
 
 @Service
 public class APIService {
@@ -164,6 +165,10 @@ public class APIService {
 	
 	public int insertWeatherFactor(Map<String, Object> map) {
 		return apiMapper.insertWeatherFactor(map);
+	}
+	
+	public List<WeatherListVO> getWeatherList(Map<String, String> map) {
+		return apiMapper.getWeatherList(map);
 	}
 
 }
