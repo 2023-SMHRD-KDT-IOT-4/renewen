@@ -21044,12 +21044,10 @@ pre[class*=language-] {
 .token.variable {
   color: #ff6666;
 }
-
-/* 현정 변경 부분  */
-/* 대시보드 페이지 셀렉트 박스 조절 */
-#plantList {
-  width: 110%; /* 최대 크기를 110%로 설정 */
-  max-width: 110%; /* 최대 너비를 110%로 제한합니다. */
-  font-size: 14px; /* 텍스트의 크기를 고정합니다. */
-  margin-left: -10%;
+/* 현정수정  */
+/* 셀렉트 박스 앞 라벨 추가 */
+.inline-label {
+    display: inline-block;
+    white-space: nowrap; ;
 }
+
