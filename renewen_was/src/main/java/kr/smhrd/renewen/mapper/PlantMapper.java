@@ -24,6 +24,8 @@ public interface PlantMapper {
 	public PowerPlantVO getPlantInfo(int plantNo);
 	public int updatePlant(PowerPlantVO vo);
 	
+	public int updateUseYn(long cellNo);
+	
 	// =================================================================	
 	
 	// 센싱데이터 

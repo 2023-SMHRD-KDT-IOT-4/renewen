@@ -30,8 +30,18 @@
                                 <a class="nav-link" href="dashboard-3.html">Affiliate</a>
                             </nav>
                         </div>
+                        
+                        <!-- 발전소 -->
                         <!-- Sidenav Heading (Custom)-->
                         <div class="sidenav-menu-heading">발전소</div>
+                        
+                        	<!-- Dashboard -->
+	                        <a class="nav-link collapsed" href="${contextPath}/plant/dashboard" >
+	                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
+	                            Dashboard
+	                        </a>                        
+                        
+                        
                         <!-- Sidenav Accordion (Pages)-->
                         <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
                             data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
