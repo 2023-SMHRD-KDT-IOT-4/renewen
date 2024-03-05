@@ -7,20 +7,6 @@ server:
       enabled: true
       force: true
 spring:
-  security:
-    oauth2:
-      client: # 네이버 로그인 연동
-        registration:
-          google:
-            client-id: 780755290259-30bopb1kcelc9laqk5ijln2evlplg9qb.apps.googleusercontent.com
-            client-secret: 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
-            scope:
-  kakao:
-    token-uri: https://kauth.kakao.com/oauth/token
-    user-info-uri: https://kapi.kakao.com/v2/user/me
-    grant-type: authorization_code
-    client-id: 발급받은 REST API 키
-    redirect-uri: 지정해둔 redirect-uri      
   servlet: 
     multipart:
       enabled: true
