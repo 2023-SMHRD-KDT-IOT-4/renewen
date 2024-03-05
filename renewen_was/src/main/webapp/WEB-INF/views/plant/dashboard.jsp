@@ -66,7 +66,7 @@
 												선택:</label>
 											<!-- 끝 -->
 											<!-- CSS 클래스를 적용 -->
-											<select class="form-control" id="plantList" name="plantList">
+											<select class="form-control" id="selectList" name="plantList">
 												<c:forEach items="${plantList}" var="vo">
 													<option value="${vo.plantNo}">${vo.plantName}</option>
 												</c:forEach>
