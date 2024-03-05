@@ -15,8 +15,7 @@
 <link rel="icon" type="image/x-icon"
 	href="${contextPath}/assets/img/favicon.png" />
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
-<!--현정 바 차트용 css 연결  -->
- <link  href="${contextPath}/css/chart.css" rel="stylesheet"/>
+
 
 <script data-search-pseudo-elements defer
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
@@ -24,8 +23,11 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
 	crossorigin="anonymous"></script>
-<!-- 현정 바 차트 삽입  -->
+<!--현정, 하이차트 사용 위해 라이브러리 로드  -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- Highcharts 스타일 시트 로드 -->
+<link rel="stylesheet"
+	href="https://code.highcharts.com/css/highcharts.css">
 </head>
 <body class="nav-fixed">
 
@@ -85,15 +87,20 @@
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량</div>
 								<div class="card-body">
-									<!--  <div class="chart-bar">
+								<!-- 현정 수정 부분, 바 차트 삽입  -->
+									<div class="chart-bar" id="chart-container">
 										<h2>현재 발전량</h2>
 										<span id="spanCurrentWatt"></span>
+
 										<h2>누적 발전량</h2>
 										<span id="spanTotalWatt"></span>
+
 										<h2>예상 발전량</h2>
-										<span id="spanTotalWatt"></span>
-									</div> -->
-									<div id="barChartContainer">
+										<span id="spanExpectedWatt"></span>
+
+										<!-- 그래프를 그릴 컨테이너 -->
+										<div id="chart-container"></div>
+											<!--  -->
 									</div>
 									<div></div>
 								</div>
@@ -173,6 +180,7 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/echarts@5"></script>
 	<script src="${contextPath}/js/renewen_dashboard.js"></script>
+	<script src="${contextPath}/js/bar_chart.js"></script>
 </body>
 </html>
 
