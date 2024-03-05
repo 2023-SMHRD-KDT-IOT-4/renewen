@@ -47,7 +47,7 @@ public class PlantRestController {
 	
 	/**
 	 * @param plantNo 발전소 식별번호
-	 * @return 누적발전량, 현재 발전량
+	 * @return 금일 누적발전량, 현재 발전량
 	 */
 	@GetMapping("/plant/gen/elec")
 	public ResponseEntity<Map<String, Double>> genTotal(@RequestParam("plantNo") long plantNo) {

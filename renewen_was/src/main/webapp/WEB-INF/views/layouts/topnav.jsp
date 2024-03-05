@@ -21,18 +21,19 @@
         <ul class="navbar-nav align-items-center ms-auto">
         
         <!-- 날씨 API -->
-		<body>
+        <body>
 			<!-- <p class="link" style="font-size: 1.0em; font-weight: 600; margin-top: 14px;">날씨 정보</p> -->
 			<div class="weather-info">
-				<div>
-					<dt>상태</dt>
-					<span id=description calss="description"></span>
-				</div>
-				<img class="icon">
-				<dt>기온</dt>
-				<span id="temperature" class="temperature"></span>
-				</div>
-			<div>
+		        <div>
+		            <dt>상태</dt>
+		            <span id="description" class="description"></span>
+		        </div>
+		     	<img class="icon">
+		        <div>
+		            <dt>기온</dt>
+		            <span id="temperature" class="temperature"></span>
+		        </div>
+    		</div>
 			<script src="./weather.js"></script>
 			<style>
 				.link {
@@ -45,7 +46,7 @@
 				}
 				
 				.weather-info div {
-					margin-right: 50px;
+					margin-right: 70px;
 				}
 				
 				.weather-info dt {
@@ -59,6 +60,7 @@
 			</style>
 			<script src="${contextPath}/js/weather.js"></script>
 		</body>
+        
 
 		<!-- 알림 Dropdown-->
             <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
