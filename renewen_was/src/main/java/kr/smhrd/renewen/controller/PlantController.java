@@ -263,7 +263,8 @@ public class PlantController {
 	public String dashboardPage(Model model, HttpSession session) {
 
 		UserVO user = (UserVO) session.getAttribute("user");
-		String userId = user.getUserId();
+//		String userId = user.getUserId();
+		String userId = "test";
 		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
 		model.addAttribute("plantList", plantList);
 		
