@@ -21071,4 +21071,10 @@ pre[class*=language-] {
     font-size: 14px; /* 폰트 크기 조절 */
 }
 
+/* 마커 정보창 스타일*/
+.navermaps-iframe {
+	width: 200px;  
+	height: 150px;  
+}
 
+ 
