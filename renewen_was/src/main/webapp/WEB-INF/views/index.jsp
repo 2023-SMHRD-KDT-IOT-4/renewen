@@ -73,8 +73,9 @@
 							<!-- 지도 -->
 							<div class="card">
 								<div class="card-header">발전소 위치 정보</div>
-								<div id="mapCardBody" class="card-body p-0">
-									<div id="plantListMap" class="card mb-4" style="height: 720px;"></div>
+								<div id="mapCardBody" class="card-body p-0"
+									style="height: 720px;">
+									<div id="plantListMap" class="card mb-4" style="height: 100%;"></div>
 								</div>
 							</div>
 						</div>
