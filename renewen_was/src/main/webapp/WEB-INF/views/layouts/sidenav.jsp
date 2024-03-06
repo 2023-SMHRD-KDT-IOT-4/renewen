@@ -41,6 +41,10 @@
 	                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
 	                            발전 현황
 	                        </a>                        
+	                        <a class="nav-link collapsed" href="${contextPath}/plant/stats" >
+	                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
+	                            발전량 조회
+	                        </a>                        
                         
                         
                         <!-- Sidenav Accordion (Pages)-->
