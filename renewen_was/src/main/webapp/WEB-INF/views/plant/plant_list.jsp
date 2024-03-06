@@ -63,11 +63,9 @@
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="card mb-4" id="plantList">
-<<<<<<< HEAD
-								<div class="card-header">${user.userId} 회원님의 발전소 리스트</div>
-=======
+
 								<div class="card-header">${user.userId}회원님의 발전소 리스트</div>
->>>>>>> branch 'main' of https://github.com/2023-SMHRD-KDT-IOT-4/renewen.git
+
 								<div class="card-body">
 									<table class="table table-hover">
 										<thead>
