@@ -20,8 +20,11 @@
 	href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
 	rel="stylesheet" />
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
+
+<!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/logo.png" />
+	href="${contextPath}/assets/img/favicon2.png" />
+	
 <script data-search-pseudo-elements defer
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 	crossorigin="anonymous"></script>

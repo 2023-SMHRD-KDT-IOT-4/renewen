@@ -15,8 +15,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon.png" />
+	href="${contextPath}/assets/img/favicon2.png" />
+
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
 <link href="${contextPath}/css/renewen_plant.css" rel="stylesheet" />
 <link
@@ -63,48 +65,51 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="card mb-4" id="plantList">
-								<div class="card-header">${user.userId}님의 승인을 기다리고 있어요</div>
+								<div class="card-header">${user.userId}님의승인을 기다리고 있어요</div>
 								<div class="card-body">
-									<form id="authForm" action="${contextPath}/plantAuth" method="post">
+									<form id="authForm" action="${contextPath}/plantAuth"
+										method="post">
 										<input type="hidden" id="plantNo" name="plantNo" value="" />
-										<input type="hidden" id="plantLinkKey" name="plantLinkKey" value="" />
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<th>No</th>
-												<th>사용자아이디</th>
-												<th>사업자등록번호</th>
-												<th>발전소 이름</th>
-												<th>주소</th>
-												<th>연동키 입력</th>
-												<!-- <th><input type="checkbox" id="selectAllCheckbox"
-                                                    onclick="toggleSelectAll()">모두 선택</th> -->
-												<th>승인</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="vo" items="${list}" varStatus="status">
+										<input type="hidden" id="plantLinkKey" name="plantLinkKey"
+											value="" />
+										<table class="table table-hover">
+											<thead>
 												<tr>
-													<td>${status.count}</td>
-													<td>${vo.userId}</td>
-													<c:set var="num" value="${vo.brNumber}" />
-													<td>${fn:substring(num,0,3)}-${fn:substring(num,3,5)}-${fn:substring(num,5,10)}</td>
-													<td>${vo.plantName}</td>
-													<td>${vo.plantAddr}${vo.plantAddr2}</td>
-													<td class="">
-														<!-- 각 행에 연동키를 입력하는 입력란 추가 --> 
-														<input type="text" name="linkKeyContent" id="linkKeyContent-${vo.plantNo}" placeholder="연동키를 입력하세요" class="form-control">
-													</td>
-													<td class="">
-														<!-- 각 행에 승인 버튼 추가 -->
-														<button type="button" class="btn btn-success btn-large grantBtn">승인</button>
-<%-- 														<button type="button" class="btn btn-success btn-large"
-															onclick="confirmApproval('${vo.plantNo}')">승인</button> --%>
-													</td>
+													<th>No</th>
+													<th>사용자아이디</th>
+													<th>사업자등록번호</th>
+													<th>발전소 이름</th>
+													<th>주소</th>
+													<th>연동키 입력</th>
+													<!-- <th><input type="checkbox" id="selectAllCheckbox"
+                                                    onclick="toggleSelectAll()">모두 선택</th> -->
+													<th>승인</th>
 												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
+											</thead>
+											<tbody>
+												<c:forEach var="vo" items="${list}" varStatus="status">
+													<tr>
+														<td>${status.count}</td>
+														<td>${vo.userId}</td>
+														<c:set var="num" value="${vo.brNumber}" />
+														<td>${fn:substring(num,0,3)}-${fn:substring(num,3,5)}-${fn:substring(num,5,10)}</td>
+														<td>${vo.plantName}</td>
+														<td>${vo.plantAddr}${vo.plantAddr2}</td>
+														<td class="">
+															<!-- 각 행에 연동키를 입력하는 입력란 추가 --> <input type="text"
+															name="linkKeyContent" id="linkKeyContent-${vo.plantNo}"
+															placeholder="연동키를 입력하세요" class="form-control">
+														</td>
+														<td class="">
+															<!-- 각 행에 승인 버튼 추가 -->
+															<button type="button"
+																class="btn btn-success btn-large grantBtn">승인</button> <%-- 														<button type="button" class="btn btn-success btn-large"
+															onclick="confirmApproval('${vo.plantNo}')">승인</button> --%>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
 									</form>
 								</div>
 							</div>
@@ -126,7 +131,8 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-danger"
 												data-bs-dismiss="modal">취소</button>
-											<button id="confirmApprovalBtn" type="button"	class="btn btn-success" onclick="confirmApproval()">승인</button>
+											<button id="confirmApprovalBtn" type="button"
+												class="btn btn-success" onclick="confirmApproval()">승인</button>
 										</div>
 									</div>
 								</div>
@@ -152,34 +158,36 @@
 	<!-- 추가 현정 -->
 	<%-- <script src="${contextPath}/js/checkbox.js"></script> --%>
 	<script>
-	
-		$(document).ready(function() {
-		    // 승인 버튼 클릭 이벤트 처리
-		    $('.grantBtn').click(function() {
-		        
-		    	// 현재 행에서 연동키 입력란의 값을 가져옴
-		        const clickRow = $(this).closest('tr').find('input[name="linkKeyContent"]');
-		        let linkKey = clickRow.val();
-		        let plantLinkKey = linkKey.trim();
-						
-		        if (plantLinkKey === '') { // 연동키가 비어 있는지 확인
-							alert('연동키를 입력해주세요.');
-							return;
-						}
-		        let plantNo = clickRow.attr('id');
-		        plantNo = plantNo.split('-')[1];
-		        
-		        postForm(plantNo, plantLinkKey);
-		    });
-		    
-		});
+		$(document).ready(
+				function() {
+					// 승인 버튼 클릭 이벤트 처리
+					$('.grantBtn').click(
+							function() {
+
+								// 현재 행에서 연동키 입력란의 값을 가져옴
+								const clickRow = $(this).closest('tr').find(
+										'input[name="linkKeyContent"]');
+								let linkKey = clickRow.val();
+								let plantLinkKey = linkKey.trim();
+
+								if (plantLinkKey === '') { // 연동키가 비어 있는지 확인
+									alert('연동키를 입력해주세요.');
+									return;
+								}
+								let plantNo = clickRow.attr('id');
+								plantNo = plantNo.split('-')[1];
+
+								postForm(plantNo, plantLinkKey);
+							});
+
+				});
 
 		function postForm(plantNo, plantLinkKey) {
-				
-	 		$("#plantNo").val(plantNo);
-      $("#plantLinkKey").val(plantLinkKey);
-      $("#authForm").submit(); // 폼 전송
-		} 
+
+			$("#plantNo").val(plantNo);
+			$("#plantLinkKey").val(plantLinkKey);
+			$("#authForm").submit(); // 폼 전송
+		}
 	</script>
 
 
