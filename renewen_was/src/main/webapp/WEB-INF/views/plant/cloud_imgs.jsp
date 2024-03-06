@@ -33,7 +33,7 @@
           
           <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="me-4 mb-3 mb-sm-0">
-              <h1 class="mb-0">발전소</h1>
+              <h1 class="mb-0">발전소 구름 이미지 </h1>
               <!-- 현재 시간 -->				
                 <div class="small" id="currentDateTimeContainer">
 	                 <span  id="currentYear"></span>
@@ -52,7 +52,7 @@
 		            	<span class="input-group-text"><i class="text-primary" data-feather="calendar"></i></span>
 		                <input class="form-control ps-0 pointer" id="litepickerSingleDate" placeholder="날짜 선택">
 		            </div>
-		            <button>조회하기</button>
+		            <button class="btn btn-warning">조회하기</button>
               </div>
               
             </div>

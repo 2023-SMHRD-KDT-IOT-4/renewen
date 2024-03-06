@@ -53,46 +53,56 @@
 						class="dropdown-item-icon"></div>로그인</a>
 			</c:when>
 			<c:otherwise>
+
+
 				<!-- 알림 Dropdown-->
+				
+				
+				<!-- a->div로 변경 -->
 				<li
 					class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-					<a class="btn btn-icon btn-transparent-dark dropdown-toggle"
-					id="navbarDropdownAlerts" href="javascript:void(0);" role="button"
-					data-bs-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img
-						src="${contextPath}/assets/img/bell.png" alt="Bell Icon"
-						style="height: 25px;"></a>
-					<div
-						class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
-						aria-labelledby="navbarDropdownAlerts">
-						<h6 class="dropdown-header dropdown-notifications-header">알림
-						</h6>
-						<!-- 알림1 -->
-						<a class="dropdown-item dropdown-notifications-item" href="#!">
-							<div class="dropdown-notifications-item-icon bg-success">
-								<i data-feather="user-plus"></i>
-							</div>
-							<div class="dropdown-notifications-item-content">
-								<div class="dropdown-notifications-item-content-details">02.22,
-									2024</div>
-								<div class="dropdown-notifications-item-content-text">로그인
-									성공!</div>
-							</div>
-						</a>
-						<!-- 알림 2-->
-						<a class="dropdown-item dropdown-notifications-item" href="#!">
-							<div class="dropdown-notifications-item-icon bg-warning">
-								<i data-feather="activity"></i>
-							</div>
-							<div class="dropdown-notifications-item-content">
-								<div class="dropdown-notifications-item-content-details">02.22,
-									2024</div>
-								<div class="dropdown-notifications-item-content-text">관리자
-									등록 요청이 승인되었습니다.</div>
-							</div>
-						</a>
-						<!-- 알림 3-->
-						<a class="dropdown-item dropdown-notifications-item" href="#!">
+					<div class="dropdown">
+						<div class="btn btn-transparent-dark dropdown-toggle"
+							id="navbarDropdownAlerts" role="button" data-bs-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"
+							style="font-weight: bold;">
+							<img src="${contextPath}/assets/img/bell.png" alt="Bell Icon"
+								style="height: 30px;"> <span style="margin-left: 5px;">알림</span>
+						</div>
+						<!-- a->div로 변경 끝 -->
+						
+						
+						<div
+							class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+							aria-labelledby="navbarDropdownAlerts">
+							<h6 class="dropdown-header dropdown-notifications-header">알림
+							</h6>
+							<!-- 알림1 -->
+							<a class="dropdown-item dropdown-notifications-item" href="#!">
+								<div class="dropdown-notifications-item-icon bg-success">
+									<i data-feather="user-plus"></i>
+								</div>
+								<div class="dropdown-notifications-item-content">
+									<div class="dropdown-notifications-item-content-details">02.22,
+										2024</div>
+									<div class="dropdown-notifications-item-content-text">로그인
+										성공!</div>
+								</div>
+							</a>
+							<!-- 알림 2-->
+							<a class="dropdown-item dropdown-notifications-item" href="#!">
+								<div class="dropdown-notifications-item-icon bg-warning">
+									<i data-feather="activity"></i>
+								</div>
+								<div class="dropdown-notifications-item-content">
+									<div class="dropdown-notifications-item-content-details">02.22,
+										2024</div>
+									<div class="dropdown-notifications-item-content-text">등록
+										요청이 승인되었습니다.</div>
+								</div>
+							</a>
+							<!-- 알림 3-->
+							<!-- 	<a class="dropdown-item dropdown-notifications-item" href="#!">
 							<div class="dropdown-notifications-item-icon bg-info">
 								<i data-feather="bar-chart"></i>
 							</div>
@@ -102,106 +112,110 @@
 								<div class="dropdown-notifications-item-content-text">오늘의
 									발전량을 확인하세요!</div>
 							</div>
-						</a>
-						<!-- 알림 4-->
-						<a class="dropdown-item dropdown-notifications-item" href="#!">
-							<div class="dropdown-notifications-item-icon bg-danger">
-								<i class="fas fa-exclamation-triangle"></i>
-							</div>
-							<div class="dropdown-notifications-item-content">
-								<div class="dropdown-notifications-item-content-details">02.24,
-									2024</div>
-								<div class="dropdown-notifications-item-content-text">비정상적
-									접근 감지!</div>
-							</div>
-						</a> <a class="dropdown-item dropdown-notifications-footer" href="#!">모든
-							알림 확인</a>
-					</div>
+						</a> -->
+							<!-- 알림 3-->
+							<a class="dropdown-item dropdown-notifications-item" href="#!">
+								<div class="dropdown-notifications-item-icon bg-danger">
+									<i class="fas fa-exclamation-triangle"></i>
+								</div>
+								<div class="dropdown-notifications-item-content">
+									<div class="dropdown-notifications-item-content-details">02.24,
+										2024</div>
+									<div class="dropdown-notifications-item-content-text">비정상적
+										접근 감지!</div>
+								</div>
+							</a> <a class="dropdown-item dropdown-notifications-footer" href="${contextPath}/user/user_log">모든
+								알림 확인</a>
+						</div>
 				</li>
-				<!-- 알림 -->
+				<!-- 발전소 드롭다운 -->
 
 				<!-- Power Plant Dropdown-->
+				
+				
+				<!-- a->div로 변경 -->
 				<li
 					class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-
-					<a class="btn  btn-transparent-dark dropdown-toggle"
-					id="navbarDropdownAlerts" href="javascript:void(0);" role="button"
-					data-bs-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" style="font-weight: bold;"><img
-						src="${contextPath}/assets/img/plant.png" alt="plant Icon"
-						style="height: 30px;"><span style="margin-left: 5px;">발전소</span></a>
-
-
-					<div
-						class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
-						aria-labelledby="navbarDropdownMessages">
-						<h6 class="dropdown-header dropdown-notifications-header">
-							발전소 목록</h6>
-						<!-- 발전소 목록 1  -->
-						<c:forEach var="vo" items="${plantList}">
-							<a class="dropdown-item dropdown-notifications-item"> <img
-								class="dropdown-notifications-item-img"
-								src="${contextPath}/assets/img/plant.png" alt="plant Icon" />
-								<div class="dropdown-notifications-item-content">
-									<div class="dropdown-notifications-item-content-text">${vo.plantName }</div>
-									<div class="dropdown-notifications-item-content-details">${vo.plantAddr}
-										${vo.plantAddr2 }</div>
-								</div>
-							</a>
-						</c:forEach>
-						<a class="dropdown-item dropdown-notifications-footer"
-							href="${contextPath}/plant/register">발전소 추가</a>
-					</div>
+					<div class="dropdown">
+						<div class="btn btn-transparent-dark dropdown-toggle"
+							id="navbarDropdownAlerts" role="button" data-bs-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"
+							style="font-weight: bold;">
+							<img src="${contextPath}/assets/img/plant.png" alt="plant Icon"
+								style="height: 30px;"><span style="margin-left: 5px;">발전소</span>
+						</div>
+						<!-- a->div로 변경 끝 -->
+						
+						<div
+							class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+							aria-labelledby="navbarDropdownMessages">
+							<h6 class="dropdown-header dropdown-notifications-header">
+								발전소 목록</h6>
+							<!-- 발전소 목록 1  -->
+							<c:forEach var="vo" items="${plantList}">
+								<a class="dropdown-item dropdown-notifications-item"> <img
+									class="dropdown-notifications-item-img"
+									src="${contextPath}/assets/img/plant.png" alt="plant Icon" />
+									<div class="dropdown-notifications-item-content">
+										<div class="dropdown-notifications-item-content-text">${vo.plantName }</div>
+										<div class="dropdown-notifications-item-content-details">${vo.plantAddr}
+											${vo.plantAddr2 }</div>
+									</div>
+								</a>
+							</c:forEach>
+							<a class="dropdown-item dropdown-notifications-footer"
+								href="${contextPath}/plant/register">발전소 추가</a>
+						</div>
 				</li>
 				<!-- 발전소 목록 -->
 
 				<!-- User Dropdown-->
+				
+				<!-- a->div로 변경 -->
 				<li
 					class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-					<a class="btn  btn-transparent-dark dropdown-toggle"
-					id="navbarDropdownAlerts" href="javascript:void(0);" role="button"
-					data-bs-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img
-						src="${contextPath}/assets/img/user.png" alt="plant Icon"
-						style="height: 30px;"><span style="margin-left: 5px;">
-							회원 정보 </span></a>
-
-					<div
-						class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
-						aria-labelledby="navbarDropdownMessages">
-						<h6 class="dropdown-header dropdown-notifications-header">
-							회원정보</h6>
-						<!-- 사용자 정보 -->
-						<div class="dropdown-item dropdown-notifications-item"
-							id="loginButton">
-							<img class="dropdown-notifications-item-img"
-								src="${contextPath}/assets/img/user.png" alt="user Icon" />
-							<div class="dropdown-notifications-item-content">
-								<div class="dropdown-notifications-item-content-text">${user.userId }님
-									환영합니다!</div>
-								<div class="dropdown-notifications-item-content-details"></div>
-								<div class="dropdown-user-details-name">사용자 이름 :
-									${user.userName }</div>
-								<div class="dropdown-user-details-email">이메일 :
-									${user.userEmail }</div>
-							</div>
+					<div class="dropdown">
+						<div class="btn btn-transparent-dark dropdown-toggle"
+							id="navbarDropdownAlerts" role="button" data-bs-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"
+							style="font-weight: bold;">
+							<img src="${contextPath}/assets/img/user.png" alt="plant Icon"
+								style="height: 30px;"> <span style="margin-left: 5px;">회원정보</span>
 						</div>
-						<!--  <div class="dropdown-divider"></div> -->
-						<div class="dropdown-item" id="logoutButton">
-							<div class="dropdown-item-icon">
-								<i class="fas fa-sign-out-alt"></i>
+						<!-- a->div로 변경 끝 -->
+						
+						<div
+							class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+							aria-labelledby="navbarDropdownMessages">
+							<h6 class="dropdown-header dropdown-notifications-header">회원정보</h6>
+							<!-- 사용자 정보 -->
+							<div class="dropdown-item dropdown-notifications-item"
+								id="loginButton">
+								<img class="dropdown-notifications-item-img"
+									src="${contextPath}/assets/img/user.png" alt="user Icon" />
+								<div class="dropdown-notifications-item-content">
+									<div class="dropdown-notifications-item-content-text">${user.userId }님
+										환영합니다!</div>
+									<div class="dropdown-notifications-item-content-details"></div>
+									<div class="dropdown-user-details-name">사용자 이름 :
+										${user.userName }</div>
+									<div class="dropdown-user-details-email">이메일 :
+										${user.userEmail }</div>
+								</div>
 							</div>
-							로그아웃
+							<a class="dropdown-item" id="logoutButton"
+								href="${contextPath}/user/logout">
+								<div class="dropdown-item-icon me-2" style="font-size: 20px;">
+									<i class="fas fa-sign-out-alt"></i>
+								</div>
+								<div>로그아웃</div>
+							</a> <a class="dropdown-item" id="updateButton"
+								href="${contextPath}/user/update">
+								<div class="dropdown-item-icon" style="font-size: 20px;">
+									<i class="fas fa-user-edit"></i>
+								</div> 회원 정보 수정
+							</a>
 						</div>
-						<hr>
-						<div class="dropdown-item" id="updateButton">
-							<div class="dropdown-item-icon">
-								<i class="fas fa-user-edit"></i>
-							</div>
-							회원 정보 수정
-						</div>
-
-					</div>
 				</li>
 			</c:otherwise>
 		</c:choose>
@@ -209,4 +223,4 @@
 	<!-- Navbar Items끝  -->
 </nav>
 
-<script src="user_actions.js"></script>
+
