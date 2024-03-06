@@ -144,7 +144,68 @@
                                     </div>
                                 </div>
                                 <!-- 현재 발전량 -->
-                                <!-- 지도 마크업 -->
+
+
+								<!-- 지도 마크업 -->
+<!-- 지도 마크업 -->
+<div id="map" style="width: 100%; height: 100%;"></div>
+
+<script type="text/javascript"
+    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l8y7kfobe4"></script>
+
+<script>
+    var mapOptions = {
+        center: new naver.maps.LatLng(35.17294, 126.89156),
+        zoom: 15
+    };
+
+    var map = new naver.maps.Map('map', mapOptions);
+
+    var markerPositions = [
+        { position: new naver.maps.LatLng(35.17294, 126.89156), name: "발전소 1", content: "주소 1" },
+        { position: new naver.maps.LatLng(35.161828, 126.880026), name: "발전소 2", content: "주소 2" },
+        { position: new naver.maps.LatLng(35.1653428, 126.9092003), name: "발전소 3", content: "주소 3" },
+        { position: new naver.maps.LatLng(35.1682592, 126.8884114), name: "발전소 4", content: "주소 4" },
+        { position: new naver.maps.LatLng(35.173121, 126.893802), name: "발전소 5", content: "주소 5" }
+    ];
+
+    // 변수를 선언하여 현재 열려 있는 정보창을 저장합니다.
+    var openedInfoWindow = null;
+
+    for (var i = 0; i < markerPositions.length; i++) {
+        var marker = new naver.maps.Marker({
+            position: markerPositions[i].position,
+            map: map
+        });
+
+        // 클로저를 사용하여 정보 창에 대한 정보를 보존합니다.
+        (function (marker, contentString) {
+            naver.maps.Event.addListener(marker, 'click', function (e) {
+                // 마커를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
+                if (openedInfoWindow && openedInfoWindow.getMap()) {
+                    openedInfoWindow.close();
+                }
+                // 현재 클릭된 마커에 정보창을 연다.
+                var infoWindow = new naver.maps.InfoWindow({
+                    content: contentString
+                });
+                infoWindow.open(map, marker);
+                // 열린 정보창을 저장합니다.
+                openedInfoWindow = infoWindow;
+            });
+        })(marker, '<div style="padding:10px;"><h5>' + markerPositions[i].name + '</h5><p>' + markerPositions[i].content + '</p></div>');
+    }
+
+    // 지도를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
+    naver.maps.Event.addListener(map, 'click', function (e) {
+        if (openedInfoWindow) {
+            openedInfoWindow.close();
+            openedInfoWindow = null;
+        }
+    });
+</script>
+
+                        <!-- 지도 마지막단 -->              
             </main>
 							<jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
         </div>		<!-- end <div id="layoutSidenav_content"> -->
@@ -156,6 +217,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<!-- renewen -->  
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <!-- Chart.js 라이브러리 추가 -->
   <script src="${contextPath}/js/chart.js"></script>
 </body>

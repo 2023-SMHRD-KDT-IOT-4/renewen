@@ -31,7 +31,6 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-
 </head>
 <body class="nav-fixed">
 
@@ -62,9 +61,9 @@
 				<!-- Main page content-->
 				<div class="container-xl px-4 mt-n10">
 					<div class="row">
-						<div class="col-lg-15">
+						<div class="col-lg-12">
 							<div class="card mb-4" id="plantList">
-								<div class="card-header">${user.userId}님의승인을기다리고있어요</div>
+								<div class="card-header">${user.userId}님의 승인을 기다리고 있어요</div>
 								<div class="card-body">
 									<table class="table table-hover">
 										<thead>
@@ -74,8 +73,10 @@
 												<th>사업자등록번호</th>
 												<th>발전소 이름</th>
 												<th>주소</th>
-												<th><input type="checkbox" id="selectAllCheckbox">
-													<label for="selectAllCheckbox">모두 선택</label></th>
+												<th>연동키 입력</th>
+												<!-- <th><input type="checkbox" id="selectAllCheckbox"
+                                                    onclick="toggleSelectAll()">모두 선택</th> -->
+												<th>승인</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -87,28 +88,23 @@
 													<td>${fn:substring(num,0,3)}-${fn:substring(num,3,5)}-${fn:substring(num,5,10)}</td>
 													<td>${vo.plantName}</td>
 													<td>${vo.plantAddr}${vo.plantAddr2}</td>
-													<td><input type="checkbox" name="selectedItems"
-														value="${vo.plantNo}"></td>
-												</tr>
-
+													<td class="">
+														<!-- 각 행에 연동키를 입력하는 입력란 추가 --> <input type="text"
+														name="linkKeyContent" id="linkKeyContent-${vo.plantNo}"
+														placeholder="연동키를 입력하세요" class="form-control">
+													</td>
+													<td class="">
+														<!-- 각 행에 승인 버튼 추가 -->
+														<button class="btn btn-success btn-large"
+															onclick="confirmApproval('${vo.plantNo}')">승인</button>
+													</td>
 												</tr>
 											</c:forEach>
-
 										</tbody>
-
 									</table>
 								</div>
 							</div>
 							<!-- end card-plantList -->
-							<!-- 승인버튼 가운데 정렬 -->
-							<div class="container">
-								<div class="row justify-content-center">
-									<div class="col-auto">
-										<button id="approveSelectedBtn"
-											class="btn btn-primary btn-lg px-5 py-3">선택 항목 승인하기</button>
-									</div>
-								</div>
-							</div>
 							<!-- 모달 -->
 							<div class="modal fade" id="approveModal" tabindex="-1"
 								aria-labelledby="approveModalLabel" aria-hidden="true">
@@ -126,8 +122,8 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-danger"
 												data-bs-dismiss="modal">취소</button>
-											<button type="button" class="btn btn-success"
-												onclick="confirmApproval()">승인</button>
+											<button id="confirmApprovalBtn" type="button"
+												class="btn btn-success" onclick="confirmApproval()">승인</button>
 										</div>
 									</div>
 								</div>
@@ -136,7 +132,6 @@
 					</div>
 				</div>
 			</main>
-
 			<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 		</div>
 		<!-- end <div id="layoutSidenav_content"> -->
@@ -152,55 +147,27 @@
 	<!-- renewen -->
 
 	<!-- 추가 현정 -->
-	<script src="${contextPath}/js/checkbox.js"></script>
+	<%-- <script src="${contextPath}/js/checkbox.js"></script> --%>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$('#approveSelectedBtn')
-									.click(
-											function() {
-												var selectedItems = [];
-												$(
-														'input[name="selectedItems"]:checked')
-														.each(
-																function() {
-																	selectedItems
-																			.push($(
-																					this)
-																					.closest(
-																							'tr')
-																					.find(
-																							'td:eq(3)')
-																					.text());
-																});
+		/* 각 행의 승인 처리 */
+		function confirmApproval(plantNo) {
+			// 해당 발전소의 연동키 입력란 가져오기
+			var linkKeyInput = document.getElementById('linkKeyContent-'
+					+ plantNo);
+			var linkKeyValue = linkKeyInput.value.trim();
 
-												if (selectedItems.length === 0) {
-													alert('선택된 항목이 없습니다.');
-													return;
-												}
+			// 연동키가 비어 있는지 확인
+			if (linkKeyValue === '') {
+				alert('연동키를 입력해주세요.');
+				return;
+			}
 
-												var selectedItemsList = $('#selectedItemsList');
-												selectedItemsList.empty();
-												selectedItems.forEach(function(
-														item) {
-													selectedItemsList
-															.append('<li>'
-																	+ item
-																	+ '</li>');
-												});
+			// 연동키가 입력된 경우 승인 완료 메시지 표시
+			alert('발전소가 성공적으로 승인되었습니다.');
 
-												$('#approveModal')
-														.modal('show');
-											});
-
-							$('#confirmApprovalBtn').click(function() {
-								// 여기에 선택한 항목을 승인하는 로직을 추가
-								alert('선택한 항목을 승인했습니다.');
-								$('#approveModal').modal('hide');
-							});
-						});
+		}
 	</script>
+
 
 </body>
 </html>

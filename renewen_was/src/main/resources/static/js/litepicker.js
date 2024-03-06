@@ -10,8 +10,11 @@
 // Litepicker Documentation
 // https://wakirin.github.io/Litepicker
 
+//import Litepicker from 'litepicker';
+
 window.addEventListener('DOMContentLoaded', event => {
 
+	console.log(event);
     const litepickerSingleDate = document.getElementById('litepickerSingleDate');
     if (litepickerSingleDate) {
         new Litepicker({

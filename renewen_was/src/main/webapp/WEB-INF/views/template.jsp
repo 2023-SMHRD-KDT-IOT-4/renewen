@@ -58,7 +58,6 @@
                 
                 <!-- Main page content-->
                 <div class="container-xl px-4 mt-n10">
-                    <h2>ddd</h2>
                  </div>
                                 <!-- 현재 발전량 -->
                                 <!-- 지도 마크업 -->

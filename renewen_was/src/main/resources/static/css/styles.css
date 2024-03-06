@@ -21065,6 +21065,19 @@ pre[class*=language-] {
     font-size: 14px; /* 폰트 크기 조절 */
 }
 
+/* 테이블 내용 가운데 정렬*/
+  table {
+    text-align: center;
+}
 
+/* 테이블 내용 가운데 정렬 */
+table {
+    text-align: center;
+}
 
+table th,
+table td {
+    text-align: center;
+    vertical-align: middle; /* 각 셀의 수직 정렬 설정 */
+}
 
