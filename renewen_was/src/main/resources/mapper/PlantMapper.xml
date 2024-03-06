@@ -58,18 +58,42 @@
 		WHERE plant_link_key = #{plantLinkKey} AND use_yn = 'Y'
 	</select>
 	
+	<select id="getNotGrantPlants" resultType="PowerPlantVO">
+		SELECT * FROM power_plant
+		WHERE grant_yn = 'N' or plant_link_key = null
+		ORDER BY created_at
+	</select>
+	
+	<update id="grantPlant" parameterType="PowerPlantVO">
+		UPDATE power_plant 
+			SET grant_yn = 'Y', plant_link_key = #{plantLinkKey}
+		WHERE plant_no = #{plantNo}
+	</update>
+	<!-- ================================================================================ -->
+
 	<update id="updateUseYn">
 		UPDATE generate_cell SET use_yn='Y' where cell_no=#{cellNo}
 	</update>
-	<!-- ================================================================================ -->
 	
 	<!-- 센싱데이터 -->
 	<insert id="insertSensingData" parameterType="SensingDataVO">
-		INSERT INTO plant_sensing_data
-	    (plant_no, sensor_id, sensor_serial_num, measure_value, measure_desc, created_at)
-	VALUES
-	    (#{plantNo}, #{sensorId}, #{sensorSerialNum}, 
-	     #{measureValue},#{measureDesc}, #{createdAt})
+		<choose>
+			<when test="cellSerialNum != null">
+				INSERT INTO plant_sensing_data
+			    (plant_no, sensor_id, sensor_serial_num, measure_value, measure_desc, created_at, cell_no)
+				VALUES
+				    (#{plantNo}, #{sensorId}, #{sensorSerialNum}, 
+				     #{measureValue},#{measureDesc}, #{createdAt}, #{cellNo})			
+			</when>
+			<otherwise>
+				INSERT INTO plant_sensing_data
+			    (plant_no, sensor_id, sensor_serial_num, measure_value, measure_desc, created_at)
+				VALUES
+				    (#{plantNo}, #{sensorId}, #{sensorSerialNum}, 
+				     #{measureValue},#{measureDesc}, #{createdAt})			
+			</otherwise>
+		</choose>
+
 	</insert>
 	
 	<resultMap id="sensingResult" type="SensingDataVO">
@@ -128,6 +152,10 @@
     	(#{plantNo}, #{cloudImgDesc}, #{cloudImgName}, #{cloudImgRealname},
     	 #{cloudImgSize}, #{cloudImgExt}, #{createdAt})
 	</insert>
+	
+	<select id="getCloudImgsByPlantNoAndDate" resultType="CloudShotImgVO" parameterType="CloudShotImgVO">
+		SELECT * FROM cloud_shot_img WHERE plant_no=#{plantNo} AND DATE(created_at)=#{selectedDate}
+	</select>
 
 	<!-- ================================================================================ -->
 

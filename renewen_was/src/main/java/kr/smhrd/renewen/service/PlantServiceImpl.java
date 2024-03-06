@@ -64,6 +64,10 @@ public class PlantServiceImpl implements PlantService {
 	public List<CloudShotImgVO> getCloudImgsByPlantNo(long plantNo) {
 		return plantMapper.getCloudImgsByPlantNo(plantNo);
 	}
+	
+	public List<CloudShotImgVO> getCloudImgsByPlantNoAndDate(CloudShotImgVO cloud){
+		return plantMapper.getCloudImgsByPlantNoAndDate(cloud);
+	}
 
 	@Override
 	public long getPlantNoByLinkKey(String plantLinkKey) {
@@ -128,6 +132,18 @@ public class PlantServiceImpl implements PlantService {
 	@Override
 	public int insertGeneratedElec(CellGeneratedElecVO vo) {
 		return plantMapper.insertGeneratedElec(vo);
+	}
+
+
+	@Override
+	public List<PowerPlantVO> getNotGrantPlants() {
+		return plantMapper.getNotGrantPlants();
+	}
+
+
+	@Override
+	public int grantPlant(PowerPlantVO vo) {
+		return plantMapper.grantPlant(vo);
 	}
 
 }

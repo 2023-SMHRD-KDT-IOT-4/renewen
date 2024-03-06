@@ -63,7 +63,9 @@
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="card mb-4" id="plantList">
+
 								<div class="card-header">${user.userId}회원님의 발전소 리스트</div>
+
 								<div class="card-body">
 									<table class="table table-hover">
 										<thead>
@@ -72,6 +74,7 @@
 												<th>발전소 이름</th>
 												<th>주소</th>
 												<th>사업자등록번호</th>
+												<th>수정/삭제</th>
 											</tr>
 										</thead>
 
@@ -102,7 +105,7 @@
 														<div class="modal fade" id="exampleModal" tabindex="-1"
 															aria-labelledby="exampleModalLabel" aria-hidden="true">
 															<div class="modal-dialog">
-																<div class="modal-content">
+																<div class="modal-content" style="min-width: 700px;">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLabel">발전
 																			셀 연동</h5>

@@ -1,12 +1,18 @@
 package kr.smhrd.renewen.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 // 발전소 구름형상 이미지
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CloudShotImgVO {
+	
+	
 	
 	// 구름 이미지 식별번호 
     private long csNo;
@@ -33,5 +39,8 @@ public class CloudShotImgVO {
     public String getImgFile() {
     	return cloudImgRealname + "." + cloudImgExt;
     }
+    
+    //선택날짜
+    private String selectedDate;
     
 }

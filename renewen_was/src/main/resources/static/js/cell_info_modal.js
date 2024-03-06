@@ -67,7 +67,7 @@
 		                row.append('<td>' + cell.cellType + '</td>');
 		                row.append('<td>' + cell.cellSerialNum + '</td>');
 		                row.append('<td>' + cell.cellVolume + '</td>');
-		                row.append('<td>' + (cell.cellWidth +' x '+ cell.cellHeight +' x '+ cell.cellDepth) + '</td>');
+		                row.append('<td>' + (cell.cellWidth +' x '+ cell.cellHeight +' x '+ cell.cellDepth + '(' + cell.cellSizeUnit + ')') + '</td>');
 		                
 		                if (cell.useYn === 'N') {
 		                    var checkbox = $('<input>').attr('type', 'checkbox').addClass('use-checkbox').data('cell-id', cell.cellId);

@@ -63,7 +63,13 @@ public class PlantRestController {
 		return ResponseEntity.ok().body(response);
 	}
 	
-
-	
+	@GetMapping("/plant/gen_time/elec")
+	public ResponseEntity<Map<String, Double>> genTimeTotal(@RequestParam("plantNo") long plantNo) {
+		
+		Map<String, Double> response = new HashMap<>();
+		response = statsService.getHourElecPerCell(plantNo); // 시간대별 누적발전량
+		
+		return ResponseEntity.ok().body(response);
+	}
 	
 }

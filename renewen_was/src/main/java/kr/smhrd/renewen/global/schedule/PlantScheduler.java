@@ -62,8 +62,12 @@ public class PlantScheduler {
 		}
 		
 		String tm = dateTime.substring(0, 12);
-		if(checkHour > 0 && checkHour <= todayHour) {
+		if(checkHour >= 0 && checkHour <= todayHour) {
 			tm = todayDate + commonUtil.formatNumberWithPadding(checkHour)+"00";
+		}
+		int min = Integer.parseInt(tm.substring(11, 12));
+		if(min > 0) {
+			return;
 		}
 		
 		// 조회 지점(지역) 리스트 현재는 156,165만. 추후 발전소 테이블에서 유효발전소 조회로
@@ -72,9 +76,11 @@ public class PlantScheduler {
 
 		String baseUrl = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php?authKey=" + API_HUB_KEY;
 		String reqUrl = baseUrl + "&stn=" + stnQueryString + "&tm=" + tm; // 요청시간 추가 ex) 202403040000
-
+		logger.info("reqUrl {} ", reqUrl);
+		
 		// Rest Get 요청
 		String response = restTemplate.getForObject(reqUrl, String.class);
+		logger.info("response {} ", response);
 		// DB 저장할 vo List
 		List<WeatherVO> weatherList = getWeatherList(response, tm);
 		
@@ -92,7 +98,6 @@ public class PlantScheduler {
 			    apiService.insertWeatherFactor(parameterMap);
 			}
 		}
-	
 		
 	}
 
@@ -106,6 +111,7 @@ public class PlantScheduler {
 		columnTypeMap.put("WS", -1); // 풍속
 		columnTypeMap.put("PA", -1); // 기압
 		columnTypeMap.put("WD", -1); // 풍향
+		columnTypeMap.put("CA", -1); // 전운량
 		List<WeatherVO> weatherList = new ArrayList<>();
 
 		String[] lines = response.split("\\r?\\n");
