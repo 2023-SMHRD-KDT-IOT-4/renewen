@@ -1,6 +1,6 @@
 
         // 페이지가 로드될 때 실행되는 함수
-       window.onload = function() {
+/*       window.onload = function() {
 				 	console.log("chart");
             // 도넛 차트 데이터
             var doughnutChartData = {
@@ -43,7 +43,7 @@
                 options: doughnutChartOptions
             });
         };
-
+*/
 
   // 발전소별 발전 용량 데이터 (마스터용)
 //   var powerPlantData = {
@@ -76,7 +76,7 @@
 // myPlantChart
 
 
-var renewableEnergyData = {
+/*var renewableEnergyData = {
     labels: ["현재 발전 용량 (kW)", "최대 발전 용량 (kW)"],
     datasets: [{
         data: [150, 200], // 현재 발전 용량과 최대 발전 용량 데이터 (단위: kW)
@@ -99,4 +99,4 @@ var myDoughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: renewableEnergyData,
     options: doughnutChartOptions
-});
+});*/
