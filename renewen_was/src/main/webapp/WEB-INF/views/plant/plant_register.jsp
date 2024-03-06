@@ -132,12 +132,7 @@
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="${contextPath}/js/address.js"></script>
 
-	<script type="text/javascript">
-		function closePopup() {
-			// 주소 검색 팝업을 닫는 함수
-			daum.postcode.resume();
-		}
-	</script>
+ 
 </body>
 </html>
 
