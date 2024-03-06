@@ -52,9 +52,9 @@
 									<div class="col-auto mb-3">
 										<h1 class="page-header-title">
 											<div class="page-header-icon">
-												<i data-feather="file"></i>
+												<i data-feather="zap"></i>
 											</div>
-											Dashboard
+											금일 발전 형황
 										</h1>
 									</div>
 
@@ -63,11 +63,7 @@
 											<h6 class="page-header-title">발전소 없음</h6>
 										</c:if>
 										<c:if test="${not empty plantList}">
-											<!-- 현정: 라벨 추가,발전소 선택 -->
-											<label for="plantList" class="me-2 inline-label">발전소
-												선택:</label>
-											<!-- 끝 -->
-											<!-- CSS 클래스를 적용 -->
+											<label for="plantList" class="me-2 inline-label">발전소:</label>
 											<select class="form-control" id="selectList" name="plantList">
 												<c:forEach items="${plantList}" var="vo">
 													<option value="${vo.plantNo}">${vo.plantName}</option>
@@ -90,17 +86,7 @@
 								<div class="card-body">
 									<!-- 현정 수정 부분, 바 차트 삽입  -->
 									<div class="chart-bar" id="chart-container"></div>
-							<!-- 						
-									<div>
-										<span>현재 발전량</span>
-										<span id="spanCurrentWatt"></span>
-										<span>누적 발전량</span>
-										<span id="spanTotalWatt"></span>
-										<span>예상 발전량</span>
-										<span id="spanExpectedWatt"></span>
-									</div> 
-							-->
-							</div>
+								</div>
 							</div>
 						</div>
 						
@@ -108,7 +94,7 @@
 						<div class="col-lg-8">
 							<!-- Pie chart example-->
 							<div class="card mb-4">
-								<div class="card-header">예상 발전량</div>
+								<div class="card-header">금일 발전량 추이</div>
 								<div class="card-body">
 									<div id="chartPredictElec" class="chart-pie"></div>
 								</div>

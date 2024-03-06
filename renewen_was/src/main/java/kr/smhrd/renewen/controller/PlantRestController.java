@@ -28,7 +28,7 @@ public class PlantRestController {
 	PlantStatsService statsService;
 
 	@Autowired
-	CommonUtil commonUtil;
+	CommonUtil util;
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -64,10 +64,15 @@ public class PlantRestController {
 	}
 	
 	@GetMapping("/plant/gen_time/elec")
-	public ResponseEntity<Map<String, Double>> genTimeTotal(@RequestParam("plantNo") long plantNo) {
+	public ResponseEntity<Map<String, Map<String, Double>>> genTimeTotal(@RequestParam("plantNo") long plantNo) {
 		
-		Map<String, Double> response = new HashMap<>();
-		response = statsService.getHourElecPerCell(plantNo); // 시간대별 누적발전량
+		Map<String, Map<String, Double>> response = new HashMap<>();
+		Map<String, Double> genReal = statsService.getHourElecPerCell(plantNo); // 시간대별 실제발전량
+		
+		String checkDate = util.getCurrentDateTime("yyyyMMdd");
+		Map<String, Double> genPredict = statsService.getPredictPerHour(plantNo, checkDate); // 시간대별 예상발전량
+		response.put("genReal", genReal);
+		response.put("genPredict", genPredict);
 		
 		return ResponseEntity.ok().body(response);
 	}
