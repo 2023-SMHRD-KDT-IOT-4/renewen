@@ -114,7 +114,8 @@ public class APIController {
 	// 센싱데이터 및 발전셀
 	@PostMapping("/sensing")
 	public String sensing(@RequestBody String jsonData) {
-		logger.info("sensing {}", jsonData);
+		
+//		logger.info("sensing {}", jsonData);
 		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
 		String plantLinkKey = jsonObj.get("plantLinkKey").getAsString();
 		JsonArray sensingJsonArray = jsonObj.get("sensing").getAsJsonArray();
@@ -127,12 +128,17 @@ public class APIController {
 		}
 
 		// sensing 처리
-		Type sensingListType = new TypeToken<List<SensingDataVO>>(){}.getType();
-		List<SensingDataVO> list = new Gson().fromJson(sensingJsonArray, sensingListType);
-		logger.info("SensingDataVO List {}", list);
+		List<SensingDataVO> list = new Gson().fromJson(sensingJsonArray,
+				new TypeToken<List<SensingDataVO>>(){}.getType() );
 		
 		for (SensingDataVO sd : list) {
 			sd.setPlantNo(plantNo);
+			String cellSerialNum = sd.getCellSerialNum();
+			
+			if(cellSerialNum != null && !cellSerialNum.isEmpty()) {
+				long cellNo = plantService.getCellNoBySerialNum(cellSerialNum);
+				sd.setCellNo(cellNo);
+			}
 			plantService.insertSensingData(sd);
 		}
 
