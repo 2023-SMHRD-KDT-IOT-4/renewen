@@ -20,9 +20,9 @@
 		src="${contextPath}/assets/img/logo.png" alt="Logo"
 		style="height: 50px;"> Renewen
 	</a> --%>
-	<a class="navbar-brand pe-3 ps-4 ps-lg-2 d-flex align-items-center" href="${contextPath}/"> 
-    <img src="${contextPath}/assets/img/logo.png" alt="Logo"> 
-    <span class="ms-2">Renewen</span>
+	<!-- 로고 svg 삽입  -->
+	<a class="navbar-brand pe-3 ps-4 ps-lg-2" href="${contextPath}/">
+    <img src="${contextPath}/assets/img/logo3.svg" alt="Logo"> 
 </a>
 
 	<!-- 날씨 API -->

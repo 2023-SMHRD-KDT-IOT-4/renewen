@@ -19917,11 +19917,7 @@ body {
   margin: 0;
   font-weight: bold;
 }
-/* 로고이미지 사이즈 */
-.topnav .navbar-brand img {
-  height: 3.8rem;
-  vertical-align: middle;
-}
+
 @media (min-width: 992px) {
   .topnav .navbar-brand {
     width: 12rem;
@@ -21085,6 +21081,12 @@ pre[class*=language-] {
 .navermaps-iframe {
 	width: 200px;  
 	height: 150px;  
+}	
+
+/* 로고이미지 사이즈 */
+.topnav .navbar-brand img {
+  height: 2.8rem;
+  margin-right: 20px 
+  
 }
 
- 
