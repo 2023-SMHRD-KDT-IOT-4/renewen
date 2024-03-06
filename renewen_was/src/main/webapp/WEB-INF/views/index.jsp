@@ -63,63 +63,15 @@
 					<!-- <div class="container-xl px-4"> -->
 				</header>
 
-
 				<!-- 헤더 밑  Main page content-->
 				<div class="container-xl px-4 mt-5">
 					<div class="row">
 						<div class="col-lg-4 mb-4">
-							<!-- Illustration card example-->
-
-
-
-							<div class="card-body text-center p-5">
-								<div id="plantListMap" class="card mb-4"
-									style="width: 100%; height: 800px"></div>
-
-							</div>
-							<!-- Report summary card example-->
-							<div class="card mb-4">
-								<div class="card-header">Affiliate Reports</div>
-								<div class="list-group list-group-flush small">
-									<a class="list-group-item list-group-item-action" href="#!">
-										<i class="fas fa-dollar-sign fa-fw text-blue me-2"></i>
-										Earnings Reports
-									</a> <a class="list-group-item list-group-item-action" href="#!">
-										<i class="fas fa-tag fa-fw text-purple me-2"></i> Average Sale
-										Price
-									</a> <a class="list-group-item list-group-item-action" href="#!">
-										<i class="fas fa-mouse-pointer fa-fw text-green me-2"></i>
-										Engagement (Clicks &amp; Impressions)
-									</a> <a class="list-group-item list-group-item-action" href="#!">
-										<i class="fas fa-percentage fa-fw text-yellow me-2"></i>
-										Conversion Rate
-									</a> <a class="list-group-item list-group-item-action" href="#!">
-										<i class="fas fa-chart-pie fa-fw text-pink me-2"></i> Segments
-									</a>
-								</div>
-								<div class="card-footer position-relative border-top-0">
-									<a class="stretched-link" href="#!">
-										<div
-											class="text-xs d-flex align-items-center justify-content-between">
-											View More Reports <i class="fas fa-long-arrow-alt-right"></i>
-										</div>
-									</a>
-								</div>
-							</div>
-							<!-- Progress card example-->
-							<div class="card bg-primary border-0">
-								<div class="card-body">
-									<h5 class="text-white-50">Budget Overview</h5>
-									<div class="mb-4">
-										<span class="display-4 text-white">$48k</span> <span
-											class="text-white-50">per year</span>
-									</div>
-									<div class="progress bg-white-25 rounded-pill"
-										style="height: 0.5rem">
-										<div class="progress-bar bg-white w-75 rounded-pill"
-											role="progressbar" aria-valuenow="75" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
+							<!-- 지도 -->
+							<div class="card">
+								<div class="card-header">발전소 위치 정보</div>
+								<div id="mapCardBody" class="card-body p-0">
+									<div id="plantListMap" class="card mb-4" style="height: 720px;"></div>
 								</div>
 							</div>
 						</div>
@@ -144,14 +96,6 @@
 												<canvas id="myBarChart" width="100%" height="30"></canvas>
 											</div>
 										</div>
-										<div class="card-footer position-relative">
-											<a class="stretched-link" href="#!">
-												<div
-													class="text-xs d-flex align-items-center justify-content-between">
-													View More Reports <i class="fas fa-long-arrow-alt-right"></i>
-												</div>
-											</a>
-										</div>
 									</div>
 								</div>
 								<div class="col-lg-6">
@@ -162,38 +106,13 @@
 											<div class="chart-pie mb-4">
 												<canvas id="myPieChart" width="100%" height="50"></canvas>
 											</div>
-											<div class="list-group list-group-flush">
-												<div
-													class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
-													<div class="me-3">
-														<i class="fas fa-circle fa-sm me-1 text-blue"></i> Direct
-													</div>
-													<div class="fw-500 text-dark">55%</div>
-												</div>
-												<div
-													class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
-													<div class="me-3">
-														<i class="fas fa-circle fa-sm me-1 text-purple"></i>
-														Social
-													</div>
-													<div class="fw-500 text-dark">15%</div>
-												</div>
-												<div
-													class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2">
-													<div class="me-3">
-														<i class="fas fa-circle fa-sm me-1 text-green"></i>
-														Referral
-													</div>
-													<div class="fw-500 text-dark">30%</div>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-</div>
+				</div>
 
 
 			</main>
@@ -207,73 +126,73 @@
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l8y7kfobe4"></script>
 	<script>
-		var mapOptions = {
-			center : new naver.maps.LatLng(35.17294, 126.89156),
-			zoom : 15
-		};
+      var mapOptions = {
+         center : new naver.maps.LatLng(35.17294, 126.89156),
+         zoom : 15
+      };
 
-		var map = new naver.maps.Map('plantListMap', mapOptions);
-		//       var map = new naver.maps.Map('map', mapOptions);
+      var map = new naver.maps.Map('plantListMap', mapOptions);
+      // var map = new naver.maps.Map('map', mapOptions);
 
-		var markerPositions = [ {
-			position : new naver.maps.LatLng(35.17294, 126.89156),
-			name : "발전소 1",
-			content : "주소 1"
-		}, {
-			position : new naver.maps.LatLng(35.161828, 126.880026),
-			name : "발전소 2",
-			content : "주소 2"
-		}, {
-			position : new naver.maps.LatLng(35.1653428, 126.9092003),
-			name : "발전소 3",
-			content : "주소 3"
-		}, {
-			position : new naver.maps.LatLng(35.1682592, 126.8884114),
-			name : "발전소 4",
-			content : "주소 4"
-		}, {
-			position : new naver.maps.LatLng(35.173121, 126.893802),
-			name : "발전소 5",
-			content : "주소 5"
-		} ];
+      var markerPositions = [ {
+         position : new naver.maps.LatLng(35.17294, 126.89156),
+         name : "<발전소1>",
+         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.17294 / 126.89156<br>*연동키: testKey1"
+      }, {
+         position : new naver.maps.LatLng(35.161828, 126.880026),
+         name : "<발전소2>",
+         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.161828 / 126.880026<br>*연동키: testKey2"
+      }, {
+         position : new naver.maps.LatLng(35.1653428, 126.9092003),
+         name : "<발전소3>",
+         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.1653428 / 126.9092003<br>*연동키: testKey3"
+      }, {
+         position : new naver.maps.LatLng(35.1682592, 126.8884114),
+         name : "<발전소4>",
+         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.1682592 / 126.8884114<br>*연동키: testKey4"
+      }, {
+         position : new naver.maps.LatLng(35.173121, 126.893802),
+         name : "<발전소5>",
+         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.173121 / 126.893802<br>*연동키: testKey5"
+      } ];
 
-		// 변수를 선언하여 현재 열려 있는 정보창을 저장합니다.
-		var openedInfoWindow = null;
+      // 변수를 선언하여 현재 열려 있는 정보창을 저장합니다.
+      var openedInfoWindow = null;
 
-		for (var i = 0; i < markerPositions.length; i++) {
-			var marker = new naver.maps.Marker({
-				position : markerPositions[i].position,
-				map : map
-			});
+      for (var i = 0; i < markerPositions.length; i++) {
+         var marker = new naver.maps.Marker({
+            position : markerPositions[i].position,
+            map : map
+         });
 
-			// 클로저를 사용하여 정보 창에 대한 정보를 보존합니다.
-			(function(marker, contentString) {
-				naver.maps.Event.addListener(marker, 'click', function(e) {
-					// 마커를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
-					if (openedInfoWindow && openedInfoWindow.getMap()) {
-						openedInfoWindow.close();
-					}
-					// 현재 클릭된 마커에 정보창을 연다.
-					var infoWindow = new naver.maps.InfoWindow({
-						content : contentString
-					});
-					infoWindow.open(map, marker);
-					// 열린 정보창을 저장합니다.
-					openedInfoWindow = infoWindow;
-				});
-			})(marker, '<div style="padding:10px;"><h5>'
-					+ markerPositions[i].name + '</h5><p>'
-					+ markerPositions[i].content + '</p></div>');
-		}
+         // 클로저를 사용하여 정보 창에 대한 정보를 보존합니다.
+         (function(marker, contentString) {
+            naver.maps.Event.addListener(marker, 'click', function(e) {
+               // 마커를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
+               if (openedInfoWindow && openedInfoWindow.getMap()) {
+                  openedInfoWindow.close();
+               }
+               // 현재 클릭된 마커에 정보창을 연다.
+               var infoWindow = new naver.maps.InfoWindow({
+                  content : contentString
+               });
+               infoWindow.open(map, marker);
+               // 열린 정보창을 저장합니다.
+               openedInfoWindow = infoWindow;
+            });
+         })(marker, '<div style="padding:10px;"><h5>'
+               + markerPositions[i].name + '</h5><p>'
+               + markerPositions[i].content + '</p></div>');
+      }
 
-		// 지도를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
-		naver.maps.Event.addListener(map, 'click', function(e) {
-			if (openedInfoWindow) {
-				openedInfoWindow.close();
-				openedInfoWindow = null;
-			}
-		});
-	</script>
+      // 지도를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
+      naver.maps.Event.addListener(map, 'click', function(e) {
+         if (openedInfoWindow) {
+            openedInfoWindow.close();
+            openedInfoWindow = null;
+         }
+      });
+   </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
