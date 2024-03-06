@@ -6,21 +6,20 @@ $(document).ready(function() {
 	console.log('dashboard js');
 	const contextPath = $("#contextPath").val();
 	const genElecUrl = contextPath + '/plant/gen/elec';
+	const genTimeElecUrl = contextPath + '/plant/gen_time/elec';
 	const weatherUrl = contextPath + '/api/was/weather/list';
 	
 	let plantNo = $("#selectList").val(); // 선택 발전소 식별번호
 	let stnNo = "156";
- 	// 1. 금일 발전량 텍스트 출력	
-	fetchGenElec(genElecUrl, plantNo); 
 
-	// ['00:00', '01:00', '02:00', ..., '23:00']
-	let timeArray = seriesData1.map(data => data.time);
+ 	// 1. 금일 발전량 차트 출력	
+	fetchGenElec(genElecUrl, plantNo); 
 	
 	// 2. 금일 발전량 추이 차트 출력
-	printPredictChart("chartPredictElec", plantNo);
+	fetchPredict(genTimeElecUrl, plantNo);
 
 	// 3. 금일 기상 차트 출력
-	printWeatherChart(weatherUrl, stnNo, timeArray);
+	fetchWeather(weatherUrl, stnNo);
 	
 	
 	// ====================================================================
@@ -28,11 +27,21 @@ $(document).ready(function() {
 	 // 발전소 변경 시 
 	 $("#selectList").change(function() {
   	plantNo = $(this).val();
-  	// 발전소 발전량 fetch ==> 차트 출력
+  	
+  	// 1. 금일 발전량 차트 출력
    	fetchGenElec(genElecUrl, plantNo);
+ 		// 2. 금일 발전량 추이 차트 출력
+		fetchPredict(genTimeElecUrl, plantNo);
   });
   
 }); // document
+
+// ['00:00', '01:00', '02:00', ..., '23:00']
+var timeData = [];
+for (var i = 0; i < 24; i++) {
+  var hour = (i < 10 ? '0' : '') + i + ':00'; // 시간 형식을 00:00으로 맞춤
+  timeData.push(hour);
+}
 
 
 const fetchGenElec = (url, plantNo) => {
@@ -44,7 +53,7 @@ const fetchGenElec = (url, plantNo) => {
         plantNo: plantNo // 파라미터와 값을 지정
     },
     success: function(response) {
-        console.log('Received data:', response);
+        console.log('fetchGenElec data:', response);
         const {totalWatt, currentWatt} = response;
         const expectedWatt = totalWatt * 0.8;
         
@@ -62,9 +71,131 @@ const fetchGenElec = (url, plantNo) => {
 }// fetchGenElec
 
 
+const fetchPredict = (url, plantNo) => {
+	
+	$.ajax({
+    url: url,
+    type: 'GET',
+    data: {
+        plantNo: plantNo
+    },
+    success: function(response) {
+        console.log('fetchPredict data:', response);
+        const genRealData = response;
+        printPredictChart(genRealData)
+        
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+  	}
+	});
 
-// 기상 차트 출력
-const printWeatherChart = (url, stnNo = 156, timeArray) => {
+}
+
+
+const printPredictChart = (genRealData) => {
+    
+  let realList = [];
+  for(let i=0; i< timeData.length; i++) {
+		let time = timeData[i];
+		realList.push({ 'time' : time, 'value' : genRealData[time]  });
+	}
+	
+	// 차트 생성
+  const dom = document.getElementById('chartPredictElec');
+  const predictChart = echarts.init(dom, null, {
+    renderer: 'canvas',
+    useDirtyRect: false
+  });
+
+  // 예상발전량 데이터 생성
+  let lineData = [];
+  for (let i = 0; i < 24; i++) {
+    lineData.push(Math.floor(Math.random() * 100)); // 임의의 데이터 생성
+  }
+
+
+  // 차트 옵션 설정
+  let option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross'
+      }
+    },
+    grid: {
+      right: '20%'
+    },
+    toolbox: {
+      feature: {
+        dataView: { show: true, readOnly: false },
+        restore: { show: false },
+        saveAsImage: { show: true }
+      }
+    },
+    legend: {
+      data: ['예상 발전량', '실제 발전량']
+    },
+    xAxis: {
+      type: 'category',
+      data: timeData,
+      axisTick: {
+        alignWithLabel: true
+      },
+    },
+    yAxis: [{
+      type: 'value',
+      name: '예상 발전량(W)',
+      position: 'left',
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: '#5470C6' // 선 그래프 색상
+        }
+      }
+    }, {
+      type: 'value',
+      name: '실제 발전량(W)',
+      position: 'right',
+      show: true,
+      axisLine: {
+        lineStyle: {
+          color: '#008000' // 막대 그래프 색상
+        }
+      }
+    }],
+    series: [{
+      name: '예상 발전량',
+      type: 'line',
+      yAxisIndex: 0, 
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + 'W';
+        }
+      },         
+      data: lineData
+    }, {
+      name: '실제 발전량',
+      type: 'bar',
+      yAxisIndex: 1, 
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + 'W';
+        }
+      },         
+      data: realList.map(item => item.value)
+    }]
+  };
+
+  // 차트에 옵션 설정
+  predictChart.setOption(option);
+
+  
+   }
+
+
+// 3) 기상 데이터 
+const fetchWeather = (url, stnNo = 156) => {
 	
 	const findTypes = ['TA','SI','WS'];
 	$.ajax({
@@ -75,8 +206,8 @@ const printWeatherChart = (url, stnNo = 156, timeArray) => {
         type: findTypes.join(',')
     },
     success: function(response) {
-        console.log('Received data:', response);
-        drawWeatherChart(response, timeArray)
+        console.log('fetchWeather data:', response);
+        drawWeatherChart(response)
         
     },
     error: function(xhr, status, error) {
@@ -86,17 +217,18 @@ const printWeatherChart = (url, stnNo = 156, timeArray) => {
 
 }
 
-const drawWeatherChart = (dataObj = {}, timeArray = []) => {
-	
+// 3) 기상차트 그리기
+const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TA': [] }) => {
+
 	const dom = document.getElementById("chartWeather");
-  const myChart = echarts.init(dom, null, {
+  const weatherChart = echarts.init(dom, null, {
     renderer: 'canvas',
     useDirtyRect: false
   });
 
-	let siList = dataObj['SI'].map(item => item.weatherValue);
-	let wsList = dataObj['WS'].map(item => item.weatherValue);
-	let tempList = dataObj['TA'].map(item => item.weatherValue);
+  let siList = dataObj['SI'] ? dataObj['SI'].map(item => item.weatherValue) : [];
+  let wsList = dataObj['WS'] ? dataObj['WS'].map(item => item.weatherValue) : [];
+  let tempList = dataObj['TA'] ? dataObj['TA'].map(item => item.weatherValue) : [];
   let option;
 
   const colors = ['#5470C6', '#91CC75', '#EE6666'];
@@ -127,7 +259,7 @@ const drawWeatherChart = (dataObj = {}, timeArray = []) => {
         axisTick: {
           alignWithLabel: true
         },
-        data: timeArray
+        data: timeData
       }
     ],
     yAxis: [
@@ -144,7 +276,7 @@ const drawWeatherChart = (dataObj = {}, timeArray = []) => {
           }
         },
         axisLabel: {
-          formatter: '{value}MJ/m2'
+          formatter: '{value}(MJ/m2)'
         }
       },
       {
@@ -183,113 +315,49 @@ const drawWeatherChart = (dataObj = {}, timeArray = []) => {
       {
         name: '일사량', // SI
         type: 'bar',
-        data: siList
+        data: siList,
+        tooltip: {
+        	valueFormatter: function (value) {
+	          return value + '(MJ/m2)';
+        	}
+        },        
       },
       {
         name: '풍속', // WS
         type: 'bar',
         yAxisIndex: 1,
-        data: wsList
+        tooltip: {
+        	valueFormatter: function (value) {
+	          return value + '(m/s)';
+        	}
+        },
+        data: wsList,
+        
+        
       },
       {
         name: '기온', // TA
         type: 'line',
         yAxisIndex: 2,
+        tooltip: {
+        	valueFormatter: function (value) {
+	          return value + '°C';
+        	}
+        },        
         data: tempList
       }
     ]
   };
 
   if (option && typeof option === 'object') {
-    myChart.setOption(option);
+    weatherChart.setOption(option);
   }
 
-  window.addEventListener('resize', myChart.resize);
-}
-
-// 발전량 추이 차트
-const printPredictChart = (divId, plantNo = 0) => {
-	const chart = echarts.init(document.getElementById(divId)); // 차트 생성
-	
-	seriesData2.forEach(item => {
-    // 현재 시간과 비교하여 현재 시간 이후인 경우 value에 null 할당
-    if (item.time > getCurrentTime()) {
-        item.value = null;
-    } else {
-	    item.value -= 50; // 이전에 주석 처리한 코드
-		}
-    
-	});
-	
-	
-	let options = { // 차트 옵션 설정
-      title: {
-          text: '발전량 추이 차트'
-      },
-      tooltip: {
-          trigger: 'axis'
-      },
-      legend: {
-          data: ['Series 1', 'Series 2']
-      },
-	    xAxis: {
-	        type: 'category', // x축은 카테고리형(시간대)
-	        boundaryGap: false,
-	        data: seriesData1.map(item => item.time) // 시간대 데이터
-	    },
-	    yAxis: {
-	        type: 'value' // y축은 값 형식
-	    },
-	    series: [
-				{
-					name: '예상발전량',
-	        type: 'line',
-	        data: seriesData1.map(item => item.value), 
-	    	},
-        {
-            name: '실제발전량',
-            type: 'line',
-            data: seriesData2.map(item => item.value)
-        }
-	    
-	    ]
-	};
-	
-	chart.setOption(options);
-	 
-} // printPredictchart
-
-let seriesData1 = [
-    { time: '00:00', value: 100 },
-    { time: '01:00', value: 120 },
-    { time: '02:00', value: 140 },
-    { time: '03:00', value: 110 },
-    { time: '04:00', value: 130 },
-    { time: '05:00', value: 150 },
-    { time: '06:00', value: 160 },
-    { time: '07:00', value: 180 },
-    { time: '08:00', value: 200 },
-    { time: '09:00', value: 190 },
-    { time: '10:00', value: 210 },
-    { time: '11:00', value: 220 },
-    { time: '12:00', value: 230 },
-    { time: '13:00', value: 240 },
-    { time: '14:00', value: 250 },
-    { time: '15:00', value: 260 },
-    { time: '16:00', value: 270 },
-    { time: '17:00', value: 280 },
-    { time: '18:00', value: 290 },
-    { time: '19:00', value: 300 },
-    { time: '20:00', value: 310 },
-    { time: '21:00', value: 320 },
-    { time: '22:00', value: 330 },
-    { time: '23:00', value: 340 }
-];
-
-let seriesData2 = seriesData1.map(obj => Object.assign({}, obj));
+  window.addEventListener('resize', weatherChart.resize);
+} // drawWeatherChart
 
 
-function getCurrentTime() {
+const getCurrentTime =() => {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
