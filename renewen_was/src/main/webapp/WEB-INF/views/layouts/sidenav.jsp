@@ -19,15 +19,13 @@
                             마스터 관리자
                             <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
+                        <!-- 사이드 내비 발전소 승인목록 수정: 현정 -->
                         <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                             <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                <a class="nav-link" href="#대기목록">
-                                    일반 관리자 <br>
-                                    승인 대기 목록
-                                    <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
-                                </a>
-                                <a class="nav-link" href="dashboard-2.html">일반 관리자 정보 수정</a>
-                                <a class="nav-link" href="dashboard-3.html">Affiliate</a>
+                                <a class="nav-link" href="${contextPath}/plantAuth">
+                                    발전소 승인 목록</a>
+                              <!--   <a class="nav-link" href="dashboard-2.html">일반 관리자 정보 수정</a>
+                                <a class="nav-link" href="dashboard-3.html">Affiliate</a> -->
                             </nav>
                         </div>
                         

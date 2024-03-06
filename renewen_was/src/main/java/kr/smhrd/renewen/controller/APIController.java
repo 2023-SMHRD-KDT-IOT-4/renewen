@@ -3,14 +3,19 @@ package kr.smhrd.renewen.controller;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -23,6 +28,7 @@ import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.SensingDataVO;
 import kr.smhrd.renewen.model.api.ShotImg;
+import kr.smhrd.renewen.model.api.WeatherListVO;
 import kr.smhrd.renewen.service.APIService;
 import kr.smhrd.renewen.service.PlantService;
 
@@ -35,7 +41,7 @@ public class APIController {
 	PlantService plantService;
 
 	@Autowired
-	APIService arduAPIService;
+	APIService apiService;
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -53,7 +59,7 @@ public class APIController {
 		// 1) 이미지 업로드 처리. db 저장할 vo 리턴
 		CloudShotImgVO shotImgVO = CloudShotImgVO.builder().build();
 		try {
-			shotImgVO = arduAPIService.processShotImg(plantNo, reqVO);
+			shotImgVO = apiService.processShotImg(plantNo, reqVO);
 		} catch (IOException e) {
 			logger.error("cloudImg upload fail");
 			return "fail";
@@ -79,7 +85,7 @@ public class APIController {
 		// 1) 이미지 업로드 처리. db 저장할 List<VO> 리턴
 		List<CellShotImgVO> cellImgList = new ArrayList<>();
 		try {
-			 cellImgList = arduAPIService.processCellShotImgs(cellsJsonArray);
+			 cellImgList = apiService.processCellShotImgs(cellsJsonArray);
 			 if(cellImgList == null) {
 				 return "Not Exists";
 			 }
@@ -127,9 +133,27 @@ public class APIController {
 		}
 
 		// 발전셀 처리
-		arduAPIService.processGenerateCell(cellsJsonArray, plantNo);
+		apiService.processGenerateCell(cellsJsonArray, plantNo);
 		
 		return "suc";
+	}
+	
+	@GetMapping("/weather/list")
+	public ResponseEntity<Map<String, List>> getWeatherList
+							(@RequestParam("stnNo") String stnNo,
+							 @RequestParam("type") String type) {
+		Map<String, List> response = new HashMap<>();
+		String[] types = type.split(",");
+		
+		for(String tp: types) {
+			Map<String, String> paramMap = new HashMap<>();
+			paramMap.put("stnNo", stnNo);
+			paramMap.put("type", tp);
+			List<WeatherListVO> result =  apiService.getWeatherList(paramMap);
+			response.put(tp, result);
+		}
+		
+		return ResponseEntity.ok().body(response);
 	}
 
 }

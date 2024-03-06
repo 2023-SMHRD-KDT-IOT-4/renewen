@@ -26,6 +26,7 @@ import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.api.ShotImg;
+import kr.smhrd.renewen.model.api.WeatherListVO;
 
 @Service
 public class APIService {
@@ -112,7 +113,7 @@ public class APIService {
 	
 	public String uploadImg(String imgOriginName, String imgExt, byte[] decodedImg) throws IOException {
 		
-		String imgUploadName = commonUtil.getCurrentDateTime() + "_" + imgOriginName; // 20240227_imgOriginName
+		String imgUploadName = commonUtil.getCurrentDateTime("yyyyMMddHHmmss") + "_" + imgOriginName; // 20240227_imgOriginName
 		String realUploadDir = commonUtil.getUploadImgPath();
 		File uploadFolder = new File(realUploadDir);
 		
@@ -165,5 +166,13 @@ public class APIService {
 	public int insertWeatherFactor(Map<String, Object> map) {
 		return apiMapper.insertWeatherFactor(map);
 	}
+	
+	public List<WeatherListVO> getWeatherList(Map<String, String> map) {
+		return apiMapper.getWeatherList(map);
+	}
 
+	public boolean isInserted(String dateTime) {
+		int result = apiMapper.checkInsert(dateTime);
+		return result > 0 ? true : false;
+	}
 }
