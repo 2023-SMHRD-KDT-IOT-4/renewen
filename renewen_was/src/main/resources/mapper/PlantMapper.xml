@@ -128,6 +128,10 @@
     	(#{plantNo}, #{cloudImgDesc}, #{cloudImgName}, #{cloudImgRealname},
     	 #{cloudImgSize}, #{cloudImgExt}, #{createdAt})
 	</insert>
+	
+	<select id="getCloudImgsByPlantNoAndDate" resultType="CloudShotImgVO" parameterType="CloudShotImgVO">
+		SELECT * FROM cloud_shot_img WHERE plant_no=#{plantNo} AND DATE(created_at)=#{selectedDate}
+	</select>
 
 	<!-- ================================================================================ -->
 

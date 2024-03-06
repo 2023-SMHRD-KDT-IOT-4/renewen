@@ -32,7 +32,10 @@ import kr.smhrd.renewen.model.api.WeatherListVO;
 import kr.smhrd.renewen.service.APIService;
 import kr.smhrd.renewen.service.PlantService;
 
-// 아두이노(ESP32, 라즈베리파이)로 부터 센싱데이터 및 이미지 ==> DB 저장  
+/**
+ * 1) 아두이노(ESP32, 라즈베리파이)로 부터 센싱데이터 및 이미지 ==> DB 저장  
+ * 2) 기상 데이터 조회
+ */
 @RestController
 @RequestMapping("/api/was")
 public class APIController {
@@ -111,7 +114,7 @@ public class APIController {
 	// 센싱데이터 및 발전셀
 	@PostMapping("/sensing")
 	public String sensing(@RequestBody String jsonData) {
-
+		logger.info("sensing {}", jsonData);
 		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
 		String plantLinkKey = jsonObj.get("plantLinkKey").getAsString();
 		JsonArray sensingJsonArray = jsonObj.get("sensing").getAsJsonArray();
@@ -126,6 +129,7 @@ public class APIController {
 		// sensing 처리
 		Type sensingListType = new TypeToken<List<SensingDataVO>>(){}.getType();
 		List<SensingDataVO> list = new Gson().fromJson(sensingJsonArray, sensingListType);
+		logger.info("SensingDataVO List {}", list);
 		
 		for (SensingDataVO sd : list) {
 			sd.setPlantNo(plantNo);
@@ -133,6 +137,7 @@ public class APIController {
 		}
 
 		// 발전셀 처리
+		logger.info("cellsJsonArray {}", cellsJsonArray);
 		apiService.processGenerateCell(cellsJsonArray, plantNo);
 		
 		return "suc";

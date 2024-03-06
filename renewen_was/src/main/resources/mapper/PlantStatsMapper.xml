@@ -7,7 +7,8 @@
 	<select id="getTotalElecPerCell" resultType="CellGeneratedElecVO">
 		SELECT A.cell_no, 
 			A.gen_voltage,
-			A.gen_elec_current
+			A.gen_elec_current,
+			A.created_at
 		FROM 
 			cell_generated_elec AS A
 		JOIN 
@@ -32,5 +33,18 @@
 		WHERE GC.plant_no = #{plantNo}
 			AND DATE(A.created_at) = CURDATE()
 	</select>
+	
+	<select id="getHourElecPerCell">
+		SELECT cell_no, gen_voltage, gen_elec_current, created_at
+		FROM cell_generated_elec
+		WHERE 
+			DATE_FORMAT(created_at, '%Y%m%d %H') = #{dateHour} <!-- '20240304 18' -->
+	    AND use_yn = 'Y'
+	    AND cell_no IN 
+	     <foreach item="item" collection="cellNos" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</select>
+	
 	
 </mapper>

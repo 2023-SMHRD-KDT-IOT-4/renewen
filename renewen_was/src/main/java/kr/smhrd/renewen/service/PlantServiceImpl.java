@@ -64,6 +64,10 @@ public class PlantServiceImpl implements PlantService {
 	public List<CloudShotImgVO> getCloudImgsByPlantNo(long plantNo) {
 		return plantMapper.getCloudImgsByPlantNo(plantNo);
 	}
+	
+	public List<CloudShotImgVO> getCloudImgsByPlantNoAndDate(CloudShotImgVO cloud){
+		return plantMapper.getCloudImgsByPlantNoAndDate(cloud);
+	}
 
 	@Override
 	public long getPlantNoByLinkKey(String plantLinkKey) {
