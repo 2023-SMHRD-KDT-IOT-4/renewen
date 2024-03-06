@@ -103,27 +103,5 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="${contextPath}/js/address.js"></script>
 
-  
-	
-		<!-- 겨레 추가 -->
-<!-- 	<script type="text/javascript">
-	function getAddressCoordinates(address) {
-	    var geocoder = new daum.maps.services.Geocoder();
-	    geocoder.addressSearch(address, function(result, status) {
-	        if (status == daum.maps.services.Status.OK) {
-	            var latitude = result[0].y;
-	            var longitude = result[0].x;
-	            
-	            // 위도와 경도 값을 hidden input에 설정
-	            document.getElementById("latitude").value = latitude;
-	            document.getElementById("longitude").value = longitude;
-	        } else {
-	            console.error("주소를 찾을 수 없습니다.");
-	        }
-	    });
-	}
-	</script> -->
-
-
 </body>
 </html>

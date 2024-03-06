@@ -54,7 +54,7 @@
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="card mb-4" id="plantList">
-								<div class="card-header">${user.userId}회원님의발전소리스트</div>
+								<div class="card-header">${user.userId}회원님의 발전소 리스트</div>
 								<div class="card-body">
 									<table class="table table-hover">
 										<thead>

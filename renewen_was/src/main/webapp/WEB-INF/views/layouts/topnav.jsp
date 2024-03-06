@@ -17,8 +17,11 @@
         </a>
 
 		<!-- 날씨 API -->      
-        <body>
-	         <div class="weather-info">
+        <!-- <body> -->
+
+	          <c:if test="${not empty user }">
+	          
+	          	         <div class="weather-info">
 	              <img id="icon" class="icon" style="width: 50px; height: 50px;">
 	          </div>
 	         <div>
@@ -29,27 +32,11 @@
 	              <span id="temperature" class="temperature"></span>
 	              
 	          </div>
-	          <script src="${contextPath}/js/weather.js"></script>
-	         <style>
-	            .link {
-	               cursor: pointer;
-	            }
-	            
-	            .weather-info {
-	               display: flex;
-	               flex-direction: row;
-	            }
-	            
-	            .weather-info div {
-	               margin-right: 70px;
-	            }
-	            
-	            .weather-info dt {
-	               font-weight: bold;
-	               margin-bottom: 2px;
-	            }
-	         </style>
-      	</body>
+	          
+	          	<script src="${contextPath}/js/weather.js"></script>
+	          </c:if>
+	       
+      <!-- 	</body> -->
         <!-- Navbar Items-->
         <ul class="navbar-nav align-items-center ms-auto">
         

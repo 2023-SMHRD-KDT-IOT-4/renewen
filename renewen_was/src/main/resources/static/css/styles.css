@@ -21066,3 +21066,21 @@ pre[class*=language-] {
     font-size: 14px; /* 폰트 크기 조절 */
 }
 
+/*  */
+.link {
+   cursor: pointer;
+}
+
+.weather-info {
+   display: flex;
+   flex-direction: row;
+}
+
+.weather-info div {
+   margin-right: 70px;
+}
+
+.weather-info dt {
+   font-weight: bold;
+   margin-bottom: 2px;
+}
