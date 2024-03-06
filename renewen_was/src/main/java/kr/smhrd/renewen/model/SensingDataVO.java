@@ -23,6 +23,9 @@ public class SensingDataVO {
     private String useYn;
     // 측정 시간 
 	private String createdAt;
+	
+	private long cellNo;
+	private String cellSerialNum;
 
 }
 		

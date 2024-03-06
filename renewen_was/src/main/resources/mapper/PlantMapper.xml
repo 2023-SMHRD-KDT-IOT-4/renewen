@@ -65,11 +65,23 @@
 	
 	<!-- 센싱데이터 -->
 	<insert id="insertSensingData" parameterType="SensingDataVO">
-		INSERT INTO plant_sensing_data
-	    (plant_no, sensor_id, sensor_serial_num, measure_value, measure_desc, created_at)
-	VALUES
-	    (#{plantNo}, #{sensorId}, #{sensorSerialNum}, 
-	     #{measureValue},#{measureDesc}, #{createdAt})
+		<choose>
+			<when test="cellSerialNum != null">
+				INSERT INTO plant_sensing_data
+			    (plant_no, sensor_id, sensor_serial_num, measure_value, measure_desc, created_at, cell_no)
+				VALUES
+				    (#{plantNo}, #{sensorId}, #{sensorSerialNum}, 
+				     #{measureValue},#{measureDesc}, #{createdAt}, #{cellNo})			
+			</when>
+			<otherwise>
+				INSERT INTO plant_sensing_data
+			    (plant_no, sensor_id, sensor_serial_num, measure_value, measure_desc, created_at)
+				VALUES
+				    (#{plantNo}, #{sensorId}, #{sensorSerialNum}, 
+				     #{measureValue},#{measureDesc}, #{createdAt})			
+			</otherwise>
+		</choose>
+
 	</insert>
 	
 	<resultMap id="sensingResult" type="SensingDataVO">
