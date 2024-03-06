@@ -39,6 +39,8 @@ public interface PlantMapper {
 	public List<CloudShotImgVO> getCloudImgsByPlantNo(long plantNo);
 	public int insertCloudShotImg(CloudShotImgVO vo);
 	
+	public List<CloudShotImgVO> getCloudImgsByPlantNoAndDate(CloudShotImgVO cloud);
+	
 	// =================================================================
 	
 	// 발전셀

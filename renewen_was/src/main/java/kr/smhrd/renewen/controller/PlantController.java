@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
@@ -192,6 +193,21 @@ public class PlantController {
 		model.addAttribute("imgList", imgList);
 		
 		return "views/plant/cloud_imgs";
+	}
+	
+	
+	@PostMapping("/plant/cloudImgs")
+	@ResponseBody
+	public List<CloudShotImgVO> cloudImgs(@RequestParam("selectedPlant") int selectedPlant, @RequestParam("selectedDate") String selectedDate,Model model) {
+		//System.out.println("선택된 발전소 "+ selectedPlant);
+		//System.out.println("선택된 날짜 "+ selectedDate);
+		CloudShotImgVO cloud = new CloudShotImgVO();
+		cloud.setPlantNo(selectedPlant);
+		cloud.setSelectedDate(selectedDate);
+	
+		List<CloudShotImgVO> cloudImgList = plantService.getCloudImgsByPlantNoAndDate(cloud);
+		
+		return cloudImgList;
 	}
 	
 	// 발전소 셀 페이지

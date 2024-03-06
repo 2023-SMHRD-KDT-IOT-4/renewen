@@ -35,7 +35,10 @@ public interface PlantService {
 	
 	// 구름형상 이미지
 	public List<CloudShotImgVO> getCloudImgsByPlantNo(long plantNo);
+	
 	public int insertCloudShotImg(CloudShotImgVO vo);
+	
+	public List<CloudShotImgVO> getCloudImgsByPlantNoAndDate(CloudShotImgVO cloud);
 	
 	// =================================================================
 	
