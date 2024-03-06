@@ -16,10 +16,14 @@
 	</button>
 	<!-- Navbar Brand-->
 
-	<a class="navbar-brand pe-3 ps-4 ps-lg-2" href="${contextPath}/"> <img
+	<%-- <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="${contextPath}/"> <img
 		src="${contextPath}/assets/img/logo.png" alt="Logo"
 		style="height: 50px;"> Renewen
-	</a>
+	</a> --%>
+	<a class="navbar-brand pe-3 ps-4 ps-lg-2 d-flex align-items-center" href="${contextPath}/"> 
+    <img src="${contextPath}/assets/img/logo.png" alt="Logo"> 
+    <span class="ms-2">Renewen</span>
+</a>
 
 	<!-- 날씨 API -->
 	<!-- <body> -->
@@ -124,7 +128,7 @@
 									<div class="dropdown-notifications-item-content-text">비정상적
 										접근 감지!</div>
 								</div>
-							</a> <a class="dropdown-item dropdown-notifications-footer" href="${contextPath}/user/user_log">모든
+							</a> <a class="dropdown-item dropdown-notifications-footer" href="${contextPath}/user/log">모든
 								알림 확인</a>
 						</div>
 				</li>

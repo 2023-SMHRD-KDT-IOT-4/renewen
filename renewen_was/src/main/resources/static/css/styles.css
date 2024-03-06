@@ -5782,13 +5782,19 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
 }
-.navbar-brand {
+/* .navbar-brand {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
   white-space: nowrap;
+} */
+/* 로고 내비바브랜드 정렬 */
+.navbar-brand {
+    display: flex;
+    align-items: center;
 }
+
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
 }
@@ -19703,12 +19709,15 @@ body {
     overflow-y: auto;
   }
 }
+/* 알림창 색 변경 */
 .dropdown-notifications .dropdown-menu .dropdown-notifications-header {
-  background-color: #0061f2;
+  background-color:rgb(249,209,67);
   color: #fff !important;
   padding-top: 1rem;
   padding-bottom: 1rem;
   line-height: 1;
+  /* 사이즈 변경 */
+  font-size: 1rem; /
 }
 .dropdown-notifications .dropdown-menu .dropdown-notifications-header svg {
   height: 0.7rem;
@@ -19906,11 +19915,12 @@ body {
 .topnav .navbar-brand {
   width: 15rem;
   margin: 0;
-  font-size: 1rem;
   font-weight: bold;
 }
+/* 로고이미지 사이즈 */
 .topnav .navbar-brand img {
-  height: 0.8rem;
+  height: 3.8rem;
+  vertical-align: middle;
 }
 @media (min-width: 992px) {
   .topnav .navbar-brand {
