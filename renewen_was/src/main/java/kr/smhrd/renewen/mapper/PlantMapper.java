@@ -26,6 +26,9 @@ public interface PlantMapper {
 	
 	public int updateUseYn(long cellNo);
 	
+	public List<PowerPlantVO> getNotGrantPlants();
+	public int grantPlant(PowerPlantVO vo);
+	
 	// =================================================================	
 	
 	// 센싱데이터 

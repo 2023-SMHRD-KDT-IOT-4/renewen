@@ -65,6 +65,9 @@
 							<div class="card mb-4" id="plantList">
 								<div class="card-header">${user.userId}님의 승인을 기다리고 있어요</div>
 								<div class="card-body">
+									<form id="authForm" action="${contextPath}/plantAuth" method="post">
+										<input type="hidden" id="plantNo" name="plantNo" value="" />
+										<input type="hidden" id="plantLinkKey" name="plantLinkKey" value="" />
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -89,19 +92,20 @@
 													<td>${vo.plantName}</td>
 													<td>${vo.plantAddr}${vo.plantAddr2}</td>
 													<td class="">
-														<!-- 각 행에 연동키를 입력하는 입력란 추가 --> <input type="text"
-														name="linkKeyContent" id="linkKeyContent-${vo.plantNo}"
-														placeholder="연동키를 입력하세요" class="form-control">
+														<!-- 각 행에 연동키를 입력하는 입력란 추가 --> 
+														<input type="text" name="linkKeyContent" id="linkKeyContent-${vo.plantNo}" placeholder="연동키를 입력하세요" class="form-control">
 													</td>
 													<td class="">
 														<!-- 각 행에 승인 버튼 추가 -->
-														<button class="btn btn-success btn-large"
-															onclick="confirmApproval('${vo.plantNo}')">승인</button>
+														<button type="button" class="btn btn-success btn-large grantBtn">승인</button>
+<%-- 														<button type="button" class="btn btn-success btn-large"
+															onclick="confirmApproval('${vo.plantNo}')">승인</button> --%>
 													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
+									</form>
 								</div>
 							</div>
 							<!-- end card-plantList -->
@@ -122,8 +126,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-danger"
 												data-bs-dismiss="modal">취소</button>
-											<button id="confirmApprovalBtn" type="button"
-												class="btn btn-success" onclick="confirmApproval()">승인</button>
+											<button id="confirmApprovalBtn" type="button"	class="btn btn-success" onclick="confirmApproval()">승인</button>
 										</div>
 									</div>
 								</div>
@@ -149,23 +152,34 @@
 	<!-- 추가 현정 -->
 	<%-- <script src="${contextPath}/js/checkbox.js"></script> --%>
 	<script>
-		/* 각 행의 승인 처리 */
-		function confirmApproval(plantNo) {
-			// 해당 발전소의 연동키 입력란 가져오기
-			var linkKeyInput = document.getElementById('linkKeyContent-'
-					+ plantNo);
-			var linkKeyValue = linkKeyInput.value.trim();
+	
+		$(document).ready(function() {
+		    // 승인 버튼 클릭 이벤트 처리
+		    $('.grantBtn').click(function() {
+		        
+		    	// 현재 행에서 연동키 입력란의 값을 가져옴
+		        const clickRow = $(this).closest('tr').find('input[name="linkKeyContent"]');
+		        let linkKey = clickRow.val();
+		        let plantLinkKey = linkKey.trim();
+						
+		        if (plantLinkKey === '') { // 연동키가 비어 있는지 확인
+							alert('연동키를 입력해주세요.');
+							return;
+						}
+		        let plantNo = clickRow.attr('id');
+		        plantNo = plantNo.split('-')[1];
+		        
+		        postForm(plantNo, plantLinkKey);
+		    });
+		    
+		});
 
-			// 연동키가 비어 있는지 확인
-			if (linkKeyValue === '') {
-				alert('연동키를 입력해주세요.');
-				return;
-			}
-
-			// 연동키가 입력된 경우 승인 완료 메시지 표시
-			alert('발전소가 성공적으로 승인되었습니다.');
-
-		}
+		function postForm(plantNo, plantLinkKey) {
+				
+	 		$("#plantNo").val(plantNo);
+      $("#plantLinkKey").val(plantLinkKey);
+      $("#authForm").submit(); // 폼 전송
+		} 
 	</script>
 
 

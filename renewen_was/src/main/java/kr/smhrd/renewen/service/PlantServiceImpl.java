@@ -134,4 +134,16 @@ public class PlantServiceImpl implements PlantService {
 		return plantMapper.insertGeneratedElec(vo);
 	}
 
+
+	@Override
+	public List<PowerPlantVO> getNotGrantPlants() {
+		return plantMapper.getNotGrantPlants();
+	}
+
+
+	@Override
+	public int grantPlant(PowerPlantVO vo) {
+		return plantMapper.grantPlant(vo);
+	}
+
 }
