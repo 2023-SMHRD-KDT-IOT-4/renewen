@@ -158,4 +158,9 @@ public class PlantServiceImpl implements PlantService {
 	}
 
 
+	@Override
+	public List<PowerPlantVO> getGrantPlants() {
+		return plantMapper.getGrantPlants();
+	}
+
 }

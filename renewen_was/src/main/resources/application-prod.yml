@@ -36,6 +36,7 @@ mybatis:
 upload:
   path: /home/renewen/upload
   img: /imgs
-
-    
-    
+url:
+  flask: http://renewen.kr:8083/
+api:
+  hub-key: CXKwvqlxTqCysL6pcS6glQ     

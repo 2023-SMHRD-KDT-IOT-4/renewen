@@ -25,6 +25,7 @@ public interface PlantService {
 	public int updateUseYn(long cellNo);
 	
 	public List<PowerPlantVO> getNotGrantPlants();
+	public List<PowerPlantVO> getGrantPlants();
 	public int grantPlant(PowerPlantVO vo);
 	
 	// =================================================================	
