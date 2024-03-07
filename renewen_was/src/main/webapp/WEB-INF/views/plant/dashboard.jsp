@@ -57,7 +57,7 @@
 											<div class="page-header-icon">
 												<i data-feather="zap"></i>
 											</div>
-											금일 발전 형황
+											금일 발전 현황
 										</h1>
 									</div>
 

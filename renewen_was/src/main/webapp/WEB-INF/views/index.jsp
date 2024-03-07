@@ -82,13 +82,13 @@
 						<div class="col-lg-8 mb-4">
 							<!-- Area chart example-->
 							<div class="card mb-4">
-								<div class="card-header">Revenue Summary</div>
-								<div class="card-body">
+								<div class="card-header">금일 발전량 추이</div>
+							 <div class="card-body">
 									<div class="chart-area">
 										<canvas id="myAreaChart" width="100%" height="30"></canvas>
 									</div>
 								</div>
-							</div>
+							</div>  	
 							<div class="row">
 								<div class="col-lg-6">
 									<!-- Bar chart example-->
