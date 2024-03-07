@@ -63,6 +63,11 @@
 		WHERE grant_yn = 'N' or plant_link_key = null
 		ORDER BY created_at
 	</select>
+
+	<select id="getGrantPlants" resultType="PowerPlantVO">
+		SELECT * FROM power_plant
+		WHERE grant_yn = 'Y' or plant_link_key != null
+	</select>
 	
 	<update id="grantPlant" parameterType="PowerPlantVO">
 		UPDATE power_plant 

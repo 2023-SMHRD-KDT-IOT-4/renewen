@@ -33,5 +33,15 @@
     "name": "spring.kakao.redirect-uri",
     "type": "java.lang.String",
     "description": "A description for 'spring.kakao.redirect-uri'"
+  },
+  {
+    "name": "url.flask",
+    "type": "java.lang.String",
+    "description": "A description for 'url.flask'"
+  },
+  {
+    "name": "api.hub-key",
+    "type": "java.lang.String",
+    "description": "A description for 'api.hub-key'"
   }
 ]}
