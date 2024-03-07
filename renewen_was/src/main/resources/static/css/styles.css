@@ -6287,6 +6287,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1.35rem 1.35rem;
+
 }
 
 .card-title {
@@ -21090,3 +21091,28 @@ pre[class*=language-] {
   
 }
 
+/* 셀이미지 카드 사이즈 */
+.card2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(33, 40, 50, 0.125);
+  border-radius: 0.35rem;
+   margin: 10px
+}
+.card-body2 {
+ flex: 1 1 auto;
+  padding: 1.35rem 1.35rem;
+}
+
+.col2 {
+    margin-bottom: 10px; /* 원하는 간격 값을 설정하세요 */
+}
+.custom-col {
+    margin-bottom: 10px;
+	
+}
