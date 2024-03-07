@@ -9324,6 +9324,7 @@ textarea.form-control-lg {
 
 .d-flex {
   display: flex !important;
+ flex-direction: column;
 }
 
 .d-inline-flex {

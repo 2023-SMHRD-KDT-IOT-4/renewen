@@ -81,19 +81,22 @@
 												class="form-control ps-0 pointer" id="litepickerSingleDate"
 												placeholder="날짜 선택">
 										</div>
+										<!-- 셀 선택 -->
+										<select class="form-control" id="cellSelect">
+											<option></option>
+										</select>
 										<button class="btn btn-warning" style="width: 15rem;">조회하기</button>
 									</div>
+									
+									
 									<div>
-							<!-- 		<br> <select class="form-control" id="cellSelect">
-							 -->
+										<h4 class="mb-0 mt-5">Cells</h4>
+										<hr class="mt-2 mb-4">
+										<div id="cellDiv" class="mt-3"></div>
+										<!-- 이미지 출력 부분 -->
 
-						<h4 class="mb-0 mt-5">Cells</h4>
-						<hr class="mt-2 mb-4">
-						<div id="cellDiv" class="mt-3"></div>
-						<!-- 이미지 출력 부분 -->
-
-					</div>
-					<!-- End cardDiv  -->
+									</div>
+									<!-- End cardDiv  -->
 			</main>
 
 			<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
