@@ -128,65 +128,97 @@
 
 					<!-- row2 -->
 					<div class="row" id="dashDiv2">
-						<!-- 셀 상태 -->
 						<div class="col-lg-4">
 							<div class="card mb-4">
 								<div class="card-header">셀 상태</div>
 								<div class="card-body">
-									<!-- 1)아이콘(상태별 색상) 2)상태 텍스트로	출력 3) 셀 표면 온도 수정 -->
-									<!--  <i class="fa-solid fa-square" style="font-size: 40px; color: green;"></i>
-									  <i class="fa-solid fa-square" style="font-size: 40px; color: red;"></i>
-									   <i class="fa-solid fa-square" style="font-size: 40px; color: red;"></i> -->
+									<!-- 셀 상태에 따라 색 달라지게 하는 jsp -->
+									<%
+									String cell1Status = "good"; // 첫 번째 셀의 상태 설정
+									String cell2Status = "warning"; // 두 번째 셀의 상태 설정
 
-									<!-- 카드에 아이콘, 상태 텍스트 출력 -->
-									<div>
-										<div>
-											
-									<!-- 이거 삭제하지않기 옆 카드 오류 남-->
-										</div>
-										<div class="row">
-										 <div class="col">
-											<div class="card2">
-												<div class="card-body2 d-flex align-items-center">
-												   <!-- 아이콘과 라벨을 감싸는 div 요소 -->
-                <div class="mr-2">
-																			<!-- 첫 번째 아이콘 -->
-											 <i id="status1" class="fa-solid fa-square" style="font-size: 40px; color: green;"></i>
-											  </div> 
-														 <!-- 상태 텍스트라벨 -->
-														<label for="status1"class="ms-2 mb-0"> 좋음 </label>
-												</div>
-											</div>
-										</div>
-										  </div>
- 
-										<!-- 두 번째 아이콘 -->
-										<div class="col">
-											<div class="card2">
-												<div class="card-body2">
-													<!-- 두 번째 아이콘 -->
-													<i class="fa-solid fa-square"
-														style="font-size: 40px; color: yellow;"></i>
-												</div>
-											</div>
-										</div>
-										<!-- 세 번째 아이콘 -->
-										<div class="col">
-											<div class="card2">
-												<div class="card-body2">
-													<!-- 세 번째 아이콘 -->
-													<i class="fa-solid fa-square"
-														style="font-size: 40px; color: red;"></i>
+									String cell1IconColor = "black"; // 첫 번째 셀의 기본 아이콘 색상 설정
+									String cell2IconColor = "black"; // 두 번째 셀의 기본 아이콘 색상 설정
+
+									// 첫 번째 셀의 상태에 따라 아이콘 색상 변경
+									if (cell1Status.equals("good")) {
+										cell1IconColor = "green"; // 좋은 상태면 녹색
+									} else if (cell1Status.equals("warning")) {
+										cell1IconColor = "orange"; // 주의 상태면 주황색
+									} else if (cell1Status.equals("alert")) {
+										cell1IconColor = "red"; // 경고 상태면 빨간색
+									}
+
+									// 두 번째 셀의 상태에 따라 아이콘 색상 변경
+									if (cell2Status.equals("good")) {
+										cell2IconColor = "green"; // 좋은 상태면 녹색
+									} else if (cell2Status.equals("warning")) {
+										cell2IconColor = "orange"; // 주의 상태면 주황색
+									} else if (cell2Status.equals("alert")) {
+										cell2IconColor = "red"; // 경고 상태면 빨간색
+									}
+
+									// 셀의 표면 온도 설정
+									int cell1Temperature = 25; // 첫 번째 셀의 표면 온도 설정
+									int cell2Temperature = 35; // 두 번째 셀의 표면 온도 설정
+									%>
+
+									<!-- 첫 번째 셀에 대한 카드 생성 -->
+									<div class="col">
+										<div class="card">
+											<div class="card-body d-flex align-items-center">
+												<!-- 첫 번째 아이콘 -->
+												<i class="fa-solid fa-square"
+													style="font-size: 40px; color: <%=cell1IconColor%>;"></i>
+												<!-- 첫 번째 셀 상태 -->
+												<div class="ms-3 d-flex flex-column">
+													<label class="mb-1"> 첫 번째 셀 상태 : <%=cell1Status%>
+													</label>
+													<%
+													if (cell1Temperature > 45) {
+														out.println("<span class='text-danger'>위험</span>");
+													} else if (cell1Temperature > 25) {
+														out.println("<span class='text-warning'>주의</span>");
+													} else {
+														out.println("<span class='text-success'>좋음</span>");
+													}
+													%>
+													<!-- 셀 표면 온도 -->
+													<label class="mb-0"> 셀 표면 온도 : <%=cell1Temperature%>°C
+													</label>
 												</div>
 											</div>
 										</div>
 									</div>
 
+									<!-- 두 번째 셀에 대한 카드 생성 -->
+									<div class="col">
+										<div class="card">
+											<div class="card-body d-flex align-items-center">
+												<!-- 두 번째 아이콘 -->
+												<i class="fa-solid fa-square"
+													style="font-size: 40px; color: <%=cell2IconColor%>;"></i>
+												<!-- 두 번째 셀 상태 -->
+												<div class="ms-3 d-flex flex-column">
+													<label class="mb-1">두 번째 셀 상태 : <%=cell2Status%>
+													</label>
+													<%
+													if (cell2Temperature > 45) {
+														out.println("<span class='text-danger'>위험</span>");
+													} else if (cell2Temperature > 25) {
+														out.println("<span class='text-warning'>주의</span>");
+													} else {
+														out.println("<span class='text-success'>좋음</span>");
+													}
+													%>
+													<!-- 셀 표면 온도 -->
+													<label class="mb-0"> 셀 표면 온도 : <%=cell2Temperature%>°C
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
 
-									<!-- 상태 텍스트 출력 -->
-
-									<!-- 셀 표면 온도 -->
-									<div></div>
 								</div>
 							</div>
 						</div>
