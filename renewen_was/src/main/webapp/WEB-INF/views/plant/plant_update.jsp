@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -9,21 +8,14 @@
 <title>renewen</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- favicon2추가  -->
-<link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon2.png" />
-
+<link rel="icon" type="image/x-icon" href="${contextPath}/assets/img/favicon2.png" />
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
 
-<script data-search-pseudo-elements defer
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
-	crossorigin="anonymous"></script>
+<script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
@@ -55,87 +47,70 @@
 									</div>
 									<div class="container mt-3">
 
-
 										<!-- 발전소 이름, 발전소 주소, 사업자 등록 번호  -->
 										<div class="d-flex justify-content-center mt-4 ">
 											<!-- d-flex, justify-content-center 클래스 추가 -->
-											<form action="${contextPath}/plant/register" method="post"
-												onsubmit="return validateForm()" id="plantForm"
-												class="flex-column">
-												<!-- dummy - 관측소 지점번호, 위도, 경도 -->
-												<input type="hidden" name="stnNo" value="156" /> <input
-													type="hidden" name="latitude" id="latitude"> <input
-													type="hidden" name="longitude" id="longitude">
+											<form action="${contextPath}/plant/update" method="post"  onsubmit="return validateForm()" id="plantForm" class="flex-column">
+												<input type="hidden" name="stnNo" value="156"> 
+												<input type="hidden" name="latitude" id="latitude">
+												<input type="hidden" name="longitude" id="longitude">
 
 												<div class="mb-2">
-													<label for="plantName" class="form-label">발전소 이름</label> <input
-														type="text" class="form-control" id="plantName"
-														placeholder="발전소 이름 입력" name="plantName">
+													<label for="plantName" class="form-label">발전소 이름</label>
+													<input type="text" class="form-control" id="plantName" placeholder="발전소 이름 입력" name="plantName" value=${vo.plantName } >
 												</div>
 
 												<div class="mb-2">
 													<label for="plantAddr" class="form-label">발전소 주소</label>
 													<div class="input-group">
-														<input type="text" class="form-control" id="plantAddr"
-															onclick="sample6_execDaumPostcode()"
-															placeholder="발전소 주소 입력" name="plantAddr"
-															onfocus="sample6_execDaumPostcode()">
-														<button type="button" onclick="sample6_execDaumPostcode()"
-															class="btn btn-warning">우편번호 찾기</button>
+														<input type="text" class="form-control" id="plantAddr" onclick="sample6_execDaumPostcode()" placeholder="발전소 주소 입력" name="plantAddr"
+															 value="${vo.plantAddr}">
+														<button type="button" onclick="sample6_execDaumPostcode()" class="btn btn-warning">우편번호 찾기</button>
 														<!--  옥색 "btn btn-success", 노랑 "btn btn-warning" 버튼 색변경 -->
 													</div>
-													<input type="text" class="form-control mt-2"
-														id="plantAddr2" placeholder="상세주소입력" name="plantAddr2">
+													<input type="text" class="form-control mt-2" id="plantAddr2" placeholder="상세주소입력" name="plantAddr2" value="${vo.plantAddr2 }">
 												</div>
 
 												<div class="mb-2">
 													<label for="brNumber" class="form-label">사업자 등록 번호</label>
-													<input type="text" class="form-control" id="brNumber"
-														placeholder="사업자 번호 입력(숫자만 입력해주세요)" name="brNumber"
-														oninput="formatNumber(this)">
+													<input type="text" class="form-control" id="brNumber" placeholder="사업자 번호 입력(숫자만 입력해주세요)" name="brNumber" value="${vo.brNumber}">
 												</div>
 
 												<div class="text-center mt-3 d-flex justify-content-center">
-													<button type="button"
-														class="btn btn-primary btn-lg flex-grow-1"
-														onclick="getLALOInfoAndSubmit()">수정</button>
+													<button type="submit" class="btn btn-primary btn-lg flex-grow-1" onclick="getLALOInfoAndSubmit()">수정</button>
 												</div>
 											</form>
 										</div>
+										
+									</div><!--<div class="container mt-3"> 끝-->
+									
+								</div> <!-- card-body끝-->
+							</div><!-- card끝 -->
+						</div><!-- <div class="col-md-5">끝 -->
+					</div><!-- <div class="row justify-content-center">끝 -->
+				</div><!-- <div class="container px-4 mt-4">끝 -->
+						
+							
+								
+								
+							
 			</main>
 			<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 		</div>
 		<!-- end <div id="layoutSidenav_content"> -->
 	</div>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="${contextPath}/js/scripts.js"></script>
 	<!-- renewen -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 	<script src="${contextPath}/js/date.js"></script>
 
-	<script type="text/javascript">
-		function validateForm() {
-			var brNumber = document.getElementById("brNumber").value;
-
-			// 입력값이 숫자 && 길이가 10이 아닌 경우
-			if (!/^\d{10}$/.test(brNumber)) {
-				alert("사업자 번호를 10자리 숫자로 입력해주세요.");
-				return false;
-			}
-			return true;
-		}
-	</script>
 
 	<!-- 주소 API -->
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-	<script src="${contextPath}/js/address.js"></script>
-
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		
 	<!-- 주소 검색 팝업 닫기  -->
 	<script type="text/javascript">
 		function closePopup() {
@@ -143,6 +118,25 @@
 			daum.postcode.resume();
 		}
 	</script>
+	
+	<script type="text/javascript">
+	
+	    //사업자번호
+	    function validateForm() {
+	        var brNumber = document.getElementById("brNumber").value;
+	        console.log(brNumber);
+
+	        // 입력값이 숫자 && 길이가 10이 아닌 경우
+	        if (!/^\d{10}$/.test(brNumber)) {	            
+	            return false;
+	        }
+	        return true;
+	    }
+	</script>
+
+	 <script src="${contextPath}/js/address.js"></script>
+	
+	
 
 </body>
 </html>

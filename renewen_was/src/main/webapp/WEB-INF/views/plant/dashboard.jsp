@@ -62,7 +62,6 @@
 											<div class="page-header-icon">
 												<i data-feather="file"></i>
 											</div>
-											Dashboard
 										</h1>
 									</div>
 
