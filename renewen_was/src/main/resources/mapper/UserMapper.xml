@@ -29,9 +29,9 @@
 	</insert>
 	
 	<select id="getValidAuthList" resultType="UserAuthVO">
-		SELECT * FROM USER_AUTH
-		WHERE AUTH_ID != 'ROLE_ADMIN'
-		ORDER BY AUTH_ID DESC
+		SELECT * FROM user_auth
+		WHERE auth_id != 'ROLE_ADMIN'
+		ORDER BY auth_id DESC
 	</select>
 	
 	<update id="updateUser" parameterType="UserVO">
