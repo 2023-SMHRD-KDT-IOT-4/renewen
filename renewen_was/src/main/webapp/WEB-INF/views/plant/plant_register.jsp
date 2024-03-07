@@ -12,8 +12,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon.png" />
+	href="${contextPath}/assets/img/favicon2.png" />
+
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
 
 <script data-search-pseudo-elements defer
@@ -76,7 +78,7 @@
 														onclick="sample6_execDaumPostcode()"
 														placeholder="발전소 주소 입력" name="plantAddr"
 														onfocus="sample6_execDaumPostcode()">
-														<!--버튼색 변경 노랑  -->
+													<!--버튼색 변경 노랑  -->
 													<button type="button" onclick="sample6_execDaumPostcode()"
 														class="btn btn-warning">우편번호 찾기</button>
 												</div>
@@ -132,7 +134,7 @@
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="${contextPath}/js/address.js"></script>
 
- 
+
 </body>
 </html>
 

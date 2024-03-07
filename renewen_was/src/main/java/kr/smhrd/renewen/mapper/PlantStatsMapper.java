@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import kr.smhrd.renewen.model.CellGeneratedElecVO;
+import kr.smhrd.renewen.model.PredictedGenElecVO;
 
 @Mapper
 public interface PlantStatsMapper {
@@ -17,5 +18,8 @@ public interface PlantStatsMapper {
 	// 발전소 - 시간별 발전량
 	public List<CellGeneratedElecVO> getHourElecPerCell(@Param("dateHour") String dateHour,
 			@Param("cellNos") List<Long> cellNos);
-	
+
+	// 예상 발전량 시간별
+	public List<PredictedGenElecVO> getPredictPerHour(@Param("plantNo") long plantNo,
+			@Param("checkDate") String checkDate);
 }

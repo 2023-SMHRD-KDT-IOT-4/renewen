@@ -12,8 +12,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon.png" />
+	href="${contextPath}/assets/img/favicon2.png" />
+
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
 
 <script data-search-pseudo-elements defer
@@ -80,7 +82,7 @@
 															onfocus="sample6_execDaumPostcode()">
 														<button type="button" onclick="sample6_execDaumPostcode()"
 															class="btn btn-warning">우편번호 찾기</button>
-															<!--  옥색 "btn btn-success", 노랑 "btn btn-warning" 버튼 색변경 -->
+														<!--  옥색 "btn btn-success", 노랑 "btn btn-warning" 버튼 색변경 -->
 													</div>
 													<input type="text" class="form-control mt-2"
 														id="plantAddr2" placeholder="상세주소입력" name="plantAddr2">
@@ -133,9 +135,9 @@
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 	<script src="${contextPath}/js/address.js"></script>
-	
-<!-- 주소 검색 팝업 닫기  -->
-<script type="text/javascript">
+
+	<!-- 주소 검색 팝업 닫기  -->
+	<script type="text/javascript">
 		function closePopup() {
 			// 주소 검색 팝업을 닫는 함수
 			daum.postcode.resume();

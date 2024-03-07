@@ -58,7 +58,9 @@ CREATE TABLE user_log
     `user_id`      VARCHAR(30)     NOT NULL    COMMENT '사용자 id', 
     `connect_ip`   VARCHAR(20)     NOT NULL    COMMENT '접속 ip', 
     `access_menu`  VARCHAR(30)     NOT NULL    COMMENT '접근 메뉴', 
-    `log_content`  VARCHAR(100)    NOT NULL    COMMENT '로그 내용', 
+    `log_content`  VARCHAR(100)    NOT NULL    COMMENT '로그 내용',
+    `log_type`     VARCHAR(10)     NULL        COMMENT '로그 종류. info, warn, danger', 
+    `popup_yn`     CHAR(1)         NOT NULL    DEFAULT 'N' COMMENT '유저 노출유무',    
     `created_at`   TIMESTAMP       NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '로그 시간', 
      PRIMARY KEY (log_id)
 );
@@ -107,7 +109,6 @@ CREATE TABLE power_plant
     CONSTRAINT PK_power_plant PRIMARY KEY (plant_no)
 );
 
--- 테이블 Comment 설정 SQL - power_plant
 ALTER TABLE power_plant COMMENT '연동 발전소 정보 저장 테이블';
 
 -- Foreign Key 설정 SQL - power_plant(user_id) -> user_info(user_id)
@@ -128,16 +129,19 @@ CREATE TABLE plant_sensing_data
     `measure_value`      DECIMAL(12, 2)    NOT NULL    COMMENT '센싱 측정 값', 
     `measure_desc`       VARCHAR(100)      NULL        COMMENT '센싱 측정 설명', 
     `use_yn`             CHAR(1)           NOT NULL    DEFAULT 'Y' COMMENT '사용여부',
-    `created_at`         TIMESTAMP         NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간',    
+    `created_at`         TIMESTAMP         NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간',
+    `cell_no`            INT UNSIGNED      NULL        COMMENT '발전셀 식별번호',
      PRIMARY KEY (sd_no)
 ) ;
 
 ALTER TABLE plant_sensing_data COMMENT '발전소 센싱 데이터 저장 테이블';
 
+-- Foreign Key 설정 SQL - plant_sensing_data(plant_no) -> power_plant(plant_no)
 ALTER TABLE plant_sensing_data
     ADD CONSTRAINT FK_plant_sensing_data_plant_no_power_plant_plant_no FOREIGN KEY (plant_no)
         REFERENCES power_plant (plant_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
+-- Foreign Key 설정 SQL - plant_sensing_data(sensor_id) -> sensor_info(sensor_id)
 ALTER TABLE plant_sensing_data
     ADD CONSTRAINT FK_plant_sensing_data_sensor_id_sensor_info_sensor_id FOREIGN KEY (sensor_id)
         REFERENCES sensor_info (sensor_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -189,6 +193,7 @@ CREATE TABLE generate_cell
 
 ALTER TABLE generate_cell COMMENT '발전소 내 발전셀 정보 저장 테이블';
 
+-- Foreign Key 설정 SQL - generate_cell(plant_no) -> power_plant(plant_no)
 ALTER TABLE generate_cell
     ADD CONSTRAINT FK_generate_cell_plant_no_power_plant_plant_no FOREIGN KEY (plant_no)
         REFERENCES power_plant (plant_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -211,7 +216,6 @@ CREATE TABLE cell_shot_img
      PRIMARY KEY (cs_no)
 );
 
--- 테이블 Comment 설정 SQL - cell_shot_img
 ALTER TABLE cell_shot_img COMMENT '발전셀 촬영 이미지 저장 테이블';
 
 -- Foreign Key 설정 SQL - cell_shot_img(cell_no) -> generate_cell(cell_no)
@@ -248,20 +252,20 @@ ALTER TABLE cell_generated_elec AUTO_INCREMENT=750001;
 CREATE TABLE predicted_gen_elec
 (
     `predict_no`        INT UNSIGNED     NOT NULL    AUTO_INCREMENT COMMENT '예측 식별번호', 
-    `cell_gen_no`       INT UNSIGNED     NOT NULL    COMMENT '셀 발전량 식별번호', 
-    `predict_gen_elec`  DECIMAL(12,2)    NOT NULL    COMMENT '예측 발전량',
-    `predict_rate`      DECIMAL(3,2)     NOT NULL    COMMENT '예측율', 
+    `plant_no`          INT UNSIGNED     NOT NULL    COMMENT '발전소 식별번호', 
+    `stn_no`            VARCHAR(10)      NOT NULL    COMMENT '관측소 지점번호', 
+    `predict_gen_elec`  DECIMAL(12,2)    NOT NULL    COMMENT '예측 발전량(W)', 
     `use_yn`            CHAR(1)          NOT NULL    DEFAULT 'Y' COMMENT '사용여부', 
-	`created_at`        TIMESTAMP        NOT NULL    DEFAULT CURRENT_TIMESTAMP COMMENT '측정 시간',
+    `created_at`        TIMESTAMP        NOT NULL    COMMENT '예측 시간',     
      PRIMARY KEY (predict_no)
 );
 
 ALTER TABLE predicted_gen_elec COMMENT '발전량(발전셀) 예측 결과 저장 테이블';
 
--- Foreign Key 설정 SQL - predicted_gen_elec(cell_gen_no) -> cell_generated_elec(cell_gen_no)
+-- Foreign Key 설정 SQL - predicted_gen_elec(plant_no) -> power_plant(plant_no)
 ALTER TABLE predicted_gen_elec
-    ADD CONSTRAINT FK_predicted_gen_elec_cell_gen_no_cell_generated_elec_cell_gen_n FOREIGN KEY (cell_gen_no)
-        REFERENCES cell_generated_elec (cell_gen_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
+    ADD CONSTRAINT FK_predicted_gen_elec_plant_no_power_plant_plant_no FOREIGN KEY (plant_no)
+        REFERENCES power_plant (plant_no) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE predicted_gen_elec AUTO_INCREMENT=850001;
 

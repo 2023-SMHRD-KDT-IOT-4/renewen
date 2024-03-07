@@ -13,5 +13,7 @@ INSERT INTO sensor_info(sensor_id, sensor_type_cd, sensor_type_nm, sensor_desc, 
 VALUES ('DHT11_TEM', 'temperature', '온도 측정', '정교한 온도 측정', '°C', 'Y');
 INSERT INTO sensor_info(sensor_id, sensor_type_cd, sensor_type_nm, sensor_desc, measure_unit, use_yn)
 VALUES ('DHT11_HUM', 'humidity', '습도 측정', '정교한 습도 측정', '%', 'Y');
+INSERT INTO sensor_info(sensor_id, sensor_type_cd, sensor_type_nm, sensor_desc, measure_unit, use_yn)
+VALUES ('PM2008M', 'dust', '미세먼지 측정', 'PM2.5 미세먼지 측정', '㎍/㎥', 'Y');
 commit;
 -- =======================================================================================================================

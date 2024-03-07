@@ -298,9 +298,7 @@ public class PlantController {
 	            .body(resource);
 	}
 	
-		
-	
-	
+	// 발전 현황
 	@GetMapping("/plant/dashboard")
 	public String dashboardPage(Model model, HttpSession session) {
 
@@ -312,5 +310,19 @@ public class PlantController {
 		
 		return "views/plant/dashboard";
 
+	}
+
+	// 발전량 조회
+	@GetMapping("/plant/stats")
+	public String plantStats(Model model, HttpSession session) {
+
+		UserVO user = (UserVO) session.getAttribute("user");
+		String userId = user.getUserId();
+		
+		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
+		model.addAttribute("plantList", plantList);
+		
+		return "views/plant/plant_stats";
+		
 	}
 }

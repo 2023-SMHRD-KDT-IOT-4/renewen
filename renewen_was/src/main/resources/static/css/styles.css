@@ -3220,13 +3220,13 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #0061f2;
-  border-color: #0061f2;
+  background-color: #ffbe41;
+  border-color: #ffbe41;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #0052ce;
-  border-color: #004ec2;
+  background-color: #ff9e00;
+  border-color: #ff9e00;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
@@ -5513,7 +5513,7 @@ textarea.form-control-lg {
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #0061f2;
+  background-color: #ffd178;
 }
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #a7aeb8;
@@ -5782,13 +5782,19 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
 }
-.navbar-brand {
+/* .navbar-brand {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
   white-space: nowrap;
+} */
+/* 로고 내비바브랜드 정렬 */
+.navbar-brand {
+    display: flex;
+    align-items: center;
 }
+
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
 }
@@ -10746,7 +10752,8 @@ textarea.form-control-lg {
 /* rtl:end:remove */
 .text-primary {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  /* color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important; */
+  color: #f4a100 !important;
 }
 
 .text-secondary {
@@ -16469,10 +16476,15 @@ body {
           animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
-.bg-gradient-primary-to-secondary {
+/* .bg-gradient-primary-to-secondary {
   background-color: #0061f2 !important;
   background-image: linear-gradient(135deg, #0061f2 0%, rgba(105, 0, 199, 0.8) 100%) !important;
-}
+} */
+
+ .bg-gradient-primary-to-secondary {
+  background-color: #ffecb3 !important;
+  background-image: linear-gradient(135deg, #ff6d00 0%, rgba(255, 165, 0, 0.8) 100%) !important;
+}  
 
 .bg-transparent-light {
   color: rgba(255, 255, 255, 0.5) !important;
@@ -18513,7 +18525,7 @@ body {
   font-weight: 500;
 }
 .card:not([class*=bg-]) .card-header {
-  color: #0061f2;
+  color: #f4a100;
 }
 
 .card.bg-dark .card-header,
@@ -19697,12 +19709,15 @@ body {
     overflow-y: auto;
   }
 }
+/* 알림창 색 변경 */
 .dropdown-notifications .dropdown-menu .dropdown-notifications-header {
-  background-color: #0061f2;
+  background-color:rgb(249,209,67);
   color: #fff !important;
   padding-top: 1rem;
   padding-bottom: 1rem;
   line-height: 1;
+  /* 사이즈 변경 */
+  font-size: 1rem; /
 }
 .dropdown-notifications .dropdown-menu .dropdown-notifications-header svg {
   height: 0.7rem;
@@ -19900,12 +19915,9 @@ body {
 .topnav .navbar-brand {
   width: 15rem;
   margin: 0;
-  font-size: 1rem;
   font-weight: bold;
 }
-.topnav .navbar-brand img {
-  height: 0.8rem;
-}
+
 @media (min-width: 992px) {
   .topnav .navbar-brand {
     width: 12rem;
@@ -20097,7 +20109,7 @@ body {
   color: #a7aeb8;
 }
 .sidenav-light .sidenav-menu .nav-link:hover {
-  color: #0061f2;
+  color: #f4a100;
 }
 .sidenav-light .sidenav-menu .nav-link.active {
   color: #0061f2;
@@ -21065,19 +21077,16 @@ pre[class*=language-] {
     font-size: 14px; /* 폰트 크기 조절 */
 }
 
-/* 테이블 내용 가운데 정렬*/
-  table {
-    text-align: center;
-}
+/* 마커 정보창 스타일*/
+.navermaps-iframe {
+	width: 200px;  
+	height: 150px;  
+}	
 
-/* 테이블 내용 가운데 정렬 */
-table {
-    text-align: center;
-}
-
-table th,
-table td {
-    text-align: center;
-    vertical-align: middle; /* 각 셀의 수직 정렬 설정 */
+/* 로고이미지 사이즈 */
+.topnav .navbar-brand img {
+  height: 2.8rem;
+  margin-right: 20px 
+  
 }
 

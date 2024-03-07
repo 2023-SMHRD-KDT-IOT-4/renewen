@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<!-- 부트스트랩 아이콘 변경  -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+ <!-- Font Awesome CSS 링크, 아이콘 추가 사용 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <div id="layoutSidenav_nav">
             <nav class="sidenav shadow-right sidenav-light">
                 <div class="sidenav-menu">
@@ -15,7 +18,7 @@
                         <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
                             data-bs-target="#collapseDashboards" aria-expanded="false"
                             aria-controls="collapseDashboards">
-                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                            <div class="nav-link-icon"><i class="fas fa-crown"></i></i></div>
                             마스터 관리자
                             <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -35,15 +38,19 @@
                         
                         	<!-- Dashboard -->
 	                        <a class="nav-link collapsed" href="${contextPath}/plant/dashboard" >
-	                            <div class="nav-link-icon"><i data-feather="activity"></i></div>
-	                            Dashboard
+	                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
+	                            발전 현황
+	                        </a>                        
+	                        <a class="nav-link collapsed" href="${contextPath}/plant/stats" >
+	                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
+	                            발전량 조회
 	                        </a>                        
                         
                         
                         <!-- Sidenav Accordion (Pages)-->
                         <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
                             data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="nav-link-icon"></div>
+                            <div class="nav-link-icon"><i class="bi bi-tools"></i></div>
                             발전소 관리
                             <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>

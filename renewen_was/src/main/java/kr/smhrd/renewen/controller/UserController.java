@@ -69,6 +69,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	// 회원정보 수정 페이지
 	@GetMapping("/user/update")
 	public String userUpdate(HttpSession session) {
 		return "views/user/user_update";
@@ -86,5 +87,14 @@ public class UserController {
 			return "redirect:/user/update";
 		}
 	}
+	
+	// 사용자 로그 확인 페이지
+	/*
+	 * @GetMapping("/user/log") public String userLogPage(HttpSession session) {
+	 * 
+	 * System.out.println("userLogPage");
+	 * 
+	 * return "views/user/user_log"; }
+	 */
 }
 

@@ -13,7 +13,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
-  <link rel="icon" type="image/x-icon" href="${contextPath}/assets/img/favicon.png" />
+<!-- favicon2추가  -->
+<link rel="icon" type="image/x-icon"
+	href="${contextPath}/assets/img/favicon2.png" />
+	
   <link href="${contextPath}/css/styles.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
   

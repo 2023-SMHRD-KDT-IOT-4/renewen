@@ -13,4 +13,7 @@ public interface PlantStatsService {
 
 //	public List<CellGeneratedElecVO> getHourElecPerCell(@Param("dateHour") String dateHour,
 //			@Param("cellNos") List<Long> cellNos);
+	
+	// 예상 발전량 시간별
+	public Map<String, Double> getPredictPerHour(long plantNo, String checkDate);
 }

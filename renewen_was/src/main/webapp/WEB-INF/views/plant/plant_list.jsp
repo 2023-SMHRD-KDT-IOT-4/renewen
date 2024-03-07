@@ -15,8 +15,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon.png" />
+	href="${contextPath}/assets/img/favicon2.png" />
+	
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
 <link href="${contextPath}/css/renewen_plant.css" rel="stylesheet" />
 <link
@@ -63,11 +65,9 @@
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="card mb-4" id="plantList">
-<<<<<<< HEAD
-								<div class="card-header">${user.userId} 회원님의 발전소 리스트</div>
-=======
+
 								<div class="card-header">${user.userId}회원님의 발전소 리스트</div>
->>>>>>> branch 'main' of https://github.com/2023-SMHRD-KDT-IOT-4/renewen.git
+
 								<div class="card-body">
 									<table class="table table-hover">
 										<thead>
@@ -107,7 +107,7 @@
 														<div class="modal fade" id="exampleModal" tabindex="-1"
 															aria-labelledby="exampleModalLabel" aria-hidden="true">
 															<div class="modal-dialog">
-																<div class="modal-content">
+																<div class="modal-content" style="min-width: 700px;">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLabel">발전
 																			셀 연동</h5>
