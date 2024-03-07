@@ -3248,11 +3248,6 @@ textarea.form-control-lg {
   border-color: #0061f2;
 }
 
-.btn-secondary {
-  color: #fff;
-  background-color: #6900c7;
-  border-color: #6900c7;
-}
 .btn-secondary:hover {
   color: #fff;
   background-color: #5900a9;
@@ -21089,4 +21084,11 @@ pre[class*=language-] {
   height: 2.8rem;
   margin-right: 20px 
   
+}
+
+/* 모달창 삭제버튼 색 변경 red */
+.btn-secondary {
+    color: #fff;
+    background-color: #fc2020;
+    border-color: #fc2020;
 }
