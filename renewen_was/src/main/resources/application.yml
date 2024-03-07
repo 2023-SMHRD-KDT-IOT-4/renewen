@@ -30,9 +30,7 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml 
   type-aliases-package: kr.smhrd.renewen.model  
   configuration:
-    map-underscore-to-camel-case: true    
-    
-     
+    map-underscore-to-camel-case: true 
     
 # ====================================================================================================================    
 

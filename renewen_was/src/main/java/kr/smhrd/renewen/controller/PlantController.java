@@ -49,7 +49,11 @@ public class PlantController {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@GetMapping("/plant/register")
-	public String plantRegister() {
+	public String plantRegister(HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("user");
+		if(user == null ) {
+			return "redirect:/user/login";
+		}
 		return "views/plant/plant_register";
 	}
 	
@@ -57,6 +61,7 @@ public class PlantController {
 	public String plantRegister(PowerPlantVO plant, HttpSession session) {
 		System.out.println(plant);
 		UserVO user = (UserVO) session.getAttribute("user");
+		
 		String userId = user.getUserId();
 		plant.setUserId(userId);
 		
@@ -72,6 +77,11 @@ public class PlantController {
 	public String plantList(Model model, HttpSession session) {
 		
 		UserVO user = (UserVO) session.getAttribute("user");
+		
+		if(user == null ) {
+			return "redirect:/user/login";
+		}
+		
 		String userId = user.getUserId();
 		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
 		model.addAttribute("list", list);
@@ -185,6 +195,9 @@ public class PlantController {
 	public String cloudImgs(Model model, HttpSession session) {
 		
 		UserVO user = (UserVO) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/user/login";
+		}
 		String userId = user.getUserId();
 		
 		// 로그인 유저의 발전소 리스트 
@@ -243,6 +256,10 @@ public class PlantController {
 	public String cellImgs(Model model, HttpSession session) {
 		
 		UserVO user = (UserVO) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/user/login";
+		}
+		
 		String userId = user.getUserId();
 		
 		// 로그인 유저의 발전소 리스트 (sortNo 오름차순)
@@ -303,6 +320,10 @@ public class PlantController {
 	public String dashboardPage(Model model, HttpSession session) {
 
 		UserVO user = (UserVO) session.getAttribute("user");
+		
+		if(user == null) {
+			return "redirect:/user/login";
+		}
 		String userId = user.getUserId();
 
 		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
@@ -317,6 +338,10 @@ public class PlantController {
 	public String plantStats(Model model, HttpSession session) {
 
 		UserVO user = (UserVO) session.getAttribute("user");
+		if(user == null ) {
+			return "redirect:/user/login";
+		}
+		
 		String userId = user.getUserId();
 		
 		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
