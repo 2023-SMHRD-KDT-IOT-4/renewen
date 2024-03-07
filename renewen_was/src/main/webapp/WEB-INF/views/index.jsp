@@ -35,6 +35,8 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
 <link rel="stylesheet" href="${contextPath}/js/chart.js">
+<script 
+	src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
 </head>
 <body class="nav-fixed">
 
@@ -79,30 +81,34 @@
 								</div>
 							</div>
 						</div>
+						
+							<!--금일 발전량 추이-->
 						<div class="col-lg-8 mb-4">
-							<!-- Area chart example-->
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량 추이</div>
 							 <div class="card-body">
 									<div class="chart-area">
-										<canvas id="myAreaChart" width="100%" height="30"></canvas>
+										<%-- <canvas id="myAreaChart" width="100%" height="400"></canvas> --%>
+										<div id="myAreaChart" class="chart-pie"></div>
 									</div>
 								</div>
 							</div>  	
 							<div class="row">
 								<div class="col-lg-6">
+									
 									<!-- Bar chart example-->
 									<div class="card h-100">
-										<div class="card-header">Sales Reporting</div>
+										<div class="card-header">금일 발전량</div>
 										<div
 											class="card-body d-flex flex-column justify-content-center">
 											<div class="chart-bar">
-												<canvas id="myBarChart" width="100%" height="30"></canvas>
+												<canvas id="myAreaChart" width="100%" height="100%"></canvas>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-6">
+								
 									<!-- Pie chart example-->
 									<div class="card h-100">
 										<div class="card-header">Traffic Sources</div>
@@ -129,7 +135,10 @@
 
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l8y7kfobe4"></script>
+		<!-- index Chart.js 라이브러리 추가 -->
+	<script src="${contextPath}/js/index_chart.js"></script>
 	<script>
+			printPredictChart();
       var mapOptions = {
          center : new naver.maps.LatLng(35.17294, 126.89156),
          zoom : 15
@@ -181,6 +190,7 @@
                   content : contentString
                });
                infoWindow.open(map, marker);
+               printPredictChart();
                // 열린 정보창을 저장합니다.
                openedInfoWindow = infoWindow;
             });
@@ -191,12 +201,14 @@
 
       // 지도를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
       naver.maps.Event.addListener(map, 'click', function(e) {
-         if (openedInfoWindow) {
+         if (openedInfoWindow) { 
             openedInfoWindow.close();
             openedInfoWindow = null;
          }
       });
    </script>
+   
+    
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
@@ -207,8 +219,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
-	<!-- Chart.js 라이브러리 추가 -->
-	<script src="${contextPath}/js/chart.js"></script>
-	<script src="${contextPath}/js/user_actions.js"></script>
+
 </body>
 </html>
