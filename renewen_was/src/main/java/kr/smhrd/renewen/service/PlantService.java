@@ -25,6 +25,7 @@ public interface PlantService {
 	public int updateUseYn(long cellNo);
 	
 	public List<PowerPlantVO> getNotGrantPlants();
+	public List<PowerPlantVO> getGrantPlants();
 	public int grantPlant(PowerPlantVO vo);
 	
 	// =================================================================	
@@ -45,6 +46,8 @@ public interface PlantService {
 	
 	// =================================================================
 	
+	public List<GenerateCellVO> getGenerateCell(long selectedCell);
+	
 	// 발전셀
 
 	// 아두이노 연동 - 발전셀 정보 저장
@@ -61,4 +64,7 @@ public interface PlantService {
 	
 	// 발전셀 발전량 저장 
 	public int insertGeneratedElec(CellGeneratedElecVO vo);
+	
+	public List<CellShotImgVO> getCellImgsByCellNoAndDate(CellShotImgVO cell);
+	
 }

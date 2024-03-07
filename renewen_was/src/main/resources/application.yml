@@ -7,6 +7,8 @@ server:
       enabled: true
       force: true
 spring:
+  jackson:
+    time-zone: Asia/Seoul
   servlet: 
     multipart:
       enabled: true
@@ -33,9 +35,12 @@ mybatis:
      
     
 # ====================================================================================================================    
- 
+
 # 별도 설정
 upload:
   path: C:\\upload
   img: \\imgs   
-    
+url:
+  flask: http://127.0.0.1:8083/
+api:
+  hub-key: CXKwvqlxTqCysL6pcS6glQ  

@@ -1,33 +1,39 @@
 package kr.smhrd.renewen.global.schedule;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import kr.smhrd.renewen.global.util.CommonUtil;
+import kr.smhrd.renewen.model.PowerPlantVO;
 import kr.smhrd.renewen.model.api.WeatherVO;
 import kr.smhrd.renewen.service.APIService;
+import kr.smhrd.renewen.service.PlantService;
 
 /**
- * 발전소 스케줄링 1) Rest API 기상인자 - 기상청 API 허브(https://apihub.kma.go.kr/)
+ * 발전소 스케줄링 
+ * 1) Rest API 기상인자 - 기상청 API 허브(https://apihub.kma.go.kr/)
+ * 2) 모델링 API 발전소 예상발전량 - Flask Server 
  */
 @Component
+@EnableScheduling
 public class PlantScheduler {
-
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-	private final String API_HUB_KEY = "CXKwvqlxTqCysL6pcS6glQ";
 
 	@Autowired
 	APIService apiService;
+	
+	@Autowired
+	PlantService plantService;
 
 	@Autowired
 	RestTemplate restTemplate;
@@ -35,6 +41,47 @@ public class PlantScheduler {
 	@Autowired
 	CommonUtil commonUtil;
 
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Value("${api.hub-key}")
+	private String API_HUB_KEY;
+	
+    @Value("${url.flask}")
+    private String FLASK_URL;
+	
+	/**
+	 * 유효한 발전소들의 예상 발전량 call
+	 * plant_no : [250002, 250004]
+	 * st_date : 2024030700 yyyymmddhh    
+	 */
+	@Scheduled(cron = "0 30 0 * * *") // 매일 00:30분
+	public void callFlask() {
+
+		// 1) 유효한 발전소(연동완료) 리스트
+		List<PowerPlantVO> plantList = plantService.getGrantPlants();
+		if(plantList.isEmpty()) {
+			return;  // 유효 발전소 없음 => 예상발전량 요청X
+		}
+		List<Long> plantNos = new ArrayList<>();
+		for(PowerPlantVO vo : plantList) {
+			plantNos.add(vo.getPlantNo());
+		}
+		String stDate = commonUtil.getCurrentDateTime("yyyyMMdd") + "00" ;
+	    
+	    HttpHeaders headers = new HttpHeaders();// HTTP 요청 헤더 설정
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    Map<String, Object> requestBody = new HashMap<>();// 요청 본문에 전송할 데이터 설정
+	    requestBody.put("plant_no", plantNos);
+	    requestBody.put("st_date", stDate);
+
+	    // HTTP 요청 엔티티 생성
+	    HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
+		String reqUrl = FLASK_URL + "predict";
+		// 2) Flask 예상 발전량 요청
+		String response = restTemplate.postForObject(reqUrl, requestEntity, String.class);
+		logger.info("callFlask response {} ", response);
+	}
+	
 	/**
 	 * 1) Rest API 지점별 기상인자(기압, 풍향, 풍속, 일사량) 요청 
 	 * 2) weather_api 테이블에 데이터 저장
@@ -43,9 +90,9 @@ public class PlantScheduler {
 	 * 156:광주 위도 : 35.17294 경도 : 126.89156
 	 * 165:목포 위도 : 34.81732 경도 : 126.38151
 	 */
-	@Scheduled(fixedRate = 1000 * 1200) // 20분 간격
+	@Scheduled(fixedRate = 60000 * 13) // (1min) 13분 간격
 	public void callApiHub() {
-		
+
 		String dateTime = commonUtil.getCurrentDateTime("yyyyMMddHHmmss");
 		String todayDate = dateTime.substring(0,8);
 		int todayHour = Integer.parseInt(dateTime.substring(8,10));
@@ -80,7 +127,6 @@ public class PlantScheduler {
 		
 		// Rest Get 요청
 		String response = restTemplate.getForObject(reqUrl, String.class);
-		logger.info("response {} ", response);
 		// DB 저장할 vo List
 		List<WeatherVO> weatherList = getWeatherList(response, tm);
 		
@@ -163,5 +209,6 @@ public class PlantScheduler {
 
 		return weatherList;
 	}
+
 
 }

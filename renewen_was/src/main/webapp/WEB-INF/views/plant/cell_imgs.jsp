@@ -18,9 +18,14 @@
 	href="${contextPath}/assets/img/favicon2.png" />
 	
   <link href="${contextPath}/css/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet" />
+  
   
   <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+  
+
 </head>
 <body class="nav-fixed">
   
@@ -36,85 +41,63 @@
           <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
             <div class="me-4 mb-3 mb-sm-0">
               <h1 class="mb-0">발전소</h1>
+              	<!-- 현재 시간 -->				
+				<div class="small" id="currentDateTimeContainer">
+					<span  id="currentYear"></span>
+					&middot; <span id="currentMonth"></span> <span id="currentDayOfMonth"></span>
+					&middot; <span class="fw-500 text-primary" id="currentDayOfWeek"></span>
+					&middot; <span id="currentHour"></span>:<span id="currentMinute"></span> <span id="currentPeriod"></span>
+				</div>
               <div class="small">
-								<select class="form-control" id="authSelect1" name="authId">
-									<c:forEach items="${plantList}" var="vo">
-										<option value="${vo.plantNo}">${vo.plantName}</option>
-										</c:forEach>
-									</select>
-                <span class="fw-500 text-primary">Friday</span>
-                · September 20, 2021 · 12:16 PM
+              	<!-- 발전소 선택 -->
+				<select class="form-control" id="authSelect1" name="authId">
+					<c:forEach items="${plantList}" var="vo">
+						<option value="${vo.plantNo}">${vo.plantName}</option>
+					</c:forEach>
+				</select>
+				<!-- 날짜 선택-->
+	            <div class="input-group input-group-joined border-0 shadow" style="width: 16.5rem">	
+	            	<span class="input-group-text"><i class="text-primary" data-feather="calendar"></i></span>
+	                <input class="form-control ps-0 pointer" id="litepickerSingleDate" placeholder="날짜 선택">
+	            </div>
+	            <br>
+	            <select class="form-control" id="cellSelect"  >
+	            	<!-- <option value="" disabled selected>발전cell을 선택하세요</option> -->
+	            	<option></option>
+	            </select>
+	            <button>조회하기</button>
               </div>
             </div>
-            <!-- Date range picker example-->
-            <div class="input-group input-group-joined border-0 shadow" style="width: 16.5rem">
-            	<h2>d</h2>
-            </div>
           </div>
-          
-          
+
           	<h4 class="mb-0 mt-5">Cells</h4>
-          	<!-- <hr class="mt-2 mb-4"> -->
-          	<div id="cellDiv" class="mt-3">
-          		<div class="row">
-          		
-	          		<c:forEach var="cell" items="${selectedPlant.cellList}">
-	          			<!-- 해당 셀의 마지막 촬영이미지 1장 -->
-	          			<c:set var="cellImg" value="${cell.cellImgList[0]}" />
-									<div class="col-lg-4 mb-4">
-										<div class="card">
-									    <img class="card-img-top" src="${contextPath}/imgs/${cellImg.imgFile}" alt="${vo.cellImgDesc}">
-									    	<div class="card-body">
-									        <h5 class="card-title">이미지 설명:${cellImg.cellImgDesc}</h5>
-									        <h5 class="card-title">촬영시간:${cellImg.createdAt}</h5>
-									        <h5 class="card-title">${cellImg.imgFile}</h5>
-									        
-									        <h6 class="card-subtitle mb-2 text-muted">Cell 정보</h6>
-									    		<p class="card-text">${cell.cellType}</p>
-									        <p class="card-text">${cell.cellSerialNum}</p>
-									        <p class="card-text">${cell.cellVolume}</p>
-									        <p class="card-text">
-									        	${cell.cellWidth} x ${cell.cellHeight } x ${cell.cellDepth} (${cell.cellSizeUnit})
-								        	</p>
-								        	<a href="${contextPath}/plant/download/${cellImg.imgFile}" class="btn btn-primary">다운로드</a>
-										    </div>
-										</div>
-									</div>
-								</c:forEach>
-								
-							</div>
-          	</div><!-- End cardDiv  -->
+          	<hr class="mt-2 mb-4">
+          	<div id="cellDiv" class="mt-3"></div><!-- 이미지 출력 부분 -->
+				
+       	</div><!-- End cardDiv  -->          	
           	
-          	<table class="table table-hover">
-         			<tbody>
-	 							<c:forEach var="vo" items="${imgList}">
-	 								<tr>
-	 									<td>
-	 										<img src="${contextPath}/imgs/${vo.imgFile}" alt="${vo.cloudImgDesc}" width="200px" height="200px">
-	 									</td>
-        						<td><p>${vo.imgFile}</p></td>
-										<td><p>${vo.cloudImgDesc}</p></td>
-        						<td>
-        						<a href="${contextPath}/plant/download/${vo.imgFile}" class="btn btn-primary">다운로드</a>
-        						</td>
-        						<td>
-        						<a href="${contextPath}/plant/download?no=${vo.csNo}&type=cloud" class="btn btn-primary">aaa</a>
-        						</td>
-        					</tr>
-								</c:forEach>
-          		</tbody>
-						</table>
 						
-        </div><!-- end <div class="container-xl px-4 mt-5"> -->
-      </main>
+      	</main>
+      	
     	<jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
+        </div><!-- end <div class="container-xl px-4 mt-5"> -->
+      
+    	
 		</div> <!-- end <div id="layoutSidenav_content"> -->
-  </div>
+
   
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="${contextPath}/js/scripts.js"></script>
 	<!-- renewen -->  
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="${contextPath}/js/date.js"></script>
+	
+	<script src="${contextPath}/js/cell_img.js" data-context-path="${contextPath}"></script>
+
+	
+
+	
 </body>
 </html>
 

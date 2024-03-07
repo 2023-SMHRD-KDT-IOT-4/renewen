@@ -136,6 +136,17 @@ public class PlantServiceImpl implements PlantService {
 
 
 	@Override
+	public List<CellShotImgVO> getCellImgsByCellNoAndDate(CellShotImgVO cell){
+		return plantMapper.getCellImgsByCellNoAndDate(cell);
+	}
+	
+	@Override
+	public List<GenerateCellVO> getGenerateCell(long selectedCell){
+		return plantMapper.getGenerateCell(selectedCell);
+	}
+
+
+	@Override
 	public List<PowerPlantVO> getNotGrantPlants() {
 		return plantMapper.getNotGrantPlants();
 	}
@@ -144,6 +155,12 @@ public class PlantServiceImpl implements PlantService {
 	@Override
 	public int grantPlant(PowerPlantVO vo) {
 		return plantMapper.grantPlant(vo);
+	}
+
+
+	@Override
+	public List<PowerPlantVO> getGrantPlants() {
+		return plantMapper.getGrantPlants();
 	}
 
 }
