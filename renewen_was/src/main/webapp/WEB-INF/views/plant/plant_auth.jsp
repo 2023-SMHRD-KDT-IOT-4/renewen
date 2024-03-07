@@ -65,7 +65,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="card mb-4" id="plantList">
-								<div class="card-header">${user.userId}님의승인을 기다리고 있어요</div>
+								<div class="card-header">${user.userId}님의 승인을 기다리는 중..🤔</div>
 								<div class="card-body">
 									<form id="authForm" action="${contextPath}/plantAuth"
 										method="post">
