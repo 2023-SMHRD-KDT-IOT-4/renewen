@@ -40,6 +40,7 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/views/layouts/sidenav.jsp" />
 		<div id="layoutSidenav_content">
+
 			<main>
 				<!-- Main page content-->
 				<div class="container-xl px-4 mt-5">
@@ -102,5 +103,6 @@
 		<script src="${contextPath}/js/date.js"></script>
 		<script src="${contextPath}/js/cloud_img.js"
 			data-context-path="${contextPath}"></script>
+
 </body>
 </html>

@@ -46,6 +46,8 @@ public interface PlantMapper {
 	
 	// =================================================================
 	
+	public List<GenerateCellVO> getGenerateCell(long selectedCell);
+	
 	// 발전셀
 	
 	// 발전셀 정보 저장
@@ -62,5 +64,7 @@ public interface PlantMapper {
 	
 	// 발전셀 발전량 저장 
 	public int insertGeneratedElec(CellGeneratedElecVO vo);
+	
+	public List<CellShotImgVO> getCellImgsByCellNoAndDate(CellShotImgVO cell);
 	
 }

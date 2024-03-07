@@ -1,12 +1,16 @@
 package kr.smhrd.renewen.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 // 발전셀 촬영 이미지
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CellShotImgVO {
 	
 	// 셀 이미지 식별번호 
