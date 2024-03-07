@@ -32,43 +32,44 @@
                             </nav>
                         </div>
                         
-                        <!-- 발전소 -->
-                        <!-- Sidenav Heading (Custom)-->
-                        <div class="sidenav-menu-heading">발전소</div>
-                        
-                        	<!-- Dashboard -->
-	                        <a class="nav-link collapsed" href="${contextPath}/plant/dashboard" >
-	                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
-	                            발전 현황
-	                        </a>                        
-	                        <a class="nav-link collapsed" href="${contextPath}/plant/stats" >
-	                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
-	                            발전량 조회
-	                        </a>                        
-                        
-                        
-                        <!-- Sidenav Accordion (Pages)-->
-                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
-                            data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="nav-link-icon"><i class="bi bi-tools"></i></div>
-                            발전소 관리
-                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-
-                        <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
-                            <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-                                <!-- Nested Sidenav Accordion (Pages -> Account)-->
-                                
-                                
-                                <a class="nav-link" href="${contextPath}/plant/register">발전소 등록</a>
-                                
-                                <a class="nav-link collapsed" href="${contextPath}/plant/list">발전소 리스트</a>
-                               
-                                
-                                <a class="nav-link collapsed" href="${contextPath}/plant/cellImgs">셀 상태 확인</a>
-                                
-                                <a class="nav-link collapsed" href="${contextPath}/plant/cloudImgs" >구름형상 이미지 </a>
-                               
+                   				<!-- 발전소 -->
+		                        <!-- Sidenav Heading (Custom)-->
+		                        <div class="sidenav-menu-heading">발전소</div>
+		                        
+	                        	<!-- Dashboard -->
+		                        <a class="nav-link collapsed" href="${contextPath}/plant/dashboard" >
+		                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
+		                            발전 현황
+		                        </a>                        
+		                        <a class="nav-link collapsed" href="${contextPath}/plant/stats" >
+		                            <div class="nav-link-icon"><i class="bi bi-lightning-fill"></i></i></div>
+		                            발전량 조회
+		                        </a>                                              
+            
+		                        <c:if test="${not empty user.userId}">
+			                        <!-- Sidenav Accordion (Pages)-->
+			                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+			                            data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+			                            <div class="nav-link-icon"><i class="bi bi-tools"></i></div>
+			                            발전소 관리
+			                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+			                        </a>
+			
+			                        <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
+			                            <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+			                                <!-- Nested Sidenav Accordion (Pages -> Account)-->
+			                                
+			                                
+			                                <a class="nav-link" href="${contextPath}/plant/register">발전소 등록</a>
+			                                
+			                                <a class="nav-link collapsed" href="${contextPath}/plant/list">발전소 리스트</a>
+			                               
+			                                
+			                                <a class="nav-link collapsed" href="${contextPath}/plant/cellImgs">셀 상태 확인</a>
+			                                
+			                                <a class="nav-link collapsed" href="${contextPath}/plant/cloudImgs" >구름형상 이미지 </a>
+			  
+		                        </c:if>
 
 
                                 <div class="collapse" id="pagesCollapseAuth"
