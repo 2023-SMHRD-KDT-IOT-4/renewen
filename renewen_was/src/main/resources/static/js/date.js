@@ -33,13 +33,6 @@
        window.onload = function() {
            updateDateTime(); 
            setInterval(updateDateTime, 1000);
-           
-          // 커서 위치
-          var input = document.querySelector('input');
-          if(input) {
-              var inputValue = input.value;
-              input.selectionStart = input.selectionEnd = inputValue.length;
-              input.focus();
-          }
+
           
        };  
