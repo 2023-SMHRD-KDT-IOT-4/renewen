@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.smhrd.renewen.global.util.CommonUtil;
 import kr.smhrd.renewen.mapper.PlantStatsMapper;
 import kr.smhrd.renewen.model.CellGeneratedElecVO;
+import kr.smhrd.renewen.model.PredictedGenElecVO;
 
 @Service
 public class PlantStatsServiceImpl implements PlantStatsService {
@@ -60,6 +61,30 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 			result.put(util.formatNumberWithPadding(i) + ":00", total);
 		}
 		return result;
+	}
+
+	@Override
+	public Map<String, Double> getPredictPerHour(long plantNo, String checkDate) {
+		Map<String, Double> result = new HashMap<>();
+		List<PredictedGenElecVO> list = mapper.getPredictPerHour(plantNo, checkDate);
+		
+		
+		for(int i = 0; i < 24; i++) {
+			for(PredictedGenElecVO vo : list) {
+				String createdAt = vo.getCreatedAt();
+				String time = createdAt.split(" ")[1].substring(0, 2);
+				if(i == Integer.parseInt(time)) {
+					result.put(util.formatNumberWithPadding(i) + ":00", vo.getGenElec());
+					break;
+				}
+				result.put(util.formatNumberWithPadding(i) + ":00", 0.0);
+			}
+
+			
+		}
+
+
+		return  result;
 	}
 
 }

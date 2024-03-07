@@ -81,8 +81,8 @@ const fetchPredict = (url, plantNo) => {
     },
     success: function(response) {
         console.log('fetchPredict data:', response);
-        const genRealData = response;
-        printPredictChart(genRealData)
+        const { genReal, genPredict } = response;
+        printPredictChart(genReal, genPredict)
         
     },
     error: function(xhr, status, error) {
@@ -93,12 +93,14 @@ const fetchPredict = (url, plantNo) => {
 }
 
 
-const printPredictChart = (genRealData) => {
+const printPredictChart = (genRealData, genPredictData) => {
     
   let realList = [];
+  let predictList = [];
   for(let i=0; i< timeData.length; i++) {
 		let time = timeData[i];
 		realList.push({ 'time' : time, 'value' : genRealData[time]  });
+		predictList.push({ 'time' : time, 'value' : genPredictData[time]  });
 	}
 	
 	// 차트 생성
@@ -107,12 +109,6 @@ const printPredictChart = (genRealData) => {
     renderer: 'canvas',
     useDirtyRect: false
   });
-
-  // 예상발전량 데이터 생성
-  let lineData = [];
-  for (let i = 0; i < 24; i++) {
-    lineData.push(Math.floor(Math.random() * 100)); // 임의의 데이터 생성
-  }
 
 
   // 차트 옵션 설정
@@ -173,7 +169,7 @@ const printPredictChart = (genRealData) => {
           return value + 'W';
         }
       },         
-      data: lineData
+      data: predictList.map(item => item.value)
     }, {
       name: '실제 발전량',
       type: 'bar',
@@ -231,7 +227,7 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TA': [] }) => {
   let tempList = dataObj['TA'] ? dataObj['TA'].map(item => item.weatherValue) : [];
   let option;
 
-  const colors = ['#5470C6', '#91CC75', '#EE6666'];
+  const colors = ['#FFA500', '#91CC75', '#EE6666'];
   option = {
     color: colors,
     tooltip: {

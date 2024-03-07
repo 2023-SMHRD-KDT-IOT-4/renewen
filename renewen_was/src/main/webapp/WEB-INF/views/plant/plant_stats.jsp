@@ -11,24 +11,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-<!-- favicon2추가  -->
-<link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon2.png" />
-	
+	<link rel="icon" type="image/x-icon" 	href="${contextPath}/assets/img/favicon.png" />
 	<link href="${contextPath}/css/styles.css" rel="stylesheet" />
 	<script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-	
-	<!--현정, 하이차트 사용 위해 라이브러리 로드  -->
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<!-- Highcharts 스타일 시트 로드 -->
-	<link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
-	
+
 	<style>
 	.chart-container-css {
 		position: relative;
-		height: 80vh;
+		height: 50vh;
 		overflow: hidden;
 	}
 	</style>
@@ -57,7 +49,7 @@
 											<div class="page-header-icon">
 												<i data-feather="zap"></i>
 											</div>
-											금일 발전 형황
+											발전량 조회
 										</h1>
 									</div>
 
@@ -83,56 +75,32 @@
 					<div class="row" id="dashDiv1">
 
 						<!-- 금일 발전량 -->
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량</div>
 								<div class="card-body">
-									<!-- 현정 수정 부분, 바 차트 삽입  -->
-									<div class="chart-bar" id="chart-container"></div>
+									<div id="chart-container" class="chart-container-css"></div>
+									<h2></h2>
 								</div>
 							</div>
 						</div>
 						
 						<!-- 금일 발전량 추이 -->
+<!-- 					
 						<div class="col-lg-8">
-							<!-- Pie chart example-->
+							Pie chart example
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량 추이</div>
 								<div class="card-body">
 									<div id="chartPredictElec" class="chart-pie"></div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
 					</div>
 					<!-- end row1 -->
 
-					<!-- row2 -->
-					<div class="row" id="dashDiv2">
-						<!-- 셀 상태 -->
-						<div class="col-lg-4">
-							<div class="card mb-4">
-								<div class="card-header">
-									셀 상태</div>
-								<div class="card-body">
-									1)아이콘(상태별 색상) 2)상태 텍스트로	출력 3) 셀 표면 온도
-									<div class="chart-bar" id="chart1">
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<!-- 금일 기상차트 -->
-						<div class="col-lg-8">
-							<div class="card mb-4">
-								<div class="card-header">금일 기상차트</div>
-									<div class="card-body">
-										<div id="chartWeather" class="chart-container-css"></div>
-									</div>
-							</div>
-						</div>
 
-					</div>
 				</div>
 				<!-- end <div class="container-xl px-4 mt-5">-->
 			</main>
@@ -147,8 +115,8 @@
 	<!-- renewen -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://fastly.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-	<script src="${contextPath}/js/renewen_dashboard.js"></script>
-	<script src="${contextPath}/js/bar_chart.js"></script>
+	<%-- <script src="${contextPath}/js/renewen_dashboard.js"></script> --%>
+	<script src="${contextPath}/js/renewen_stats.js"></script>
 </body>
 </html>
 
