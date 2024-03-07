@@ -166,6 +166,10 @@
 
 	<!-- 발전셀 -->
 
+	<select id="getGenerateCell" resultType="GenerateCellVO">
+		select*from generate_cell where cell_no=#{selectedCell}
+	</select>
+	
 	<!-- 아두이노 연동 - 발전셀 정보 use_yn 'N'으로 -->
 	<insert id="insertGenerateCell" parameterType="GenerateCellVO">
 		INSERT INTO generate_cell
@@ -208,6 +212,12 @@
 		SELECT * FROM cell_shot_img
 		WHERE cell_no = #{cellNo}
 		ORDER BY created_at DESC
+	</select>
+	
+	<select id="getCellImgsByCellNoAndDate" resultType="CellShotImgVO" parameterType="CellShotImgVO">
+		SELECT * FROM cell_shot_img 
+		WHERE cell_no=#{cellNo} and DATE(created_at)=#{createdAt}
+		ORDER BY created_at DESC, cs_no ASC
 	</select>
 	
 </mapper>
