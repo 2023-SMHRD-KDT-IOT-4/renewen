@@ -3,7 +3,9 @@ package kr.smhrd.renewen.controller;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ import org.springframework.web.util.UriUtils;
 
 import jakarta.servlet.http.HttpSession;
 import kr.smhrd.renewen.global.util.CommonUtil;
+import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
 import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.PowerPlantVO;
@@ -60,8 +63,7 @@ public class PlantController {
 		// JSP 넘겨준거 우도 경도
 		plant.setLatitude(plant.getLatitude());
 		
-		int res = plantService.registerPlant(plant);
-		System.out.println("발전소 등록 결과 : "+ res);
+		int res = plantService.registerPlant(plant);		
 		
 		return "redirect:/plant/list";
 	}
@@ -74,7 +76,7 @@ public class PlantController {
 		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
 		model.addAttribute("list", list);
 		session.setAttribute("plantNo", list);
-		System.out.println("세션에 저장된 값"+session.getAttribute("plantNo"));
+		//System.out.println("세션에 저장된 값"+session.getAttribute("plantNo"));
 		
 		
 		return "views/plant/plant_list";
@@ -195,7 +197,7 @@ public class PlantController {
 		return "views/plant/cloud_imgs";
 	}
 	
-	
+	//구름이미지
 	@PostMapping("/plant/cloudImgs")
 	@ResponseBody
 	public List<CloudShotImgVO> cloudImgs(@RequestParam("selectedPlant") int selectedPlant, @RequestParam("selectedDate") String selectedDate,Model model) {
@@ -208,6 +210,32 @@ public class PlantController {
 		List<CloudShotImgVO> cloudImgList = plantService.getCloudImgsByPlantNoAndDate(cloud);
 		
 		return cloudImgList;
+	}
+	
+	//셀 이미지
+	@PostMapping("/plant/cellImgs")
+	@ResponseBody
+	public Map<String, Object> cellImgs(@RequestParam("selectedCell") int selectedCell, @RequestParam("selectedDate")String selectedDate) {
+		//System.out.println("선택된 셀"+selectedCell);
+		//System.out.println("선택된 날짜"+selectedDate);
+		
+		CellShotImgVO cell = new CellShotImgVO();
+		
+		cell.setCellNo(selectedCell);
+		cell.setCreatedAt(selectedDate);
+		
+		List<CellShotImgVO> cellList = plantService.getCellImgsByCellNoAndDate(cell);
+		//System.out.println("cell이미지 리스트:"+cellList);
+		
+	    List<GenerateCellVO> generateCellList = plantService.getGenerateCell(selectedCell);
+		
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("cellList", cellList);
+	    result.put("GenerateCellVO", generateCellList);
+		
+		
+		return result;
+		
 	}
 	
 	// 발전소 셀 페이지
@@ -234,6 +262,20 @@ public class PlantController {
 		model.addAttribute("plantList", plantList);
 		
 		return "views/plant/cell_imgs";
+	}
+	
+	//cellNo 가져오기
+	@GetMapping("/plant/cell")
+	@ResponseBody
+	public List<GenerateCellVO> getCellNo(@RequestParam("plantNo") int plantNo) {
+		//System.out.println("선택된 발전소 번호 : "+plantNo);
+
+		List<GenerateCellVO> cellList =  plantService.getCellsByPlantNo(plantNo);
+		
+		//System.out.println(cellList);
+		
+		return cellList;
+		
 	}
 
 	// 이미지 다운로드

@@ -134,4 +134,13 @@ public class PlantServiceImpl implements PlantService {
 		return plantMapper.insertGeneratedElec(vo);
 	}
 
+	@Override
+	public List<CellShotImgVO> getCellImgsByCellNoAndDate(CellShotImgVO cell){
+		return plantMapper.getCellImgsByCellNoAndDate(cell);
+	}
+	
+	@Override
+	public List<GenerateCellVO> getGenerateCell(long selectedCell){
+		return plantMapper.getGenerateCell(selectedCell);
+	}
 }

@@ -77,8 +77,8 @@
         </div>
       </main>
     	<jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
-		</div> <!-- end <div id="layoutSidenav_content"> -->
-  </div>
+	</div> <!-- layoutSidenavcontent -->
+  </div> <!--layoutSidenav끝-->
   
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="${contextPath}/js/scripts.js"></script>
