@@ -221,9 +221,11 @@ var myLineChart = new Chart(ctx, {
                 }
             }]
         },
-        legend: {
+        
+        plugins: {
+					legend: {
             display: false
-        },
+				},
         tooltips: {
             backgroundColor: "rgb(255,255,255)",
             bodyFontColor: "#858796",
@@ -250,5 +252,6 @@ var myLineChart = new Chart(ctx, {
         onClick: function(e) {
             e.stopPropagation();
         }
+    }
     }
 });
