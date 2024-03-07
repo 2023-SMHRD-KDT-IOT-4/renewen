@@ -31,6 +31,8 @@ mybatis:
   type-aliases-package: kr.smhrd.renewen.model  
   configuration:
     map-underscore-to-camel-case: true    
+
+# ====================================================================================================================
     
 # 별도 설정
 upload:
