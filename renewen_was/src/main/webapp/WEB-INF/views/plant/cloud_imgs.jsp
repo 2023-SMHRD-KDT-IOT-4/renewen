@@ -12,13 +12,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
 	href="${contextPath}/assets/img/favicon2.png" />
-	<!-- 중복부분 삭제함 패비콘 2번  -->
-
-	
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
+
+<link href="${contextPath}/css/custom_style.css" rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
 	rel="stylesheet" />
@@ -40,14 +38,12 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/views/layouts/sidenav.jsp" />
 		<div id="layoutSidenav_content">
-
 			<main>
 				<!-- Main page content-->
 				<div class="container-xl px-4 mt-5">
 					<div class="card mb-4">
 						<div class="card-body">
-						<!-- 간격 일부 수정 -->
-							<h1 class="mb-1">발전소 구름형상 이미지</h1>
+							<h1 class="mb-4">발전소 구름형상 이미지</h1>
 							<!-- 현재 시간 -->
 							<div class="small" id="currentDateTimeContainer">
 								<span id="currentYear"></span> &middot; <span id="currentMonth"></span>
@@ -55,8 +51,7 @@
 								&middot; <span id="currentHour"></span>:<span id="currentMinute"></span>
 								<span id="currentPeriod"></span>
 							</div>
-							<!-- 간격 일부 수정  -->
-							<p class="mb-2">원하는 발전소와 날짜 선택 후 조회하기, 필요한 사진은 저장하세요 😊</p>
+							<p class="mb-3">원하는 발전소와 날짜 선택 후 조회하기, 필요한 사진은 저장하세요 😊</p>
 							<div class="small d-flex align-items-center mb-3">
 								<label for="authSelect1" class="form-label mb-0 me-2"
 									style="width: 10rem; text-align: center;">발전소 선택</label>
@@ -105,6 +100,5 @@
 		<script src="${contextPath}/js/date.js"></script>
 		<script src="${contextPath}/js/cloud_img.js"
 			data-context-path="${contextPath}"></script>
-
 </body>
 </html>

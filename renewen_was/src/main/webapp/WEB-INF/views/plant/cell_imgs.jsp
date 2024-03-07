@@ -66,7 +66,7 @@
 										<label for="authSelect1" class="form-label mb-0 me-2"
 											style="width: 10rem; text-align: center;">발전소 선택</label> <select
 											class="form-control me-2" id="authSelect1" name="authId"
-											style="width: 30rem;">
+											style="width: 20rem;">
 											<c:forEach items="${plantList}" var="vo">
 												<option value="${vo.plantNo}">${vo.plantName}</option>
 											</c:forEach>
@@ -75,21 +75,20 @@
 										<!-- 날짜 선택-->
 										<div
 											class="input-group input-group-joined border-0 shadow me-2"
-											style="width: 15rem;">
+											style="width: 20rem;">
 											<span class="input-group-text"><i class="text-primary"
 												data-feather="calendar"></i></span> <input
 												class="form-control ps-0 pointer" id="litepickerSingleDate"
 												placeholder="날짜 선택">
 										</div>
-										<!-- 셀 선택 -->
-										<select class="form-control" id="cellSelect">
+										<!-- 셀선택 -->
+										<select class="form-control" id="cellSelect" style="width: 20rem;">
 											<option></option>
 										</select>
-										<button class="btn btn-warning" style="width: 15rem;">조회하기</button>
+										<button class="btn btn-warning" style="width: 30%; margin-left: 10px;">조회하기</button>
 									</div>
-									
-									
 									<div>
+
 										<h4 class="mb-0 mt-5">Cells</h4>
 										<hr class="mt-2 mb-4">
 										<div id="cellDiv" class="mt-3"></div>
