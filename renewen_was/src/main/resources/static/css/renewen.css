@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.icon-24 {
+	font-size: 24px;
+}
+
+.chart-container-css {
+	position: relative;
+	height: 80vh;
+	overflow: hidden;
+}

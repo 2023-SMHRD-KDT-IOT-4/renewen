@@ -3,6 +3,7 @@ package kr.smhrd.renewen.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class UserController {
 		return "views/user/login";
 	}
 	
+	/*
 	@PostMapping("/user/login")
 	public String login(UserVO user, HttpSession session,Model model) {
 		
@@ -47,6 +49,24 @@ public class UserController {
 			return "redirect:/user/login";
 		}
 	}
+	*/
+	@PostMapping("/user/login")
+	public String login(UserVO user, HttpSession session, Model model) {
+	    System.out.println(user);
+	    UserVO loginUser = userService.login(user);
+	    System.out.println("logined!! " + loginUser);
+	    if (loginUser != null) {
+	        String userId = loginUser.getUserId();
+	        session.setAttribute("user", loginUser);
+	        List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
+	        System.out.println("로그인후 발전소 정보" + plantList);
+	        session.setAttribute("plantList", plantList);
+	        return "redirect:/";
+	    } else {
+	        return "redirect:/user/login";
+	    }
+	}
+	
 	
 	@GetMapping("/user/logout")
 	public String logout(HttpSession session) {
@@ -61,12 +81,26 @@ public class UserController {
 		return "views/user/join";
 	}
 	
+	/*
+	 * @PostMapping("/user/join") public String join(UserVO user) {
+	 * 
+	 * userService.joinUser(user);
+	 * 
+	 * return "redirect:/"; }
+	 */
+	
 	@PostMapping("/user/join")
 	public String join(UserVO user) {
-		
-		userService.joinUser(user);
-		
-		return "redirect:/";
+	    try {
+	        int result = userService.joinUser(user);
+	        if (result < 1) {
+	            return "views/user/join";
+	        } else {
+	            return "redirect:/";
+	        }
+	    } catch (DataIntegrityViolationException ex) {
+	        return "views/user/join";
+	    } 
 	}
 	
 	// 회원정보 수정 페이지

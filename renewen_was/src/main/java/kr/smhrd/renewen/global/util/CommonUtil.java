@@ -2,10 +2,12 @@ package kr.smhrd.renewen.global.util;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,10 +24,11 @@ public class CommonUtil {
 	String uploadPath; // 업로드 기본경로
 
 	@Value("${upload.img}")
-	String imgDir; // 업로드-이미지 경로
+	String imgDir; // 업로드 이미지 경로
 	
 	/**
-	 * @param dateFormat yymmddhhmmss
+	 * @param dateFormat 
+	 * yyyyMMddhhmmss
 	 * @return
 	 */
 	public String getCurrentDateTime(String dateFormat) {
@@ -63,4 +66,37 @@ public class CommonUtil {
 	public String getFileFullPath(String fileName) {
 		return getUploadImgPath() + File.separator + fileName;
 	}
+	
+	/**
+	 * @param startDateStr yyyymmdd
+	 * @param endDateStr yyyymmdd
+	 * @return  List<String> dateList  startDateStr ~ endDateStr
+	 */
+	public List<String> dateList(String startDateStr , String endDateStr ) {
+        // 문자열을 LocalDate로 변환
+        LocalDate startDate = LocalDate.parse(startDateStr, DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate endDate = LocalDate.parse(endDateStr, DateTimeFormatter.BASIC_ISO_DATE);
+
+        // 시작 날짜부터 종료 날짜까지의 모든 날짜를 리스트에 추가
+        List<String> dateList = new ArrayList<>();
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+            dateList.add(date.format(DateTimeFormatter.BASIC_ISO_DATE));
+        }
+       return dateList;
+	}
+	
+	/**
+	 * @param paramDate YYYYMMDD
+	 * @return paramDate + plusDay
+	 */
+	public String plusDays(String paramDate, int plusDay) {
+	
+        LocalDate date = LocalDate.parse(paramDate);
+        LocalDate tomorrow = date.plusDays(plusDay);
+        String plusDate = tomorrow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+		return plusDate;
+	}
+	
+	
 }

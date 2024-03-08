@@ -20,5 +20,5 @@ public class CellGeneratedElecVO {
 	
 	private double genElecWatt;
 	
-	private double genElecWattText;
+	private String genElecWattText;
 }

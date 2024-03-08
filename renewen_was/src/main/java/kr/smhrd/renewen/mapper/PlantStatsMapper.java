@@ -16,10 +16,19 @@ public interface PlantStatsMapper {
 	// 발전소 셀 별 금일 현재 발전량
 	public List<CellGeneratedElecVO> getCurrentElecPerCell(long plantNo);
 	// 발전소 - 시간별 발전량
-	public List<CellGeneratedElecVO> getHourElecPerCell(@Param("dateHour") String dateHour,
+	public List<CellGeneratedElecVO> getHourElecPerCell(
+			@Param("dateHour") String dateHour,
 			@Param("cellNos") List<Long> cellNos);
+	// 발전소 - 기간별 발전량
+	public List<CellGeneratedElecVO> getGenElecPeriod(
+			@Param("startDate") String startDate,
+			@Param("endDate") String endDate,
+			@Param("cellNos") List<Long> cellNos);
+	
+	// =============================================================================================
 
 	// 예상 발전량 시간별
-	public List<PredictedGenElecVO> getPredictPerHour(@Param("plantNo") long plantNo,
+	public List<PredictedGenElecVO> getPredictPerHour(
+			@Param("plantNo") long plantNo,
 			@Param("checkDate") String checkDate);
 }

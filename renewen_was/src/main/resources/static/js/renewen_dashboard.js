@@ -36,13 +36,11 @@ $(document).ready(function() {
   
 }); // document
 
-// ['00:00', '01:00', '02:00', ..., '23:00']
 var timeData = [];
 for (var i = 0; i < 24; i++) {
   var hour = (i < 10 ? '0' : '') + i + ':00'; // 시간 형식을 00:00으로 맞춤
   timeData.push(hour);
 }
-
 
 const fetchGenElec = (url, plantNo) => {
 	
@@ -54,22 +52,61 @@ const fetchGenElec = (url, plantNo) => {
     },
     success: function(response) {
         console.log('fetchGenElec data:', response);
-        const {totalWatt, currentWatt} = response;
-        const expectedWatt = totalWatt * 0.8;
+        const {totalWatt, currentWatt, predictWatt} = response;
         
-        drawGenElecChart(currentWatt, totalWatt, expectedWatt);
-        // $("#spanCurrentWatt").text(currentWatt);
-        // $("#spanTotalWatt").text(totalWatt);
-        // $("#spanExpectedWatt").text(expectedWatt);
+        drawGenElecChart(currentWatt, totalWatt, predictWatt);
     },
     error: function(xhr, status, error) {
+				console.error(error);
 				drawGenElecChart(0, 0, 0);
-        // $("#spanCurrentWatt").text('N/A');
-        // $("#spanTotalWatt").text('N/A');
   	}
 	});
 }// fetchGenElec
 
+// 금일발전량 차트 출력
+const drawGenElecChart = (currentWatt = 0, totalWatt = 0, predictWatt = 0) => {
+	
+	Highcharts.chart('chart-container', {
+	    accessibility: {
+	        enabled: false
+	    },
+	    chart: {
+	        type: 'bar'
+	    },
+	    title: {
+	        text: ''
+	    },
+	    xAxis: {
+	        categories: ['발전량'],
+	        gridLineColor: '#808080', // X 축의 그리드 라인 색상 변경
+	        gridLineWidth: 1 // X 축의 그리드 라인 두께 설정
+	    },
+	    yAxis: {
+	        title: {
+	            text: ''
+	        },
+	        gridLineColor: '#808080', // Y 축의 그리드 라인 색상 변경
+	        gridLineWidth: 1, // Y 축의 그리드 라인 두께 설정
+	    },
+	    credits: { // 로고 제거를 위한 credits 옵션 추가
+	        enabled: false
+	    },
+	    series: [{
+	        name: '현재 발전량',
+	        data: [currentWatt],
+	        color: '#f9f043'
+	    }, {
+	        name: '누적 발전량',
+	        data: [totalWatt],
+	        color: '#f9ad43'
+	    }, {
+	        name: '예상 발전량',
+	        data: [predictWatt],
+	        color: '#fe413e'
+	    }]
+	});
+	
+}
 
 const fetchPredict = (url, plantNo) => {
 	
@@ -99,8 +136,9 @@ const printPredictChart = (genRealData, genPredictData) => {
   let predictList = [];
   for(let i=0; i< timeData.length; i++) {
 		let time = timeData[i];
+		let predictVal = genPredictData[time] !== undefined ? genPredictData[time] : 0; 
 		realList.push({ 'time' : time, 'value' : genRealData[time]  });
-		predictList.push({ 'time' : time, 'value' : genPredictData[time]  });
+		predictList.push({ 'time' : time, 'value' : predictVal });
 	}
 	
 	// 차트 생성
@@ -130,7 +168,7 @@ const printPredictChart = (genRealData, genPredictData) => {
       }
     },
     legend: {
-      data: ['예상 발전량', '실제 발전량']
+      data: ['실제 발전량', '예상 발전량']
     },
     xAxis: {
       type: 'category',
@@ -140,60 +178,58 @@ const printPredictChart = (genRealData, genPredictData) => {
       },
     },
     yAxis: [{
-      type: 'value',
-      name: '예상 발전량(W)',
+      type: 'value', // bar
+      name: '실제 발전량(W)',
       position: 'left',
       axisLine: {
         show: true,
         lineStyle: {
-          color: '#5470C6' // 선 그래프 색상
+          color: '#5470C6' 
         }
       }
     }, {
-      type: 'value',
-      name: '실제 발전량(W)',
+      type: 'value', // line
+      name: '예상 발전량(W)',
       position: 'right',
       show: true,
       axisLine: {
         lineStyle: {
-          color: '#008000' // 막대 그래프 색상
+          color: '#008000' 
         }
       }
     }],
     series: [{
-      name: '예상 발전량',
-      type: 'line',
+      name: '실제 발전량',
+      type: 'bar',
       yAxisIndex: 0, 
       tooltip: {
         valueFormatter: function (value) {
           return value + 'W';
         }
       },         
-      data: predictList.map(item => item.value)
+      data: realList.map(item => item.value)
     }, {
-      name: '실제 발전량',
-      type: 'bar',
+      name: '예상 발전량',
+      type: 'line',
       yAxisIndex: 1, 
       tooltip: {
         valueFormatter: function (value) {
           return value + 'W';
         }
       },         
-      data: realList.map(item => item.value)
+      data: predictList.map(item => item.value)
     }]
   };
-
   // 차트에 옵션 설정
   predictChart.setOption(option);
 
-  
-   }
+}
 
 
 // 3) 기상 데이터 
 const fetchWeather = (url, stnNo = 156) => {
 	
-	const findTypes = ['TA','SI','WS'];
+	const findTypes = ['TEMPERATURE','SI','WS']; // TA => TEMPERATURE
 	$.ajax({
     url: url,
     type: 'GET',
@@ -214,7 +250,7 @@ const fetchWeather = (url, stnNo = 156) => {
 }
 
 // 3) 기상차트 그리기
-const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TA': [] }) => {
+const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TEMPERATURE': [] }) => {
 
 	const dom = document.getElementById("chartWeather");
   const weatherChart = echarts.init(dom, null, {
@@ -224,7 +260,7 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TA': [] }) => {
 
   let siList = dataObj['SI'] ? dataObj['SI'].map(item => item.weatherValue) : [];
   let wsList = dataObj['WS'] ? dataObj['WS'].map(item => item.weatherValue) : [];
-  let tempList = dataObj['TA'] ? dataObj['TA'].map(item => item.weatherValue) : [];
+  let tempList = dataObj['TEMPERATURE'] ? dataObj['TEMPERATURE'].map(item => item.weatherValue) : [];
   let option;
 
   const colors = ['#FFA500', '#91CC75', '#EE6666'];
