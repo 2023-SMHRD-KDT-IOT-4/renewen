@@ -26,35 +26,31 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 	@Autowired
 	CommonUtil util;
 	
+	// 금일 누적 발전량
 	@Override
 	public double genTodayTotal(long plantNo) {
-		double totalWatt = 0;
-		List<CellGeneratedElecVO> list = mapper.getTotalElecPerCell(plantNo);
-		for(CellGeneratedElecVO vo : list) {
-			totalWatt += vo.getGenVoltage() * vo.getGenElecCurrent();
-		}
-		return totalWatt;
+		double totalWatt = mapper.getTodayTotal(plantNo);
+		double result = Math.floor(totalWatt * 100) / 100; // 소수점 2자리 버림
+		return result;
 	}
 
+	// 금일 현재 발전량
 	@Override
 	public double genTodayCurrent(long plantNo) {
-		double totalWatt = 0;
-		List<CellGeneratedElecVO> list = mapper.getCurrentElecPerCell(plantNo);
-		for(CellGeneratedElecVO vo : list) {
-			totalWatt += vo.getGenVoltage() * vo.getGenElecCurrent();
-		}
-		return totalWatt;
+		double totalWatt = mapper.getTodayCurrent(plantNo);
+		double result = Math.floor(totalWatt * 100) / 100; // 소수점 2자리 버림
+		return result;
 	}
 	
 	@Override
 	public double genTodayPredict(long plantNo) {
 		String today = util.getCurrentDateTime("yyyyMMdd");
-		Map<String, Double> timeMap	= new HashMap<>();
 		List<PredictedGenElecVO> list = mapper.getPredictPerHour(plantNo, today);
 		double total = 0; 
 		for(PredictedGenElecVO vo : list) {
 			total += vo.getGenElec();
 		}
+		double result = Math.floor(total * 100) / 100; // 소수점 2자리 버림
 		return total;
 	}
 
