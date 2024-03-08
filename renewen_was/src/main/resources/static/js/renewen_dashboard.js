@@ -27,7 +27,7 @@ $(document).ready(function() {
 	 // 발전소 변경 시 
 	 $("#selectList").change(function() {
   	plantNo = $(this).val();
-  	
+  	console.log(plantNo);
   	// 1. 금일 발전량 차트 출력
    	fetchGenElec(genElecUrl, plantNo);
  		// 2. 금일 발전량 추이 차트 출력
