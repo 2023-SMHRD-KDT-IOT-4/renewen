@@ -34,16 +34,7 @@
 			AND DATE(A.created_at) = CURDATE()
 	</select>
 	
-	<select id="getPredictPerHour" parameterType="java.util.Map" resultType="PredictedGenElecVO" >
-		SELECT 
-			SUM(predict_gen_elec) as gen_elec, created_at 
-		FROM predicted_gen_elec
-		WHERE plant_no = #{plantNo}
-			AND DATE_FORMAT(created_at, '%Y%m%d') = #{checkDate}
-		GROUP BY created_at
-	</select>
-	
-	<select id="getHourElecPerCell">
+	<select id="getHourElecPerCell" parameterType="java.util.Map">
 		SELECT cell_no, gen_voltage, gen_elec_current, created_at
 		FROM cell_generated_elec
 		WHERE 
@@ -54,6 +45,29 @@
             #{item}
         </foreach>
 	</select>
+
+	<select id="getGenElecPeriod" resultType="CellGeneratedElecVO">
+		SELECT 
+			 created_at , SUM(gen_voltage * gen_elec_current) as gen_elec_watt
+		from cell_generated_elec 
+		WHERE cell_no IN 
+	    <foreach item="item" collection="cellNos" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+			AND DATE_FORMAT(created_at, '%Y%m%d') &gt;= #{startDate}
+			AND DATE_FORMAT(created_at, '%Y%m%d') &lt;= #{endDate}
+		GROUP BY created_at
+	</select>
+	
+	<select id="getPredictPerHour" parameterType="java.util.Map" resultType="PredictedGenElecVO" >
+		SELECT 
+			SUM(predict_gen_elec) as gen_elec, created_at 
+		FROM predicted_gen_elec
+		WHERE plant_no = #{plantNo}
+			AND DATE_FORMAT(created_at, '%Y%m%d') = #{checkDate}
+		GROUP BY created_at
+	</select>
+	
 	
 	
 </mapper>

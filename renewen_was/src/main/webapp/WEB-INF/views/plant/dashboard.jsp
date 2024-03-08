@@ -17,6 +17,7 @@
 	href="${contextPath}/assets/img/favicon2.png" />
 
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
+<link href="${contextPath}/css/renewen.css" rel="stylesheet" />
 <script data-search-pseudo-elements defer
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 	crossorigin="anonymous"></script>
@@ -31,11 +32,7 @@
 	href="https://code.highcharts.com/css/highcharts.css">
 
 <style>
-.chart-container-css {
-	position: relative;
-	height: 80vh;
-	overflow: hidden;
-}
+
 </style>
 
 </head>
@@ -56,22 +53,21 @@
 						class="page-header page-header-compact page-header-light border-bottom bg-white mb-3">
 						<div class="container-xl px-4">
 							<div class="page-header-content">
-								<div class="row align-items-center justify-content-between pt-3">
+								
+								<div class="row col pt-3 d-flex align-items-center">
 									<div class="col-auto mb-3">
-										<h1 class="page-header-title">
-											<div class="page-header-icon">
-												<i data-feather="file"></i>
-											</div>
-										</h1>
+										<h1 class="page-header-title" style="font-size: 1.2rem;">
+											<i class="bi bi-lightning-fill icon-24 me-2"></i>
+											금일 발전현황
+										</h1>	
 									</div>
-
-									<div class="col-12 col-xl-auto mb-3 d-flex align-items-center">
+									<div class="col-12 col-xl-auto mb-3 d-flex align-items-center" style="margin: 0 1rem;">
 										<c:if test="${empty plantList}">
 											<h6 class="page-header-title">발전소 없음</h6>
 										</c:if>
 										<c:if test="${not empty plantList}">
 											<!-- 현정: 라벨 추가,발전소 선택 -->
-											<label for="plantList" class="me-2 inline-label">발전소
+											<label for="plantList" class="me-2 inline-label" style="font-size: 1.1rem;">발전소
 												선택:</label>
 											<!-- 끝 -->
 											<!-- CSS 클래스를 적용 -->
@@ -81,9 +77,10 @@
 												</c:forEach>
 											</select>
 										</c:if>
-									</div>
+									</div>								
 								</div>
-							</div>
+				
+							</div><!-- ennd <div class="page-header-content"> -->
 						</div>
 					</header>
 
@@ -115,7 +112,7 @@
 						<div class="col-lg-8">
 							<!-- Pie chart example-->
 							<div class="card mb-4">
-								<div class="card-header">예상 발전량</div>
+								<div class="card-header">금일 발전량 추이</div>
 								<div class="card-body">
 									<div id="chartPredictElec" class="chart-pie"></div>
 								</div>
