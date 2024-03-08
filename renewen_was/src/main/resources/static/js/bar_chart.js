@@ -17,11 +17,14 @@ const drawGenElecChart = (currentWatt, totalWatt, expectedWatt) => {
 	    title: {
 	        text: ''
 	    },
-	    xAxis: {
-	        categories: ['발전량'],
-	        gridLineColor: '#808080', // X 축의 그리드 라인 색상 변경
-	        gridLineWidth: 1 // X 축의 그리드 라인 두께 설정
-	    },
+xAxis: {
+    categories: ['발전량'], // 카테고리 설정
+    tickLength: 0, // 눈금 길이를 0으로 설정하여 숫자 레이블을 제거함
+    labels: {
+        align: 'center' // 레이블 가운데 정렬
+    }
+},
+
 	    yAxis: {
 	        title: {
 	            text: ''

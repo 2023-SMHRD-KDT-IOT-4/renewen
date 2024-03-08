@@ -29,7 +29,8 @@ const getWeatherInfo = () => {
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(success, fail);
 	} else {
-		alert("사용자의 위치 정보를 알 수 없습니다.")
+		//alert("사용자의 위치 정보를 알 수 없습니다.")
+		console.log("사용자의 위치 정보를 알 수 없습니다.");
 	}
 };
 
@@ -45,8 +46,9 @@ const success = (position) => {
 
 // 실패
 const fail = () => {
-    alert("좌표를 받아올 수 없습니다.")
-	iconSection.parentElement.style.display = 'none';
+    //alert("좌표를 받아올 수 없습니다.")
+    console.log("사용자의 위치 정보를 알 수 없습니다.");
+		iconSection.parentElement.style.display = 'none';
 }
 
 

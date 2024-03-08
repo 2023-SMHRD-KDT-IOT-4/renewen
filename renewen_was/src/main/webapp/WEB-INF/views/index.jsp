@@ -37,6 +37,8 @@
 
 <!-- 하이차트 라이브러리 연결 -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- 하이차트 허용 모듈 -->
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <!-- Highcharts 스타일 시트 로드 -->
 <link rel="stylesheet"
 	href="https://code.highcharts.com/css/highcharts.css">
@@ -114,7 +116,6 @@
 							<div class="row">
 								<div class="col-lg-6">
 									<!-- 금일 발전량-->
-
 									<div class="card h-100">
 										<div class="card-header">금일 발전량</div>
 										<div class="card-body">
@@ -124,11 +125,140 @@
 								</div>
 								
 								<div class="col-lg-6">
-									<!-- Pie chart example-->
+									<!-- 셀 상태-->
 									<div class="card h-100">
-										<div class="card-header">Traffic Sources</div>
+										<div class="card-header">셀 상태</div>
 										<div class="card-body">
 											<div class="chart-pie mb-4">
+												<!-- 셀 상태에 따라 색 달라지게 하는 jsp -->
+												<%
+												String cell1Status = "good"; // 첫 번째 셀의 상태 설정
+												String cell2Status = "warning"; // 두 번째 셀의 상태 설정
+
+												String cell1IconColor = "black"; // 첫 번째 셀의 기본 아이콘 색상 설정
+												String cell2IconColor = "black"; // 두 번째 셀의 기본 아이콘 색상 설정
+
+												// 첫 번째 셀의 상태에 따라 아이콘 색상 변경
+												if (cell1Status.equals("good")) {
+													cell1IconColor = "green"; // 좋은 상태면 녹색
+												} else if (cell1Status.equals("warning")) {
+													cell1IconColor = "orange"; // 주의 상태면 주황색
+												} else if (cell1Status.equals("alert")) {
+													cell1IconColor = "red"; // 경고 상태면 빨간색
+												}
+
+												// 두 번째 셀의 상태에 따라 아이콘 색상 변경
+												if (cell2Status.equals("good")) {
+													cell2IconColor = "green"; // 좋은 상태면 녹색
+												} else if (cell2Status.equals("warning")) {
+													cell2IconColor = "orange"; // 주의 상태면 주황색
+												} else if (cell2Status.equals("alert")) {
+													cell2IconColor = "red"; // 경고 상태면 빨간색
+												}
+												
+												// 세 번째 셀의 상태에 따라 아이콘 색상 변경
+												if (cell2Status.equals("good")) {
+													cell2IconColor = "green"; // 좋은 상태면 녹색
+												} else if (cell2Status.equals("warning")) {
+													cell2IconColor = "orange"; // 주의 상태면 주황색
+												} else if (cell2Status.equals("alert")) {
+													cell2IconColor = "red"; // 경고 상태면 빨간색
+												}
+
+												// 셀의 표면 온도 설정
+												int cell1Temperature = 25; 
+												int cell2Temperature = 35; 
+												int cell3Temperature = 45; 
+												%>
+
+												<!-- 첫 번째 셀에 대한 카드 생성 -->
+												<div class="col">
+													<div class="card">
+														<div class="card-body d-flex align-items-center">
+															<!-- 첫 번째 아이콘 -->
+															<i class="fa-solid fa-square"
+																style="font-size: 40px; color: <%=cell1IconColor%>;"></i>
+															<!-- 첫 번째 셀 상태 -->
+															<div class="ms-3 d-flex flex-column">
+																<label class="mb-1"> 첫 번째 셀 상태 : <%=cell1Status%>
+																</label>
+																<%
+																if (cell1Temperature > 45) {
+																	out.println("<span class='text-danger'>위험</span>");
+																} else if (cell1Temperature > 25) {
+																	out.println("<span class='text-warning'>주의</span>");
+																} else {
+																	out.println("<span class='text-success'>좋음</span>");
+																}
+																%>
+																<!-- 셀 표면 온도 -->
+																<label class="mb-0"> 셀 표면 온도 : <%=cell1Temperature%>°C
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+
+									<!-- 두 번째 셀에 대한 카드 생성 -->
+									<div class="col">
+										<div class="card">
+											<div class="card-body d-flex align-items-center">
+												<!-- 두 번째 아이콘 -->
+												<i class="fa-solid fa-square"
+													style="font-size: 40px; color: <%=cell2IconColor%>;"></i>
+												<!-- 두 번째 셀 상태 -->
+												<div class="ms-3 d-flex flex-column">
+													<label class="mb-1">두 번째 셀 상태 : <%=cell2Status%>
+													</label>
+													<%
+													if (cell2Temperature > 45) {
+														out.println("<span class='text-danger'>위험</span>");
+													} else if (cell2Temperature > 25) {
+														out.println("<span class='text-warning'>주의</span>");
+													} else {
+														out.println("<span class='text-success'>좋음</span>");
+													}
+													%>
+													<!-- 셀 표면 온도 -->
+													<label class="mb-0"> 셀 표면 온도 : <%=cell2Temperature%>°C
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									
+									<!-- 세 번째 셀에 대한 카드 생성 -->
+												<div class="col">
+													<div class="card">
+														<div class="card-body d-flex align-items-center">
+															<!-- 세 번째 아이콘 -->
+															<i class="fa-solid fa-square"
+																style="font-size: 40px; color: <%=cell1IconColor%>;"></i>
+															<!-- 세 번째 셀 상태 -->
+															<div class="ms-3 d-flex flex-column">
+																<label class="mb-1"> 세 번째 셀 상태 : <%=cell1Status%>
+																</label>
+																<%
+																if (cell1Temperature > 45) {
+																	out.println("<span class='text-danger'>위험</span>");
+																} else if (cell1Temperature > 25) {
+																	out.println("<span class='text-warning'>주의</span>");
+																} else {
+																	out.println("<span class='text-success'>좋음</span>");
+																}
+																%>
+																<!-- 셀 표면 온도 -->
+																<label class="mb-0"> 셀 표면 온도 : <%=cell1Temperature%>°C
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+									
+									
+									
 												<canvas id="myPieChart" width="100%" height="50%"></canvas>
 											</div>
 										</div>
@@ -237,7 +367,7 @@
 	<script src="${contextPath}/js/scripts.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<%-- <script src="${contextPath}/js/bar_chart.js"></script> --%>
-	<script src="${contextPath}/js/index_chart.js"></script>
-
+	<%-- <script src="${contextPath}/js/index_chart.js"></script>
+ --%>
 </body>
 </html>
