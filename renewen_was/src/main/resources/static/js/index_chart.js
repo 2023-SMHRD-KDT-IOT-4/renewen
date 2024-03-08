@@ -1,5 +1,3 @@
-
-
 // 차트 생성 함수
 const printPredictChart = () => {
 	
@@ -98,3 +96,71 @@ const printPredictChart = () => {
   // 차트에 옵션 설정
   predictChart.setOption(option);
 }
+
+
+ /* 금일 발전량 */
+ 
+ 
+ 
+ 
+ // 더미 데이터 예시
+const dummyData = {
+    currentWatt: [100, 200, 300, 400, 500, 600, 700],
+    totalWatt: [1000, 1200, 1400, 1600, 1800, 2000, 2200],
+    estimatedWatt: [1200, 1100, 1420, 1600, 1750, 1900, 2100]
+};
+
+// 차트 그리기 함수
+const drawGenElecChart= (currentWatt, totalWatt, estimatedWatt) =>{
+    Highcharts.chart('chart-container', {
+        chart: {
+            type: 'bar'
+        },
+        
+        credits: { // 로고 제거를 위한 credits 옵션 추가
+	        enabled: false
+	    	},
+	    
+	    	title: {
+	        text: ''
+	   	 },
+      
+        xAxis: {
+            categories: ['발전량'],
+            labels: {
+                enabled: true // x 축 레이블 보이기
+            }
+        },
+        
+        yAxis: {
+            title: {
+                text: ''
+            },
+            
+            labels: {
+                formatter: function() {
+                    return ''; // 비어있는 문자열 반환하여 빈 칸 표시
+                }
+            }
+        },
+        
+        series: [{
+            name: '현재 발전량',
+            data: currentWatt,
+            color: '#f9f043'
+        }, {
+            name: '누적 발전량',
+            data: totalWatt,
+            color: '#f9ad43'
+        }, {
+            name: '예상 발전량',
+            data: estimatedWatt,
+            color: '#fe413e'
+        }]
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 더미 데이터를 사용하여 차트 그리기
+    drawGenElecChart(dummyData.currentWatt, dummyData.totalWatt, dummyData.estimatedWatt);
+});

@@ -24,7 +24,7 @@
 <!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
 	href="${contextPath}/assets/img/favicon2.png" />
-	
+
 <script data-search-pseudo-elements defer
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 	crossorigin="anonymous"></script>
@@ -34,9 +34,26 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
+
+<!-- 하이차트 라이브러리 연결 -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- Highcharts 스타일 시트 로드 -->
+<link rel="stylesheet"
+	href="https://code.highcharts.com/css/highcharts.css">
+
+<link rel="stylesheet" href="${contextPath}/js/index_chart.js">
 <link rel="stylesheet" href="${contextPath}/js/chart.js">
-<script 
+<script
 	src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+
+<style>
+.chart-container-css {
+	position: relative;
+	height: 80vh;
+	overflow: hidden;
+}
+</style>
+
 </head>
 <body class="nav-fixed">
 
@@ -81,45 +98,44 @@
 								</div>
 							</div>
 						</div>
-						
-							<!--금일 발전량 추이-->
+
+						<!--금일 발전량 추이-->
 						<div class="col-lg-8 mb-4">
 							<div class="card mb-4">
 								<div class="card-header">금일 발전량 추이</div>
-							 <div class="card-body">
+								<div class="card-body">
 									<div class="chart-area">
 										<%-- <canvas id="myAreaChart" width="100%" height="400"></canvas> --%>
 										<div id="myAreaChart" class="chart-pie"></div>
 									</div>
 								</div>
-							</div>  	
+							</div>
+
 							<div class="row">
 								<div class="col-lg-6">
-									
-									<!-- Bar chart example-->
+									<!-- 금일 발전량-->
+
 									<div class="card h-100">
 										<div class="card-header">금일 발전량</div>
-										<div
-											class="card-body d-flex flex-column justify-content-center">
-											<div class="chart-bar">
-												<canvas id="myAreaChart" width="100%" height="100%"></canvas>
-											</div>
+										<div class="card-body">
+											<div class="chart-bar" id="chart-container"></div>
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-6">
 								
+								<div class="col-lg-6">
 									<!-- Pie chart example-->
 									<div class="card h-100">
 										<div class="card-header">Traffic Sources</div>
 										<div class="card-body">
 											<div class="chart-pie mb-4">
-												<canvas id="myPieChart" width="100%" height="50"></canvas>
+												<canvas id="myPieChart" width="100%" height="50%"></canvas>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -135,90 +151,93 @@
 
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l8y7kfobe4"></script>
-		<!-- index Chart.js 라이브러리 추가 -->
+	<!-- index Chart.js 라이브러리 추가 -->
 	<script src="${contextPath}/js/index_chart.js"></script>
 	<script>
-			printPredictChart();
-      var mapOptions = {
-         center : new naver.maps.LatLng(35.17294, 126.89156),
-         zoom : 15
-      };
+		printPredictChart();
+		var mapOptions = {
+			center : new naver.maps.LatLng(35.17294, 126.89156),
+			zoom : 15
+		};
 
-      var map = new naver.maps.Map('plantListMap', mapOptions);
-      // var map = new naver.maps.Map('map', mapOptions);
+		var map = new naver.maps.Map('plantListMap', mapOptions);
+		// var map = new naver.maps.Map('map', mapOptions);
 
-      var markerPositions = [ {
-         position : new naver.maps.LatLng(35.17294, 126.89156),
-         name : "<발전소1>",
-         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.17294 / 126.89156<br>*연동키: testKey1"
-      }, {
-         position : new naver.maps.LatLng(35.161828, 126.880026),
-         name : "<발전소2>",
-         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.161828 / 126.880026<br>*연동키: testKey2"
-      }, {
-         position : new naver.maps.LatLng(35.1653428, 126.9092003),
-         name : "<발전소3>",
-         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.1653428 / 126.9092003<br>*연동키: testKey3"
-      }, {
-         position : new naver.maps.LatLng(35.1682592, 126.8884114),
-         name : "<발전소4>",
-         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.1682592 / 126.8884114<br>*연동키: testKey4"
-      }, {
-         position : new naver.maps.LatLng(35.173121, 126.893802),
-         name : "<발전소5>",
-         content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.173121 / 126.893802<br>*연동키: testKey5"
-      } ];
+		var markerPositions = [
+				{
+					position : new naver.maps.LatLng(35.17294, 126.89156),
+					name : "<발전소1>",
+					content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.17294 / 126.89156<br>*연동키: testKey1"
+				},
+				{
+					position : new naver.maps.LatLng(35.161828, 126.880026),
+					name : "<발전소2>",
+					content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.161828 / 126.880026<br>*연동키: testKey2"
+				},
+				{
+					position : new naver.maps.LatLng(35.1653428, 126.9092003),
+					name : "<발전소3>",
+					content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.1653428 / 126.9092003<br>*연동키: testKey3"
+				},
+				{
+					position : new naver.maps.LatLng(35.1682592, 126.8884114),
+					name : "<발전소4>",
+					content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.1682592 / 126.8884114<br>*연동키: testKey4"
+				},
+				{
+					position : new naver.maps.LatLng(35.173121, 126.893802),
+					name : "<발전소5>",
+					content : "*주소: 광주광역시 ○○동<br>*위도/경도: 35.173121 / 126.893802<br>*연동키: testKey5"
+				} ];
 
-      // 변수를 선언하여 현재 열려 있는 정보창을 저장합니다.
-      var openedInfoWindow = null;
+		// 변수를 선언하여 현재 열려 있는 정보창을 저장합니다.
+		var openedInfoWindow = null;
 
-      for (var i = 0; i < markerPositions.length; i++) {
-         var marker = new naver.maps.Marker({
-            position : markerPositions[i].position,
-            map : map
-         });
+		for (var i = 0; i < markerPositions.length; i++) {
+			var marker = new naver.maps.Marker({
+				position : markerPositions[i].position,
+				map : map
+			});
 
-         // 클로저를 사용하여 정보 창에 대한 정보를 보존합니다.
-         (function(marker, contentString) {
-            naver.maps.Event.addListener(marker, 'click', function(e) {
-               // 마커를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
-               if (openedInfoWindow && openedInfoWindow.getMap()) {
-                  openedInfoWindow.close();
-               }
-               // 현재 클릭된 마커에 정보창을 연다.
-               var infoWindow = new naver.maps.InfoWindow({
-                  content : contentString
-               });
-               infoWindow.open(map, marker);
-               printPredictChart();
-               // 열린 정보창을 저장합니다.
-               openedInfoWindow = infoWindow;
-            });
-         })(marker, '<div style="padding:10px;"><h5>'
-               + markerPositions[i].name + '</h5><p>'
-               + markerPositions[i].content + '</p></div>');
-      }
+			// 클로저를 사용하여 정보 창에 대한 정보를 보존합니다.
+			(function(marker, contentString) {
+				naver.maps.Event.addListener(marker, 'click', function(e) {
+					// 마커를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
+					if (openedInfoWindow && openedInfoWindow.getMap()) {
+						openedInfoWindow.close();
+					}
+					// 현재 클릭된 마커에 정보창을 연다.
+					var infoWindow = new naver.maps.InfoWindow({
+						content : contentString
+					});
+					infoWindow.open(map, marker);
+					printPredictChart();
+					// 열린 정보창을 저장합니다.
+					openedInfoWindow = infoWindow;
+				});
+			})(marker, '<div style="padding:10px;"><h5>'
+					+ markerPositions[i].name + '</h5><p>'
+					+ markerPositions[i].content + '</p></div>');
+		}
 
-      // 지도를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
-      naver.maps.Event.addListener(map, 'click', function(e) {
-         if (openedInfoWindow) { 
-            openedInfoWindow.close();
-            openedInfoWindow = null;
-         }
-      });
-   </script>
-   
-    
+		// 지도를 클릭했을 때 열려 있는 정보창이 있다면 닫습니다.
+		naver.maps.Event.addListener(map, 'click', function(e) {
+			if (openedInfoWindow) {
+				openedInfoWindow.close();
+				openedInfoWindow = null;
+			}
+		});
+	</script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script src="${contextPath}/js/scripts.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<!-- renewen -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"
-		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-		crossorigin="anonymous"></script>
+	<%-- <script src="${contextPath}/js/bar_chart.js"></script> --%>
+	<script src="${contextPath}/js/index_chart.js"></script>
 
 </body>
 </html>
