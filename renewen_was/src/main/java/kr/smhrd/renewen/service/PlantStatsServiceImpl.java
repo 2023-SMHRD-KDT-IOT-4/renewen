@@ -50,6 +50,7 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 		for(PredictedGenElecVO vo : list) {
 			total += vo.getGenElec();
 		}
+		double result = Math.floor(total * 100) / 100; // 소수점 2자리 버림
 		return total;
 	}
 

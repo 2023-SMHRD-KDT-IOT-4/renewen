@@ -134,12 +134,18 @@ const printPredictChart = (genRealData, genPredictData) => {
     
   let realList = [];
   let predictList = [];
+  
   for(let i=0; i< timeData.length; i++) {
 		let time = timeData[i];
 		let predictVal = genPredictData[time] !== undefined ? genPredictData[time] : 0; 
-		realList.push({ 'time' : time, 'value' : genRealData[time]  });
+		let realVal = genRealData[time] !== undefined ? genRealData[time] : 0; 
+		realList.push({ 'time' : time, 'value' : realVal  });
 		predictList.push({ 'time' : time, 'value' : predictVal });
 	}
+	
+	const realMax = Math.max(...realList.map(item => item.value))
+	const predictMax = Math.max(...predictList.map(item => item.value))
+	
 	
 	// 차트 생성
   const dom = document.getElementById('chartPredictElec');
@@ -177,27 +183,32 @@ const printPredictChart = (genRealData, genPredictData) => {
         alignWithLabel: true
       },
     },
-    yAxis: [{
-      type: 'value', // bar
-      name: '실제 발전량(W)',
-      position: 'left',
-      axisLine: {
-        show: true,
-        lineStyle: {
-          color: '#5470C6' 
-        }
-      }
-    }, {
-      type: 'value', // line
-      name: '예상 발전량(W)',
-      position: 'right',
-      show: true,
-      axisLine: {
-        lineStyle: {
-          color: '#008000' 
-        }
-      }
-    }],
+    yAxis: [
+			{
+	      type: 'value', // bar
+	      name: '실제 발전량(W)',
+	      position: 'left',
+	      axisLine: {
+	        show: true,
+	        lineStyle: {
+	          color: '#5470C6' 
+	        }
+	      },
+	      max : Math.floor(realMax * 1.2)
+    	},
+    	{
+	      type: 'value', // line
+	      name: '예상 발전량(W)',
+	      position: 'right',
+	      show: true,
+	      axisLine: {
+	        lineStyle: {
+	          color: '#008000' 
+	        }
+	      },
+	      max : Math.floor(predictMax * 1.2)
+    	}
+    ],
     series: [{
       name: '실제 발전량',
       type: 'bar',
