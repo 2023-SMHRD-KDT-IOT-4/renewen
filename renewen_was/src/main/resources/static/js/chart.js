@@ -1,6 +1,6 @@
 
         // 페이지가 로드될 때 실행되는 함수
-/*       window.onload = function() {
+       window.onload = function() {
 				 	console.log("chart");
             // 도넛 차트 데이터
             var doughnutChartData = {
@@ -43,40 +43,39 @@
                 options: doughnutChartOptions
             });
         };
-*/
+
 
   // 발전소별 발전 용량 데이터 (마스터용)
-//   var powerPlantData = {
-//     labels: ["발전소 A", "발전소 B", "발전소 C"],
-//     datasets: [{
-//         data: [500, 700, 300], // kW 단위로 발전 용량 데이터 설정
-//         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-//     }]
-// };
+   var powerPlantData = {
+     labels: ["발전소 A", "발전소 B", "발전소 C"],
+     datasets: [{
+         data: [500, 700, 300], // kW 단위로 발전 용량 데이터 설정
+         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+     }]
+ };
 
 // 파이 차트 옵션
-// var pieChartOptions = {
-//     responsive: true,
-//     animation: {
-//         animateRotate: true, // 회전 애니메이션 활성화
-//         animateScale: true // 크기 애니메이션 활성화
-//     }
-// };
+ var pieChartOptions = {
+     responsive: true,
+     animation: {
+         animateRotate: true, // 회전 애니메이션 활성화
+         animateScale: true // 크기 애니메이션 활성화
+     }
+ };
 
 // 파이 차트 생성
-// var ctx = document.getElementById("myPieChart").getContext('2d');
-// var myPieChart = new Chart(ctx, {
-//     type: 'pie',
-//     data: powerPlantData,
-//     options: pieChartOptions
-// });
+ var ctx = document.getElementById("myPieChart").getContext('2d');
+ var myPieChart = new Chart(ctx, {
+     type: 'pie',
+     data: powerPlantData,
+     options: pieChartOptions
+ });
 
 
 
 // myPlantChart
 
-
-/*var renewableEnergyData = {
+var renewableEnergyData = {
     labels: ["현재 발전 용량 (kW)", "최대 발전 용량 (kW)"],
     datasets: [{
         data: [150, 200], // 현재 발전 용량과 최대 발전 용량 데이터 (단위: kW)
@@ -99,7 +98,7 @@ var myDoughnutChart = new Chart(ctx, {
     type: 'doughnut',
     data: renewableEnergyData,
     options: doughnutChartOptions
-});*/
+});
 
 
 
@@ -131,127 +130,4 @@ var myDoughnutChart = new Chart(ctx, {
     return s.join(dec);
 }*/
 
-
-// 금일 반전량 추이
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-        ],
-        datasets: [{
-            label: "", // 라벨 없애기
-            lineTension: 0.3,
-            backgroundColor: "rgba(0, 97, 242, 0.05)",
-            borderColor: "rgba(0, 97, 242, 1)",
-            pointRadius: 3,
-            pointBackgroundColor: "rgba(0, 97, 242, 1)",
-            pointBorderColor: "rgba(0, 97, 242, 1)",
-            pointHoverRadius: 3,
-            pointHoverBackgroundColor: "rgba(0, 97, 242, 1)",
-            pointHoverBorderColor: "rgba(0, 97, 242, 1)",
-            pointHitRadius: 10,
-            pointBorderWidth: 2,
-            data: [
-                0,
-                10000,
-                5000,
-                15000,
-                10000,
-                20000,
-                15000,
-                25000,
-                20000,
-                30000,
-                25000,
-                40000
-            ]
-        }]
-    },
-    options: {
-        maintainAspectRatio: false,
-        layout: {
-            padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-            }
-        },
-        scales: {
-            xAxes: [{
-                time: {
-                    unit: "date"
-                },
-                gridLines: {
-                    display: false,
-                    drawBorder: false
-                },
-                ticks: {
-                    maxTicksLimit: 7
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    maxTicksLimit: 5,
-                    padding: 10,
-                    // Include a dollar sign in the ticks
-                    callback: function(value, index, values) {
-                        return "$" + number_format(value);
-                    }
-                },
-                gridLines: {
-                    color: "rgb(234, 236, 244)",
-                    zeroLineColor: "rgb(234, 236, 244)",
-                    drawBorder: false,
-                    borderDash: [2],
-                    zeroLineBorderDash: [2]
-                }
-            }]
-        },
-        
-        plugins: {
-					legend: {
-            display: false
-				},
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            titleMarginBottom: 10,
-            titleFontColor: "#6e707e",
-            titleFontSize: 14,
-            borderColor: "#dddfeb",
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            intersect: false,
-            mode: "index",
-            caretPadding: 10,
-            callbacks: {
-                label: function(tooltipItem, chart) {
-                    var datasetLabel =
-                        chart.datasets[tooltipItem.datasetIndex].label || "";
-                    return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
-                }
-            }
-        },
-        // 라벨 클릭 시 동작하는 기능을 없애기
-        onClick: function(e) {
-            e.stopPropagation();
-        }
-    }
-    }
-});
+ 
