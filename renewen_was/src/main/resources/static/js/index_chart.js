@@ -100,11 +100,25 @@ const printPredictChart = () => {
 
  /* 금일 발전량 */
  // 더미 데이터 예시
-const dummyData = {
+/*const dummyData = {
     currentWatt: [100, 200, 300,],
     totalWatt: [1000, 1200, 1400],
     estimatedWatt: [1200, 1100, 1420]
+};*/
+
+// 랜덤 데이터 생성 함수
+const generatRandomData = () => {
+    return Math.floor(Math.random() * 10000);
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 랜덤 데이터 생성
+    const currentWatt = generatRandomData();
+    const totalWatt = generatRandomData();
+    const estimatedWatt = generatRandomData();
+    
+    drawGenElecChart(currentWatt, totalWatt, estimatedWatt);
+});
 
 // 차트 그리기 함수
 const drawGenElecChart = (currentWatt, totalWatt, estimatedWatt) => {
@@ -122,7 +136,7 @@ const drawGenElecChart = (currentWatt, totalWatt, estimatedWatt) => {
         },
 
         xAxis: {
-            categories: ['','발전량',''],
+            categories: ['발전량'],
             tickLength: 0,
             labels: {
                 align: 'center'
@@ -157,20 +171,16 @@ const drawGenElecChart = (currentWatt, totalWatt, estimatedWatt) => {
 
         series: [{
             name: '현재 발전량',
-            data: currentWatt,
+            data: [currentWatt],
             color: '#f9f043'
         }, {
             name: '누적 발전량',
-            data: totalWatt,
+            data: [totalWatt],
             color: '#f9ad43'
         }, {
             name: '예상 발전량',
-            data: estimatedWatt,
+            data: [estimatedWatt],
             color: '#fe413e'
         }]
     });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    drawGenElecChart(dummyData.currentWatt, dummyData.totalWatt, dummyData.estimatedWatt);
-});
+};
