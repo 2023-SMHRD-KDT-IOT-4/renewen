@@ -4,6 +4,21 @@
 
 <mapper namespace="kr.smhrd.renewen.mapper.PlantStatsMapper">
 
+	<!-- 발전소 금일 누적 발전량 -->
+	<select id="getTodayTotal" >
+		SELECT 
+			SUM(A.gen_voltage * A.gen_elec_current) AS gen_elec_watt
+		FROM 
+			cell_generated_elec AS A
+		JOIN 
+				(SELECT cell_no, plant_no 
+				 FROM generate_cell
+				 WHERE plant_no = #{plantNo} ) AS B 
+		ON A.cell_no = B.cell_no
+		where DATE(A.created_at) = curdate()
+	</select>
+	
+	<!-- 발전소 셀 별 금일 누적 발전량 -->
 	<select id="getTotalElecPerCell" resultType="CellGeneratedElecVO">
 		SELECT A.cell_no, 
 			A.gen_voltage,
@@ -18,6 +33,24 @@
 			ON A.cell_no = B.cell_no
 		WHERE DATE(A.created_at) = CURDATE()
 	</select>
+
+	<!-- 금일 현재 발전량 -->
+	<select id="getTodayCurrent">
+		SELECT 
+			SUM(A.gen_voltage * A.gen_elec_current) AS gen_elec_watt
+		FROM 
+			cell_generated_elec AS A
+		JOIN 
+			(SELECT cell_no 
+			FROM generate_cell
+			WHERE plant_no = #{plantNo} ) AS B 
+		ON A.cell_no = B.cell_no
+		where A.created_at &lt; now()
+		GROUP BY A.created_at
+		ORDER By created_at DESC
+		LIMIT 1;	
+	</select>
+
 
 	<select id="getCurrentElecPerCell" resultType="CellGeneratedElecVO">
 		SELECT A.cell_no, A.gen_voltage, A.gen_elec_current

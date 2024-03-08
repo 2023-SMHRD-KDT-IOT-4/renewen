@@ -57,9 +57,11 @@ public class PlantScheduler {
 	@Scheduled(cron = "0 30 0 * * *") // 매일 00:30분
 	public void callFlask() {
 
+		logger.info("callFlask schedule");
 		// 1) 유효한 발전소(연동완료) 리스트
 		List<PowerPlantVO> plantList = plantService.getGrantPlants();
 		if(plantList.isEmpty()) {
+			logger.info("callFlask schedule - plantList empty");
 			return;  // 유효 발전소 없음 => 예상발전량 요청X
 		}
 		List<Long> plantNos = new ArrayList<>();
@@ -73,7 +75,6 @@ public class PlantScheduler {
 	    Map<String, Object> requestBody = new HashMap<>();// 요청 본문에 전송할 데이터 설정
 	    requestBody.put("plant_no", plantNos);
 	    requestBody.put("st_date", stDate);
-
 	    // HTTP 요청 엔티티 생성
 	    HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 		String reqUrl = FLASK_URL + "predict";
