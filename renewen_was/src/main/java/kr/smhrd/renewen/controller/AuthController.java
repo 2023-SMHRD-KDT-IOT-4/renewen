@@ -28,7 +28,6 @@ public class AuthController {
 	public String GrantPlantList(Model model, HttpSession session) {
 		
 		UserVO user = (UserVO) session.getAttribute("user");
-		user.setAuthId("ROLE_ADMIN");
 		if(!"ROLE_ADMIN".equals(user.getAuthId())) {
 			return "redirect:/";
 		}
