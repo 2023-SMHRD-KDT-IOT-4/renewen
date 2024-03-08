@@ -13,6 +13,16 @@
 		  litepickerSingleDate.on('selected', (date) => {
 		      console.log('선택한 날짜:', date.format('YYYY-MM-DD'));
 		  });
+ 
+	//발전소 선택 후 발전셀 선택 
+	document.getElementById("authSelect1").addEventListener("change", function() {
+	    var selectedPlantName = this.options[this.selectedIndex].text;
+	    document.getElementById("selectdPowerPlnat").textContent = selectedPlantName;
+	
+	    // 발전소 선택이 바뀔 때마다 "발전셀 선택" 옵션 숨기기
+	    document.getElementById("first").style.display = "none";
+	    document.getElementById("selectdPowerPlnat").style.display = "block";
+	});
 		    
 	//발전소 선택시 해당 cell의 발전셀 가져오기
 	document.getElementById("authSelect1").addEventListener("change", function() {
@@ -36,6 +46,7 @@
 		                option.textContent = cell.cellType + '-' + cell.cellVolume;
 		                selectElement.appendChild(option);
 		            });
+		      
 		           	               
 	            }
 	        };
