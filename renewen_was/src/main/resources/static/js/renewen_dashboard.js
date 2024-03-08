@@ -229,7 +229,7 @@ const printPredictChart = (genRealData, genPredictData) => {
 // 3) 기상 데이터 
 const fetchWeather = (url, stnNo = 156) => {
 	
-	const findTypes = ['TA','SI','WS'];
+	const findTypes = ['TEMPERATURE','SI','WS']; // TA => TEMPERATURE
 	$.ajax({
     url: url,
     type: 'GET',
@@ -250,7 +250,7 @@ const fetchWeather = (url, stnNo = 156) => {
 }
 
 // 3) 기상차트 그리기
-const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TA': [] }) => {
+const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TEMPERATURE': [] }) => {
 
 	const dom = document.getElementById("chartWeather");
   const weatherChart = echarts.init(dom, null, {
@@ -260,7 +260,7 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TA': [] }) => {
 
   let siList = dataObj['SI'] ? dataObj['SI'].map(item => item.weatherValue) : [];
   let wsList = dataObj['WS'] ? dataObj['WS'].map(item => item.weatherValue) : [];
-  let tempList = dataObj['TA'] ? dataObj['TA'].map(item => item.weatherValue) : [];
+  let tempList = dataObj['TEMPERATURE'] ? dataObj['TEMPERATURE'].map(item => item.weatherValue) : [];
   let option;
 
   const colors = ['#FFA500', '#91CC75', '#EE6666'];

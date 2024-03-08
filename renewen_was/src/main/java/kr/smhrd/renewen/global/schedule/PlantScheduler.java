@@ -152,7 +152,7 @@ public class PlantScheduler {
 
 		Map<String, Integer> columnTypeMap = new HashMap<>();
 		columnTypeMap.put("STN", -1); // 지점코드
-		columnTypeMap.put("TA", -1); // 기온
+		columnTypeMap.put("TA", -1); // 기온 ==> TEMPERATURE
 		columnTypeMap.put("SI", -1); // 일사량
 		columnTypeMap.put("WS", -1); // 풍속
 		columnTypeMap.put("PA", -1); // 기압
@@ -193,7 +193,10 @@ public class PlantScheduler {
 			reversedMap.forEach((key, value) -> {
 				if ("STN".equals(value)) {
 					stn[0] = responseArr[key];
-				} else {
+				} else if("TA".equals(value)) { // 기상(TA)일 경우 키값 => TEMPERATURE
+					measureMap.put("TEMPERATURE", Double.parseDouble(responseArr[key]));
+				}
+				else {
 					measureMap.put(value, Double.parseDouble(responseArr[key]));
 				}
 			});
