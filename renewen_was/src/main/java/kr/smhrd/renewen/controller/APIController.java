@@ -52,11 +52,12 @@ public class APIController {
 	@PostMapping("/img/cloud")
 	public String processCloudImg(@RequestBody ShotImg reqVO) throws IOException {
 
+		logger.info("img cloud");
 		String plantLinkKey = reqVO.getPlantLinkKey();
 		// 발전소연동키 조회로 해당 발전소 가져옴
 		long plantNo = plantService.getPlantNoByLinkKey(plantLinkKey);
 		if (plantNo == 0) {
-			return "Not Exists";
+			return "Not Exists plantLinkKey";
 		}
 		
 		// 1) 이미지 업로드 처리. db 저장할 vo 리턴
@@ -82,6 +83,7 @@ public class APIController {
 	@PostMapping("/img/cells")
 	public String cellImgsInsert(@RequestBody String jsonData) {
 		
+		logger.info("img cells");
 		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
 		JsonArray cellsJsonArray = jsonObj.get("cells").getAsJsonArray();
 		
@@ -90,7 +92,7 @@ public class APIController {
 		try {
 			 cellImgList = apiService.processCellShotImgs(cellsJsonArray);
 			 if(cellImgList == null) {
-				 return "Not Exists";
+				 return "Not Exists plantLinkKey";
 			 }
 				 
 		} catch (IOException e) {
@@ -107,7 +109,7 @@ public class APIController {
 			
 		}
 		
-		return "suc";
+		return "success";
 	}
 	
 	
@@ -115,6 +117,7 @@ public class APIController {
 	@PostMapping("/sensing")
 	public String sensing(@RequestBody String jsonData) {
 		
+		logger.info("sensing");
 //		logger.info("sensing {}", jsonData);
 		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
 		String plantLinkKey = jsonObj.get("plantLinkKey").getAsString();
@@ -124,7 +127,8 @@ public class APIController {
 		// 발전소연동키 조회로 해당 발전소 가져옴
 		long plantNo = plantService.getPlantNoByLinkKey(plantLinkKey);
 		if (plantNo == 0) {
-			return "Not Exists";
+			logger.info("sensing - plantLinkKey {}", plantLinkKey);
+			return "Not Exists plantLinkKey";
 		}
 
 		// sensing 처리
@@ -146,13 +150,15 @@ public class APIController {
 		logger.info("cellsJsonArray {}", cellsJsonArray);
 		apiService.processGenerateCell(cellsJsonArray, plantNo);
 		
-		return "suc";
+		return "success";
 	}
 	
 	@GetMapping("/weather/list")
 	public ResponseEntity<Map<String, List>> getWeatherList
 							(@RequestParam("stnNo") String stnNo,
 							 @RequestParam("type") String type) {
+		
+		logger.info("weather/list {}", type);
 		Map<String, List> response = new HashMap<>();
 		String[] types = type.split(",");
 		
