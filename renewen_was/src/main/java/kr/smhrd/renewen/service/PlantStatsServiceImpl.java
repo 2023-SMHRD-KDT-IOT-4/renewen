@@ -159,9 +159,7 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 		startDate = startDate.replaceAll("-", "");
 		endDate = endDate.replaceAll("-", "");
 		List<String> dateList = util.dateList(startDate, endDate);
-		System.out.println(dateList);
 		Map<String, Double> timeMap =  makeTimeTable(dateList);
-		System.out.println(timeMap);
 		
 		for(String checkDate : dateList) {
 			checkDate = checkDate.replaceAll("-", "");
