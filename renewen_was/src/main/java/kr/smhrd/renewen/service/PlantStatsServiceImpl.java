@@ -51,7 +51,7 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 			total += vo.getGenElec();
 		}
 		double result = Math.floor(total * 100) / 100; // 소수점 2자리 버림
-		return total;
+		return result;
 	}
 
 	@Override
@@ -71,7 +71,8 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 				}
 				
 			}
-			result.put(util.formatNumberWithPadding(i) + ":00", total);
+			double totalVal = Math.floor(total * 100) / 100;
+			result.put(util.formatNumberWithPadding(i) + ":00", totalVal);
 		}
 		return result;
 	}
