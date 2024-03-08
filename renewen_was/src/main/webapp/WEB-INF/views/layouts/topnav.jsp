@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<link href="${contextPath}/css/custom_style.css" rel="stylesheet" />
 <nav
 	class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white"
 	id="sidenavAccordion">

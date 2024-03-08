@@ -126,7 +126,7 @@ public class PlantController {
 	 
 	 @GetMapping("/plant/update")
 	   public String plantUpdate(@RequestParam("plantNo")int plantNo, HttpSession session,Model model) {
-	      
+	      System.out.println("선택된 발전소"+plantNo);
 	      
 	      PowerPlantVO vo = plantService.getPlantInfo(plantNo);
 	      model.addAttribute("vo",vo);

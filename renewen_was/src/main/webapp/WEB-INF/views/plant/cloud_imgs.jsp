@@ -12,13 +12,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- favicon2추가  -->
-<link rel="icon" type="image/x-icon"
-	href="${contextPath}/assets/img/favicon2.png" /><!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
 	href="${contextPath}/assets/img/favicon2.png" />
-	
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
+
+<link href="${contextPath}/css/custom_style.css" rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
 	rel="stylesheet" />
@@ -40,7 +38,6 @@
 	<div id="layoutSidenav">
 		<jsp:include page="/WEB-INF/views/layouts/sidenav.jsp" />
 		<div id="layoutSidenav_content">
-
 			<main>
 				<!-- Main page content-->
 				<div class="container-xl px-4 mt-5">
@@ -103,6 +100,5 @@
 		<script src="${contextPath}/js/date.js"></script>
 		<script src="${contextPath}/js/cloud_img.js"
 			data-context-path="${contextPath}"></script>
-
 </body>
 </html>

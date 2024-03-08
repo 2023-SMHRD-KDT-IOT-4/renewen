@@ -100,7 +100,7 @@
 														class="btn btn-datatable btn-icon btn-transparent-dark"><i
 															data-feather="trash-2"></i></a></td>
 													<c:if test="${vo.grantYn eq 'Y'}">
-														<td><button type="button" class="btn btn-primary"
+														<td><button type="button" class="btn btn-success"
 																data-bs-toggle="modal" data-bs-target="#exampleModal"
 																onclick="getCellInfo('${vo.plantNo}')">발전 셀 연동</button></td>
 														<!-- Modal -->
@@ -117,6 +117,7 @@
 																	<div class="modal-body">
 																		<!-- 모달 내용 -->
 																	</div>
+																	<!-- 모달 닫기버튼 css 조절 -->
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary"
 																			data-bs-dismiss="modal">닫기</button>
