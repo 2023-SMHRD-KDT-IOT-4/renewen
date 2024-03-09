@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
@@ -68,7 +67,10 @@ public class PlantController {
 		// JSP 넘겨준거 우도 경도
 		plant.setLatitude(plant.getLatitude());
 		
-		int res = plantService.registerPlant(plant);		
+		int res = plantService.registerPlant(plant);	
+		if(res < 0) {
+			return "redirect:/plant/register";
+		}
 		
 		return "redirect:/plant/list";
 	}
