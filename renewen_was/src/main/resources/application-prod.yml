@@ -6,6 +6,11 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+  ssl:
+    key-store: /etc/apache2/ssl/renewen_kr.jks
+    key-store-type: JKS
+    key-store-password: guru2sun
+    enabled: true
 spring:
   jackson:
     time-zone: Asia/Seoul
@@ -39,6 +44,6 @@ upload:
   path: /home/renewen/upload
   img: /imgs
 url:
-  flask: http://renewen.kr:8083/
+  flask: http://127.0.0.1:8083/
 api:
-  hub-key: CXKwvqlxTqCysL6pcS6glQ     
+  hub-key: CXKwvqlxTqCysL6pcS6glQ   

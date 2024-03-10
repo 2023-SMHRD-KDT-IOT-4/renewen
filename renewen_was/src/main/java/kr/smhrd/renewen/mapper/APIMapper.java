@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import kr.smhrd.renewen.model.api.WeatherListVO;
 
@@ -15,5 +16,7 @@ public interface APIMapper {
 	
 	public List<WeatherListVO> getWeatherList(Map<String, String> map);
 	
-	public int checkInsert(String dateTime);
+	public List<String> checkInsert(
+			@Param("dateTime") String dateTime,
+			@Param("types") List<String> types);
 }

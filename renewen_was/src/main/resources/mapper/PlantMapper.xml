@@ -60,13 +60,13 @@
 	
 	<select id="getNotGrantPlants" resultType="PowerPlantVO">
 		SELECT * FROM power_plant
-		WHERE grant_yn = 'N' or plant_link_key = null
+		WHERE grant_yn = 'N' or plant_link_key IS NULL
 		ORDER BY created_at
 	</select>
 
 	<select id="getGrantPlants" resultType="PowerPlantVO">
 		SELECT * FROM power_plant
-		WHERE grant_yn = 'Y' and plant_link_key != null
+		WHERE grant_yn = 'Y' and plant_link_key IS NOT NULL
 	</select>
 	
 	<update id="grantPlant" parameterType="PowerPlantVO">

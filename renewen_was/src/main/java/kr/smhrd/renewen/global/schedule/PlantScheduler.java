@@ -49,6 +49,10 @@ public class PlantScheduler {
     @Value("${url.flask}")
     private String FLASK_URL;
 	
+    // 기온, 일사량, 풍속, 기압, 풍향, 전운량
+	private List<String> weatherFactors 
+		= Arrays.asList("TEMPERATURE", "SI", "WS", "PA", "WD", "CA");
+    
 	/**
 	 * 유효한 발전소들의 예상 발전량 call
 	 * plant_no : [250002, 250004]
@@ -93,17 +97,21 @@ public class PlantScheduler {
 	 */
 	@Scheduled(fixedRate = 60000 * 13) // (1min) 13분 간격
 	public void callApiHub() {
-
 		String dateTime = commonUtil.getCurrentDateTime("yyyyMMddHHmmss");
 		String todayDate = dateTime.substring(0,8);
 		int todayHour = Integer.parseInt(dateTime.substring(8,10));
 
+		List<String> checkFactors = null;
 		int checkHour = -1;
 		for(int i = 0; i <= todayHour; i++) {
 			String checkDateTime 
 				= 	commonUtil.getCurrentDateTime("yyyy-MM-dd") + " " +
 					commonUtil.formatNumberWithPadding(i)+":00:00";
-			if(!apiService.isInserted(checkDateTime)) {
+			List<String> insertedFactors = apiService.isInserted(checkDateTime, weatherFactors);
+			checkFactors = new ArrayList<>(weatherFactors);
+			checkFactors.removeAll(insertedFactors);
+			// 수집할 기상인자 존재
+			if(checkFactors.size() > 0) {
 				checkHour = i;
 				break;
 			}
@@ -129,10 +137,10 @@ public class PlantScheduler {
 		// Rest Get 요청
 		String response = restTemplate.getForObject(reqUrl, String.class);
 		// DB 저장할 vo List
-		List<WeatherVO> weatherList = getWeatherList(response, tm);
+		List<WeatherVO> weatherList = getWeatherList(response, tm, checkFactors);
 		
 		for(WeatherVO vo : weatherList) {
-			logger.info("weather {}", vo);
+			logger.info("weather {}", vo.getMeasure());
 			Map<String, Double> measureMap =vo.getMeasure();
 			Map<String, Object> parameterMap = new HashMap<>(); // insert
 			parameterMap.put("stnNo", vo.getStnNo());
@@ -149,16 +157,18 @@ public class PlantScheduler {
 	}
 
 	// DB 저장할 기상정보 List<VO>로 정제
-	public List<WeatherVO> getWeatherList(String response, String createdTime) {
+	public List<WeatherVO> getWeatherList(String response, String createdTime, List<String> checkFactors) {
 
 		Map<String, Integer> columnTypeMap = new HashMap<>();
 		columnTypeMap.put("STN", -1); // 지점코드
-		columnTypeMap.put("TA", -1); // 기온 ==> TEMPERATURE
-		columnTypeMap.put("SI", -1); // 일사량
-		columnTypeMap.put("WS", -1); // 풍속
-		columnTypeMap.put("PA", -1); // 기압
-		columnTypeMap.put("WD", -1); // 풍향
-		columnTypeMap.put("CA", -1); // 전운량
+
+		for(String factor : weatherFactors) {
+			if("TEMPERATURE".equals(factor)) {
+				columnTypeMap.put("TA", -1); // TEMPERATURE(db저장) 수집은 TA
+				continue;
+			}
+			columnTypeMap.put(factor, -1);
+		}
 		List<WeatherVO> weatherList = new ArrayList<>();
 
 		String[] lines = response.split("\\r?\\n");
