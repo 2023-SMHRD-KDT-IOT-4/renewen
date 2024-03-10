@@ -95,8 +95,7 @@ public class PlantScheduler {
 	 * 156:광주 위도 : 35.17294 경도 : 126.89156
 	 * 165:목포 위도 : 34.81732 경도 : 126.38151
 	 */
-//	@Scheduled(fixedRate = 60000 * 13) // (1min) 13분 간격
-	@Scheduled(fixedRate = 1000 * 20) // (1min) 13분 간격
+	@Scheduled(fixedRate = 60000 * 13) // (1min) 13분 간격
 	public void callApiHub() {
 		String dateTime = commonUtil.getCurrentDateTime("yyyyMMddHHmmss");
 		String todayDate = dateTime.substring(0,8);
