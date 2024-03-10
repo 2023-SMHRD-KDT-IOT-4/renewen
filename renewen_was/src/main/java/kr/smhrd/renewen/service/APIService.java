@@ -171,8 +171,8 @@ public class APIService {
 		return apiMapper.getWeatherList(map);
 	}
 
-	public boolean isInserted(String dateTime) {
-		int result = apiMapper.checkInsert(dateTime);
-		return result > 0 ? true : false;
+	public List<String> isInserted(String dateTime, List<String> types) {
+		List<String> result = apiMapper.checkInsert(dateTime, types);
+		return result;
 	}
 }

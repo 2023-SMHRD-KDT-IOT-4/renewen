@@ -45,7 +45,8 @@
 			FROM generate_cell
 			WHERE plant_no = #{plantNo} ) AS B 
 		ON A.cell_no = B.cell_no
-		where A.created_at &lt; now()
+		WHERE DATE(A.created_at) = CURDATE() 
+			AND TIME(A.created_at) &lt; CURTIME()
 		GROUP BY A.created_at
 		ORDER By created_at DESC
 		LIMIT 1;	

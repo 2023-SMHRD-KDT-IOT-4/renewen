@@ -22,8 +22,12 @@
     ORDER BY created_at
 	</select>
 	
-	<select id="checkInsert" resultType="Integer">
-		SELECT COUNT(*) FROM weather_api 
+	<select id="checkInsert" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT weather_type FROM weather_api 
 		WHERE created_at = #{dateTime}
+			AND weather_type IN
+	     <foreach item="item" collection="types" open="(" separator="," close=")">
+            #{item}
+        </foreach>			
 	</select>
 </mapper>

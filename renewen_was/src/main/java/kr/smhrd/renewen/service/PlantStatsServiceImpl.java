@@ -29,16 +29,16 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 	// 금일 누적 발전량
 	@Override
 	public double genTodayTotal(long plantNo) {
-		double totalWatt = mapper.getTodayTotal(plantNo);
-		double result = Math.floor(totalWatt * 100) / 100; // 소수점 2자리 버림
+		Double totalWatt = mapper.getTodayTotal(plantNo);
+		double result = totalWatt != null ? Math.floor(totalWatt * 100) / 100 : 0.0; 
 		return result;
 	}
 
 	// 금일 현재 발전량
 	@Override
 	public double genTodayCurrent(long plantNo) {
-		double totalWatt = mapper.getTodayCurrent(plantNo);
-		double result = Math.floor(totalWatt * 100) / 100; // 소수점 2자리 버림
+		Double totalWatt = mapper.getTodayCurrent(plantNo);
+		double result = totalWatt != null ? Math.floor(totalWatt * 100) / 100 : 0.0; 
 		return result;
 	}
 	
