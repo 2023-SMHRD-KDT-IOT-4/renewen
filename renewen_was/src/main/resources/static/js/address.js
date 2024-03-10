@@ -38,6 +38,8 @@
 	    async function setLALOInfo(placeAddress) {
 	        try {
 	            const { latitude, longitude } = await getLALOInfo(placeAddress);
+	            console.log(latitude);
+	            console.log(longitude);
 	            document.getElementById('latitude').value = latitude;
 	            document.getElementById('longitude').value = longitude;
 	        } catch (error) {

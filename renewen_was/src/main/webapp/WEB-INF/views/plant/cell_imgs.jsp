@@ -39,7 +39,7 @@
 				<!-- Main page content-->
 				<div class="container-xl px-4 mt-5">
 					<div class="card mb-4">
-						<div class="card-body">
+						<div class="card-body"  style="max-height: 400px; overflow-y: auto;">
 							<h1 class="mb-1">발전소 셀 상태 확인</h1>
 							<div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
 								<div class="me-4 mb-3 mb-sm-0">
@@ -58,7 +58,7 @@
 									</div>
 									
 									<p class="mb-2">원하는 발전소의 셀 상태를 확인하기, 필요한 사진은 저장하세요😀</p>
-									<div class="small d-flex align-items-center mb-3">
+									<div class="small d-flex flex-column flex-sm-row align-items-center mb-3">
 										<!-- 발전소 선택 -->
 										<label for="authSelect1" class="form-label mb-0 me-2" style="width: 10rem; text-align: center;">발전소 선택</label>
 										<select class="form-control me-2" id="authSelect1" name="authId" style="width: 20rem;">

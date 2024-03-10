@@ -18,9 +18,10 @@
 <!-- favicon2추가  -->
 <link rel="icon" type="image/x-icon"
 	href="${contextPath}/assets/img/favicon2.png" />
-	
+
 <link href="${contextPath}/css/styles.css" rel="stylesheet" />
 <link href="${contextPath}/css/renewen_plant.css" rel="stylesheet" />
+<link href="${contextPath}/css/plant_list.css" rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
 	rel="stylesheet" />
@@ -32,7 +33,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 </head>
 <body class="nav-fixed">
 
@@ -66,9 +66,9 @@
 						<div class="col-lg-8">
 							<div class="card mb-4" id="plantList">
 
-								<div class="card-header">${user.userId}회원님의 발전소 리스트</div>
+								<div class="card-header">${user.userId}회원님의발전소 리스트</div>
 
-								<div class="card-body">
+								<div class="card-body" style="overflow-x: auto;">
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -76,12 +76,12 @@
 												<th>발전소 이름</th>
 												<th>주소</th>
 												<th>사업자등록번호</th>
+												<th>발전소 날씨</th>
 												<th>수정/삭제</th>
 											</tr>
 										</thead>
 
 										<tbody>
-
 											<c:forEach var="vo" items="${list}" varStatus="status">
 												<tr>
 													<td>${status.count}</td>
@@ -89,6 +89,24 @@
 													<td>${vo.plantAddr}${vo.plantAddr2}</td>
 													<c:set var="num" value="${vo.brNumber}" />
 													<td>${fn:substring(num,0,3)}-${fn:substring(num,3,5)}-${fn:substring(num,5,10)}</td>
+													<!-- 발전소별 날씨 정보 출력 -->
+													<td>
+														<div class="latitude" style="display: none;">${vo.latitude}</div>
+														<div class="longitude" style="display: none;">${vo.longitude}</div>
+														<!-- 날씨 정보를 표시할 div -->
+														<div class="weather-info"
+															id="weather-info-${status.count}">
+															<img id="icon" class="icon"
+																style="width: 50px; height: 50px;">
+															<div>
+																<span id="description" class="description"
+																	style="margin-right: 8px"></span>
+															</div>
+															<div>
+																<span id="temperature" class="temperature"></span>
+															</div>
+														</div>
+													</td>
 
 													<td><a
 														href="${contextPath}/plant/update?plantNo=${vo.plantNo}"
@@ -165,53 +183,56 @@
 	<!-- renewen -->
 	<script src="${contextPath}/js/cell_info_modal.js"></script>
 	<script type="text/javascript">
-	  	function delete_event(){
-	  		 if(confirm("발전소를 삭제하시겠습니까?") == true){
-	             return true; 
-	          }else{
-	             return false; 
-	          }
-	  	}
-	</script>
+        function delete_event(){
+            if(confirm("발전소를 삭제하시겠습니까?") == true){
+                return true; 
+             }else{
+                return false; 
+             }
+        }
+   </script>
 
 	<!-- 지도 -->
 	<script type="text/javascript"
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=l8y7kfobe4"></script>
 	<script src="${contextPath}/js/renewen_map.js"></script>
 	<script type="text/javascript">
-  	
-	    let reqUrl = '${contextPath}'+ '/plant/list/json';
-		  
-	
-		  fetchJsonData(reqUrl)
-	    		.then(plantList => {
-	       			console.log('Received data:', plantList);
-		          
-		          printPlantMap(plantList, 'plantListMap')   
-		      })
-		      .catch(error => {
-		          console.error('Error:', error);
-		      });
-		
-		  function fetchJsonData(url, method = 'GET', headers = {'Content-Type': 'application/json'}) {
-		    return new Promise((resolve, reject) => {
-		      fetch(url)
-		          .then(response => {
-		              if (!response.ok) {
-		                  throw new Error('network response error');
-		              }
-		              return response.json();
-		          })
-		          .then(data => {
-		              resolve(data);
-		          })
-		          .catch(error => {
-		              reject(error);
-		          });
-		    });
-			}
-	</script>
+     
+       let reqUrl = '${contextPath}'+ '/plant/list/json';
+        
+   
+        fetchJsonData(reqUrl)
+             .then(plantList => {
+                   console.log('Received data:', plantList);
+                
+                printPlantMap(plantList, 'plantListMap')   
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+      
+        function fetchJsonData(url, method = 'GET', headers = {'Content-Type': 'application/json'}) {
+          return new Promise((resolve, reject) => {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('network response error');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    resolve(data);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+          });
+         }
+   </script>
+
+ <!-- 발전소 날씨 -->
+ <script src="${contextPath}/js/plant_weather.js"></script>
+ 
 
 </body>
 </html>
-
