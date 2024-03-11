@@ -1,24 +1,42 @@
 /**
  * 
  */
-	//litepicker
-	 const litepickerSingleDate = new Litepicker({
-         element: document.getElementById('litepickerSingleDate'),
-         format: 'YYYY-MM-DD'
-     });
+//litepicker
+$(document).ready(function(){
+	let litepickerSingleDate = new Litepicker({
+		element:document.getElementById('litepickerSingleDate'),
+		startDate:getDateByParam(),
+		format:'YYYY-MM-DD',
+		utc:true
+	});
+	/*  litepickerSingleDate.on('selected', (date) => {
+	      console.log('선택한 날짜:', date.format('YYYY-MM-DD'));
+	  });*/
+});
 
-     litepickerSingleDate.on('selected', (date) => {
-         //console.log('선택한 날짜:', date.format('YYYY-MM-DD'));
-     });
+
+const getDateByParam = (dateParam = 0, format = '')=> {
+	let today = new Date(); 
+	today.setDate(today.getDate() - Math.abs(dateParam)); 
+	let year = today.getFullYear(); 
+	let month =  ('0' + (today.getMonth() + 1)).slice(-2);
+	let day = ('0' + today.getDate()).slice(-2);
 	
-	//contextPath변수저장
-	const contextPath = document.currentScript.getAttribute('data-context-path');
+	return `${year}${format}${month}${format}${day}`;
+}   
+
+
 	
+//contextPath변수저장
+const contextPath = document.currentScript.getAttribute('data-context-path');
+
     //버튼 클릭시    
     $("button").click(function(){
         
         var selectedPlant = $("#authSelect1").val();
         var selectedDate = $("#litepickerSingleDate").val();
+        
+        $("#imgBody").empty();
         
 
         $.ajax({
