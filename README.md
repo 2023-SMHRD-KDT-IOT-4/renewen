@@ -54,11 +54,16 @@
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/fa6f4b72-c91c-4b0e-9f6f-6c1548cdae73)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/fdf05e00-85d2-4f5e-831b-6c46e69e44b2)
 
+<br>
 
+## 💻 화면 구성
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/7b87ba8d-68b5-453f-b8e0-f0eeb6f5bc0e)
 
-
-
-
+### 메인화면
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/91c9abbc-6b54-4fd0-a353-c75bd0bca462)
+<br>
+<ul><li>BSS시스템 첫 화면구성</li></ul>
+<br>
 
  
 
