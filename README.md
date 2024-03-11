@@ -121,7 +121,7 @@
 <table>
   <tr>
     <td align="center"><img src="https://i.pinimg.com/originals/96/79/45/967945b77626e6ef12cae02ab1d01ac9.jpg" width="100" height="100"/></td>
-    <td align="center"><img src="https://m.blog.naver.com/minziminzi128/222632067520?view=img_13" width="100" height="100"/></td>
+    <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGTe-5PUwlI_jiHm_l8H7zmeAsQ8tFyqQuTg&usqp=CAU" width="100" height="100"/></td>
     <td align="center"><img src="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/assets/149558578/3666a1b2-5bbb-41ba-b113-9582fef82fbb" width="100" height="100"/></td>
     <td align="center"><img src="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/assets/149558578/7b108ab0-3080-4bf1-a4a8-ad15c80341b6" width="100" height="100"/></td>
     <td align="center"><img src="https://pbs.twimg.com/media/B-n6uPYUUAAZSUx.png" width="100" height="100"/></td>
