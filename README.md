@@ -66,11 +66,10 @@
 ### 회원가입/로그인/로그아웃/회원정보수정
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/f3c4f3ea-0ef4-41a8-b9e5-2f07b763b2b2)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/19636118-99e5-4d1d-939a-11fbaf15d87e)
-![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/1bd12de6-f1b3-48d0-a353-e984ddd8ae13)
-
+<ul><li>회원가입을 클릭하면 회원 가입할 수 있고, 로그인 후 renewen의 다양한 서비스를 사용할 수 있다.</li></ul>
 <br>
-<ul><li>회원 가입페이지에서 회원 가입할 수 있고, 로그인 후 renewen의 다양한 서비스를 사용할 수 있다.</li></ul>
-<ul><li>회원 정보수정 기능을 이용할 수 있다.</li></ul>
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/1bd12de6-f1b3-48d0-a353-e984ddd8ae13)
+<ul><li>개인 정보 수정이 필요할 경우 회원 정보수정 기능을 이용할 수 있다.</li></ul>
 <br>
 
  
