@@ -59,6 +59,7 @@
 	                   <!-- Nested Sidenav Accordion (Pages -> Account)-->
 	                   <a class="nav-link" href="${contextPath}/plant/register">발전소 등록</a>
 	                   <a class="nav-link collapsed" href="${contextPath}/plant/list">발전소 리스트</a>
+	                   <a class="nav-link collapsed" href="${contextPath}/plant/status">발전소 현황</a>
 	                   <a class="nav-link collapsed" href="${contextPath}/plant/cellImgs">셀 상태 확인</a>
 	                   <a class="nav-link collapsed" href="${contextPath}/plant/cloudImgs" >구름형상 이미지 </a>
 									</nav>
