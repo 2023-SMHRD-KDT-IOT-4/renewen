@@ -63,7 +63,7 @@
                   <div class="row mt-3">
                     <div class="col-lg-4 d-flex align-items-center">
                     	<c:if test="${empty plantList}">
-												<h6 class="page-header-title">발전소 없음</h6>
+												<h6 class="page-header-title">등록된 발전소 없음</h6>
 											</c:if>
 											<c:if test="${not empty plantList}">
 	                      <label style="font-size: 1.1rem;">발전소 : </label>
@@ -73,6 +73,7 @@
 	                      	</c:forEach>
 	                      </select>
                       </c:if>
+                      
                     </div>
                     <div class="col-lg-8 d-flex align-items-center">
                     	<c:if test="${not empty plantList}">
@@ -85,6 +86,9 @@
 	                        <input class="form-control ps-0 pointer" id="endDate" placeholder="종료 날짜">
 	                      </div>
 	                      <button id="searchBtn" type="button" class="btn btn-warning" style="width:5rem; margin: 0 1rem;">조회</button>
+	                      <button type="button" id="downBtn" class="btn btn-success" style="width:8rem; height: 43.6px;">
+	                      	<i class="fas fa-file-excel" style="font-size:1.5rem;"></i>&nbsp;&nbsp;다운로드
+                     	 	</button>
                       </c:if>
                     </div>
                  </div>

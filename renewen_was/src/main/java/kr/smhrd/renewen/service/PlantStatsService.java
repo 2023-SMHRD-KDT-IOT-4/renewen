@@ -1,6 +1,12 @@
 package kr.smhrd.renewen.service;
 
+import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+import kr.smhrd.renewen.model.api.GenerateElec;
 
 public interface PlantStatsService {
 
@@ -20,4 +26,7 @@ public interface PlantStatsService {
 	public Map<String, Double> getPredictPerHour(long plantNo, String checkDate);
 	// 예상 발전량 기간별
 	public Map<String, Double> getPredictPerPeriod(long plantNo, String startDate, String endDate);
+	
+	public List<GenerateElec> parseGenElec(String datas) throws JsonMappingException, JsonProcessingException;
+	
 }

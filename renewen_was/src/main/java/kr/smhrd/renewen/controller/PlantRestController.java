@@ -1,20 +1,39 @@
 package kr.smhrd.renewen.controller;
 
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.smhrd.renewen.global.util.CommonUtil;
 import kr.smhrd.renewen.model.PowerPlantVO;
 import kr.smhrd.renewen.model.UserVO;
+import kr.smhrd.renewen.model.api.GenerateElec;
 import kr.smhrd.renewen.service.PlantService;
 import kr.smhrd.renewen.service.PlantStatsService;
 
@@ -26,7 +45,7 @@ public class PlantRestController {
 	
 	@Autowired
 	PlantStatsService statsService;
-
+	
 	@Autowired
 	CommonUtil util;
 	
@@ -47,6 +66,18 @@ public class PlantRestController {
 	
 	/**
 	 * @param plantNo 발전소 식별번호
+	 * @return 발전셀 센싱 정보 - 온도, 측정시간, 셀타입, 용량 
+	 */
+	@GetMapping("/plant/sensing/cell")
+	public @ResponseBody List<Map<String, Object>> sensingCell(@RequestParam("plantNo") long plantNo) {
+		
+		List<Map<String, Object>> result = plantService.getCellsSensing(plantNo);
+		System.out.println(result);
+		return result;
+	}
+	
+	/**
+	 * @param plantNo 발전소 식별번호
 	 * @return 금일 - 누적발전량, 현재 발전량, 예상 발전량
 	 */
 	@GetMapping("/plant/gen/elec")
@@ -54,6 +85,7 @@ public class PlantRestController {
 		
 		Map<String, Double> response = new HashMap<>();
 
+		// plantNo 로 LinkKey체크
 		double totalWatt = statsService.genTodayTotal(plantNo); // 누적발전량
 		double currentWatt = statsService.genTodayCurrent(plantNo); // 현재발전량
 		double predictWatt = statsService.genTodayPredict(plantNo); // 예상발전량
@@ -64,6 +96,8 @@ public class PlantRestController {
 		
 		return ResponseEntity.ok().body(response);
 	}
+	
+	
 	
 	
 	/**
@@ -112,5 +146,72 @@ public class PlantRestController {
 		response.put("genPredict", genPredict);
 		return ResponseEntity.ok().body(response);
 	}
+	
+	/**
+	 * 발전량 조회 결과 엑셀 다운로드
+	 * @return
+	 */
+	@PostMapping("/plant/download/excel")
+	public ResponseEntity<byte[]> downloadExcel(@RequestBody String datas, HttpServletResponse response) {
+		
+		try {
+			List<GenerateElec> list = statsService.parseGenElec(datas);
+			
+				if(list.size() == 0) { // 데이터 없음
+					return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+				}
+			
+				String startDate = list.get(0).getTimeData().split(" ")[0];
+				String endDate = list.get(list.size()-1).getTimeData().split(" ")[0];
+				
+				// 엑셀파일 생성
+				Workbook workbook = new HSSFWorkbook();
+				CellStyle centerStyle = workbook.createCellStyle();
+				centerStyle.setAlignment(HorizontalAlignment.CENTER);
+				Sheet sheet = workbook.createSheet("발전량(" + startDate +"~" + endDate + ")");
+		        sheet.setColumnWidth(1, 4000); // 날짜
+		        sheet.setColumnWidth(2, 3000); // 실 발전량
+		        sheet.setColumnWidth(3, 3000); // 예상 발전량
+		        
+				int rowNo = 0;
+				Row headerRow = sheet.createRow(rowNo++);
+		        headerRow.createCell(0).setCellValue("No");
+		        headerRow.createCell(1).setCellValue("날짜");
+		        headerRow.createCell(2).setCellValue("실제 발전량");
+		        headerRow.createCell(3).setCellValue("예상 발전량");
+		        headerRow.setHeight((short) 450);
+		        
+		        for(GenerateElec vo : list) {
+		        	Row row = sheet.createRow(rowNo++);
+		        	row.createCell(0).setCellValue(vo.getNo());
+		        	row.createCell(1).setCellValue(vo.getTimeData());
+		        	row.createCell(2).setCellValue(vo.getGenReal());
+		        	row.createCell(3).setCellValue(vo.getGenPredict());
+		        }
+		        
+		        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		        workbook.write(outputStream);
+		        workbook.close();
+		        byte[] excelBytes = outputStream.toByteArray();
+		        
+		        HttpHeaders headers = new HttpHeaders();
+		        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		        headers.setContentDispositionFormData("attachment", "genElecSearchList.xls");
+		        
+		        return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
+		        
+			} catch (JsonProcessingException e) {
+				logger.error("json parsing error {}", e.getMessage());
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			} catch (IOException e) {
+				logger.error("IOException {}", e.getMessage());
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			}
+		
+	}
+	
+	
+	
+	
 	
 }

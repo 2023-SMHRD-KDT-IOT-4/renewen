@@ -53,7 +53,7 @@
 									<div class="col-auto mb-3">
 										<h1 class="page-header-title" style="font-size: 1.2rem;">
 											<i class="bi bi-lightning-fill icon-24 me-2"></i>
-											금일 발전현황
+											발전소 현황
 										</h1>	
 									</div>
 									<div class="col-12 col-xl-auto mb-3 d-flex align-items-center" style="margin: 0 1rem;">
@@ -79,45 +79,9 @@
 						</div>
 					</header>
 
-					<!-- row1 -->
-					<div class="row" id="dashDiv1">
-
-						<!-- 금일 발전량 -->
-						<div class="col-lg-4">
-							<div class="card mb-4">
-								<div class="card-header">금일 발전량
-									<button type="button" id="todayGenBtn" class="refresh-btn float-lg-end">
-										<i class="fas fa-sync-alt"></i>
-									</button>								
-								</div>
-								<div class="card-body">
-									<!-- 현정 수정 부분, 바 차트 삽입  -->
-									<div class="chart-bar" id="chart-container"></div>
-								</div>
-							</div>
-						</div>
-
-						<!-- 금일 발전량 추이 -->
-						<div class="col-lg-8">
-							<!-- Pie chart example-->
-							<div class="card mb-4">
-								<div class="card-header">금일 발전량 추이
-									<button type="button" id="todayPredictBtn" class="float-lg-end refresh-btn">
-										<i class="fas fa-sync-alt"></i>
-									</button>								
-								</div>
-								<div class="card-body">
-									<div id="chartPredictElec" class="chart-pie"></div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-					<!-- end row1 -->
-
 					<!-- row2 -->
 					<div class="row" id="dashDiv2">
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<div class="card mb-4">
 								<div class="card-header">셀 상태
 									<button type="button" id="cellBtn" class="float-lg-end refresh-btn">
@@ -131,9 +95,9 @@
 						</div><!-- end <div class="col-lg-4"> -->
 
 						<!-- 금일 기상차트 -->
-						<div class="col-lg-8">
+						<div class="col-lg-6">
 							<div class="card mb-4">
-								<div class="card-header">금일 기상차트
+								<div class="card-header">발전소 센서 데이터(센싱)
 									<button type="button" id="weatherBtn" class="float-lg-end refresh-btn">
 										<i class="fas fa-sync-alt"></i>
 									</button>								

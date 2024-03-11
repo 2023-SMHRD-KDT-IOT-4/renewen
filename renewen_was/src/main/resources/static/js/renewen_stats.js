@@ -3,10 +3,14 @@
  */
 let startDatePicker;
 let endDatePicker;
+let predictData = []; // 예상발전량 데이터
+let genRealData = []; // 실제 발전량 데이터
+let timeDatas = [];
 
 $(document).ready(function() {
 	const contextPath = $("#contextPath").val();
 	const genPeriodUrl = contextPath + '/plant/gen_period/elec';
+	const downUrl = contextPath + '/plant/download/excel';
 	
 	let plantNo = $("#selectList").val(); // 선택 발전소 식별번호
 	
@@ -41,6 +45,46 @@ $(document).ready(function() {
 	 $("#selectList").change(function() {
   	plantNo = $(this).val();
   });
+  
+  $("#downBtn").on('click', function() {
+		console.log(timeDatas);
+		if(timeDatas.length == 0) {
+			alert('조회된  데이터가 없습니다.');
+			return;
+		}
+		
+		let plantName = $("#selectList option:selected").text();
+		
+		// down 요청
+		$.ajax({
+	    url: downUrl,
+	    type: 'POST',
+	    contentType : 'application/json',
+	    data: JSON.stringify({
+	        timeData: timeDatas,
+	        genReal: genRealData,
+	        genPredict: predictData,
+	    }),
+      xhrFields: {
+          responseType: 'blob' // 바이너리 데이터를 처리할 수 있도록 responseType을 blob으로 설정합니다.
+      },	    
+	    success: function(response) {
+	        console.log('down', response);
+	        let url = window.URL.createObjectURL(response);
+	        let a = document.createElement('a');
+	        a.href = url;
+	        a.download = plantName +' 발전량조회.xls';
+	        document.body.append(a);
+	        a.click();
+	        a.remove();
+	        window.URL.revokeObjectURL(url);	        
+	    },
+	    error: function(xhr, status, error) {
+	        console.error(error);
+	  	}
+		});		
+		
+	}); // excell download
   
 }); // document
 
@@ -128,9 +172,8 @@ const printPredictChart = (genReal = {}, genPredict = {}) => {
     let dateB = new Date("20" + b.replace(/-/g, "/"));
   	return dateA - dateB;
 	});
-
-	let predictData = []; // 예상발전량 데이터
-	let genRealData = []; // 실제 발전량 데이터
+	timeDatas = timeData;
+	
 	let chartMax = -9999;
 	timeData.forEach(function(key) {
 		let predictVal = genPredict[key];

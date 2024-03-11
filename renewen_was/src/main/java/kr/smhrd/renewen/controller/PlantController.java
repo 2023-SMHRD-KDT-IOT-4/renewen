@@ -352,4 +352,21 @@ public class PlantController {
 		return "views/plant/plant_stats";
 		
 	}
+	
+	@GetMapping("/plant/status")
+	public String plantStatus(Model model, HttpSession session) {
+		
+		UserVO user = (UserVO) session.getAttribute("user");
+		if(user == null ) {
+			return "redirect:/user/login";
+		}
+		
+		String userId = user.getUserId();
+		
+		List<PowerPlantVO> plantList = plantService.getPlantsByUserId(userId);
+		model.addAttribute("plantList", plantList);
+		
+		return "views/plant/plant_status";
+		
+	}
 }

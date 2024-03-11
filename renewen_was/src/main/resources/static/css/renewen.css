@@ -9,3 +9,11 @@
 	height: 80vh;
 	overflow: hidden;
 }
+
+.refresh-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #808080;
+}
