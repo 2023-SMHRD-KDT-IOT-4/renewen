@@ -57,13 +57,13 @@
 <br>
 
 ## 💻 화면 구성
-## 메인화면
+### 메인화면
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/289acd8e-c9b2-48ea-a491-f0d2cf533bd6)
 <br>
 <ul><li>Renewen 시스템 첫 화면구성</li></ul>
 <br>
 
-## 회원가입/로그인/로그아웃/회원정보수정
+### 회원가입/로그인/로그아웃/회원정보수정
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/f3c4f3ea-0ef4-41a8-b9e5-2f07b763b2b2)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/19636118-99e5-4d1d-939a-11fbaf15d87e)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/1bd12de6-f1b3-48d0-a353-e984ddd8ae13)
