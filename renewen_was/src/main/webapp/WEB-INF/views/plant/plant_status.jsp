@@ -25,7 +25,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
 	crossorigin="anonymous"></script>
 
-<!--현정, 하이차트 사용 위해 라이브러리 로드  -->
+<!-- 하이차트 사용 위해 라이브러리 로드 -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <!-- Highcharts 스타일 시트 로드 -->
 <link rel="stylesheet"
@@ -68,7 +68,7 @@
 											<!-- CSS 클래스를 적용 -->
 											<select class="form-control" id="selectList" name="plantList">
 												<c:forEach items="${plantList}" var="vo">
-													<option value="${vo.plantNo}">${vo.plantName}</option>
+													<option value="$parseInt{vo.plantNo}">${vo.plantName}</option>
 												</c:forEach>
 											</select>
 										</c:if>
@@ -97,7 +97,7 @@
 						<!-- 금일 기상차트 -->
 						<div class="col-lg-6">
 							<div class="card mb-4">
-								<div class="card-header">발전소 센서 데이터(센싱)
+								<div class="card-header">센서 데이터
 									<button type="button" id="weatherBtn" class="float-lg-end refresh-btn">
 										<i class="fas fa-sync-alt"></i>
 									</button>								
@@ -126,7 +126,7 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script
 		src="https://fastly.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-	<script src="${contextPath}/js/renewen_dashboard.js"></script>
+	<script src="${contextPath}/js/renewen_status_dashboard.js"></script>
 </body>
 </html>
 
