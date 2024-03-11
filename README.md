@@ -124,7 +124,7 @@
     <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGTe-5PUwlI_jiHm_l8H7zmeAsQ8tFyqQuTg&usqp=CAU" width="100" height="100"/></td>
     <td align="center"><img src="https://pzip.kr/wp-content/uploads/2023/09/image-75.png" width="100" height="100"/></td>
     <td align="center"><img src="https://image.ajunews.com/content/image/2021/01/04/20210104220435919156.jpg" width="100" height="100"/></td>
-    <td align="center"><img src="https://pbs.twimg.com/media/B-n6uPYUUAAZSUx.png" width="100" height="100"/></td>
+    <td align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/cnoC/image/DsgJnnSn5FoSogwRJV90VZxyMs0" width="100" height="100"/></td>
     <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbRpMQnLoUgkuT8BKefB5QY-6E8nWM8ir6cg&usqp=CAU" width="100" height="100"/></td>
       
   </tr>
