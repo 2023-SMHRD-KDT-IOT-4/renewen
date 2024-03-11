@@ -47,7 +47,7 @@
     <tr>
         <td>라이브러리</td>
         <td>
-            <img src="https://img.shields.io/badge/Kakao Map Api-007CE2?style=for-the-badge&logo=KaKao Map Api&logoColor=white">
+            <img src="https://img.shields.io/badge/Naver Map Api-007CE2?style=for-the-badge&logo=Naver Map Api&logoColor=white">
         </td>
     </tr>
     <tr>
