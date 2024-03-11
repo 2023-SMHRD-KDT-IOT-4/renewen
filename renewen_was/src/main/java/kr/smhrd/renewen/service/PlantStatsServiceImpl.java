@@ -1,5 +1,6 @@
 package kr.smhrd.renewen.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +9,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.smhrd.renewen.global.util.CommonUtil;
 import kr.smhrd.renewen.mapper.PlantMapper;
 import kr.smhrd.renewen.mapper.PlantStatsMapper;
-import kr.smhrd.renewen.model.CellGeneratedElecVO;import kr.smhrd.renewen.model.GenerateCellVO;
+import kr.smhrd.renewen.model.CellGeneratedElecVO;
+import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.PredictedGenElecVO;
+import kr.smhrd.renewen.model.api.GenerateElec;
 
 @Service
 public class PlantStatsServiceImpl implements PlantStatsService {
@@ -96,17 +103,25 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 		for(CellGeneratedElecVO vo : list) {
 			String createdAt = vo.getCreatedAt(); // 2024-03-06 19:19:32
 			String[] dates = createdAt.split(" ");
-			String dateHour = dates[0] + " " + dates[1].substring(0,2) + ":00";
-			String inputKey = dateHour.substring(2);
+			String dateHour = dates[0] + " " + dates[1].substring(0,2);
+			String inputKey = dateHour.substring(2); // 24-03-08 15
 			double watt = vo.getGenElecWatt();
-			if(map.containsKey(dateHour)) {
-				double oldWatt = map.get(dateHour);
+			if(map.containsKey(inputKey)) {
+				double oldWatt = map.get(inputKey);
 				map.put(inputKey, oldWatt + watt);
 			} else {
 				map.put(inputKey, watt);
 			}
 		}
-		return map;
+		
+		Map<String, Double> resultMap = new HashMap<>();
+		for (Map.Entry<String, Double> entry : map.entrySet()) {
+		    String hour = entry.getKey();
+		    double value = entry.getValue();
+		    String hourMin = hour + ":00";
+		    resultMap.put(hourMin, value);
+		}
+		return resultMap;
 	}
 	
 	@Override
@@ -213,6 +228,34 @@ public class PlantStatsServiceImpl implements PlantStatsService {
 		}
 		
 		return resultMap;
+	}
+
+	@Override
+	public List<GenerateElec> parseGenElec(String datas) throws  JsonProcessingException {
+		
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    List<GenerateElec> generateElecList = new ArrayList<>();
+	
+        JsonNode rootNode = objectMapper.readTree(datas);
+        JsonNode timeDataNode = rootNode.get("timeData");
+        JsonNode genRealNode = rootNode.get("genReal");
+        JsonNode genPredictNode = rootNode.get("genPredict");
+
+        for (int i = 0; i < timeDataNode.size(); i++) {
+            String timeData = timeDataNode.get(i).asText();
+            double genReal = genRealNode.get(i).get("value").asDouble();
+            double genPredict = genPredictNode.get(i).get("value").asDouble();
+
+            GenerateElec generateElec = new GenerateElec();
+            generateElec.setNo(i+1);
+            generateElec.setTimeData(timeData);
+            generateElec.setGenReal(genReal);
+            generateElec.setGenPredict(genPredict);
+
+            generateElecList.add(generateElec);
+        }
+	        
+	    return generateElecList;
 	}
 
 

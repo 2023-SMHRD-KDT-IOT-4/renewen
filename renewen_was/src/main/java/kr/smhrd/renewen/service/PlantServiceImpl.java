@@ -1,6 +1,7 @@
 package kr.smhrd.renewen.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,10 +99,6 @@ public class PlantServiceImpl implements PlantService {
 
 	@Override
 	public int insertGenerateCell(GenerateCellVO vo) {
-		vo.setCellSizeUnit("mm");
-		vo.setCellWidth(300);
-		vo.setCellHeight(200);
-		vo.setCellDepth(100);
 		return plantMapper.insertGenerateCell(vo);
 	}
 
@@ -161,6 +158,12 @@ public class PlantServiceImpl implements PlantService {
 	@Override
 	public List<PowerPlantVO> getGrantPlants() {
 		return plantMapper.getGrantPlants();
+	}
+
+
+	@Override
+	public List<Map<String, Object>> getCellsSensing(long plantNo) {
+		return plantMapper.getCellsSensing(plantNo);
 	}
 
 }

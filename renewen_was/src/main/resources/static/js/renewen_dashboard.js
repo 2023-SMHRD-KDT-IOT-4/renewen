@@ -8,19 +8,19 @@ $(document).ready(function() {
 	const genElecUrl = contextPath + '/plant/gen/elec';
 	const genTimeElecUrl = contextPath + '/plant/gen_time/elec';
 	const weatherUrl = contextPath + '/api/was/weather/list';
+	const cellSensingUrl = contextPath + '/plant/sensing/cell';
 	
 	let plantNo = $("#selectList").val(); // 선택 발전소 식별번호
 	let stnNo = "156";
 
  	// 1. 금일 발전량 차트 출력	
 	fetchGenElec(genElecUrl, plantNo); 
-	
 	// 2. 금일 발전량 추이 차트 출력
 	fetchPredict(genTimeElecUrl, plantNo);
-
 	// 3. 금일 기상 차트 출력
 	fetchWeather(weatherUrl, stnNo);
-	
+	// 4. 발전셀 센싱데이터
+	fetchCellSensing(cellSensingUrl, plantNo);
 	
 	// ====================================================================
 
@@ -32,7 +32,23 @@ $(document).ready(function() {
    	fetchGenElec(genElecUrl, plantNo);
  		// 2. 금일 발전량 추이 차트 출력
 		fetchPredict(genTimeElecUrl, plantNo);
+		// 3. 발전셀 센싱데이터
+		fetchCellSensing(cellSensingUrl, plantNo);
   });
+  
+  $("#todayGenBtn").click(function() {
+		
+		fetchGenElec(genElecUrl, plantNo); 
+	});
+  $("#todayPredictBtn").click(function() {
+		fetchPredict(genTimeElecUrl, plantNo);
+	});
+  $("#weatherBtn").click(function() {
+		fetchWeather(weatherUrl, stnNo);
+	});
+  $("#cellBtn").click(function() {
+		fetchCellSensing(cellSensingUrl, plantNo);
+	});
   
 }); // document
 
@@ -41,6 +57,65 @@ for (var i = 0; i < 24; i++) {
   var hour = (i < 10 ? '0' : '') + i + ':00'; // 시간 형식을 00:00으로 맞춤
   timeData.push(hour);
 }
+
+const fetchCellSensing = (url, plantNo) => {
+	console.log('fetchCellSensing');
+	$.ajax({
+    url: url,
+    type: 'GET',
+    data: {
+        plantNo: plantNo // 파라미터와 값을 지정
+    },
+    success: function(response) {
+        console.log('fetchCellSensing data:', response);
+        makeCellList(response);
+        
+    },
+    error: function(xhr, status, error) {
+				console.error(error);
+  	}
+	});
+}// fetchCellSensing
+
+// 셀 카드리스트 
+const makeCellList = (list = []) => {
+	const $cellList = $("#cellList");
+	$cellList.html(''); // 내용 초기화
+	
+	let content = '';
+	for(let i = 0; i< list.length; i++) {
+
+		let {cell_type, measure_value, cell_volume, created_at} = list[i];
+		let cellObj = {};
+		if(measure_value > 60) {
+			cellObj['color'] = "red";
+			cellObj['status'] = "위험";
+			cellObj['stStyle'] = "text-danger";
+		} else if(measure_value > 45) {
+			cellObj['color'] = "orange";
+			cellObj['status'] = "경고";
+			cellObj['stStyle'] = "text-warning";
+		} else {
+			cellObj['color'] = "blue";
+			cellObj['status'] = "양호";
+			cellObj['stStyle'] = "text-success";
+		}
+		
+		content += '<div class="col">';
+		content += '<div class="card mb-2">';
+		content += '<div class="card-body d-flex align-items-center">';
+		content += '<i class="fa-solid fa-square" style="font-size: 40px; color: '+ cellObj['color'] + ';"></i>';
+		content += '<div class="ms-3 d-flex flex-column">';
+		content += '<label class="mb-1">No.'+ (i+1)+'&nbsp;&nbsp;'+ cell_type+ ' - ' + cell_volume + ' </label>';
+		content += '<span class=' + cellObj['stStyle'] + '>' + cellObj['status'] + '</span>';
+		content += '<label class="mb-0">셀 표면 온도 : '+ measure_value +'°C</label>';
+		content += '<label class="mb-0">측정시간 : '+ created_at +'</label>';
+		content += '</div></div></div>';
+	}
+	
+	$cellList.html(content);
+
+} 
 
 const fetchGenElec = (url, plantNo) => {
 	
@@ -265,6 +340,7 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TEMPERATURE': [] }) =
 
 	const dom = document.getElementById("chartWeather");
   const weatherChart = echarts.init(dom, null, {
+		height: 450,
     renderer: 'canvas',
     useDirtyRect: false
   });
@@ -273,7 +349,6 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TEMPERATURE': [] }) =
   let wsList = dataObj['WS'] ? dataObj['WS'].map(item => item.weatherValue) : [];
   let tempList = dataObj['TEMPERATURE'] ? dataObj['TEMPERATURE'].map(item => item.weatherValue) : [];
   let option;
-
   const colors = ['#FFA500', '#91CC75', '#EE6666'];
   option = {
     color: colors,

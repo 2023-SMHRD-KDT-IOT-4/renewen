@@ -137,7 +137,22 @@
 		    ON p.sensor_id = s.sensor_id
 		WHERE p.sd_no = #{sdNo}
 	</select>
-		
+	<!-- 발전셀 센싱(온도) -->
+	<select id="getCellsSensing" resultType="java.util.Map">
+		SELECT 
+		    A.sensor_id, A.measure_value, C.cell_type, C.cell_volume,
+		    DATE_FORMAT(A.created_at, '%Y-%m-%d %H:%i') AS created_at
+		FROM 
+		    plant_sensing_data AS A
+		JOIN 
+		    generate_cell C ON A.cell_no = C.cell_no
+		WHERE 
+		    A.plant_no = #{plantNo} AND A.sensor_id = 'GY-906'
+		    AND A.created_at = (
+		        SELECT MAX(created_at) FROM plant_sensing_data
+		        WHERE plant_no = #{plantNo} )
+	</select>
+	
 	<!-- ================================================================================ -->
 	
 	<!-- 구름형상 이미지 -->

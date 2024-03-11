@@ -1,6 +1,7 @@
 package kr.smhrd.renewen.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.smhrd.renewen.model.CellGeneratedElecVO;
 import kr.smhrd.renewen.model.CellShotImgVO;
@@ -34,6 +35,7 @@ public interface PlantService {
 	public int insertSensingData(SensingDataVO vo);
 	public List<SensingDataVO> getSensingDatasByPlantNo(long plantNo);
 	public SensingDataVO getSensingDataBySdNo(long sdNo);
+	public List<Map<String, Object>> getCellsSensing(long plantNo);
 	
 	// =================================================================
 	

@@ -1,6 +1,8 @@
 package kr.smhrd.renewen.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.smhrd.renewen.model.CellGeneratedElecVO;
@@ -36,6 +38,7 @@ public interface PlantMapper {
 	public int insertSensingData(SensingDataVO vo);
 	public List<SensingDataVO> getSensingDatasByPlantNo(long plantNo);
 	public SensingDataVO getSensingDataBySdNo(long sdNo);
+	public List<Map<String, Object>> getCellsSensing(long plantNo);
 	
 	// =================================================================
 	
