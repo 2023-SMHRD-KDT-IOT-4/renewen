@@ -15,12 +15,13 @@
 
 ## ⭐ 주요 기능
 * 링크걸기 <a 로그인/회원가입/회원정보수정</a>
-* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/blob/3f8803bbcdb0ba4b6b3fc7eb2a0e6ec6611d8b53/Middle_project12/src/main/java/com/smhrd/bicycle/ParkingController.java" target='_blank'>LOCK/UNLOCK</a>
-* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/blob/eb78bd65a676770a437d7aee8d3b4b003fde1bb1/Middle_project12/src/main/java/com/smhrd/bicycle/GpsController.java#L26" target='_blank'>라이딩기록확인</a>
-* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/blob/eb78bd65a676770a437d7aee8d3b4b003fde1bb1/Middle_project12/src/main/webapp/WEB-INF/views/map.jsp#L72" target='_blank'>현재위치확인</a>
-* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/blob/3f8803bbcdb0ba4b6b3fc7eb2a0e6ec6611d8b53/Middle_project12/src/main/java/com/smhrd/bicycle/BoardController.java" target='_blank'>게시판</a>
-* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/blob/eb78bd65a676770a437d7aee8d3b4b003fde1bb1/Middle_project12/src/main/java/com/smhrd/bicycle/AlarmController.java" target='_blank'>알람기능</a>
-
+* 링크걸기 <a 발전 현황 확인(금일 발전량/금일 발전량 추이)</a>
+* 링크걸기 <a 발전량 조회</a>
+* 링크걸기 <a 발전소 등록</a>
+* 링크걸기 <a 발전소 리스트 수정/삭제</a>
+* 링크걸기 <a 발전소 현황</a>
+* 링크걸기 <a 셀 이미지 확인(셀 상태/센서 데이터)</a>
+* 링크걸기 <a 구름형상 이미지 확인</a>
 
 <br>
 
