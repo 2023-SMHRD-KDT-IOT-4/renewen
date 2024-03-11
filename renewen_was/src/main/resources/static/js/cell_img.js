@@ -1,28 +1,47 @@
+
+
 /**
  * 
  */
-	//contextPath변수 
-	const contextPath = document.currentScript.getAttribute('data-context-path');
-	
-	//litepicker		
-	const litepickerSingleDate = new Litepicker({
-		      element: document.getElementById('litepickerSingleDate'),
-		      format: 'YYYY-MM-DD'
-		  });
-		
-		  litepickerSingleDate.on('selected', (date) => {
-		      console.log('선택한 날짜:', date.format('YYYY-MM-DD'));
-		  });
- 
-	//발전소 선택 후 발전셀 선택 
-	document.getElementById("authSelect1").addEventListener("change", function() {
-	    var selectedPlantName = this.options[this.selectedIndex].text;
-	    document.getElementById("selectdPowerPlnat").textContent = selectedPlantName;
-	
-	    // 발전소 선택이 바뀔 때마다 "발전셀 선택" 옵션 숨기기
-	    document.getElementById("first").style.display = "none";
-	    document.getElementById("selectdPowerPlnat").style.display = "block";
+//let datePicker;
+
+$(document).ready(function(){
+	let litepickerSingleDate = new Litepicker({
+		element:document.getElementById('litepickerSingleDate'),
+		startDate:getDateByParam(),
+		format:'YYYY-MM-DD',
+		utc:true
 	});
+	  litepickerSingleDate.on('selected', (date) => {
+	      console.log('선택한 날짜:', date.format('YYYY-MM-DD'));
+	  });
+});
+
+
+const getDateByParam = (dateParam = 0, format = '')=> {
+	let today = new Date(); 
+	today.setDate(today.getDate() - Math.abs(dateParam)); 
+	let year = today.getFullYear(); 
+	let month =  ('0' + (today.getMonth() + 1)).slice(-2);
+	let day = ('0' + today.getDate()).slice(-2);
+	
+	return `${year}${format}${month}${format}${day}`;
+}    
+
+
+//contextPath변수 
+const contextPath = document.currentScript.getAttribute('data-context-path');
+	
+ 
+//발전소 선택 후 발전셀 선택 
+document.getElementById("authSelect1").addEventListener("change", function() {
+    var selectedPlantName = this.options[this.selectedIndex].text;
+    document.getElementById("selectdPowerPlnat").textContent = selectedPlantName;
+
+    // 발전소 선택이 바뀔 때마다 "발전셀 선택" 옵션 숨기기
+    document.getElementById("first").style.display = "none";
+    document.getElementById("selectdPowerPlnat").style.display = "block";
+});
 		    
 	//발전소 선택시 해당 cell의 발전셀 가져오기
 	document.getElementById("authSelect1").addEventListener("change", function() {
@@ -58,6 +77,8 @@
 	    $("button").click(function() {
 	        var selectedCell = $("#cellSelect").val();
 	        var selectedDate = $("#litepickerSingleDate").val();
+	        
+	        
 	        
 	        $.ajax({
 	            type: "POST",
