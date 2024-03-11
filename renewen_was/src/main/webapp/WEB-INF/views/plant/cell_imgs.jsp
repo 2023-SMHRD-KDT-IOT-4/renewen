@@ -39,6 +39,8 @@
 				<!-- Main page content-->
 				<div class="container-xl px-4 mt-5">
 					<div class="card mb-4">
+						<div class="card-body"  style="max-height: 400px; overflow-y: auto;">
+							<h1 class="mb-4">발전소 셀 이미지 확인</h1>
 						<div class="card-body"  style="/* max-height: 400px */; overflow-y: auto;">
 							<h1 class="mb-1">발전소 셀 상태 확인</h1>
 							<div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
