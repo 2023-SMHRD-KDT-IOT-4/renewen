@@ -71,13 +71,13 @@
 							</div>
 							<div>
 								<table class="table table-hover mb-0">
-									<tbody id="imgBody">
 										<tr>
 											<th>이미지</th>
 											<th>이름</th>
 											<th>찍힌 시간</th>
 											<th></th>
 										</tr>
+									<tbody id="imgBody">
 									</tbody>
 								</table>
 							</div>
