@@ -171,8 +171,8 @@ public class APIController {
 			Type cellsType = new TypeToken<GenerateCellVO>(){}.getType();
 			GenerateCellVO cell = new Gson().fromJson(cellJson, cellsType);
 			
-			String serialNum = cell.getCellSerialNum();
-			long cellNo = plantService.getCellNoBySerialNum(serialNum);
+			String cellSerialNum = cell.getCellSerialNum();
+			long cellNo = plantService.getCellNoBySerialNum(cellSerialNum);
 			
 			// 해당 발전셀 최초 등록
 			if(cellNo == 0) { 
@@ -188,6 +188,8 @@ public class APIController {
 			
 			SensingDataVO sensor = new Gson().fromJson(sensorJson, sensorType);
 			sensor.setPlantNo(plantNo);
+			sensor.setCellNo(cellNo);
+			sensor.setCellSerialNum(cellSerialNum);
 			plantService.insertSensingData(sensor);
 			
 	    } // for cellsJsonArray
