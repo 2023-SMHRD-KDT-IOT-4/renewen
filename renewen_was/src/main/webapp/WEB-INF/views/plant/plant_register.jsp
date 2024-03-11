@@ -87,7 +87,7 @@
 											</div>
 
 											<div class="text-center mt-3 d-flex justify-content-center">
-												<button type="submit" class="btn btn-primary btn-lg flex-grow-1" onclick="getLALOInfoAndSubmit()">등록</button>
+												<button type="button" class="btn btn-primary btn-lg flex-grow-1" onclick="getLALOInfoAndSubmit()">등록</button>
 											</div>
 										</form>
 									</div>

@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.card-body {
+	overflow-x: auto; /* 카드 바디가 넘칠 때 가로 스크롤 표시 */
+}
+
+table {
+	min-width: 600px; 
+}
+
+@media ( max-width : 768px) {
+	table {
+		min-width: auto; 
+	}
+}
+
