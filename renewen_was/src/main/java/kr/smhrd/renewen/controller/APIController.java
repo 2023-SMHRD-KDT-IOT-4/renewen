@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import kr.smhrd.renewen.model.CellGeneratedElecVO;
 import kr.smhrd.renewen.model.CellShotImgVO;
 import kr.smhrd.renewen.model.CloudShotImgVO;
+import kr.smhrd.renewen.model.GenerateCellVO;
 import kr.smhrd.renewen.model.SensingDataVO;
 import kr.smhrd.renewen.model.api.ShotImg;
 import kr.smhrd.renewen.model.api.WeatherListVO;
@@ -75,7 +78,7 @@ public class APIController {
 			logger.error("cloudImg db insert fail {}", shotImgVO);
 			return "fail";
 		}
-
+		logger.info("img cloud success {}", plantNo);
 		return "success";
 	}
 
@@ -109,23 +112,23 @@ public class APIController {
 			
 		}
 		
+		logger.info("img cells success");
 		return "success";
 	}
 	
 	
-	// 센싱데이터 및 발전셀
+	// 발전소 - 센싱데이터 처리
 	@PostMapping("/sensing")
-	public String sensing(@RequestBody String jsonData) {
+	public String plantSensing(@RequestBody String jsonData) {
 		
-		logger.info("sensing");
-//		logger.info("sensing {}", jsonData);
 		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
 		String plantLinkKey = jsonObj.get("plantLinkKey").getAsString();
 		JsonArray sensingJsonArray = jsonObj.get("sensing").getAsJsonArray();
-		JsonArray cellsJsonArray = jsonObj.get("cells").getAsJsonArray();
 
 		// 발전소연동키 조회로 해당 발전소 가져옴
 		long plantNo = plantService.getPlantNoByLinkKey(plantLinkKey);
+		logger.info("sensing plantNo {}", plantNo);
+		
 		if (plantNo == 0) {
 			logger.info("sensing - plantLinkKey {}", plantLinkKey);
 			return "Not Exists plantLinkKey";
@@ -137,21 +140,108 @@ public class APIController {
 		
 		for (SensingDataVO sd : list) {
 			sd.setPlantNo(plantNo);
-			String cellSerialNum = sd.getCellSerialNum();
-			
-			if(cellSerialNum != null && !cellSerialNum.isEmpty()) {
-				long cellNo = plantService.getCellNoBySerialNum(cellSerialNum);
-				sd.setCellNo(cellNo);
-			}
 			plantService.insertSensingData(sd);
 		}
+		
+		logger.info("sensing success");
+		return "success";
+	}
+	
+	// 발전셀 - 센싱데이터 처리
+	@PostMapping("/cells/sensing")
+	public String cellsSensing(@RequestBody String jsonData) {
+		
+		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
+		String plantLinkKey = jsonObj.get("plantLinkKey").getAsString();
+		JsonArray cellsJsonArray = jsonObj.get("cells").getAsJsonArray();
+		
+		// 발전소연동키 조회로 해당 발전소 가져옴
+		long plantNo = plantService.getPlantNoByLinkKey(plantLinkKey);
+		if (plantNo == 0) {
+			return "Not Exists plantLinkKey";
+		}
+		if(cellsJsonArray.size() == 0) {
+			return "No Cells Datas";
+		}
+		logger.info("cells plantNo {}", plantNo);
+		
+		for (int i = 0; i < cellsJsonArray.size(); i++) {
+			// cell 1개의 json data
+			JsonObject cellJson = cellsJsonArray.get(i).getAsJsonObject();
+			Type cellsType = new TypeToken<GenerateCellVO>(){}.getType();
+			GenerateCellVO cell = new Gson().fromJson(cellJson, cellsType);
+			
+			String serialNum = cell.getCellSerialNum();
+			long cellNo = plantService.getCellNoBySerialNum(serialNum);
+			
+			// 해당 발전셀 최초 등록
+			if(cellNo == 0) { 
+				cell.setPlantNo(plantNo);
+				cell.setUseYn("N");
+				plantService.insertGenerateCell(cell);
+				continue;
+			}
 
-		// 발전셀 처리
-		logger.info("cellsJsonArray {}", cellsJsonArray);
-		apiService.processGenerateCell(cellsJsonArray, plantNo);
+			// 이미 등록된 발전셀 -  센싱 데이터 저장
+			JsonObject sensorJson = cellJson.get("sensor").getAsJsonObject();
+			Type sensorType = new TypeToken<SensingDataVO>(){}.getType();
+			
+			SensingDataVO sensor = new Gson().fromJson(sensorJson, sensorType);
+			sensor.setPlantNo(plantNo);
+			plantService.insertSensingData(sensor);
+			
+	    } // for cellsJsonArray
 		
 		return "success";
 	}
+	
+	// 발전셀 - 발전량 처리
+	@PostMapping("/cells/elect")
+	public String cellsElec(@RequestBody String jsonData) {
+		
+		JsonObject jsonObj = (JsonObject) JsonParser.parseString(jsonData);
+		String plantLinkKey = jsonObj.get("plantLinkKey").getAsString();
+		JsonArray cellsJsonArray = jsonObj.get("cells").getAsJsonArray();
+		
+		// 발전소연동키 조회로 해당 발전소 가져옴
+		long plantNo = plantService.getPlantNoByLinkKey(plantLinkKey);
+		if (plantNo == 0) {
+			return "Not Exists plantLinkKey";
+		}
+		if(cellsJsonArray.size() == 0) {
+			return "No Cells Datas";
+		}
+		logger.info("cells plantNo {}", plantNo);
+		
+		for (int i = 0; i < cellsJsonArray.size(); i++) {
+			// cell 1개의 json data
+			JsonObject cellJson = cellsJsonArray.get(i).getAsJsonObject();
+			Type cellsType = new TypeToken<GenerateCellVO>(){}.getType();
+			GenerateCellVO cell = new Gson().fromJson(cellJson, cellsType);
+			
+			String serialNum = cell.getCellSerialNum();
+			long cellNo = plantService.getCellNoBySerialNum(serialNum);
+			
+			// 해당 발전셀 최초 등록
+			if(cellNo == 0) { 
+				cell.setPlantNo(plantNo);
+				cell.setUseYn("N");
+				plantService.insertGenerateCell(cell);
+				continue;
+			}
+
+			// 이미 등록된 발전셀 -  발전량 데이터 저장
+			JsonObject elecJson = cellJson.get("elec").getAsJsonObject();
+			Type elecType = new TypeToken<CellGeneratedElecVO>(){}.getType();
+			
+			CellGeneratedElecVO cge = new Gson().fromJson(elecJson, elecType);
+			cge.setCellNo(cellNo);
+			plantService.insertGeneratedElec(cge);
+			
+	    } // for cellsJsonArray
+		
+		return "success";
+	}	
 	
 	@GetMapping("/weather/list")
 	public ResponseEntity<Map<String, List>> getWeatherList
