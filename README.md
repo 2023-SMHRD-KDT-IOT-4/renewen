@@ -125,7 +125,7 @@
     <td align="center"><img src="https://pzip.kr/wp-content/uploads/2023/09/image-75.png" width="100" height="100"/></td>
     <td align="center"><img src="https://github.com/2023-SMHRD-KDT-IOT-4/Repo/assets/149558578/7b108ab0-3080-4bf1-a4a8-ad15c80341b6" width="100" height="100"/></td>
     <td align="center"><img src="https://pbs.twimg.com/media/B-n6uPYUUAAZSUx.png" width="100" height="100"/></td>
-    <td align="center"><img src="https://mblogthumb-phinf.pstatic.net/20160127_177/krazymouse_1453865104404DjQIi_PNG/%C4%AB%C4%AB%BF%C0%C7%C1%B7%BB%C1%EE_%B6%F3%C0%CC%BE%F0.png?type=w2" width="100" height="100"/></td>
+    <td align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbRpMQnLoUgkuT8BKefB5QY-6E8nWM8ir6cg&usqp=CAU" width="100" height="100"/></td>
       
   </tr>
   <tr>
