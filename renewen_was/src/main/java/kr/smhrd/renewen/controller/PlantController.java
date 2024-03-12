@@ -94,17 +94,6 @@ public class PlantController {
 		return "views/plant/plant_list";
 	}
 
-	// 기존 리스트에 지도반영
-	@GetMapping("/plant/list2")
-	public String plantList2(Model model, HttpSession session) {
-		
-		UserVO user = (UserVO) session.getAttribute("user");
-		String userId = user.getUserId();
-		List<PowerPlantVO> list = plantService.getPlantsByUserId(userId);
-		model.addAttribute("list", list);
-		return "views/plant/plant_list2";
-	}
-	
 	 @GetMapping("/plant/list/delete")
 	   public String plantListDelete(@RequestParam("plantNo") int plantNo,PowerPlantVO plant ,Model model,HttpSession session) {
 	      System.out.println(plantNo);
