@@ -353,6 +353,7 @@ public class PlantController {
 		
 	}
 	
+	// 발전소 현황
 	@GetMapping("/plant/status")
 	public String plantStatus(Model model, HttpSession session) {
 		
