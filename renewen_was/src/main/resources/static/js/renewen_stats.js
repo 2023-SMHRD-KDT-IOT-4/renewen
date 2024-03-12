@@ -263,12 +263,22 @@ const printPredictChart = (genReal = {}, genPredict = {}) => {
 	      name: '실제 발전량',
 	      type: 'line',
 	      symbolSize: 8,
+	      tooltip: {
+	        valueFormatter: function (value) {
+	          return value + 'W';
+	        }
+	      }, 	      
 	      data: genRealData.map(item => item.value)
 	    },
 	    {
 	      name: '예상 발전량',
 	      type: 'line',
 	      symbolSize: 8,
+	      tooltip: {
+	        valueFormatter: function (value) {
+	          return value + 'W';
+	        }
+	      }, 		      
 	      data: predictData.map(item => item.value)
 	    }
 	  ]

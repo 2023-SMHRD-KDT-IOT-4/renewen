@@ -201,15 +201,15 @@ public class PlantRestController {
 				centerStyle.setAlignment(HorizontalAlignment.CENTER);
 				Sheet sheet = workbook.createSheet("발전량(" + startDate +"~" + endDate + ")");
 		        sheet.setColumnWidth(1, 4000); // 날짜
-		        sheet.setColumnWidth(2, 3000); // 실 발전량
-		        sheet.setColumnWidth(3, 3000); // 예상 발전량
+		        sheet.setColumnWidth(2, 3800); // 실 발전량
+		        sheet.setColumnWidth(3, 3800); // 예상 발전량
 		        
 				int rowNo = 0;
 				Row headerRow = sheet.createRow(rowNo++);
 		        headerRow.createCell(0).setCellValue("No");
 		        headerRow.createCell(1).setCellValue("날짜");
-		        headerRow.createCell(2).setCellValue("실제 발전량");
-		        headerRow.createCell(3).setCellValue("예상 발전량");
+		        headerRow.createCell(2).setCellValue("실제 발전량(W)");
+		        headerRow.createCell(3).setCellValue("예상 발전량(W)");
 		        headerRow.setHeight((short) 450);
 		        
 		        for(GenerateElec vo : list) {

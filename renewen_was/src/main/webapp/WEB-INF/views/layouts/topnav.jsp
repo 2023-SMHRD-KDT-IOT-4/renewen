@@ -129,7 +129,7 @@
 									<div class="dropdown-notifications-item-content-text">비정상적
 										접근 감지!</div>
 								</div>
-							</a> <a class="dropdown-item dropdown-notifications-footer" href="${contextPath}/user/log">모든
+							</a> <a class="dropdown-item dropdown-notifications-footer" href="#!">모든
 								알림 확인</a>
 						</div>
 				</li>
