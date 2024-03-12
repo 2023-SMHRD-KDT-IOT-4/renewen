@@ -42,4 +42,12 @@
 				user_tel=#{userTel}
 			WHERE user_id=#{userId}
 	</update>
+	
+	<insert id="insertLog" parameterType="UserLogVO">
+		INSERT INTO user_log
+	    (user_id, connect_ip, access_menu, log_content, log_type, popup_yn)
+		VALUES
+		    (#{userId}, #{connectIp}, #{accessMenu}, #{logContent}, #{logType}, #{popupYn})
+	</insert>
+	
 </mapper>
