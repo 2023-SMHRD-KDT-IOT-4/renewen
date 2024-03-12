@@ -248,8 +248,18 @@
 
 ## 💣 트러블슈팅
 ### ● 문제1
-  * 어떤 문제가 있는지 작성
-  * 해결 방안
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/5849c4f2-460e-4560-b29c-2f9f1d9d684e)
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/582051cd-3dce-46f8-a01a-bbd7dd5f7fe8)
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/104410f8-2b73-4cba-a541-4e3f5c33c009)
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/23824ee9-4f14-45b1-9159-b20ad1149efa)
+
+### Apache 설정 (ssl 인증서 설치된 상태)
+### 가상호스트 및 프록시 설정 (추가 및 수정)
+  * 경로 : /etc/apache2/sites-enabled/renewen.kr.conf
+### 해결 방안
+* 1. Apache 가상호스트 및 프록시 설정
+* 2. Permission denied 발생 ⇒ 1024이하 포트 사용하려면 root권한이 필요한데 was(tomcat)에 443 포트로 설정 되어있었기 때문!
+* 3. Tomcat server.xml  redirectPort 443 => 8443 변경 후 해결 됨
 
 <br>
 
