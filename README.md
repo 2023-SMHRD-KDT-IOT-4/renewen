@@ -1,5 +1,5 @@
 # ☀️ Renewen (팀명: Taiyang)
-![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/32b62adb-949b-4a2b-b966-f970daee0fa0)
+![폼보드_승재팀_1](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/152847551/bbe237a6-9837-4de3-990e-01b49526349e)
 
 <br>
 
