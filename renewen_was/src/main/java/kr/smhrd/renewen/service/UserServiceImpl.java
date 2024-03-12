@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.smhrd.renewen.mapper.UserMapper;
 import kr.smhrd.renewen.model.UserAuthVO;
+import kr.smhrd.renewen.model.UserLogVO;
 import kr.smhrd.renewen.model.UserVO;
 
 @Service
@@ -41,6 +42,17 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int updateUser(UserVO user) {
 		return userMapper.updateUser(user);
+	}
+
+	@Override
+	public int insertLog(UserLogVO log) {
+		
+		if(log.getLogType() == null || "".equals(log.getLogType())) {
+			log.setLogType("debug");
+		} else if(log.getConnectIp() == null || "".equals(log.getConnectIp()) ) {
+			log.setConnectIp("");
+		}
+		return userMapper.insertLog(log);
 	}
 
 }

@@ -73,7 +73,6 @@ public class PlantRestController {
 	public @ResponseBody List<Map<String, Object>> sensingCell(@RequestParam("plantNo") long plantNo) {
 		
 		List<Map<String, Object>> result = plantService.getCellsSensing(plantNo);
-		System.out.println(result);
 		return result;
 	}
 	
