@@ -78,27 +78,28 @@
 
 ## 💻 화면 구성
 ### 메인화면
-![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/289acd8e-c9b2-48ea-a491-f0d2cf533bd6)
-<br>
 <ul><li>Renewen 시스템 첫 화면구성</li></ul>
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/289acd8e-c9b2-48ea-a491-f0d2cf533bd6)
+
 <br>
 
 ### 회원가입/로그인/로그아웃/회원정보수정
+<ul><li>회원가입을 클릭하면 회원 가입할 수 있고, 로그인 후 renewen의 다양한 서비스를 사용할 수 있다.</li></ul>
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/f3c4f3ea-0ef4-41a8-b9e5-2f07b763b2b2)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/19636118-99e5-4d1d-939a-11fbaf15d87e)
-<ul><li>회원가입을 클릭하면 회원 가입할 수 있고, 로그인 후 renewen의 다양한 서비스를 사용할 수 있다.</li></ul>
 
 <br>
 
+<ul><li>개인 정보 수정이 필요할 경우 회원 정보수정 기능을 이용할 수 있다.</li></ul>
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/26c9e947-5b0f-4546-931c-c0091038ef2a)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/e2091886-95a2-4e45-bcfc-d584ce6cba2e)
-<ul><li>개인 정보 수정이 필요할 경우 회원 정보수정 기능을 이용할 수 있다.</li></ul>
  
 <br>
 
 ### 발전소 등록
-![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/97926a39-ad50-41a9-905b-8cafdc29ec0c)
 <ul><li>발전소 이름, 주소, 상세 주소, 사업자 등록 번호를 입력하면 발전소 등록이 가능하다.</li></ul>
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/97926a39-ad50-41a9-905b-8cafdc29ec0c)
+
 
 <br>
 
@@ -110,21 +111,21 @@
 <br>
  
 ### 발전 현황 확인(금일 발전량/금일 발전량 추이)
-![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/0855ebe8-cd92-4e6e-a3a7-351f20c4cf85)
 <ul><li>금일 발전량 추이와 실제 금일 발전량을 확인할 수 있다.</li></ul>
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/0855ebe8-cd92-4e6e-a3a7-351f20c4cf85)
 
 <br>
 
 ### 발전량 조회
+<ul><li>등록된 등록소별, 날짜별 발전량을 조회할 수 있고 엑셀 다운로드도 가능하다.</li></ul>
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/9c5ad3a7-18fb-40c8-b1f1-a72e84dd4455)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/d9ae50f9-f58b-4f44-ae49-2c2034d1dc2f)
-<ul><li>등록된 등록소별, 날짜별 발전량을 조회할 수 있고 엑셀 다운로드도 가능하다.</li></ul>
  
 <br>
 
 ### 발전소 현황(셀 상태/센서 데이터) 
-![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/ce615ec6-12e9-4ac1-a5b8-4eb288dec8c7)
 <ul><li>등록된 발전소별 셀 상태와 센서 데이터를 확인할 수 있다.</li></ul>
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/ce615ec6-12e9-4ac1-a5b8-4eb288dec8c7)
 
 <br>
 
