@@ -29,4 +29,7 @@ public interface PlantStatsService {
 	
 	public List<GenerateElec> parseGenElec(String datas) throws JsonMappingException, JsonProcessingException;
 	
+	// 발전소 특정 센서 
+	public List<Map<String, Double>> getSensingPerPeriod(long plantNo, String sensorId, String startDate, String endDate);
+	
 }
