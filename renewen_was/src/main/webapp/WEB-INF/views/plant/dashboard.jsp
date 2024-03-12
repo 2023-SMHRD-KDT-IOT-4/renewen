@@ -25,7 +25,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
 	crossorigin="anonymous"></script>
 
-<!--현정, 하이차트 사용 위해 라이브러리 로드  -->
+<!-- 하이차트 사용 위해 라이브러리 로드  -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <!-- Highcharts 스타일 시트 로드 -->
 <link rel="stylesheet"
