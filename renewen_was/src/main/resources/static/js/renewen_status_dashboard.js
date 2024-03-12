@@ -9,15 +9,13 @@ $(document).ready(function() {
 	const sensorUrl = contextPath + '/plant/sensing';
 	
 	let plantNo = $("#selectList").val(); // 선택 발전소 식별번호
-	let stnNo = "156";
-
-  	// 1. 셀 상태
-  	fetchCellSensing(cellSensingUrl, plantNo);
-  	// 2. 발전소 센싱데이터
-  	fetchSensorData(sensorUrl, plantNo);
-	
+	// 1. 발전소 셀 상태
+	fetchCellSensing(cellSensingUrl, plantNo);
+	// 2. 발전소 센싱데이터
+	fetchSensorData(sensorUrl, plantNo);
+		
 	// ====================================================================
-/**/
+
 	 // 발전소 변경 시 
 	 $("#selectList").change(function() {
   	plantNo = $(this).val();
@@ -28,15 +26,18 @@ $(document).ready(function() {
 
   });
   
-	/*여기 변경 함*/
+	// 발전소 셀 새로고침 버튼
+ $("#cellBtn").click(function() {
+		$(this).addClass('spinner-border');
+   	fetchCellSensing(cellSensingUrl, plantNo);
+ 	});
+	// 발전소 센싱데이터 새로고침 버튼
  $("#sensorBtn").click(function() {
+	 	$(this).addClass('spinner-border');
 		fetchSensorData(sensorUrl, plantNo);
 	});
 	
-	// 셀 상태 카드
- $("#cellBtn").click(function() {
-   	fetchCellSensing(cellSensingUrl, plantNo);
-});
+
   
 }); // document
 
@@ -58,11 +59,17 @@ const fetchSensorData = (url, plantNo) => {
     },
     success: function(response) { // 응답 성공
         console.log('fetchSensorData:', response);
+        setTimeout(function() {
+            $('#sensorBtn').removeClass('spinner-border');
+        }, 500);        
         printSensorChar(response);
         
     },
     error: function(xhr, status, error) {
 				console.error(error);
+        setTimeout(function() {
+            $('#sensorBtn').removeClass('spinner-border');
+        }, 500); 				
   	}
 	});
 }// fetchSensorData
@@ -230,6 +237,9 @@ const fetchCellSensing = (url, plantNo) => {
     },
     success: function(response) {
         console.log('fetchCellSensing data:', response);
+        setTimeout(function() {
+            $('#cellBtn').removeClass('spinner-border');
+        }, 500);           
         makeCellList(response);
         
     },

@@ -36,16 +36,19 @@ $(document).ready(function() {
   });
   
   $("#todayGenBtn").click(function() {
-		
+		$(this).addClass('spinner-border');
 		fetchGenElec(genElecUrl, plantNo); 
 	});
   $("#todayPredictBtn").click(function() {
+		$(this).addClass('spinner-border');
 		fetchPredict(genTimeElecUrl, plantNo);
 	});
   $("#weatherBtn").click(function() {
+		$(this).addClass('spinner-border');
 		fetchWeather(weatherUrl, stnNo);
 	});
   $("#cellBtn").click(function() {
+		$(this).addClass('spinner-border');
 		fetchCellSensing(cellSensingUrl, plantNo);
 	});
   
@@ -67,11 +70,17 @@ const fetchCellSensing = (url, plantNo) => {
     },
     success: function(response) {
         console.log('fetchCellSensing data:', response);
+        setTimeout(function() {
+            $('#cellBtn').removeClass('spinner-border');
+        }, 500);            
         makeCellList(response);
         
     },
     error: function(xhr, status, error) {
 				console.error(error);
+        setTimeout(function() {
+            $('#cellBtn').removeClass('spinner-border');
+        }, 500); 				
   	}
 	});
 }// fetchCellSensing
@@ -126,12 +135,17 @@ const fetchGenElec = (url, plantNo) => {
     },
     success: function(response) {
         console.log('fetchGenElec data:', response);
+        setTimeout(function() {
+            $('#todayGenBtn').removeClass('spinner-border');
+        }, 500);         
         const {totalWatt, currentWatt, predictWatt} = response;
-        
         drawGenElecChart(currentWatt, totalWatt, predictWatt);
     },
     error: function(xhr, status, error) {
 				console.error(error);
+        setTimeout(function() {
+            $('#todayGenBtn').removeClass('spinner-border');
+        }, 500);   				
 				drawGenElecChart(0, 0, 0);
   	}
 	});
@@ -191,13 +205,18 @@ const fetchPredict = (url, plantNo) => {
         plantNo: plantNo
     },
     success: function(response) {
-        console.log('fetchPredict data:', response);
-        const { genReal, genPredict } = response;
-        printPredictChart(genReal, genPredict)
-        
+    	console.log('fetchPredict data:', response);
+    	setTimeout(function() {
+      	$('#todayPredictBtn').removeClass('spinner-border');
+      }, 500);           
+      const { genReal, genPredict } = response;
+      printPredictChart(genReal, genPredict)
     },
     error: function(xhr, status, error) {
-        console.error(error);
+    	console.error(error);
+      setTimeout(function() {
+          $('#todayPredictBtn').removeClass('spinner-border');
+      }, 500);           
   	}
 	});
 
@@ -323,12 +342,18 @@ const fetchWeather = (url, stnNo = 156) => {
         type: findTypes.join(',')
     },
     success: function(response) {
+      	setTimeout(function() {
+            $('#weatherBtn').removeClass('spinner-border');
+        }, 500);   			
         console.log('fetchWeather data:', response);
         drawWeatherChart(response)
         
     },
     error: function(xhr, status, error) {
         console.error(error);
+      	setTimeout(function() {
+            $('#weatherBtn').removeClass('spinner-border');
+        }, 500);        
   	}
 	});
 

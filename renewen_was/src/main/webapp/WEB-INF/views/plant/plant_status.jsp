@@ -49,7 +49,7 @@
 								<div class="row col pt-3 d-flex align-items-center">
 									<div class="col-auto mb-3">
 										<h1 class="page-header-title" style="font-size: 1.2rem;">
-											<i class="bi bi-lightning-fill icon-24 me-2"></i>
+											<i class="bi bi-display icon-24 me-2"></i>
 											발전소 현황
 										</h1>	
 									</div>
@@ -80,7 +80,7 @@
                <div class="row" id="dashDiv2">
                   <div class="col-lg-6">
                      <div class="card mb-4">
-                        <div class="card-header">셀 상태
+                        <div class="card-header">발전소 셀 상태
                            <button type="button" id="cellBtn" class="float-lg-end refresh-btn">
                               <i class="fas fa-sync-alt"></i>
                            </button>
@@ -94,11 +94,12 @@
 						<!-- 발전소 센싱1 -->
 						<div class="col-lg-6">
 							<div class="card mb-4">
-								<div class="card-header">발전소 센서 데이터(센싱)
+								<div class="card-header">발전소 센싱 데이터
 									<button type="button" id="sensorBtn" class="float-lg-end refresh-btn">
 										<i class="fas fa-sync-alt"></i>
-									</button>								
+									</button>
 								</div>
+								
 								<div class="card-body" style="height: 450px;">
 						 			<div id="sensorChart">></div>
 								</div>
