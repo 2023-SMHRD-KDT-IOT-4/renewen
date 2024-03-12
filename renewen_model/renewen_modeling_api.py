@@ -23,11 +23,11 @@ app = Flask(__name__)
 CORS(app)
 
 app.secret_key = 'renewen'
-app.config['MYSQL_HOST'] = 'project-db-campus.smhrd.com'
-app.config['MYSQL_PORT'] = 3307
-app.config['MYSQL_USER'] = 'campus_23K_IoT4_P3_1'
-app.config['MYSQL_PASSWORD'] = 'smhrd1'
-app.config['MYSQL_DB'] = 'campus_23K_IoT4_P3_1'
+app.config['MYSQL_HOST'] = '****'
+app.config['MYSQL_PORT'] = 0000
+app.config['MYSQL_USER'] = '****'
+app.config['MYSQL_PASSWORD'] = '****'
+app.config['MYSQL_DB'] = '****'
 
 mysql = MySQL(app)
 
@@ -246,11 +246,11 @@ def predict():
 
             # MySQL 연결 설정
             connection = pymysql.connect(
-                                host='project-db-campus.smhrd.com',
-                                port=3307,
-                                user='campus_23K_IoT4_P3_1',
-                                password='smhrd1',
-                                database='campus_23K_IoT4_P3_1'
+                                host='****',
+                                port=0000,
+                                user='****',
+                                password='****',
+                                database='****'
                             )
 
 
@@ -285,4 +285,4 @@ def predict():
     return "success"
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8083)
+    app.run(debug=True)
