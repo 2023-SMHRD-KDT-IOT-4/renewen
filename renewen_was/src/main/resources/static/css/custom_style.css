@@ -3,7 +3,7 @@
     display: inline-block;
     white-space: nowrap;
     vertical-align: middle; /* 수직 정렬 */
-}
+}/*  */
 #selectList {
     width: 100%;
     max-width: 100%;
@@ -35,3 +35,9 @@
   display: flex !important;
  flex-direction: column;
 } */
+
+#sensorChart {
+    width: 100%; /* 캔버스 요소의 가로 크기를 부모 요소의 100%로 설정합니다. */
+    max-width: 1000px;
+    height: 300px; /* 세로 길이를 400px로 설정합니다. */
+}

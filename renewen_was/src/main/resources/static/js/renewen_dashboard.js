@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function() {
-	console.log('dashboard js');
+
 	const contextPath = $("#contextPath").val();
 	const genElecUrl = contextPath + '/plant/gen/elec';
 	const genTimeElecUrl = contextPath + '/plant/gen_time/elec';
@@ -27,7 +27,6 @@ $(document).ready(function() {
 	 // 발전소 변경 시 
 	 $("#selectList").change(function() {
   	plantNo = $(this).val();
-  	console.log(plantNo);
   	// 1. 금일 발전량 차트 출력
    	fetchGenElec(genElecUrl, plantNo);
  		// 2. 금일 발전량 추이 차트 출력
@@ -59,7 +58,7 @@ for (var i = 0; i < 24; i++) {
 }
 
 const fetchCellSensing = (url, plantNo) => {
-	console.log('fetchCellSensing');
+
 	$.ajax({
     url: url,
     type: 'GET',
@@ -359,7 +358,7 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TEMPERATURE': [] }) =
       }
     },
     grid: {
-      right: '20%'
+      right: '25%'
     },
     toolbox: {
       feature: {

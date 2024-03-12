@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function() {
-   console.log('dashboard js');
+
    const contextPath = $("#contextPath").val();
    const genElecUrl = contextPath + '/plant/gen/elec';
    /*const genTimeElecUrl = contextPath + '/plant/gen_time/elec';*/
@@ -40,12 +40,7 @@ $(document).ready(function() {
       
       fetchGenElec(genElecUrl, plantNo); 
    });
- /* $("#todayPredictBtn").click(function() {
-      fetchPredict(genTimeElecUrl, plantNo);
-   });*/
-  $("#weatherBtn").click(function() {
-      fetchWeather(weatherUrl, stnNo);
-   });
+   //셀 상태 갱신
   $("#cellBtn").click(function() {
       fetchCellSensing(cellSensingUrl, plantNo);
    });
