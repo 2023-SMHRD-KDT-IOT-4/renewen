@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.smhrd.renewen.model.UserAuthVO;
+import kr.smhrd.renewen.model.UserLogVO;
 import kr.smhrd.renewen.model.UserVO;
 
 @Mapper
@@ -16,5 +17,6 @@ public interface UserMapper {
 	public int joinUser(UserVO user);
 	public List<UserAuthVO> getValidAuthList();
 	public int updateUser(UserVO user);
+	public int insertLog(UserLogVO log);
 }
  

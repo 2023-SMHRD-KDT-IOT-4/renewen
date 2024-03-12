@@ -84,7 +84,7 @@
 										<!-- <div class="page-header-icon"><i data-feather="activity"></i></div> -->
 										서비스 둘러보기
 									</h1>
-									<div class="page-header-subtitle">AIoT를 이용한 재생에너지 발전량 예측
+									<div class="page-header-subtitle">AIoT, LSTM 모델을 활용한 태양광 발전량 예측
 										서비스</div>
 								</div>
 							</div>

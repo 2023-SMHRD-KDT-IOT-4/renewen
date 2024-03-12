@@ -3,6 +3,7 @@ package kr.smhrd.renewen.service;
 import java.util.List;
 
 import kr.smhrd.renewen.model.UserAuthVO;
+import kr.smhrd.renewen.model.UserLogVO;
 import kr.smhrd.renewen.model.UserVO;
 
 
@@ -12,5 +13,5 @@ public interface UserService {
 	public int joinUser(UserVO user);
 	public List<UserAuthVO> getValidAuthList();
 	public int updateUser(UserVO user);
-	
+	public int insertLog(UserLogVO log);
 }
