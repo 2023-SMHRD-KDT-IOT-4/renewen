@@ -87,7 +87,8 @@
 ### 회원가입/로그인/로그아웃/회원정보수정
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/f3c4f3ea-0ef4-41a8-b9e5-2f07b763b2b2)
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/19636118-99e5-4d1d-939a-11fbaf15d87e)
-<ul><li>회원가입을 클릭하면 회원 가입할 수 있고, 로그인 후 renewen의 다양한 서비스를 사용할 수 있다.</li></ul>
+<ul><li>회원가입을 클릭하면 회원 가입할 수 있다.</li></ul>
+<ul><li>로그인 후 renewen의 다양한 서비스를 사용할 수 있고, 브라우저 위치상 날씨 정보도 확인할 수 있다.</li></ul>
 
 <br>
 
