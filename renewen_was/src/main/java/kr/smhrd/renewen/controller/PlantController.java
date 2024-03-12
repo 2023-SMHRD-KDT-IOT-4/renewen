@@ -200,6 +200,11 @@ public class PlantController {
 		if(user == null) {
 			return "redirect:/user/login";
 		}
+		
+		List<PowerPlantVO> plant = (List<PowerPlantVO>)session.getAttribute("plantList");
+		if(plant.isEmpty()) {
+			return "redirect:/plant/register";
+		}
 		String userId = user.getUserId();
 		
 		// 로그인 유저의 발전소 리스트 
