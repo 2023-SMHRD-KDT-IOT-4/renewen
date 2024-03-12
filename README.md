@@ -102,6 +102,7 @@
 <br>
 
 ### 발전량 조회
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/9c5ad3a7-18fb-40c8-b1f1-a72e84dd4455)
 <ul><li>등록된 등록소별, 날짜별 발전량을 조회할 수 있고 엑셀 다운로드도 가능하다.</li></ul>
  
 <br>
