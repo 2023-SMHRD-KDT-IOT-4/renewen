@@ -163,7 +163,7 @@ public class APIController {
 		if(cellsJsonArray.size() == 0) {
 			return "No Cells Datas";
 		}
-		logger.info("cells plantNo {}", plantNo);
+		logger.info("cells sensing plantNo {}", plantNo);
 		
 		for (int i = 0; i < cellsJsonArray.size(); i++) {
 			// cell 1개의 json data
@@ -213,7 +213,7 @@ public class APIController {
 		if(cellsJsonArray.size() == 0) {
 			return "No Cells Datas";
 		}
-		logger.info("cells plantNo {}", plantNo);
+		logger.info("cells elect plantNo {}", plantNo);
 		
 		for (int i = 0; i < cellsJsonArray.size(); i++) {
 			// cell 1개의 json data
@@ -250,7 +250,7 @@ public class APIController {
 							(@RequestParam("stnNo") String stnNo,
 							 @RequestParam("type") String type) {
 		
-		logger.info("weather/list {}", type);
+		logger.info("weather list {}", type);
 		Map<String, List> response = new HashMap<>();
 		String[] types = type.split(",");
 		

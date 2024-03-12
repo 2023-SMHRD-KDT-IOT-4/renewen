@@ -61,7 +61,7 @@ public class PlantScheduler {
 	@Scheduled(cron = "0 30 0 * * *") // 매일 00:30분
 	public void callFlask() {
 
-		logger.info("callFlask schedule");
+		logger.info("call Modeling API - {}", FLASK_URL);
 		// 1) 유효한 발전소(연동완료) 리스트
 		List<PowerPlantVO> plantList = plantService.getGrantPlants();
 		if(plantList.isEmpty()) {
@@ -84,7 +84,7 @@ public class PlantScheduler {
 		String reqUrl = FLASK_URL + "predict";
 		// 2) Flask 예상 발전량 요청
 		String response = restTemplate.postForObject(reqUrl, requestEntity, String.class);
-		logger.info("callFlask response {} ", response);
+		logger.info("Modeling API Response {} ", response);
 	}
 	
 	/**

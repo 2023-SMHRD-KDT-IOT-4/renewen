@@ -281,12 +281,8 @@ public class PlantController {
 	@GetMapping("/plant/cell")
 	@ResponseBody
 	public List<GenerateCellVO> getCellNo(@RequestParam("plantNo") int plantNo) {
-		//System.out.println("선택된 발전소 번호 : "+plantNo);
 
 		List<GenerateCellVO> cellList =  plantService.getCellsByPlantNo(plantNo);
-		
-		//System.out.println(cellList);
-		
 		return cellList;
 		
 	}
