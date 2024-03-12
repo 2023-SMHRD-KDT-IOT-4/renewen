@@ -150,7 +150,7 @@
 		    A.plant_no = #{plantNo} AND A.sensor_id = 'GY-906'
 		    AND A.created_at = (
 		        SELECT MAX(created_at) FROM plant_sensing_data
-		        WHERE plant_no = #{plantNo} )
+		        WHERE plant_no = #{plantNo} AND sensor_id = 'GY-906')
 	</select>
 	
 	<!-- ================================================================================ -->
