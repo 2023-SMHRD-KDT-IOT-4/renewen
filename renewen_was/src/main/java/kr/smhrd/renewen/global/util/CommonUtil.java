@@ -73,6 +73,10 @@ public class CommonUtil {
 	 * @return  List<String> dateList  startDateStr ~ endDateStr
 	 */
 	public List<String> dateList(String startDateStr , String endDateStr ) {
+		
+		startDateStr = startDateStr.replaceAll("-", "");
+		endDateStr = endDateStr.replaceAll("-", "");
+		
         // 문자열을 LocalDate로 변환
         LocalDate startDate = LocalDate.parse(startDateStr, DateTimeFormatter.BASIC_ISO_DATE);
         LocalDate endDate = LocalDate.parse(endDateStr, DateTimeFormatter.BASIC_ISO_DATE);
@@ -98,5 +102,31 @@ public class CommonUtil {
 		return plusDate;
 	}
 	
+	/**
+	 * @param startDate yyy-MM-dd
+	 * @param endDate yyy-MM-dd
+	 * @param delim 
+	 * @return yyy-MM-dd HH:00  yyyMMdd HH:00
+	 */
+	public List<String> dateTimeList(String startDate, String endDate, String delim) {
+		List<String> dateList = dateList(startDate, endDate); // yyyyMMdd
+		List<String> resultList = new ArrayList<>();
+		
+		for(String date : dateList) {
+			String year = date.substring(0,4);
+			String month = date.substring(4, 6);
+			String day = date.substring(6);
+			for(int hour = 0; hour < 24; hour++) {
+				String dateTime 
+					= year + delim + month + delim + day + " " + formatNumberWithPadding(hour) + ":00";
+				resultList.add(dateTime);
+			}
+		}
+		
+		return resultList;
+	}
 	
+	public List<String> dateTimeList(String startDate, String endDate) {
+		return dateTimeList(startDate, endDate, "");
+	}
 }

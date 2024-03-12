@@ -159,6 +159,10 @@ const fetchPredict = (url, plantNo, startDate, endDate) => {
 
 
 const printPredictChart = (genReal = {}, genPredict = {}) => {
+
+ 	predictData = []; // 예상발전량 데이터
+ 	genRealData = []; // 실제 발전량 데이터
+ 	timeDatas = [];
     
 	const dom = document.getElementById('chart-container');
 	const myChart = echarts.init(dom, null, {

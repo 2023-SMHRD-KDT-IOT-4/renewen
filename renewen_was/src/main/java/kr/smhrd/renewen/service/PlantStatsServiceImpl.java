@@ -1,5 +1,6 @@
 package kr.smhrd.renewen.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -256,6 +257,34 @@ public class PlantStatsServiceImpl implements PlantStatsService {
         }
 	        
 	    return generateElecList;
+	}
+
+	@Override
+	public List<Map<String, Double>> getSensingPerPeriod(long plantNo, String sensorId, String startDate, String endDate) {
+		
+        List<String> dateTimes = util.dateTimeList(startDate, endDate, "-"); // yyy-MM-dd HH:00
+        List<Map<String, Double>> result = new ArrayList<>();
+		
+		List<Map<String, Object>> sensings = mapper.getSensingPerPeriod(sensorId, plantNo, startDate, endDate);
+		
+		for(String dateTime : dateTimes) {
+			Double value = 0.0;
+			
+			for(Map<String, Object> sensing : sensings) {
+				String createdAt = (String) sensing.get("hour_group");
+				BigDecimal measureVal = (BigDecimal) sensing.get("measure_value");
+				
+				if(dateTime.equals(createdAt)) {
+					value = measureVal != null ? measureVal.doubleValue() : 0.0;
+					break;
+				}
+			}
+			Map<String, Double> map = new HashMap<>();
+			map.put(dateTime, value);
+			result.add(map);
+		}
+		
+		return result;
 	}
 
 

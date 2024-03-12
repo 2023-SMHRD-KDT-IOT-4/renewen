@@ -103,5 +103,16 @@
 	</select>
 	
 	
+	<select id="getSensingPerPeriod" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT 
+		    DATE_FORMAT(created_at, '%Y-%m-%d %H:00') AS hour_group,
+		    ROUND(AVG(measure_value), 1) AS measure_value
+		FROM plant_sensing_data
+		WHERE sensor_id = #{sensorId}
+		    AND plant_no = #{plantNo}
+		    AND DATE(created_at) BETWEEN #{startDate} AND #{endDate}   
+		GROUP BY hour_group
+	</select>
+	
 	
 </mapper>

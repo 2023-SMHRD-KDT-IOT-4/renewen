@@ -340,7 +340,7 @@ const drawWeatherChart = (dataObj = { 'SI': [], 'WS': [], 'TEMPERATURE': [] }) =
 
 	const dom = document.getElementById("chartWeather");
   const weatherChart = echarts.init(dom, null, {
-		height: 450,
+		height: 400,
     renderer: 'canvas',
     useDirtyRect: false
   });
