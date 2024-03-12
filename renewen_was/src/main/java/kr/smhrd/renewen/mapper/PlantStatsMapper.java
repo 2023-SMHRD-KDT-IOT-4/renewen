@@ -1,6 +1,7 @@
 package kr.smhrd.renewen.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -35,4 +36,11 @@ public interface PlantStatsMapper {
 	public List<PredictedGenElecVO> getPredictPerHour(
 			@Param("plantNo") long plantNo,
 			@Param("checkDate") String checkDate);
+	
+	
+	public List<Map<String, Object>> getSensingPerPeriod(
+			@Param("sensorId") String sensorId, 
+			@Param("plantNo") long plantNo,
+			@Param("startDate") String startDate,
+			@Param("endDate") String endDate);
 }

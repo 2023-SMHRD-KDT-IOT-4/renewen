@@ -2,6 +2,7 @@ package kr.smhrd.renewen.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,37 @@ public class PlantRestController {
 		System.out.println(result);
 		return result;
 	}
+	
+	/**
+	 * 해당 발전소의 센싱데이터 조회
+	 * @param platNo
+	 * @return
+	 */
+	@GetMapping("/plant/sensing")
+	public @ResponseBody Map<String, List<Map<String, Double>>>	plantSensing(@RequestParam("plantNo") long plantNo,
+								 @RequestParam(value = "startDate", required = false) String startDate,
+								 @RequestParam(value = "endDate", required = false) String endDate) {
+		
+		// startDate, endDtae 없으면 오늘 날짜로
+		String nowDate = util.getCurrentDateTime("yyy-MM-dd");
+		startDate = startDate != null ? startDate : nowDate;
+		endDate = endDate != null ? endDate : nowDate;
+		
+		Map<String, List<Map<String, Double>>> resultMap = new HashMap<>();
+		Map<String, String> sensorMap = new HashMap<>();
+		sensorMap.put("DHT11_TEM", "temperature");
+		sensorMap.put("DHT11_HUM", "humidity");
+		sensorMap.put("PM2008M", "dust");
+		 
+		 for (Map.Entry<String, String> entry : sensorMap.entrySet()) {
+			 List<Map<String, Double>> sensing // 각 센서 결과
+			 	=  statsService.getSensingPerPeriod(plantNo, entry.getKey(),startDate, endDate);
+			 resultMap.put(entry.getValue(), sensing);
+		 }
+		
+		return resultMap;
+	}
+	
 	
 	/**
 	 * @param plantNo 발전소 식별번호
