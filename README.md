@@ -135,13 +135,13 @@
 
 ### 셀 이미지 확인
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/82692362-6163-4649-a4e7-cb727ca57ce0)
-<ul><li>발전소의 발전 셀은 날짜별로 조회가 가능하다</li></ul>
+<ul><li>발전소의 발전 셀은 날짜별로 조회 및 이미지 다운로드할 수 있다.</li></ul>
 
 <br>
 
 ### 구름형상 이미지 확인 
 ![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/f2f8ae21-7111-4b2e-b6ae-e56085cf225a)
-<ul><li>발전소와 날짜를 선택하면 당시 구름형상 이미지를 확인할 수 있다.</li></ul>
+<ul><li>발전소와 날짜를 선택하면 당시 구름형상 이미지를 확인할 수 있고, 이미지는 다운로드할 수 있다.</li></ul>
 
 <br>
 
