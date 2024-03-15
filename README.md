@@ -200,6 +200,7 @@
 
 
 ### 박찬영
+  * **DataBase,Full stack**
   * DB 설계, 구축 및 DB 요구사항분석서, 테이블명세 작성
   * 리눅스 웹서버, WAS SSL 적용 및 war 배포
   * Spring Boot 프로젝트 구축 및 환경설정
