@@ -262,11 +262,41 @@
 
 #### Apache 설정 (ssl 인증서 설치된 상태)
 #### 가상호스트 및 프록시 설정 (추가 및 수정)
-  * 경로 : /etc/apache2/sites-enabled/renewen.kr.conf
+* 경로 : /etc/apache2/sites-enabled/renewen.kr.conf
 #### 해결 방안
 * 1. Apache 가상호스트 및 프록시 설정
 * 2. Permission denied 발생 ⇒ 1024이하 포트 사용하려면 root권한이 필요한데 was(tomcat)에 443 포트로 설정 되어있었기 때문!
 * 3. Tomcat server.xml  redirectPort 443 => 8443 변경 후 해결 됨
+
+### ● 문제2
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/14aed52c-16ed-4077-944e-cba6dab5faea)
+![image](https://github.com/2023-SMHRD-KDT-IOT-4/renewen/assets/144170214/da954239-4182-4fde-a71e-a6df38b5cfd3)
+
+#### 각 발전소별 날씨 정보 제공에 대한 트러블 슈팅
+#### 원인
+* 1. <td>${vo.latitude}${vo.longitude}가  HTML의 요소로 인식되지 않음.
+* 2. querySelector 메서드에서 호출한 weatherInfoContainer 변수가 null이라는 문제가 발생하여  각 발전소별 날씨 아이콘, 날씨 상태, 기온이 화면에 보이지 않았음. 
+* 3. 마지막 발전소만 날씨 정보가 나오지 않았음. 
+
+#### 해결 방안
+* 1. 해당 부분을 <div>태그로 요소 안에 값을 넣어 줌. 해당 과정을 통해 각 발전소의 위도, 경도 값을 저장하고  JavaScript에서 해당 요소를 찾아서 위도와 경도 값을 찾을 수 있게 함.
+
+<div class="latitude" style="display: none;">${vo.latitude}</div>
+    <div class="longitude" style="display: none;">${vo.longitude}</div>
+
+* 2. if (weatherInfoContainer)  추가해서  weatherInfoContainer가 null이 아닌지 확인해 줌.
+
+      const weatherInfoContainer = row.querySelector(`#weather-info-${index}`);
+            if (weatherInfoContainer) { // weatherInfoContainer가 null이 아닌지 확인
+                const iconElement = weatherInfoContainer.querySelector(".icon");
+                const descriptionElement = weatherInfoContainer.querySelector(".description");
+                const temperatureElement = weatherInfoContainer.querySelector(".temperature");
+                
+* 3. 마지막 발전소가 출력되지 않은 줄 알았으나 확인해 보니 첫 번째 발전소가 출력되지 않고 있었던 것이었음.
+
+    const weatherInfoContainer = document.querySelector(`#weather-info-${index}`); 을
+     const weatherInfoContainer = document.querySelector(`#weather-info-${index + 1}`); 수정해줌.
+     그 결과 모든 발전소별 날씨 아이콘, 날씨 상태, 기온이 화면에 나타남.
 
 <br>
 
