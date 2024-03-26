@@ -22,7 +22,7 @@
 * <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/0a65f3cf62fdb782183dee0e11bdb257b7bf2a3b/renewen_was/src/main/java/kr/smhrd/renewen/controller/PlantController.java#L50C1-L149C3" target='_blank'> 발전소 등록/수정/삭제</a>
 * <a href="renewen_was/src/main/resources/static/js/renewen_map.js" target='_blank'> 발전소 위치 지도에서 확인</a> 
 * <a href="renewen_was/src/main/resources/static/js/plant_weather.js" target='_blank'> 발전소별 날씨</a>
-*<a href="renewen_was/src/main/java/kr/smhrd/renewen/controller/PlantRestController.java" target='_blank'> 발전소 현황(예상 발전량/실제 발전량)</a>
+* <a href="renewen_was/src/main/java/kr/smhrd/renewen/controller/PlantRestController.java" target='_blank'> 발전소 현황(예상 발전량/실제 발전량)</a>
 * <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/360e0119cbe7c229119b6438b363bca8b9d2f34e/renewen_was/src/main/java/kr/smhrd/renewen/controller/APIController.java#L85C1-L117C3" target='_blank'> 셀 이미지 확인(셀 상태/센서 데이터)</a>
 * <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/360e0119cbe7c229119b6438b363bca8b9d2f34e/renewen_was/src/main/java/kr/smhrd/renewen/controller/APIController.java#L54C1-L83C3" target='_blank'> 구름형상 이미지 확인</a>
 * <a href="renewen_model/renewen_LSTM_model.ipynb" target='_blank'> LSTM모델 소스코드 </a>
