@@ -18,19 +18,17 @@
 <br>
 
 ## ⭐ 주요 기능
-* <a 로그인/로그아웃/회원가입/회원정보수정</a>
-https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java#L53C1-L124C1
-
 * <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java#L53C1-L124C1" target='_blank'>로그인/로그아웃/회원가입/회원정보수정</a>
-
+* 링크걸기 <a 발전소 등록</a>
 * 링크걸기 <a 발전 현황 확인(금일 발전량/금일 발전량 추이)</a>
 * 링크걸기 <a 발전량 조회</a>
-* 링크걸기 <a 발전소 등록</a>
+
 * 링크걸기 <a 발전소 리스트 수정/삭제</a>
 * 링크걸기 <a 발전소 현황</a>
-* 링크걸기 <a 셀 이미지 확인(셀 상태/센서 데이터)</a>
-* 링크걸기 <a 구름형상 이미지 확인</a>
-* 링크걸기 <a LSTM모델 소스코드 </a>
+* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/360e0119cbe7c229119b6438b363bca8b9d2f34e/renewen_was/src/main/java/kr/smhrd/renewen/controller/APIController.java#L85C1-L117C3" target='_blank'> 셀 이미지 확인(셀 상태/센서 데이터)</a>
+* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/360e0119cbe7c229119b6438b363bca8b9d2f34e/renewen_was/src/main/java/kr/smhrd/renewen/controller/APIController.java#L54C1-L83C3" target='_blank'> 구름형상 이미지 확인</a>
+
+* <a href="renewen_model/renewen_LSTM_model.ipynb" target='_blank'> LSTM모델 소스코드 </a>
 * 링크걸기 <a Modeling API 소스코드 </a>
 
 <br>
