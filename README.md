@@ -18,18 +18,15 @@
 <br>
 
 ## ⭐ 주요 기능
-* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java#L53C1-L124C1" target='_blank'>로그인/로그아웃/회원가입/회원정보수정</a>
-* 링크걸기 <a 발전소 등록</a>
-* 링크걸기 <a 발전 현황 확인(금일 발전량/금일 발전량 추이)</a>
-* 링크걸기 <a 발전량 조회</a>
-
-* 링크걸기 <a 발전소 리스트 수정/삭제</a>
-* 링크걸기 <a 발전소 현황</a>
+* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java#L53C1-L124C1" target='_blank'> 로그인/로그아웃/회원가입/회원정보수정</a>
+* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/0a65f3cf62fdb782183dee0e11bdb257b7bf2a3b/renewen_was/src/main/java/kr/smhrd/renewen/controller/PlantController.java#L50C1-L149C3" target='_blank'> 발전소 등록/수정/삭제</a>
+* <a href="renewen_was/src/main/resources/static/js/renewen_map.js" target='_blank'> 발전소 위치 지도에서 확인</a> 
+* <a href="renewen_was/src/main/resources/static/js/plant_weather.js" target='_blank'> 발전소별 날씨</a>
+*<a href="renewen_was/src/main/java/kr/smhrd/renewen/controller/PlantRestController.java" target='_blank'> 발전소 현황(예상 발전량/실제 발전량)</a>
 * <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/360e0119cbe7c229119b6438b363bca8b9d2f34e/renewen_was/src/main/java/kr/smhrd/renewen/controller/APIController.java#L85C1-L117C3" target='_blank'> 셀 이미지 확인(셀 상태/센서 데이터)</a>
 * <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/360e0119cbe7c229119b6438b363bca8b9d2f34e/renewen_was/src/main/java/kr/smhrd/renewen/controller/APIController.java#L54C1-L83C3" target='_blank'> 구름형상 이미지 확인</a>
-
 * <a href="renewen_model/renewen_LSTM_model.ipynb" target='_blank'> LSTM모델 소스코드 </a>
-* 링크걸기 <a Modeling API 소스코드 </a>
+* <a href="renewen_model/renewen_modeling_api.py" target='_blank'> Modeling API 소스코드 </a>
 
 <br>
 
