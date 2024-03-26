@@ -21,7 +21,8 @@
 * <a 로그인/로그아웃/회원가입/회원정보수정</a>
 https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java#L53C1-L124C1
 
-<a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java" target=#L53
+* <a href="https://github.com/2023-SMHRD-KDT-IOT-4/renewen/blob/66ee319944aecb7ecd85bf35abae2fa91476f21a/renewen_was/src/main/java/kr/smhrd/renewen/controller/UserController.java#L53C1-L124C1" target='_blank'>로그인/로그아웃/회원가입/회원정보수정</a>
+
 * 링크걸기 <a 발전 현황 확인(금일 발전량/금일 발전량 추이)</a>
 * 링크걸기 <a 발전량 조회</a>
 * 링크걸기 <a 발전소 등록</a>
